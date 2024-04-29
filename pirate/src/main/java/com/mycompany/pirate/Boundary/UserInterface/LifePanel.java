@@ -18,20 +18,27 @@ public class LifePanel extends javax.swing.JPanel {
    private Color playerColor = Color.GRAY ;
    
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        int centerX = getWidth() / 2;
-        int centerY = getHeight() / 2;
-        int radius = 50;
-        int startAngle = 90; // Angle de départ (en degrés)
+  protected void paintComponent(Graphics g) {
+    super.paintComponent(g);
+    int bottomY = getHeight() - 20; // Position verticale basse
+    int radius = 20;
+    int circleSpacing = 10;
 
-        // Dessine chaque part du cercle
-        for (int i = 0; i < viesRestantes; i++) {
-            g.setColor(playerColor); // Couleur des vies restantes
-            g.fillArc(centerX - radius, centerY - radius, 2 * radius, 2 * radius,
-                    startAngle + i * 72, 72); // 72 degrés pour chaque part
-        }
+    // Position horizontale en fonction de la couleur du joueur
+    int startX;
+    if (playerColor == Color.GREEN) {
+        startX = 20; // Position à gauche si la couleur est Verte
+    } else {
+        startX = getWidth() - 5 * (radius * 2 + circleSpacing); // Position à droite pour toute autre couleur
     }
+
+    // Dessine chaque cercle en fonction du nombre de vies restantes
+    g.setColor(playerColor); // Couleur des vies restantes
+    for (int i = 0; i < viesRestantes; i++) {
+        int circleX = startX + ((radius * 2 + circleSpacing) * i); // Calcul de la position en commençant par le cercle le plus à gauche ou à droite
+        g.fillOval(circleX, bottomY - radius * 2, radius * 2, radius * 2); // Position Y ajustée pour placer les cercles en bas
+    }
+}
 
     // Méthode pour décrémenter le nombre de vies
     public void perdreVie() {
