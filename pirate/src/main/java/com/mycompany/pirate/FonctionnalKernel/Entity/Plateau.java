@@ -1,4 +1,4 @@
-package com.mycompany.pirate.utils;
+package com.mycompany.pirate.FonctionnalKernel.Entity;
 
 public class Plateau {
     // nbLignes et nbColonnes sont les dimensions du plateau
