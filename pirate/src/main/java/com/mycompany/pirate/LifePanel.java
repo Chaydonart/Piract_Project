@@ -12,6 +12,8 @@ import java.awt.Graphics;
  * @author BEN JAAFAR
  */
 public class LifePanel extends javax.swing.JPanel {
+   
+   
    private int viesRestantes = 5;
    private Color playerColor = Color.GRAY ;
    
