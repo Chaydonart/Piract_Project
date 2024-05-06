@@ -15,4 +15,12 @@ public class Pion {
     public void setColor(Color color){
         this.color = color;
     }
+
+    public int getVie() {
+        return vie;
+    }
+
+    public void setVie(int vie) {
+        this.vie = vie;
+    }
 }
