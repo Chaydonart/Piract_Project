@@ -5,8 +5,11 @@
 package com.mycompany.pirate.Boundary.UserInterface;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -19,52 +22,19 @@ import javax.swing.SwingUtilities;
  */
 public class CasePanel extends javax.swing.JPanel {
 
-    private Rectangle caseJeu; // Le rectangle représentant une case du jeu de l'oie
-    private boolean pionEstDessus = false; 
-    private boolean havePion = false;
+   private Color backgroundColor = Color.BLUE;
 
-    public CasePanel() {
-        // Créez un rectangle pour représenter une case du jeu de l'oie
-        caseJeu = new Rectangle(WIDTH, WIDTH, WIDTH, WIDTH); 
-        
-        addMouseListener(new MouseAdapter() {
-            
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                pionEstDessus = true;
-                System.out.println("Pion dans la case");
-                repaint(); // Redessine le JPanel
-                
-            }
-            
-            @Override
-            public void mouseExited(MouseEvent e) {
-                pionEstDessus = false;
-                System.out.println("Pion pas dans la case");
-                repaint(); // Redessine le JPanel
-            }
-        });
+     public CasePanel() {
+        setPreferredSize(new Dimension(100, 100)); // Définissez la taille de votre CasePanel selon vos besoins
     }
+     
+
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
-
-        // Récupérez les dimensions du JPanel
-        int largeur = getWidth();
-        int hauteur = getHeight();
-
-        // Dessinez le rectangle en utilisant les dimensions du JPanel
-        g2d.setColor(Color.BLUE);
-        g2d.fillRect(0, 0, largeur, hauteur);
-
-        // Si un pion est dessus, dessinez un cercle rouge au centre
-        if (pionEstDessus) {
-            g2d.setColor(Color.RED);
-            g2d.fillRect(0, 0, largeur, hauteur);
-        }
+        g.setColor(backgroundColor);
+        g.fillRect(0, 0, getWidth(), getHeight());
     }
 
 

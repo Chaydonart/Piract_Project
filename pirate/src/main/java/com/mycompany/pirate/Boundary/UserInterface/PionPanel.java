@@ -6,9 +6,11 @@ package com.mycompany.pirate.Boundary.UserInterface;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -25,6 +27,19 @@ public class PionPanel extends JPanel{
                 initialX = e.getX();
                 initialY = e.getY();
             }
+            
+           @Override
+public void mouseReleased(MouseEvent e) {
+    // Obtenez les coordonnées du relâchement de la souris
+    Point releasePoint = e.getPoint();
+    // Convertissez les coordonnées du PionPanel dans le coordinateur de son parent
+    Point convertedReleasePoint = SwingUtilities.convertPoint(PionPanel.this, releasePoint, getParent());
+    
+    // Vérifiez si le PionPanel a été relâché dans le CasePanel
+    if (getParent() instanceof CustomLayeredPanel && getParent().getBounds().contains(convertedReleasePoint)) {
+        System.out.println("PionPanel déposé sur CasePanel !");
+    }
+}
         });
 
         addMouseMotionListener(new MouseAdapter() {
@@ -35,7 +50,14 @@ public class PionPanel extends JPanel{
                 setLocation(getX() + deltaX, getY() + deltaY);
             }
         });
+        
+        
+        
+        
+        
+  
     }
+    
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
