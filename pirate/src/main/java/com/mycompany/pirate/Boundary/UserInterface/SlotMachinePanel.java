@@ -77,17 +77,15 @@ public class SlotMachinePanel extends javax.swing.JPanel {
                 slotLabels[i].setText(String.valueOf(finalValues[i]));
             }
 
-            // Vérifier les gains ou autres conditions ici
+        }
+    }
+    
+    void setFinalValues(int[] values){
+        for(int i=0; i < 3; i++){
+            values[i] = finalValues[i];
         }
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Slot Machine");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300, 200);
-        frame.getContentPane().add(new SlotMachinePanel());
-        frame.setVisible(true);
-    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

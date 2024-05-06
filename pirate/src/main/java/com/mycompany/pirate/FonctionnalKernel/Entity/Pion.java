@@ -6,6 +6,7 @@ public class Pion {
     private int vie;
     private Position position;
     public Color color; 
+    private boolean alive = true;
 
     public Pion() {
         vie = 3;
@@ -22,5 +23,9 @@ public class Pion {
 
     public void setVie(int vie) {
         this.vie = vie;
+    }
+    
+    public boolean isAlive(){
+        return alive;
     }
 }
