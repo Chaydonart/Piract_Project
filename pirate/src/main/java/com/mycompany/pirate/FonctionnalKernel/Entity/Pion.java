@@ -12,7 +12,7 @@ public class Pion {
         vie = 3;
         position = new Position(0, 0);
     }
-    
+
     public void setColor(Color color){
         this.color = color;
     }
@@ -24,7 +24,7 @@ public class Pion {
     public void setVie(int vie) {
         this.vie = vie;
     }
-    
+
     public boolean isAlive(){
         return alive;
     }

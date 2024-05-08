@@ -19,8 +19,7 @@ public class mainTest extends javax.swing.JFrame {
         initComponents();
         lifePanel1.setColot(Color.yellow);
         lifePanel2.setColot(Color.blue);
-        pion1.setColor(Color.yellow);
-        pion2.setColor(Color.blue);
+        
     }
 
     /**
@@ -35,8 +34,8 @@ public class mainTest extends javax.swing.JFrame {
         lifePanel1 = new com.mycompany.pirate.LifePanel();
         lifePanel2 = new com.mycompany.pirate.LifePanel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
-        pion1 = new com.mycompany.pirate.Pion();
-        pion2 = new com.mycompany.pirate.Pion();
+        pionPanel1 = new com.mycompany.pirate.Boundary.UserInterface.PionPanel();
+        pionPanel2 = new com.mycompany.pirate.Boundary.UserInterface.PionPanel();
         backgroundPanel1 = new com.mycompany.pirate.Boundary.UserInterface.BackgroundPanel();
         jButton1 = new javax.swing.JButton();
         slotMachinePanel1 = new com.mycompany.pirate.Boundary.UserInterface.SlotMachinePanel();
@@ -69,29 +68,29 @@ public class mainTest extends javax.swing.JFrame {
 
         jLayeredPane1.setPreferredSize(new java.awt.Dimension(1000, 600));
 
-        pion1.setPreferredSize(new java.awt.Dimension(20, 20));
+        pionPanel1.setPreferredSize(new java.awt.Dimension(20, 20));
 
-        javax.swing.GroupLayout pion1Layout = new javax.swing.GroupLayout(pion1);
-        pion1.setLayout(pion1Layout);
-        pion1Layout.setHorizontalGroup(
-            pion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pionPanel1Layout = new javax.swing.GroupLayout(pionPanel1);
+        pionPanel1.setLayout(pionPanel1Layout);
+        pionPanel1Layout.setHorizontalGroup(
+            pionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 20, Short.MAX_VALUE)
         );
-        pion1Layout.setVerticalGroup(
-            pion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pionPanel1Layout.setVerticalGroup(
+            pionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 20, Short.MAX_VALUE)
         );
 
-        pion2.setPreferredSize(new java.awt.Dimension(20, 20));
+        pionPanel2.setPreferredSize(new java.awt.Dimension(20, 20));
 
-        javax.swing.GroupLayout pion2Layout = new javax.swing.GroupLayout(pion2);
-        pion2.setLayout(pion2Layout);
-        pion2Layout.setHorizontalGroup(
-            pion2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pionPanel2Layout = new javax.swing.GroupLayout(pionPanel2);
+        pionPanel2.setLayout(pionPanel2Layout);
+        pionPanel2Layout.setHorizontalGroup(
+            pionPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 20, Short.MAX_VALUE)
         );
-        pion2Layout.setVerticalGroup(
-            pion2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pionPanel2Layout.setVerticalGroup(
+            pionPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 20, Short.MAX_VALUE)
         );
 
@@ -106,8 +105,8 @@ public class mainTest extends javax.swing.JFrame {
             .addGap(0, 200, Short.MAX_VALUE)
         );
 
-        jLayeredPane1.setLayer(pion1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(pion2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(pionPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(pionPanel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(backgroundPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
@@ -115,36 +114,36 @@ public class mainTest extends javax.swing.JFrame {
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addGap(63, 63, 63)
+                .addGap(88, 88, 88)
                 .addComponent(backgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(274, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                    .addGap(1096, 1096, 1096)
-                    .addComponent(pion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGap(349, 349, 349)
+                    .addComponent(pionPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(349, Short.MAX_VALUE)))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                    .addGap(1096, 1096, 1096)
-                    .addComponent(pion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGap(349, 349, 349)
+                    .addComponent(pionPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(349, Short.MAX_VALUE)))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addComponent(backgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(203, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                    .addGap(565, 565, 565)
-                    .addComponent(pion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGap(220, 220, 220)
+                    .addComponent(pionPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(221, Short.MAX_VALUE)))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                    .addGap(565, 565, 565)
-                    .addComponent(pion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGap(220, 220, 220)
+                    .addComponent(pionPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(221, Short.MAX_VALUE)))
         );
 
         jButton1.setText("TakeDamage");
@@ -240,8 +239,8 @@ public class mainTest extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane1;
     private com.mycompany.pirate.LifePanel lifePanel1;
     private com.mycompany.pirate.LifePanel lifePanel2;
-    private com.mycompany.pirate.Pion pion1;
-    private com.mycompany.pirate.Pion pion2;
+    private com.mycompany.pirate.Boundary.UserInterface.PionPanel pionPanel1;
+    private com.mycompany.pirate.Boundary.UserInterface.PionPanel pionPanel2;
     private com.mycompany.pirate.Boundary.UserInterface.SlotMachinePanel slotMachinePanel1;
     // End of variables declaration//GEN-END:variables
 }
