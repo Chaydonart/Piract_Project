@@ -6,8 +6,7 @@ public class ControlJeu {
       private Pion joueur1 = new Pion();
       private Pion joueur2 = new Pion();
       
-      while(!jeuTermine){
-    
-      }
+      //while(!jeuTermine){
+      //}
       
 }
