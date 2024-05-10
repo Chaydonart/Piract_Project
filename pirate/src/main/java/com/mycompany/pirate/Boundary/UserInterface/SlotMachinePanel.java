@@ -19,8 +19,7 @@ import javax.swing.Timer;
  * @author BEN JAAFAR
  */
 public class SlotMachinePanel extends javax.swing.JPanel {
-
-   private final JLabel[] slotLabels = new JLabel[3];
+    private final JLabel[] slotLabels = new JLabel[3];
     private final Random random = new Random();
     private final Timer timer;
     private final int[] finalValues = new int[3];
@@ -48,6 +47,8 @@ public class SlotMachinePanel extends javax.swing.JPanel {
         JButton startButton = new JButton("Start");
         startButton.addActionListener(e -> start());
         add(startButton);
+
+        setOpaque(false); // Rend le JPanel transparent
     }
 
     private void start() {

@@ -11,5 +11,6 @@ package Utilities;
 public class FileRef {
     public final static String imageLifePlayer1 = "src\\main\\java\\res\\LifeRessourcePlayer1.png";
     public final static String imageLifePlayer2 = "src\\main\\java\\res\\LifeRessourcePlayer2.png";
+    public final static String imageSlotMachine = "src\\main\\java\\res\\slotMachine.png";
     
 }

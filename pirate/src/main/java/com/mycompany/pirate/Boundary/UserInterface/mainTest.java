@@ -17,9 +17,6 @@ public class mainTest extends javax.swing.JFrame {
      */
     public mainTest() {
         initComponents();
-        lifePanel2.setPlayer2();
-
-        
     }
 
     /**
@@ -36,9 +33,9 @@ public class mainTest extends javax.swing.JFrame {
         pionPanel2 = new com.mycompany.pirate.Boundary.UserInterface.PionPanel();
         backgroundPanel1 = new com.mycompany.pirate.Boundary.UserInterface.BackgroundPanel();
         jButton1 = new javax.swing.JButton();
-        slotMachinePanel1 = new com.mycompany.pirate.Boundary.UserInterface.SlotMachinePanel();
         lifePanel1 = new com.mycompany.pirate.Boundary.UserInterface.LifePanel();
-        lifePanel2 = new com.mycompany.pirate.Boundary.UserInterface.LifePanel();
+        imagePanelSlotmachine1 = new com.mycompany.pirate.Boundary.UserInterface.ImagePanelSlotmachine();
+        slotMachinePanel1 = new com.mycompany.pirate.Boundary.UserInterface.SlotMachinePanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(900, 600));
@@ -111,17 +108,17 @@ public class mainTest extends javax.swing.JFrame {
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addComponent(backgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(295, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addGap(220, 220, 220)
                     .addComponent(pionPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(313, Short.MAX_VALUE)))
+                    .addContainerGap(46, Short.MAX_VALUE)))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addGap(220, 220, 220)
                     .addComponent(pionPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(313, Short.MAX_VALUE)))
+                    .addContainerGap(46, Short.MAX_VALUE)))
         );
 
         jButton1.setText("TakeDamage");
@@ -142,15 +139,21 @@ public class mainTest extends javax.swing.JFrame {
             .addGap(0, 108, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout lifePanel2Layout = new javax.swing.GroupLayout(lifePanel2);
-        lifePanel2.setLayout(lifePanel2Layout);
-        lifePanel2Layout.setHorizontalGroup(
-            lifePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 533, Short.MAX_VALUE)
+        javax.swing.GroupLayout imagePanelSlotmachine1Layout = new javax.swing.GroupLayout(imagePanelSlotmachine1);
+        imagePanelSlotmachine1.setLayout(imagePanelSlotmachine1Layout);
+        imagePanelSlotmachine1Layout.setHorizontalGroup(
+            imagePanelSlotmachine1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(imagePanelSlotmachine1Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(slotMachinePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(121, Short.MAX_VALUE))
         );
-        lifePanel2Layout.setVerticalGroup(
-            lifePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        imagePanelSlotmachine1Layout.setVerticalGroup(
+            imagePanelSlotmachine1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(imagePanelSlotmachine1Layout.createSequentialGroup()
+                .addGap(83, 83, 83)
+                .addComponent(slotMachinePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -159,32 +162,31 @@ public class mainTest extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lifePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lifePanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1155, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(slotMachinePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 519, Short.MAX_VALUE)
+                        .addGap(534, 534, 534)
                         .addComponent(jButton1)
-                        .addGap(304, 304, 304))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(imagePanelSlotmachine1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lifePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lifePanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lifePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(slotMachinePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButton1)
+                .addGap(32, 32, 32)
+                .addComponent(imagePanelSlotmachine1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -231,10 +233,10 @@ public class mainTest extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.mycompany.pirate.Boundary.UserInterface.BackgroundPanel backgroundPanel1;
+    private com.mycompany.pirate.Boundary.UserInterface.ImagePanelSlotmachine imagePanelSlotmachine1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLayeredPane jLayeredPane1;
     private com.mycompany.pirate.Boundary.UserInterface.LifePanel lifePanel1;
-    private com.mycompany.pirate.Boundary.UserInterface.LifePanel lifePanel2;
     private com.mycompany.pirate.Boundary.UserInterface.PionPanel pionPanel1;
     private com.mycompany.pirate.Boundary.UserInterface.PionPanel pionPanel2;
     private com.mycompany.pirate.Boundary.UserInterface.SlotMachinePanel slotMachinePanel1;
