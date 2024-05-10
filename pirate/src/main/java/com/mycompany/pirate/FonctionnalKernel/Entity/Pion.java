@@ -4,16 +4,22 @@ import java.awt.Color;
 
 public class Pion {
     private int vie;
-    private Position position;
-    public Color color; 
+    private int position;
+    public Color color;
     private boolean alive = true;
+    private String name;
 
-    public Pion() {
+    public Pion(String name) {
+        this.name = name;
         vie = 3;
-        position = new Position(0, 0);
+        position = 1;
     }
 
-    public void setColor(Color color){
+    public String getName() {
+        return name;
+    }
+
+    public void setColor(Color color) {
         this.color = color;
     }
 
@@ -25,7 +31,15 @@ public class Pion {
         this.vie = vie;
     }
 
-    public boolean isAlive(){
+    public boolean isAlive() {
         return alive;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 }

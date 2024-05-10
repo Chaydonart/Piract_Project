@@ -1,19 +1,28 @@
 package com.mycompany.pirate.FonctionnalKernel.Entity;
 
 public class Plateau {
-    // nbLignes et nbColonnes sont les dimensions du plateau
-    private int nbLignes;
-    private int nbColonnes;
-    private Case[][] cases;
+    private int nbCases;
+    private Case[] cases;
 
-    public Plateau(int nbLignes, int nbColonnes) {
-        this.nbLignes = nbLignes;
-        this.nbColonnes = nbColonnes;
-        cases = new Case[nbLignes][nbColonnes];
-        for (int i = 0; i < nbLignes; i++) {
-            for (int j = 0; j < nbColonnes; j++) {
-                cases[i][j] = new Case(i, j);
-            }
+    public Plateau(int nbCases) {
+        this.nbCases = nbCases;
+        this.cases = new Case[nbCases];
+        for (int i = 0; i < nbCases; i++) {
+            this.cases[i] = new Case();
         }
+    }
+
+    public void poserPion(Pion pion) {
+        int position = pion.getPosition() - 1;
+        cases[position].ajouterPion(pion);
+    }
+
+    public void retirerPion(Pion pion) {
+        int position = pion.getPosition() - 1;
+        cases[position].retirerPion(pion);
+    }
+
+    public int getNbCases() {
+        return nbCases;
     }
 }

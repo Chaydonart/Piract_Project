@@ -1,11 +1,23 @@
 package com.mycompany.pirate.FonctionnalKernel.Entity;
 
-public class Case {
-    private Position position;
-    private boolean estOccupee;
+import java.util.ArrayList;
 
-    public Case(int ligne, int colonne) {
-        position = new Position(ligne, colonne);
-        estOccupee = false;
+public class Case {
+    private ArrayList<Pion> occupants;
+
+    public Case() {
+        occupants = new ArrayList<>();
+    }
+
+    public boolean estOccupee() {
+        return !occupants.isEmpty();
+    }
+
+    public void ajouterPion(Pion pion) {
+        occupants.add(pion);
+    }
+
+    public void retirerPion(Pion pion) {
+        occupants.remove(pion);
     }
 }
