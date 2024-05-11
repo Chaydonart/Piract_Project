@@ -18,7 +18,7 @@ import javax.swing.JPanel;
  * @author BEN JAAFAR
  */
 public class BackgroundPanel extends JPanel {
-    private BufferedImage backgroundImage;
+    private transient BufferedImage backgroundImage;
 
     public BackgroundPanel() {
         // Charger l'image de fond
