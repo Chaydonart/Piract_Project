@@ -16,7 +16,7 @@ import javax.imageio.ImageIO;
  */
 public class CartePanel extends javax.swing.JPanel {
 
-    private BufferedImage image;
+    private transient BufferedImage image;
     
     public CartePanel() {
         try {
