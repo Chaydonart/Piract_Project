@@ -12,7 +12,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+import Utilities.FileRef;
 /**
  *
  * @author BEN JAAFAR
@@ -23,7 +23,7 @@ public class BackgroundPanel extends JPanel {
     public BackgroundPanel() {
         // Charger l'image de fond
         try {
-            backgroundImage = ImageIO.read(new File("C:\\plateau.jpg")); // Remplacez "plateau.jpg" par le chemin de votre image
+            backgroundImage = ImageIO.read(new File(FileRef.BACKGROUND_IMAGE)); // Remplacez "plateau.jpg" par le chemin de votre image
         } catch (IOException ex) {
             ex.printStackTrace();
         }

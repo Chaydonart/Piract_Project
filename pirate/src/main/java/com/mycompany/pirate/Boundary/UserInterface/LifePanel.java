@@ -10,8 +10,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import static Utilities.FileRef.imageLifePlayer1;
-import static Utilities.FileRef.imageLifePlayer2;
+import static Utilities.FileRef.IMAGE_LIFE_PLAYER_1;
+import static Utilities.FileRef.IMAGE_LIFE_PLAYER_2;
 
 /**
  *
@@ -29,7 +29,7 @@ public class LifePanel extends javax.swing.JPanel {
     
     private void loadImage(){
         try {
-            lifeImage = isPlayer1 ? ImageIO.read(new File(imageLifePlayer1)) : ImageIO.read(new File(imageLifePlayer2));
+            lifeImage = isPlayer1 ? ImageIO.read(new File(IMAGE_LIFE_PLAYER_1)) : ImageIO.read(new File(IMAGE_LIFE_PLAYER_2));
         } catch (IOException ex) {
             ex.printStackTrace();
         }

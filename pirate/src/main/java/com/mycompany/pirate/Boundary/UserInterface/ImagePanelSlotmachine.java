@@ -9,7 +9,7 @@ import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import static Utilities.FileRef.imageSlotMachine;
+import static Utilities.FileRef.IMAGE_SLOT_MACHINE;
 import java.awt.Graphics;
 
 /**
@@ -22,7 +22,7 @@ public class ImagePanelSlotmachine extends javax.swing.JPanel {
 
     public ImagePanelSlotmachine() {
         try {
-            backgroundImage = ImageIO.read(new File(imageSlotMachine));
+            backgroundImage = ImageIO.read(new File(IMAGE_SLOT_MACHINE));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
