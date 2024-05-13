@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import static Utilities.FileRef.IMAGE_SLOT_MACHINE;
+import static Utilities.values.GREEN_COLOR_BACKGROUND;
+import static Utilities.values.TRANSPARENT_COLOR_BACKGROUND;
 import java.awt.Graphics;
 
 /**
@@ -35,6 +37,8 @@ public class ImagePanelSlotmachine extends javax.swing.JPanel {
             setSize(size);
             setLayout(null); // Pour ne pas utiliser de layout manager et permettre de positionner les composants manuellement
         }
+        
+        setBackground(TRANSPARENT_COLOR_BACKGROUND);
     }
 
     @Override
