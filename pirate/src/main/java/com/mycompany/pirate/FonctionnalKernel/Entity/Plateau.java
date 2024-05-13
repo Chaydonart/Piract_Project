@@ -16,18 +16,16 @@ public class Plateau {
         
         // Définition des fournisseurs de cases spéciales
         Supplier<Case> caseNormale = Case::new;
-        Supplier<Case> caseSpeciale1 = CaseDegat::new; // Remplacez CaseSpeciale1 par le nom de votre classe spéciale 1
+        Supplier<Case> caseSpeciale1 = CaseDegat::new; 
 
-        // Génération aléatoire du type de case pour chaque position du plateau
+        
         for (int i = 0; i < nbCases; i++) {
             Supplier<Case> caseSupplier;
-            int randomValue = randomNumbers.nextInt(3); // Générer une valeur aléatoire entre 0 et 2
-            switch (randomValue) {
-                case 0:
-                    caseSupplier = caseSpeciale1;
-                    break;                    
-                default:
-                    caseSupplier = caseNormale;
+            int randomValue = randomNumbers.nextInt(100); 
+            if(randomValue < 30) { // 30% de chance d'avoir une case degat sur le plateau
+                caseSupplier = caseSpeciale1;
+            } else {
+                caseSupplier = caseNormale;
             }
             this.cases[i] = caseSupplier.get();
         }
