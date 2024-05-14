@@ -4,7 +4,7 @@
  */
 package com.mycompany.pirate.FonctionnalKernel.Controller;
 
-import com.mycompany.pirate.Boundary.interfaces.ISlotMachine;
+import com.mycompany.pirate.Interfaces.ISlotMachine;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.IntStream;

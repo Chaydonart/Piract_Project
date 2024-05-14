@@ -21,7 +21,7 @@ import javax.swing.Timer;
 public class SlotMachinePanel extends javax.swing.JPanel {
     private final JLabel[] slotLabels = new JLabel[3];
     private final Random random = new Random();
-    private final Timer timer;
+    private Timer timer;
     private final int[] finalValues = new int[3];
     private final int[] currentValues = new int[3];
     private final int maxValue = 4; // Valeur maximale pour les slots
@@ -37,12 +37,7 @@ public class SlotMachinePanel extends javax.swing.JPanel {
             add(slotLabels[i]);
         }
 
-        timer = new Timer(100, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateSlots();
-            }
-        });
+        
 
         JButton startButton = new JButton("Start");
         startButton.addActionListener(e -> start());
@@ -52,6 +47,12 @@ public class SlotMachinePanel extends javax.swing.JPanel {
     }
 
    private void start() {
+       timer = new Timer(100, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateSlots();
+            }
+        });
         // Initialiser les valeurs actuelles à zéro
         for (int i = 0; i < 3; i++) {
             currentValues[i] = 0;
@@ -80,7 +81,7 @@ public class SlotMachinePanel extends javax.swing.JPanel {
         }
 
         // Assurez-vous que le JPanel est redessiné
-        repaint();
+        //repaint();
     }
     
     void setFinalValues(int[] values){

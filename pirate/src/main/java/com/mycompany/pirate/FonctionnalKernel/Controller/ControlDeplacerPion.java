@@ -2,7 +2,7 @@ package com.mycompany.pirate.FonctionnalKernel.Controller;
 
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Plateau;
-import com.mycompany.pirate.Boundary.interfaces.IDeplacerPion;
+import com.mycompany.pirate.Interfaces.IDeplacerPion;
 
 /**
  *
@@ -20,11 +20,6 @@ public class ControlDeplacerPion implements IDeplacerPion {
         plateau.retirerPion(pion);
         pion.setPosition(nouvellePosition);
         plateau.poserPion(pion);
-        
-        if(plateau.getCase(pion).isSpecial()){
-            System.out.println("SPECIALE = "+plateau.getCase(pion).toString());
-            System.out.println("VIE = "+ pion.getVie());
-        }
       
         return nouvellePosition;
     }

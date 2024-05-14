@@ -107,30 +107,30 @@ public class newTest extends javax.swing.JFrame {
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jLayeredPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
 
-        pionPanel1.setPreferredSize(new java.awt.Dimension(20, 20));
+        pionPanel1.setPreferredSize(new java.awt.Dimension(35, 35));
 
         javax.swing.GroupLayout pionPanel1Layout = new javax.swing.GroupLayout(pionPanel1);
         pionPanel1.setLayout(pionPanel1Layout);
         pionPanel1Layout.setHorizontalGroup(
             pionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
+            .addGap(0, 35, Short.MAX_VALUE)
         );
         pionPanel1Layout.setVerticalGroup(
             pionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
+            .addGap(0, 35, Short.MAX_VALUE)
         );
 
-        pionPanel2.setPreferredSize(new java.awt.Dimension(20, 20));
+        pionPanel2.setPreferredSize(new java.awt.Dimension(35, 35));
 
         javax.swing.GroupLayout pionPanel2Layout = new javax.swing.GroupLayout(pionPanel2);
         pionPanel2.setLayout(pionPanel2Layout);
         pionPanel2Layout.setHorizontalGroup(
             pionPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
+            .addGap(0, 35, Short.MAX_VALUE)
         );
         pionPanel2Layout.setVerticalGroup(
             pionPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
+            .addGap(0, 35, Short.MAX_VALUE)
         );
 
         cartePanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -143,7 +143,7 @@ public class newTest extends javax.swing.JFrame {
         );
         cartePanel1Layout.setVerticalGroup(
             cartePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 616, Short.MAX_VALUE)
+            .addGap(0, 601, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout imagePanelSlotmachine1Layout = new javax.swing.GroupLayout(imagePanelSlotmachine1);
