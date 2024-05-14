@@ -45,10 +45,13 @@ public class ControlJeu implements IControlJeu {
                         Pion joueurCourant = joueurs[i];
                         jouerTour(joueurCourant);
                         if (jeuTermine) {
+                              System.out.println("FIN DE PARTIE");
                               break;
+                        } else {
+                            System.out.println("Fin du tour\n");
                         }
                   }
-                  System.out.println("Fin du tour\n");
+                  
             }
       }
       
