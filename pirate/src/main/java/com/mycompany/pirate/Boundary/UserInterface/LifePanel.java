@@ -12,6 +12,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import static Utilities.FileRef.IMAGE_LIFE_PLAYER_1;
 import static Utilities.FileRef.IMAGE_LIFE_PLAYER_2;
+import static Utilities.values.TRANSPARENT_COLOR_BACKGROUND;
 
 /**
  *
@@ -25,6 +26,8 @@ public class LifePanel extends javax.swing.JPanel {
 
     public LifePanel() {    
         loadImage();
+        setBackground(TRANSPARENT_COLOR_BACKGROUND);
+        setDoubleBuffered(true);
     }
     
     private void loadImage(){
@@ -35,9 +38,12 @@ public class LifePanel extends javax.swing.JPanel {
         }
     }
     
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+@Override
+protected void paintComponent(Graphics g) {
+    super.paintComponent(g);
+    
+    // Vérifier si lifeImage est nul
+    if (lifeImage != null) {
         int bottomY = getHeight() - 20; // Position verticale basse
         int imageWidth = lifeImage.getWidth(); // Largeur de l'image de vie
         int imageHeight = lifeImage.getHeight(); // Hauteur de l'image de vie
@@ -57,6 +63,7 @@ public class LifePanel extends javax.swing.JPanel {
             g.drawImage(lifeImage, imageX, bottomY - imageHeight, this); // Dessiner l'image de vie
         }
     }
+}
 
     // Plus tard on va juste lire les variables du jeu
     public void perdreVie() {

@@ -4,8 +4,13 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
+import static Utilities.values.TRANSPARENT_COLOR_BACKGROUND;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -15,13 +20,14 @@ import java.awt.event.MouseEvent;
  */
 public class PionPanel extends javax.swing.JPanel {
 
-private int initialX;
+    private int initialX;
     private int initialY;
-    private int currentX; // Coordonnée x actuelle du pion
-    private int currentY; // Coordonnée y actuelle du pion
+    private int currentX;
+    private int currentY;
     private Color pionColor;
 
     public PionPanel() {
+        setDoubleBuffered(true);
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -35,18 +41,41 @@ private int initialX;
             public void mouseDragged(MouseEvent e) {
                 int deltaX = e.getX() - initialX;
                 int deltaY = e.getY() - initialY;
-                currentX += deltaX; // Mettre à jour les coordonnées x actuelles
-                currentY += deltaY; // Mettre à jour les coordonnées y actuelles
+                currentX += deltaX;
+                currentY += deltaY;
                 setLocation(currentX, currentY);
             }
         });
+        
+         addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                // Mettez à jour les coordonnées actuelles en fonction de la nouvelle taille
+                currentX = getX();
+                currentY = getY();
+            }
+        });
+        setOpaque(false); // Rend le fond transparent
     }
     
-     @Override
+    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(pionColor);
-        g.fillOval(0, 0, getWidth(), getHeight());
+
+        // Convertir Graphics en Graphics2D pour utiliser setStroke()
+        Graphics2D g2d = (Graphics2D) g;
+
+        // Définir l'épaisseur du contour
+        float contourWidth = 2.0f; // épaisseur personnalisée
+        g2d.setStroke(new BasicStroke(contourWidth));
+
+        // Dessiner le contour blanc
+        g2d.setColor(Color.WHITE);
+        g2d.drawOval(0, 0, getWidth(), getHeight());
+
+        // Remplir le cercle avec la couleur du pion
+        g2d.setColor(pionColor);
+        g2d.fillOval(0, 0, getWidth(), getHeight());
     }
 
     public void setColor(Color color) {
@@ -61,11 +90,11 @@ private int initialX;
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 419, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 342, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

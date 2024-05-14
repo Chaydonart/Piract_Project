@@ -21,7 +21,7 @@ import javax.swing.Timer;
 public class SlotMachinePanel extends javax.swing.JPanel {
     private final JLabel[] slotLabels = new JLabel[3];
     private final Random random = new Random();
-    private final Timer timer;
+    private Timer timer;
     private final int[] finalValues = new int[3];
     private final int[] currentValues = new int[3];
     private final int maxValue = 4; // Valeur maximale pour les slots
@@ -37,12 +37,7 @@ public class SlotMachinePanel extends javax.swing.JPanel {
             add(slotLabels[i]);
         }
 
-        timer = new Timer(100, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateSlots();
-            }
-        });
+        
 
         JButton startButton = new JButton("Start");
         startButton.addActionListener(e -> start());
@@ -51,7 +46,13 @@ public class SlotMachinePanel extends javax.swing.JPanel {
         setOpaque(false); // Rend le JPanel transparent
     }
 
-    private void start() {
+   private void start() {
+       timer = new Timer(100, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateSlots();
+            }
+        });
         // Initialiser les valeurs actuelles à zéro
         for (int i = 0; i < 3; i++) {
             currentValues[i] = 0;
@@ -67,18 +68,20 @@ public class SlotMachinePanel extends javax.swing.JPanel {
         // Générer de nouvelles valeurs de slot pour l'animation
         if (elapsedTime < animationDuration) {
             for (int i = 0; i < 3; i++) {
-                currentValues[i] = random.nextInt(maxValue + 1); // Valeurs entre 0 et maxValue
+                currentValues[i] = random.nextInt(maxValue + 1);
                 slotLabels[i].setText(String.valueOf(currentValues[i]));
             }
         } else {
             // Arrêter l'animation et afficher les valeurs finales
             timer.stop();
             for (int i = 0; i < 3; i++) {
-                finalValues[i] = random.nextInt(maxValue + 1); // ICI on mettra les valeurs donner par le controlleur
+                finalValues[i] = random.nextInt(maxValue + 1); // Remplacez par les valeurs du contrôleur
                 slotLabels[i].setText(String.valueOf(finalValues[i]));
             }
-
         }
+
+        // Assurez-vous que le JPanel est redessiné
+        //repaint();
     }
     
     void setFinalValues(int[] values){

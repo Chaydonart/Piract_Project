@@ -4,6 +4,7 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
+import static Utilities.FileRef.BACKGROUND_IMAGE;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -21,7 +22,7 @@ public class CartePanel extends javax.swing.JPanel {
     public CartePanel() {
         try {
             // Chargez l'image depuis un fichier (remplacez le chemin par le vôtre)
-            image = ImageIO.read(new File("chemin-vers-votre-image.jpg"));
+            image = ImageIO.read(new File(BACKGROUND_IMAGE));
         } catch (IOException e) {
             e.printStackTrace();
         }
