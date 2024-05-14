@@ -20,6 +20,9 @@ public class ControlDeplacerPion implements IDeplacerPion {
         plateau.retirerPion(pion);
         pion.setPosition(nouvellePosition);
         plateau.poserPion(pion);
+        if(plateau.getCase(pion).isSpecial()){
+            System.out.println(pion.getName() + plateau.getCase(pion).toString());
+        }
       
         return nouvellePosition;
     }

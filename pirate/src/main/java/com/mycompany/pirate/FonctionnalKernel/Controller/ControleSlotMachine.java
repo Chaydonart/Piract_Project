@@ -19,7 +19,7 @@ public class ControleSlotMachine implements ISlotMachine {
 
     @Override
     public int[] spin() {
-        values = IntStream.generate(() -> random.nextInt(5)) // Valeurs entre 0 et 4
+        values = IntStream.generate(() -> random.nextInt(3)) 
                 .limit(3)
                 .map(val -> val < 2 ? val : val + 1) // Assure que les deuxième et troisième cases ont des valeurs entre
                                                      // 1 et 4

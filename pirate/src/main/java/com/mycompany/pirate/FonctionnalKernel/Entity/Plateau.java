@@ -21,12 +21,13 @@ public class Plateau {
         
         for (int i = 0; i < nbCases; i++) {
             Supplier<Case> caseSupplier;
-            int randomValue = randomNumbers.nextInt(100); 
-            if(randomValue < 30) { // 30% de chance d'avoir une case degat sur le plateau
-                caseSupplier = caseSpeciale1;
-            } else {
-                caseSupplier = caseNormale;
-            }
+            
+            //ATTENTION LES i SONT DECALES DE 1 !!! il faut faire -1 (case 10 = case 9 en vrai)
+            caseSupplier = switch (i) {
+                case 3, 13, 21, 29, 30 -> caseSpeciale1;
+                default -> caseNormale;
+            };
+   
             this.cases[i] = caseSupplier.get();
         }
     }

@@ -29,6 +29,6 @@ public class CaseDegat extends Case {
     }
     
     public String toString(){
-        return " perd un point de vie";
+        return " perd un point de vie du à une case DEGAT !";
     }
 }
