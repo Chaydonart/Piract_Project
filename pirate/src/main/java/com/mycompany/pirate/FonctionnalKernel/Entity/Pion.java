@@ -2,12 +2,17 @@ package com.mycompany.pirate.FonctionnalKernel.Entity;
 
 import java.awt.Color;
 
+/**
+ *
+ * @author RIBEIRO
+ */
+
 public class Pion {
     private int vie;
     private int position;
     public Color color;
     private boolean alive = true;
-    private String name;
+    private final String name;
 
     public Pion(String name) {
         this.name = name;

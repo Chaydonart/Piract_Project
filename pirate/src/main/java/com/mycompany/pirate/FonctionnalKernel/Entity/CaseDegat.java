@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author BEN JAAFAR
  */
 public class CaseDegat extends Case {
-     private ArrayList<Pion> occupants;
+    private ArrayList<Pion> occupants;
 
     public CaseDegat() {
         occupants = new ArrayList<>();
@@ -19,8 +19,8 @@ public class CaseDegat extends Case {
     
      @Override
     public void ajouterPion(Pion pion) {
-        pion.setVie(pion.getVie() - 1);
         occupants.add(pion);
+        pion.setVie(pion.getVie() - 1);
     }
     
     @Override
@@ -28,6 +28,7 @@ public class CaseDegat extends Case {
         return true;
     }
     
+    @Override
     public String toString(){
         return " perd un point de vie du à une case DEGAT !";
     }

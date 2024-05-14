@@ -4,10 +4,34 @@
  */
 package com.mycompany.pirate.FonctionnalKernel.Entity;
 
+import java.util.ArrayList;
+import com.mycompany.pirate.FonctionnalKernel.Controller.ControlGamblingDuel;
+
 /**
  *
- * @author BEN JAAFAR
+ * @author RIBEIRO
  */
 public class CaseGambling extends Case {
+    private ArrayList<Pion> occupants;
+    private ControlGamblingDuel controlGamblingDuel;
+
+    public CaseGambling() {
+        occupants = new ArrayList<>();
+    }
     
+     @Override
+    public void ajouterPion(Pion pion) {
+        occupants.add(pion);
+        controlGamblingDuel.duelDeDes();
+    }
+    
+    @Override
+    public boolean isSpecial(){
+        return true;
+    }
+    
+    @Override
+    public String toString(){
+        return " atterrit sur une case DUEL !";
+    }
 }

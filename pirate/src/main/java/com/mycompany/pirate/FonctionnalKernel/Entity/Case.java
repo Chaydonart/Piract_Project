@@ -2,6 +2,11 @@ package com.mycompany.pirate.FonctionnalKernel.Entity;
 
 import java.util.ArrayList;
 
+/**
+ *
+ * @author BEN JAAFAR
+ */
+
 public class Case {
     private ArrayList<Pion> occupants;
 
