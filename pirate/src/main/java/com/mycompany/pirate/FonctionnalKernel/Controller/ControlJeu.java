@@ -25,7 +25,8 @@ public class ControlJeu implements IControlJeu {
       public void jouerTour(Pion joueurCourant) {
             controleSlotMachine.spin();
             int deplacement = controleSlotMachine.getSumValues();
-            System.out.println(joueurCourant.getName() + " avance de " + deplacement + " cases et atterrit a la case " + (joueurCourant.getPosition() + deplacement));
+            System.out.println("Case d'origine de " + joueurCourant.getName() + " : casse " + joueurCourant.getPosition());
+            System.out.println(joueurCourant.getName() + " avance de " + deplacement + " cases");
             int nouvellePosition = controlDeplacerPion.deplacerPion(joueurCourant, plateau, deplacement);
             System.out.println(joueurCourant.getName() + " est a la case " + nouvellePosition);
             if(joueurCourant.getVie() <= 0){
