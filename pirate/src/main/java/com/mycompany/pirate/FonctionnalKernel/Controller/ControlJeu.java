@@ -75,5 +75,12 @@ public class ControlJeu implements IControlJeu {
             controlJeu.initialiserJeu();
             controlJeu.jouer();
       }
-
+      
+      public Pion getJoueur1() {
+          return this.joueur1;
+      }
+      
+      public Pion getJoueur2() {
+          return this.joueur2;
+      }
 }

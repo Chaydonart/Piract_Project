@@ -4,10 +4,18 @@
  */
 package com.mycompany.pirate.Interfaces;
 
+import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
+
 /**
  *
  * @author BEN JAAFAR
  */
-public interface IBoundary extends IControlJeu, IPirates {
+public interface ICase {
+    public boolean estOccupee();
+     
+    public void ajouterPion(Pion pion);
     
+    public void retirerPion(Pion pion);
+    
+    public boolean isSpecial();
 }
