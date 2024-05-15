@@ -13,8 +13,8 @@ import java.util.Random;
  *
  * @author RIBEIRO
  */
-public class ControlGamblingDuel implements IControlGamblingDuel {
-    private final ISlotMachine controleSlotMachine ;
+public class ControlGamblingDuel  {
+   /* private final ControleSlotMachine controleSlotMachine ;
 
     
     public ControlGamblingDuel() {
@@ -41,11 +41,12 @@ public class ControlGamblingDuel implements IControlGamblingDuel {
 
     @Override
     public int[] spin() {
-        return controleSlotMachine.spin();
+        return controleSlotMachine.spinMachine();
     }
 
     @Override
     public int getSumValues() {
         return controleSlotMachine.getSumValues();
     }
+*/
 }

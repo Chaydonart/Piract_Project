@@ -1,6 +1,7 @@
 package com.mycompany.pirate.FonctionnalKernel.Controller;
 
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
+import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Plateau;
 import com.mycompany.pirate.Interfaces.IDeplacerPion;
 
@@ -8,24 +9,20 @@ import com.mycompany.pirate.Interfaces.IDeplacerPion;
  *
  * @author ESSENGUE MATIS
  */
-public class ControlDeplacerPion implements IDeplacerPion {
+public class ControlDeplacerPion  {
 
-    @Override
-    public int deplacerPion(Pion pion, Plateau plateau, int deplacement) {
-        int position = pion.getPosition();
-        int nouvellePosition = position + deplacement;
-        if (nouvellePosition > plateau.getNbCases()) {
-            nouvellePosition = plateau.getNbCases();
-        }
-        plateau.retirerPion(pion);
-        pion.setPosition(nouvellePosition);
-                if(plateau.getCase(pion).isSpecial()){
-            System.out.println(pion.getName() + plateau.getCase(pion).toString());
-        }
-        plateau.poserPion(pion);
+    private DeplacerPionService deplacePionService;
+    private PionRepository pionRepository;
 
-      
-        return nouvellePosition;
+    public ControlDeplacerPion(DeplacerPionService deplacePionService, PionRepository pionRepository) {
+        this.deplacePionService = deplacePionService;
+        this.pionRepository = pionRepository;
+    }
+
+    public void deplacerPion(int resultatDe) {
+        Pion pionActuel = pionRepository.getPionActuel();
+        deplacePionService.deplacerPion(pionActuel, resultatDe);
+        pionRepository.save(pionActuel);
     }
 
 }

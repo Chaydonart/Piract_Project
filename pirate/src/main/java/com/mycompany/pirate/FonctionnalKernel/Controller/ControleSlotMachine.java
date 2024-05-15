@@ -4,7 +4,6 @@
  */
 package com.mycompany.pirate.FonctionnalKernel.Controller;
 
-import com.mycompany.pirate.Interfaces.ISlotMachine;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.IntStream;
@@ -13,22 +12,19 @@ import java.util.stream.IntStream;
  *
  * @author BEN JAAFAR
  */
-public class ControleSlotMachine implements ISlotMachine {
-    private final Random random = new Random();
-    private int[] values = new int[3];
+public class ControleSlotMachine {
+    private SlotMachineService smService;
 
-    @Override
-    public int[] spin() {
-        values = IntStream.generate(() -> random.nextInt(3)) 
-                .limit(3)
-                .map(val -> val < 2 ? val : val + 1) // Assure que les deuxième et troisième cases ont des valeurs entre
-                                                     // 1 et 4
-                .toArray();
-        return values;
+    public ControleSlotMachine(SlotMachineService smService) {
+        this.smService = smService;
     }
 
+    public int[] spinMachine() {
+        return smService.spin();
+    }
+    
     public int getSumValues() {
-        return Arrays.stream(values).sum();
+        return smService.getSumValues();
     }
 
 }

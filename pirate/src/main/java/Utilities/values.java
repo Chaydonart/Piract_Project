@@ -12,6 +12,10 @@ import java.awt.Color;
  */
 public class values {
      public static final Color GREEN_COLOR_BACKGROUND = new Color(34, 111, 55);
+     public static final Color RED_CUSTOM = new Color(170,39,23);
+     public static final Color GREEN_CUSTOM = new Color(0,105,91);
+     public static final Color BLACK_CUSTOM = new Color(74,32,41);
+     
      public static final Color INFO_PANEL_COLOR_BACKGROUND = new Color(24, 101, 45);
      public static final Color TRANSPARENT_COLOR_BACKGROUND = new Color(255, 0, 0, 0);
 }

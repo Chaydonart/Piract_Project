@@ -13,7 +13,7 @@ import com.mycompany.pirate.Interfaces.IControlGamblingDuel;
  * @author RIBEIRO
  */
 public class CaseGambling extends Case {
-    private ArrayList<Pion> occupants;
+    /*private ArrayList<Pion> occupants;
     private final IControlGamblingDuel controlGamblingDuel = new ControlGamblingDuel();
 
     public CaseGambling() {
@@ -35,4 +35,5 @@ public class CaseGambling extends Case {
     public String toString(){
         return " atterrit sur une case DUEL !";
     }
+*/
 }
