@@ -4,12 +4,13 @@
  */
 package com.mycompany.pirate.Interfaces;
 
+import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
+
 /**
  *
  * @author BEN JAAFAR
  */
-public interface ISlotMachine {
-    int[] spin();
+public interface IServiceGamblingDuel {
+    void duelDeDes(Pion pion, NotificationService notificationServices);
     
-    int getSumValues();
 }

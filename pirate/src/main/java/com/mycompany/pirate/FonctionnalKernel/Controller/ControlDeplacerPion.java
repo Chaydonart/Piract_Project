@@ -3,7 +3,7 @@ package com.mycompany.pirate.FonctionnalKernel.Controller;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Plateau;
-import com.mycompany.pirate.Interfaces.IDeplacerPion;
+import com.mycompany.pirate.Interfaces.IServiceDeplacerPion;
 
 /**
  *

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package TempBoundary;
+package com.mycompany.pirate.Boundary.Console;
 
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlJeu;
@@ -12,15 +12,15 @@ import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Plateau;
 import com.mycompany.pirate.Interfaces.IBoundary;
-import com.mycompany.pirate.Interfaces.ISlotMachine;
 import com.mycompany.pirate.Interfaces.NotificationService;
 import java.util.Arrays;
+import com.mycompany.pirate.Interfaces.IServiceSlotMachine;
 
 /**
  *
  * @author BEN JAAFAR
  */
-public class Boundary implements NotificationService {
+public class Boundary implements NotificationService, IBoundary{
     private ControleSlotMachine controlSlotMachine;
     private ControlDeplacerPion controlDeplacePion;
     private ControlJeu gameLoopController;
@@ -38,8 +38,8 @@ public class Boundary implements NotificationService {
         gameLoopController.startGame();
     }
 
-    public void lancerDe() {
-        int[] values = controlSlotMachine.spinMachine();
+    public void spin() {
+        int[] values = controlSlotMachine.spin();
         afficherMessage("La machine affiche = " + values[0] + " " +  values[1] + " " + values[2]);
         int resultat = Arrays.stream(values).sum();
         afficherMessage("Résultat de la machine " + resultat);

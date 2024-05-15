@@ -5,10 +5,10 @@
 package com.mycompany.pirate.FonctionnalKernel.Controller;
 
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
-import com.mycompany.pirate.Interfaces.IControlGamblingDuel;
-import com.mycompany.pirate.Interfaces.ISlotMachine;
+import com.mycompany.pirate.Interfaces.IServiceGamblingDuel;
 import com.mycompany.pirate.Interfaces.NotificationService;
 import java.util.Random;
+import com.mycompany.pirate.Interfaces.IServiceSlotMachine;
 
 /**
  *
@@ -16,9 +16,9 @@ import java.util.Random;
  */
 public class ControlGamblingDuel  {
     
-    private ServiceGameblingDuel gdService;
+    private IServiceGamblingDuel gdService;
 
-    public ControlGamblingDuel(ServiceGameblingDuel gdService) {
+    public ControlGamblingDuel(IServiceGamblingDuel gdService) {
         this.gdService = gdService;
     }
     

@@ -20,7 +20,7 @@ public class CaseDegat extends Case {
         this.notificationService = notificationService;
     }
     
-     @Override
+    @Override
     public void ajouterPion(Pion pion) {
         occupants.add(pion);
         pion.setVie(pion.getVie() - 1);

@@ -3,10 +3,10 @@ package com.mycompany.pirate.Interfaces;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Plateau;
 
-public interface IDeplacerPion {
+public interface IServiceDeplacerPion {
     /**
      *
      * @author ESSENGUE MATIS
      */
-    int deplacerPion(Pion pion, Plateau plateau, int deplacement);
+    public void deplacerPion(Pion pion, int deplacement);
 }

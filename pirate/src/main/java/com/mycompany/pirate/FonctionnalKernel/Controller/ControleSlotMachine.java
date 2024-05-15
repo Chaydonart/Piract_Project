@@ -4,6 +4,7 @@
  */
 package com.mycompany.pirate.FonctionnalKernel.Controller;
 
+import com.mycompany.pirate.Interfaces.IServiceSlotMachine;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.IntStream;
@@ -12,19 +13,16 @@ import java.util.stream.IntStream;
  *
  * @author BEN JAAFAR
  */
-public class ControleSlotMachine {
+public class ControleSlotMachine implements IServiceSlotMachine {
     private SlotMachineService smService;
 
     public ControleSlotMachine(SlotMachineService smService) {
         this.smService = smService;
     }
 
-    public int[] spinMachine() {
+    @Override
+    public int[] spin() {
         return smService.spin();
-    }
-    
-    public int getSumValues() {
-        return smService.getSumValues();
     }
 
 }

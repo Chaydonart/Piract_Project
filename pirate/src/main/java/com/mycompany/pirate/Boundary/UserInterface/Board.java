@@ -4,10 +4,10 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
-import static Utilities.values.BLACK_CUSTOM;
-import static Utilities.values.GREEN_COLOR_BACKGROUND;
-import static Utilities.values.GREEN_CUSTOM;
-import static Utilities.values.RED_CUSTOM;
+import static com.mycompany.pirate.data.values.BLACK_CUSTOM;
+import static com.mycompany.pirate.data.values.GREEN_COLOR_BACKGROUND;
+import static com.mycompany.pirate.data.values.GREEN_CUSTOM;
+import static com.mycompany.pirate.data.values.RED_CUSTOM;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;

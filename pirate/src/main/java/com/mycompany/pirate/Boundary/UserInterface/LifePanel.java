@@ -10,9 +10,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import static Utilities.FileRef.IMAGE_LIFE_PLAYER_1;
-import static Utilities.FileRef.IMAGE_LIFE_PLAYER_2;
-import static Utilities.values.TRANSPARENT_COLOR_BACKGROUND;
+import static com.mycompany.pirate.data.FileRef.IMAGE_LIFE_PLAYER_1;
+import static com.mycompany.pirate.data.FileRef.IMAGE_LIFE_PLAYER_2;
+import static com.mycompany.pirate.data.values.TRANSPARENT_COLOR_BACKGROUND;
 
 /**
  *

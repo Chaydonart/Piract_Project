@@ -4,7 +4,7 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
-import static Utilities.values.TRANSPARENT_COLOR_BACKGROUND;
+import static com.mycompany.pirate.data.values.TRANSPARENT_COLOR_BACKGROUND;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;

@@ -7,7 +7,7 @@ package com.mycompany.pirate.FonctionnalKernel.Entity;
 import java.util.ArrayList;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlGamblingDuel;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ServiceGameblingDuel;
-import com.mycompany.pirate.Interfaces.IControlGamblingDuel;
+import com.mycompany.pirate.Interfaces.IServiceGamblingDuel;
 import com.mycompany.pirate.Interfaces.NotificationService;
 
 /**
@@ -18,7 +18,7 @@ public class CaseGambling extends Case {
     private ArrayList<Pion> occupants;
     private NotificationService notificationService;
     
-    private ServiceGameblingDuel gdDuel = new ServiceGameblingDuel();
+    private IServiceGamblingDuel gdDuel = new ServiceGameblingDuel();
     private ControlGamblingDuel controlGamblingDuel = new ControlGamblingDuel(gdDuel);
 
     public CaseGambling(NotificationService notificationService) {

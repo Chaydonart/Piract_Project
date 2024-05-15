@@ -4,6 +4,7 @@
  */
 package com.mycompany.pirate.FonctionnalKernel.Controller;
 
+import com.mycompany.pirate.Interfaces.IServiceSlotMachine;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -11,7 +12,7 @@ import java.util.Random;
  *
  * @author BEN JAAFAR
  */
-public class SlotMachineService {
+public class SlotMachineService implements IServiceSlotMachine {
     
     private final Random random = new Random();
     private int[] values = new int[3];
@@ -25,7 +26,4 @@ public class SlotMachineService {
         return values;
     }
     
-    public int getSumValues() {
-        return Arrays.stream(values).sum();
-    }
 }

@@ -7,18 +7,20 @@ package com.mycompany.pirate.FonctionnalKernel.Controller;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Case;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Plateau;
+import com.mycompany.pirate.Interfaces.IServiceDeplacerPion;
 
 /**
  *
  * @author BEN JAAFAR
  */
-public class DeplacerPionService {
+public class DeplacerPionService implements IServiceDeplacerPion {
     private Plateau plateau;
 
     public DeplacerPionService(Plateau plateau) {
         this.plateau = plateau;
     }
-
+    
+    @Override
     public void deplacerPion(Pion pion, int deplacement) {
         plateau.retirerPion(pion);
         int nouvellePosition = pion.getPosition() + deplacement;

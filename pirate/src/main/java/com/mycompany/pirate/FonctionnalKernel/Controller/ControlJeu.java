@@ -1,15 +1,14 @@
 package com.mycompany.pirate.FonctionnalKernel.Controller;
 
-import TempBoundary.Boundary;
+import com.mycompany.pirate.Boundary.Console.Boundary;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Jeu;
-import com.mycompany.pirate.Interfaces.IControlJeu;
-import com.mycompany.pirate.Interfaces.IDeplacerPion;
-import com.mycompany.pirate.Interfaces.ISlotMachine;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Plateau;
+import com.mycompany.pirate.Interfaces.IServiceSlotMachine;
+import com.mycompany.pirate.Interfaces.IServiceDeplacerPion;
 
-public class ControlJeu  {
+public class ControlJeu {
     private Jeu jeu;
     private PionRepository pionRepository;
     private Boundary gameUI;
@@ -26,7 +25,7 @@ public class ControlJeu  {
                 if (jeu.isGameOver()) break;
                 gameUI.afficherMessage("");
                 gameUI.afficherMessage("C'est le tour du pion " + pion.getName());
-                gameUI.lancerDe();
+                gameUI.spin();
                 
                 if(pion.getVie() <= 0){
                     jeu.setGameOver(true);
@@ -45,9 +44,6 @@ public class ControlJeu  {
     }
 
     public void setGameUI(Boundary gameUI) {
-        this.gameUI = gameUI; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.gameUI = gameUI;
     }
-
-
-    
 }

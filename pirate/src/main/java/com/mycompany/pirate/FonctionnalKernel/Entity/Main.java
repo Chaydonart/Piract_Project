@@ -4,7 +4,7 @@
  */
 package com.mycompany.pirate.FonctionnalKernel.Entity;
 
-import TempBoundary.Boundary;
+import com.mycompany.pirate.Boundary.Console.Boundary;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlJeu;
 import java.util.Arrays;
