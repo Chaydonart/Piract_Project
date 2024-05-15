@@ -15,27 +15,19 @@ import java.util.Random;
 public class ControlCaseReculer {
         private final ISlotMachine controleSlotMachine ;
 
-    
+    //Si on recule sur une case spéciale on anime pas 
+    //Risque de trop désavantager un joueur avec -5 cases et perdre une vie
     public ControlCaseReculer() {
         this.controleSlotMachine = new ControleSlotMachine();
     }
 
-    public void duelDeDes(Pion pion) {
-        //Lancers de dés
-        spin();
-        int lancerPion = getSumValues();
+    public void reculer(Pion pion) {
+        //Valeur aléatoire de retour en arrière
         Random random = new Random();
-        int value = random.nextInt(6);
-        System.out.println("Duel gambling ! Le joueur doit faire une valeur superieur a "+ value);
-        System.out.println("La roulette affiche... " + lancerPion + " !");
+        int value = random.nextInt(5);
+        System.out.println("Case reculer ! Le joueur doit reculer de "+ value + " cases");
+        
 
-        //perdant perd une vie
-        if (lancerPion < value) {
-            pion.setVie(pion.getVie() - 1);
-            System.out.println(pion.getName() + " a perdu le gambling ! Une vie en moins ");
-        } else {
-            System.out.println("DUEL REUSSI !");
-        }
     }
 
     @Override

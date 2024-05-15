@@ -4,10 +4,12 @@
  */
 package com.mycompany.pirate.Interfaces;
 
+import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
+
 /**
  *
  * @author RIBEIRO
- */
-public interface IControlCaseReculer {
-    
+ */;
+publ;face IControlCaseReculer extends ISlotMachine{
+    void reculer(Pion pion);
 }

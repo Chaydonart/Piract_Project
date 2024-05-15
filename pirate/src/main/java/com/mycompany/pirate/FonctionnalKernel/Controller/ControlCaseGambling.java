@@ -28,7 +28,7 @@ public class ControlCaseGambling implements IControlCaseGambling {
         int lancerPion = getSumValues();
         Random random = new Random();
         int value = random.nextInt(6);
-        System.out.println("Duel gambling ! Le joueur doit faire une valeur superieur a "+ value);
+        System.out.println("Case gambling ! Le joueur doit faire un lancer superieur a "+ value);
         System.out.println("La roulette affiche... " + lancerPion + " !");
 
         //perdant perd une vie

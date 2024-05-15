@@ -13,5 +13,4 @@ import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 public interface IControlCaseGambling extends ISlotMachine {
     
     public void duelDeDes(Pion pion);
-    
 }
