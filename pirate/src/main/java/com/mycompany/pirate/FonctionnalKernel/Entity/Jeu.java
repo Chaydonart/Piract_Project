@@ -9,7 +9,16 @@ import java.util.List;
 /**
  *
  * @author BEN JAAFAR
+ * 
+ * # DESCRIPTION
+ * La classe Jeu peut suivre l'état global du jeu, comme le joueur actuel 
+ * en train de jouer, le tour actuel, le nombre de tours restants, etc. 
+ * En conservant cette information dans la classe Jeu, nous pouvons faciliter 
+ * la coordination des différentes actions et événements qui se produisent 
+ * pendant le jeu.
+ * 
  */
+
 public class Jeu {
     private List<Pion> pions;
     private boolean gameOver;
@@ -33,7 +42,7 @@ public class Jeu {
 
     public boolean checkVictory(Pion pion) {
         // Logique de vérification de la victoire
-        return pion.getPosition() >= 36; // Example condition
+        return pion.getPosition() >= 36; 
     }
     
 }

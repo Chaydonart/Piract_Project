@@ -2,13 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.pirate.FonctionnalKernel.Entity;
+package com.mycompany.pirate.main;
 
 import com.mycompany.pirate.Boundary.Console.Boundary;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlJeu;
 import java.util.Arrays;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControleSlotMachine;
+import com.mycompany.pirate.FonctionnalKernel.Entity.Jeu;
+import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
+import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
+import com.mycompany.pirate.FonctionnalKernel.Entity.Plateau;
 import com.mycompany.pirate.Services.DeplacerPionService;
 import com.mycompany.pirate.Services.SlotMachineService;
 

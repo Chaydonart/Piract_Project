@@ -9,7 +9,14 @@ import java.util.List;
 /**
  *
  * @author BEN JAAFAR
+ * 
+ * # DESCRIPTION
+ * Le PionRepository agit comme une couche d'abstraction entre les entités (les pions)
+ * et les contrôleurs qui ont besoin d'accéder à ces entités. Il fournit des méthodes 
+ * pour manipuler la collection de pions de manière cohérente.
+ * 
  */
+
 public class PionRepository {
     private List<Pion> pions;
     private int pionActuelIndex;
