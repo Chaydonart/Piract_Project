@@ -8,7 +8,7 @@ import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 
 /**
  *
- * @author BEN JAAFAR
+ * @author RIBEIRO
  */
 public interface IControlGamblingDuel extends ISlotMachine {
     

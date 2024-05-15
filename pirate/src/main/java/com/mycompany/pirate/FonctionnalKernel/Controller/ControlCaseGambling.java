@@ -13,14 +13,15 @@ import java.util.Random;
  *
  * @author RIBEIRO
  */
-public class ControlGamblingDuel implements IControlGamblingDuel {
+public class ControlCaseGambling implements IControlGamblingDuel {
     private final ISlotMachine controleSlotMachine ;
 
     
-    public ControlGamblingDuel() {
+    public ControlCaseGambling() {
         this.controleSlotMachine = new ControleSlotMachine();
     }
 
+    @Override
     public void duelDeDes(Pion pion) {
         //Lancers de dés
         spin();

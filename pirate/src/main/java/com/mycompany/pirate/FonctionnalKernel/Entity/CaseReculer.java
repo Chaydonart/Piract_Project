@@ -5,6 +5,7 @@
 package com.mycompany.pirate.FonctionnalKernel.Entity;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -12,17 +13,19 @@ import java.util.ArrayList;
  */
 public class CaseReculer extends Case {
     private ArrayList<Pion> occupants;
-    private int position;
 
-    public CaseReculer(int position) {
+    public CaseReculer() {
         occupants = new ArrayList<>();
-        this.position = position;
     }
     
      @Override
     public void ajouterPion(Pion pion) {
+        Random random = new Random();
+        int value = random.nextInt(6);
+        int pos = pion.getPosition();
         occupants.add(pion);
-        pion.setVie(pion.getVie() - 1);
+        
+        
     }
     
     @Override
