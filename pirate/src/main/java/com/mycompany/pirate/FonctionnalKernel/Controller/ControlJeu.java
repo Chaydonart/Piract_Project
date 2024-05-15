@@ -27,14 +27,14 @@ public class ControlJeu implements IControlJeu {
             int deplacement = controleSlotMachine.getSumValues();
             System.out.println(joueurCourant.getName() + " avance de " + deplacement + " cases");
             int nouvellePosition = controlDeplacerPion.deplacerPion(joueurCourant, plateau, deplacement);
-            System.out.println(joueurCourant.getName() + " est à la case " + nouvellePosition);
+            System.out.println(joueurCourant.getName() + " est a la case " + nouvellePosition);
             if(joueurCourant.getVie() <= 0){
                 System.out.println(joueurCourant.getName() + " n'a plus de vie");
                 jeuTermine = true;
             }
             if (nouvellePosition == plateau.getNbCases()) {
                   jeuTermine = true;
-                  System.out.println(joueurCourant.getName() + " a gagné");
+                  System.out.println(joueurCourant.getName() + " a gagne");
             }
       }
 

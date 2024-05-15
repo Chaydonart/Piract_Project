@@ -8,13 +8,15 @@ import java.util.ArrayList;
 
 /**
  *
- * @author BEN JAAFAR
+ * @author RIBEIRO
  */
-public class CaseDegat extends Case {
+public class CaseReculer extends Case {
     private ArrayList<Pion> occupants;
+    private int position;
 
-    public CaseDegat() {
+    public CaseReculer(int position) {
         occupants = new ArrayList<>();
+        this.position = position;
     }
     
      @Override
@@ -30,6 +32,6 @@ public class CaseDegat extends Case {
     
     @Override
     public String toString(){
-        return " perd un point de vie du a une case DEGAT !";
+        return " perd un point de vie du à une case DEGAT !";
     }
 }
