@@ -4,8 +4,9 @@
  */
 package com.mycompany.pirate.FonctionnalKernel.Entity;
 
+import com.mycompany.pirate.FonctionnalKernel.Controller.ControlCaseReculer;
+import com.mycompany.pirate.Interfaces.IControlCaseReculer;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  *
@@ -13,19 +14,16 @@ import java.util.Random;
  */
 public class CaseReculer extends Case {
     private ArrayList<Pion> occupants;
-
+    private final IControlCaseReculer controlCaseReculer = new ControlCaseReculer();
+    
     public CaseReculer() {
         occupants = new ArrayList<>();
     }
     
      @Override
     public void ajouterPion(Pion pion) {
-        Random random = new Random();
-        int value = random.nextInt(6);
-        int pos = pion.getPosition();
         occupants.add(pion);
-        
-        
+        controlCaseReculer.reculer(pion);   
     }
     
     @Override
@@ -35,6 +33,6 @@ public class CaseReculer extends Case {
     
     @Override
     public String toString(){
-        return " perd un point de vie du à une case DEGAT !";
+        return " atterrit sur une case RECULER !";
     }
 }

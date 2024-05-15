@@ -19,6 +19,7 @@ public class ControlCaseReculer implements IControlCaseReculer{
     public ControlCaseReculer() {
     }
 
+    @Override
     public void reculer(Pion pion) {
         //Valeur aléatoire de retour en arrière
         Random random = new Random();
@@ -29,10 +30,10 @@ public class ControlCaseReculer implements IControlCaseReculer{
         //si plus grand -> case depart
         if (pos < value) {
             pion.setPosition(1);
-            System.out.println("Le joueur se retrouve à la case 1");
+            System.out.println("Le joueur se retrouve a la case 1");
         } else {
             pion.setPosition(pos - value);
-            System.out.println("Le joueur se retrouve à la case " + (pos - value));
+            System.out.println("Le joueur se retrouve a la case " + (pos - value));
         }
     }
 }
