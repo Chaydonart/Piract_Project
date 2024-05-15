@@ -3,6 +3,9 @@ package com.mycompany.pirate.FonctionnalKernel.Controller;
 import com.mycompany.pirate.Interfaces.IControlJeu;
 import com.mycompany.pirate.Interfaces.IDeplacerPion;
 import com.mycompany.pirate.Interfaces.ISlotMachine;
+
+import java.util.Scanner;
+
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Plateau;
 
