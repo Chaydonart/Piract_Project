@@ -22,7 +22,7 @@ public class Main {
         Pion joueur2 = new Pion("Joueur 2");
         
         Jeu jeu = new Jeu(Arrays.asList(joueur1, joueur2));
-        Plateau plateau = new Plateau(32);
+        Plateau plateau = new Plateau(36);
 
         SlotMachineService smService = new SlotMachineService();
         ControleSlotMachine controlSlotMachine = new ControleSlotMachine(smService);
