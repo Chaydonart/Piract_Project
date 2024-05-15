@@ -9,8 +9,8 @@ import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlJeu;
 import java.util.Arrays;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControleSlotMachine;
-import com.mycompany.pirate.FonctionnalKernel.Controller.DeplacerPionService;
-import com.mycompany.pirate.FonctionnalKernel.Controller.SlotMachineService;
+import com.mycompany.pirate.Services.DeplacerPionService;
+import com.mycompany.pirate.Services.SlotMachineService;
 
 /**
  *
