@@ -13,13 +13,14 @@ import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Plateau;
 import com.mycompany.pirate.Interfaces.IBoundary;
 import com.mycompany.pirate.Interfaces.ISlotMachine;
+import com.mycompany.pirate.Interfaces.NotificationService;
 import java.util.Arrays;
 
 /**
  *
  * @author BEN JAAFAR
  */
-public class Boundary {
+public class Boundary implements NotificationService {
     private ControleSlotMachine controlSlotMachine;
     private ControlDeplacerPion controlDeplacePion;
     private ControlJeu gameLoopController;
@@ -58,6 +59,15 @@ public class Boundary {
 
     public void afficherMessage(String message) {
         System.out.println(message);
+    }
+
+    @Override
+    public void notify(String message) {
+        afficherMessage(message);
+    }
+
+    public void setGameLoopController(ControlJeu gameLoopController) {
+        this.gameLoopController = gameLoopController; 
     }
     
 }

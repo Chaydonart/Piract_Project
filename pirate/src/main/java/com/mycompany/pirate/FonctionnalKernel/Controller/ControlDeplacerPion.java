@@ -25,4 +25,8 @@ public class ControlDeplacerPion  {
         pionRepository.save(pionActuel);
     }
 
+    public void setDeplacerPionService(DeplacerPionService deplacerPionService) {
+        this.deplacePionService = deplacerPionService ; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

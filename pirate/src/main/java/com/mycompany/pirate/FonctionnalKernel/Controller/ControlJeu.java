@@ -27,6 +27,10 @@ public class ControlJeu  {
                 gameUI.afficherMessage("");
                 gameUI.afficherMessage("C'est le tour du pion " + pion.getName());
                 gameUI.lancerDe();
+                
+                if(pion.getVie() <= 0){
+                    jeu.setGameOver(true);
+                }
 
                 // Check if the game is won by checking pion's position or other criteria
                 if (jeu.checkVictory(pion)) {
@@ -39,4 +43,11 @@ public class ControlJeu  {
             }
         }
     }
+
+    public void setGameUI(Boundary gameUI) {
+        this.gameUI = gameUI; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+
+    
 }
