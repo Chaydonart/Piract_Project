@@ -14,7 +14,7 @@ import com.mycompany.pirate.Interfaces.IServiceSlotMachine;
  *
  * @author RIBEIRO
  */
-public class ControlGamblingDuel  {
+public class ControlGamblingDuel implements IServiceGamblingDuel   {
     
     private IServiceGamblingDuel gdService;
 
@@ -22,6 +22,7 @@ public class ControlGamblingDuel  {
         this.gdService = gdService;
     }
     
+    @Override
     public void duelDeDes(Pion pion, NotificationService nots){
         this.gdService.duelDeDes(pion,nots);
     }

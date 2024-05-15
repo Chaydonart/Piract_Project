@@ -15,13 +15,12 @@ import java.util.stream.IntStream;
  * @author BEN JAAFAR
  */
 public class ControleSlotMachine implements IServiceSlotMachine {
-    private SlotMachineService smService;
+    private IServiceSlotMachine smService;
 
     public ControleSlotMachine(SlotMachineService smService) {
         this.smService = smService;
     }
 
-    @Override
     public int[] spin() {
         return smService.spin();
     }

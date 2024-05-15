@@ -10,9 +10,9 @@ import com.mycompany.pirate.Interfaces.IServiceDeplacerPion;
  *
  * @author ESSENGUE MATIS
  */
-public class ControlDeplacerPion  {
+public class ControlDeplacerPion {
 
-    private DeplacerPionService deplacePionService;
+    private IServiceDeplacerPion deplacePionService;
     private PionRepository pionRepository;
 
     public ControlDeplacerPion(DeplacerPionService deplacePionService, PionRepository pionRepository) {
