@@ -8,6 +8,6 @@ package com.mycompany.pirate.FonctionnalKernel.Controller;
  *
  * @author Soumaya
  */
-public class ControlReculer {
+public class ControlCaseReculer {
     
 }
