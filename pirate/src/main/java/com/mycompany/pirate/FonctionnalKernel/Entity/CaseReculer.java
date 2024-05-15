@@ -5,25 +5,27 @@
 package com.mycompany.pirate.FonctionnalKernel.Entity;
 
 import java.util.ArrayList;
-import com.mycompany.pirate.FonctionnalKernel.Controller.ControlCaseGambling;
-import com.mycompany.pirate.Interfaces.IControlCaseGambling;
+import java.util.Random;
 
 /**
  *
  * @author RIBEIRO
  */
-public class CaseGambling extends Case {
+public class CaseReculer extends Case {
     private ArrayList<Pion> occupants;
-    private final IControlCaseGambling controlGamblingDuel = new ControlCaseGambling();
 
-    public CaseGambling() {
+    public CaseReculer() {
         occupants = new ArrayList<>();
     }
     
      @Override
     public void ajouterPion(Pion pion) {
+        Random random = new Random();
+        int value = random.nextInt(6);
+        int pos = pion.getPosition();
         occupants.add(pion);
-        controlGamblingDuel.duelDeDes(pion);
+        
+        
     }
     
     @Override
@@ -33,6 +35,6 @@ public class CaseGambling extends Case {
     
     @Override
     public String toString(){
-        return " atterrit sur une case DUEL !";
+        return " perd un point de vie du à une case DEGAT !";
     }
 }

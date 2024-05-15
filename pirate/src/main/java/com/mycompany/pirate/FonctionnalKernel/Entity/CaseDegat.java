@@ -30,6 +30,6 @@ public class CaseDegat extends Case {
     
     @Override
     public String toString(){
-        return " perd un point de vie du à une case DEGAT !";
+        return " perd un point de vie du a une case DEGAT !";
     }
 }
