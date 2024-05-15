@@ -10,6 +10,7 @@ import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
  *
  * @author RIBEIRO
  */
-public interface IControlCaseReculer extends ISlotMachine{
+public interface IControlCaseReculer {
+    
     void reculer(Pion pion);
 }
