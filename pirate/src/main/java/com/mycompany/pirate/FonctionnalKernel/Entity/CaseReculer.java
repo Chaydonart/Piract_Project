@@ -23,7 +23,7 @@ public class CaseReculer extends Case {
      @Override
     public void ajouterPion(Pion pion) {
         occupants.add(pion);
-        controlCaseReculer.reculer(pion);   
+        controlCaseReculer.reculer(pion);
     }
     
     @Override
