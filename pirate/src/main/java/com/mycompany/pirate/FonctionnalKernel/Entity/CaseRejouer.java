@@ -16,16 +16,16 @@ import com.mycompany.pirate.Services.ServiceRejouer;
  * @author BEN JAAFAR
  */
 public class CaseRejouer extends Case {
-     private IServiceRejouer serviceRejouer;
+     private ControlRejouer controlRejouer;
      
     public CaseRejouer(ControlDeplacerPion controlDeplacerPion, ControleSlotMachine controlSlotMachine, NotificationService notificationService) {
-        this.serviceRejouer = new ServiceRejouer(controlDeplacerPion,controlSlotMachine,notificationService);
+        this.controlRejouer = new ControlRejouer(controlDeplacerPion,controlSlotMachine,notificationService);
     }
 
     @Override
     public void ajouterPion(Pion pion) {
-        if (serviceRejouer != null) {
-            serviceRejouer.rejouer();
+        if (controlRejouer != null) {
+            controlRejouer.rejouer();
         }
     }
 

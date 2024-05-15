@@ -16,8 +16,8 @@ public class ControlRejouer {
     
     private ServiceRejouer serviceRejouer;
 
-    public ControlRejouer(ServiceRejouer serviceRejouer) {
-        this.serviceRejouer = serviceRejouer;
+    public ControlRejouer(ControlDeplacerPion controlDeplacerPion, ControleSlotMachine controlSlotMachine, NotificationService notificationService) {
+        this.serviceRejouer = new ServiceRejouer(controlDeplacerPion,controlSlotMachine,notificationService);
     }
 
     public void rejouer() {
