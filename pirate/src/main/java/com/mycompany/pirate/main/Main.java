@@ -46,8 +46,12 @@ public class Main {
         gameUI.setGameLoopController(gameLoopController);
         
         // Mettez à jour le service de déplacement de pion pour utiliser le plateau avec le service de notification
-        DeplacerPionService deplacerPionService = new DeplacerPionService(new Plateau(36, gameUI));
+        Plateau plateau =  new Plateau(36,gameUI);
+        
+        DeplacerPionService deplacerPionService = new DeplacerPionService(plateau);
         controlDeplacerPion.setDeplacerPionService(deplacerPionService);
+        
+        plateau.initialiser(controlDeplacerPion,controlSlotMachine);
         
         // Mettez à jour le GameLoopController avec le GameUI correct
         gameLoopController.setGameUI(gameUI);
