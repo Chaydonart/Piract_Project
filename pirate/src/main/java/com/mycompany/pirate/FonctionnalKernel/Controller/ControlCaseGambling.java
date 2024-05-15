@@ -5,15 +5,15 @@
 package com.mycompany.pirate.FonctionnalKernel.Controller;
 
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
-import com.mycompany.pirate.Interfaces.IControlGamblingDuel;
 import com.mycompany.pirate.Interfaces.ISlotMachine;
 import java.util.Random;
+import com.mycompany.pirate.Interfaces.IControlCaseGambling;
 
 /**
  *
  * @author RIBEIRO
  */
-public class ControlCaseGambling implements IControlGamblingDuel {
+public class ControlCaseGambling implements IControlCaseGambling {
     private final ISlotMachine controleSlotMachine ;
 
     

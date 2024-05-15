@@ -6,7 +6,7 @@ package com.mycompany.pirate.FonctionnalKernel.Entity;
 
 import java.util.ArrayList;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlCaseGambling;
-import com.mycompany.pirate.Interfaces.IControlGamblingDuel;
+import com.mycompany.pirate.Interfaces.IControlCaseGambling;
 
 /**
  *
@@ -14,7 +14,7 @@ import com.mycompany.pirate.Interfaces.IControlGamblingDuel;
  */
 public class CaseGambling extends Case {
     private ArrayList<Pion> occupants;
-    private final IControlGamblingDuel controlGamblingDuel = new ControlCaseGambling();
+    private final IControlCaseGambling controlGamblingDuel = new ControlCaseGambling();
 
     public CaseGambling() {
         occupants = new ArrayList<>();
