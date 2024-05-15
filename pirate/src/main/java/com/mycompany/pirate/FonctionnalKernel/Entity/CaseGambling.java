@@ -6,6 +6,7 @@ package com.mycompany.pirate.FonctionnalKernel.Entity;
 
 import java.util.ArrayList;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlGamblingDuel;
+import com.mycompany.pirate.Interfaces.IControlGamblingDuel;
 
 /**
  *
@@ -13,7 +14,7 @@ import com.mycompany.pirate.FonctionnalKernel.Controller.ControlGamblingDuel;
  */
 public class CaseGambling extends Case {
     private ArrayList<Pion> occupants;
-    private ControlGamblingDuel controlGamblingDuel;
+    private final IControlGamblingDuel controlGamblingDuel = new ControlGamblingDuel();
 
     public CaseGambling() {
         occupants = new ArrayList<>();
@@ -22,7 +23,7 @@ public class CaseGambling extends Case {
      @Override
     public void ajouterPion(Pion pion) {
         occupants.add(pion);
-        controlGamblingDuel.duelDeDes();
+        controlGamblingDuel.duelDeDes(pion);
     }
     
     @Override

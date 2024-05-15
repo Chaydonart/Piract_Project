@@ -5,33 +5,47 @@
 package com.mycompany.pirate.FonctionnalKernel.Controller;
 
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
+import com.mycompany.pirate.Interfaces.IControlGamblingDuel;
+import com.mycompany.pirate.Interfaces.ISlotMachine;
+import java.util.Random;
 
 /**
  *
  * @author RIBEIRO
  */
-public class ControlGamblingDuel {
-    private final ControleSlotMachine controleSlotMachine;
-    private final Pion pion1;
-    private final Pion pion2;
+public class ControlGamblingDuel implements IControlGamblingDuel {
+    private final ISlotMachine controleSlotMachine ;
+
     
-    public ControlGamblingDuel(ControlJeu controlJeu) {
-        this.pion1 = controlJeu.getJoueur1();
-        this.pion2 = controlJeu.getJoueur2();
+    public ControlGamblingDuel() {
         this.controleSlotMachine = new ControleSlotMachine();
     }
 
-    public void duelDeDes() {
+    public void duelDeDes(Pion pion) {
         //Lancers de dés
-        int lancerPion1 = controleSlotMachine.spin()[0];
-        int lancerPion2 = controleSlotMachine.spin()[0];
+        spin();
+        int lancerPion = getSumValues();
+        Random random = new Random();
+        int value = random.nextInt(6);
+        System.out.println("Duel gambling ! Le joueur doit faire une valeur superieur a "+ value);
+        System.out.println("La roulette affiche... " + lancerPion + " !");
 
         //perdant perd une vie
-        if (lancerPion1 < lancerPion2) {
-            pion1.setVie(pion1.getVie() - 1);
-        } else if (lancerPion2 < lancerPion1) {
-            pion2.setVie(pion2.getVie() - 1);
+        if (lancerPion < value) {
+            pion.setVie(pion.getVie() - 1);
+            System.out.println(pion.getName() + " a perdu le gambling ! Une vie en moins ");
+        } else {
+            System.out.println("DUEL REUSSI !");
         }
-        // En cas d'égalité, aucun pion ne perd de vie
+    }
+
+    @Override
+    public int[] spin() {
+        return controleSlotMachine.spin();
+    }
+
+    @Override
+    public int getSumValues() {
+        return controleSlotMachine.getSumValues();
     }
 }

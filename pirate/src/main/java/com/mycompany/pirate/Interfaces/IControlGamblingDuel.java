@@ -4,10 +4,14 @@
  */
 package com.mycompany.pirate.Interfaces;
 
+import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
+
 /**
  *
  * @author BEN JAAFAR
  */
-public interface IBoundary extends IControlJeu, IPirates {
+public interface IControlGamblingDuel extends ISlotMachine {
+    
+    public void duelDeDes(Pion pion);
     
 }

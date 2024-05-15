@@ -8,6 +8,6 @@ package com.mycompany.pirate.Interfaces;
  *
  * @author BEN JAAFAR
  */
-public interface IBoundary extends IControlJeu, IPirates {
+public interface IPirates {
     
 }
