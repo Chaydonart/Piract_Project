@@ -23,7 +23,7 @@ public class ControlCaseReculer implements IControlCaseReculer{
     public void reculer(Pion pion) {
         //Valeur aléatoire de retour en arrière
         Random random = new Random();
-        int value = random.nextInt(5);
+        int value = random.nextInt(4) + 1;
         System.out.println("Case reculer ! Le joueur doit reculer de "+ value + " cases");
         int pos = pion.getPosition();
         
