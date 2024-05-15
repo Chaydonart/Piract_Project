@@ -28,7 +28,7 @@ public class Plateau {
             //ATTENTION LES i SONT DECALES DE 1 !!! il faut faire -1 (case 10 = case 9 en vrai)
             caseSupplier = switch (i) {
                 case 3, 13, 21, 29, 30 -> caseSpeciale1;
-                case 6, 16, 26 -> caseSpeciale2;
+                case 7, 19, 31 -> caseSpeciale2;
                 default -> caseNormale;
             };
    
