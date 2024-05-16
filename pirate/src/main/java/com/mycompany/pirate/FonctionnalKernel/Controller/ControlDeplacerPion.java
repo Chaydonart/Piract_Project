@@ -1,6 +1,6 @@
 package com.mycompany.pirate.FonctionnalKernel.Controller;
 
-import com.mycompany.pirate.Services.DeplacerPionService;
+import com.mycompany.pirate.Services.ServiceDeplacerPion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
 import com.mycompany.pirate.Interfaces.IServiceDeplacerPion;
@@ -14,7 +14,7 @@ public class ControlDeplacerPion {
     private IServiceDeplacerPion deplacePionService;
     private PionRepository pionRepository;
 
-    public ControlDeplacerPion(DeplacerPionService deplacePionService, PionRepository pionRepository) {
+    public ControlDeplacerPion(ServiceDeplacerPion deplacePionService, PionRepository pionRepository) {
         this.deplacePionService = deplacePionService;
         this.pionRepository = pionRepository;
     }
@@ -25,7 +25,7 @@ public class ControlDeplacerPion {
         pionRepository.save(pionActuel);
     }
 
-    public void setDeplacerPionService(DeplacerPionService deplacerPionService) {
+    public void setDeplacerPionService(ServiceDeplacerPion deplacerPionService) {
         this.deplacePionService = deplacerPionService ; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

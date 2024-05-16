@@ -12,13 +12,13 @@ import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Plateau;
-import com.mycompany.pirate.Services.DeplacerPionService;
+import com.mycompany.pirate.Services.ServiceDeplacerPion;
 
 public class TestDeplacerPion extends Tester{
     //initialisation pour les tests
     private Random rng = new Random();
     private Plateau p = TestRes.plateau;
-    private DeplacerPionService dps = TestRes.deplacerPionService;
+    private ServiceDeplacerPion dps = TestRes.deplacerPionService;
     private Pion p1 = TestRes.joueur1;
     private Pion p2 = TestRes.joueur2;
     private List<Pion> lp = new ArrayList<>(){

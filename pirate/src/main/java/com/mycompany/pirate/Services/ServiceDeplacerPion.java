@@ -13,10 +13,10 @@ import com.mycompany.pirate.Interfaces.IServiceDeplacerPion;
  *
  * @author BEN JAAFAR & RIBEIRO
  */
-public class DeplacerPionService implements IServiceDeplacerPion {
+public class ServiceDeplacerPion implements IServiceDeplacerPion {
     private Plateau plateau;
 
-    public DeplacerPionService(Plateau plateau) {
+    public ServiceDeplacerPion(Plateau plateau) {
         this.plateau = plateau;
     }
     
