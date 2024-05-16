@@ -16,7 +16,7 @@ public class ControlReculer implements IServiceReculer{
     private IServiceReculer serviceReculer;
     //Si on recule sur une case spéciale on anime pas 
     //Risque de trop désavantager un joueur avec -5 cases et perdre une vie
-    public ControlReculer(ControlDeplacerPion controlDeplacerPion, ControleSlotMachine controlSlotMachine, NotificationService notificationService) {
+    public ControlReculer(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine, NotificationService notificationService) {
         this.serviceReculer = new ServiceReculer(controlDeplacerPion,controlSlotMachine,notificationService);
     }
     

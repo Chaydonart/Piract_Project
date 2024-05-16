@@ -5,7 +5,7 @@
 package com.mycompany.pirate.Services;
 
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
-import com.mycompany.pirate.FonctionnalKernel.Controller.ControleSlotMachine;
+import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
 import com.mycompany.pirate.Interfaces.IServiceReculer;
 import com.mycompany.pirate.Interfaces.NotificationService;
 import java.util.Arrays;
@@ -17,9 +17,9 @@ import java.util.Arrays;
 public class ServiceReculer implements IServiceReculer {
     private ControlDeplacerPion controlDeplacerPion;
     private NotificationService notificationService;
-    private ControleSlotMachine controlSlotMachine;
+    private ControlSlotMachine controlSlotMachine;
 
-    public ServiceReculer(ControlDeplacerPion controlDeplacerPion, ControleSlotMachine controlSlotMachine, NotificationService notificationService) {
+    public ServiceReculer(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine, NotificationService notificationService) {
         this.controlDeplacerPion = controlDeplacerPion;
         this.controlSlotMachine = controlSlotMachine;
         this.notificationService = notificationService;

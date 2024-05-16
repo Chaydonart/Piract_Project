@@ -1,7 +1,7 @@
 package com.mycompany.pirate.test;
 
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlGamblingDuel;
-import com.mycompany.pirate.FonctionnalKernel.Controller.ControleSlotMachine;
+import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
 import com.mycompany.pirate.FonctionnalKernel.Entity.CaseGambling;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.Interfaces.IServiceGamblingDuel;

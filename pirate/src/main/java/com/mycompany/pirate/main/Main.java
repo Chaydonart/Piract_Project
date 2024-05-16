@@ -8,7 +8,7 @@ import com.mycompany.pirate.Boundary.Console.Boundary;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlJeu;
 import java.util.Arrays;
-import com.mycompany.pirate.FonctionnalKernel.Controller.ControleSlotMachine;
+import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Jeu;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
@@ -31,7 +31,7 @@ public class Main {
         
         // Créez les contrôleurs
         ControlDeplacerPion controlDeplacerPion = new ControlDeplacerPion(new DeplacerPionService(null), pionRepository);
-        ControleSlotMachine controlSlotMachine = new ControleSlotMachine(smService);
+        ControlSlotMachine controlSlotMachine = new ControlSlotMachine(smService);
         
         // Créez le GameLoopController avec le GameUI null
         ControlJeu gameLoopController = new ControlJeu(jeu, pionRepository, null);

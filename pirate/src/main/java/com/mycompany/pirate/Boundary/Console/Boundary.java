@@ -6,7 +6,7 @@ package com.mycompany.pirate.Boundary.Console;
 
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlJeu;
-import com.mycompany.pirate.FonctionnalKernel.Controller.ControleSlotMachine;
+import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Jeu;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
@@ -21,12 +21,12 @@ import com.mycompany.pirate.Interfaces.IServiceSlotMachine;
  * @author BEN JAAFAR
  */
 public class Boundary implements NotificationService, IBoundary{
-    private ControleSlotMachine controlSlotMachine;
+    private ControlSlotMachine controlSlotMachine;
     private ControlDeplacerPion controlDeplacePion;
     private ControlJeu gameLoopController;
     private PionRepository pionRepository;
 
-    public Boundary(ControleSlotMachine controlSlotMachine, ControlDeplacerPion controlDeplacePion, ControlJeu gameLoopController, PionRepository pionRepository) {
+    public Boundary(ControlSlotMachine controlSlotMachine, ControlDeplacerPion controlDeplacePion, ControlJeu gameLoopController, PionRepository pionRepository) {
         this.controlSlotMachine = controlSlotMachine;
         this.controlDeplacePion = controlDeplacePion;
         this.gameLoopController = gameLoopController;

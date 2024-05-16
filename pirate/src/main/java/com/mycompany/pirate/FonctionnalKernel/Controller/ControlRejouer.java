@@ -16,7 +16,7 @@ public class ControlRejouer implements IServiceRejouer {
     
     private IServiceRejouer serviceRejouer;
 
-    public ControlRejouer(ControlDeplacerPion controlDeplacerPion, ControleSlotMachine controlSlotMachine, NotificationService notificationService) {
+    public ControlRejouer(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine, NotificationService notificationService) {
         this.serviceRejouer = new ServiceRejouer(controlDeplacerPion,controlSlotMachine,notificationService);
     }
        

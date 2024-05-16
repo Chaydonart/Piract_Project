@@ -11,11 +11,11 @@ import com.mycompany.pirate.Interfaces.IServiceSlotMachine;
  *
  * @author BEN JAAFAR
  */
-public class ControleSlotMachine implements IServiceSlotMachine {
+public class ControlSlotMachine implements IServiceSlotMachine {
     private IServiceSlotMachine smService;
     private int compteurSpin = 0;
 
-    public ControleSlotMachine(SlotMachineService smService) {
+    public ControlSlotMachine(SlotMachineService smService) {
         this.smService = smService;
     }
 

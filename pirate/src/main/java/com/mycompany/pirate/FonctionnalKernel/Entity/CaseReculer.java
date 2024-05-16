@@ -6,7 +6,7 @@ package com.mycompany.pirate.FonctionnalKernel.Entity;
 
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlReculer;
-import com.mycompany.pirate.FonctionnalKernel.Controller.ControleSlotMachine;
+import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
 import com.mycompany.pirate.Interfaces.NotificationService;
 
 /**
@@ -16,7 +16,7 @@ import com.mycompany.pirate.Interfaces.NotificationService;
 public class CaseReculer extends Case {
     private final ControlReculer controlReculer;
     
-    public CaseReculer(ControlDeplacerPion controlDeplacerPion, ControleSlotMachine controlSlotMachine, NotificationService notificationService) {
+    public CaseReculer(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine, NotificationService notificationService) {
         this.controlReculer = new ControlReculer(controlDeplacerPion,controlSlotMachine,notificationService);
     }
     

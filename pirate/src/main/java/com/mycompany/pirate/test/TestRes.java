@@ -5,7 +5,7 @@ import java.util.Arrays;
 import com.mycompany.pirate.Boundary.Console.Boundary;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlJeu;
-import com.mycompany.pirate.FonctionnalKernel.Controller.ControleSlotMachine;
+import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Jeu;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
@@ -20,7 +20,7 @@ public class TestRes {
     public static PionRepository pionRepository = new PionRepository(jeu.getPions());
     public static SlotMachineService smService = new SlotMachineService();
     public static ControlDeplacerPion controlDeplacerPion = new ControlDeplacerPion(new DeplacerPionService(null), pionRepository);
-    public static ControleSlotMachine controlSlotMachine = new ControleSlotMachine(smService); 
+    public static ControlSlotMachine controlSlotMachine = new ControlSlotMachine(smService); 
     public static ControlJeu gameLoopController = new ControlJeu(jeu, pionRepository, null);
     public static Boundary gameUI = new Boundary(controlSlotMachine, controlDeplacerPion, gameLoopController, pionRepository);
     public static Plateau plateau =  new Plateau(36,gameUI);
