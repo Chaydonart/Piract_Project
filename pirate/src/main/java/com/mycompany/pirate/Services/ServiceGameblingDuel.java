@@ -7,10 +7,10 @@ package com.mycompany.pirate.Services;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.Interfaces.IServiceGamblingDuel;
-import com.mycompany.pirate.Interfaces.NotificationService;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.Random;
+import com.mycompany.pirate.Interfaces.INotificationService;
 
 /**
  *
@@ -18,16 +18,16 @@ import java.util.Random;
  */
 public class ServiceGameblingDuel implements IServiceGamblingDuel {
     private final ControlSlotMachine controleSlotMachine;
-    private final SlotMachineService smService;
+    private final ServiceSlotMachine smService;
     private Random random = new Random();
     
     public ServiceGameblingDuel() {
-        this.smService = new SlotMachineService();
+        this.smService = new ServiceSlotMachine();
         this.controleSlotMachine = new ControlSlotMachine(smService);
     }
     
     @Override
-    public void duelDeDes(Pion pion, NotificationService notificationServices) {
+    public void duelDeDes(Pion pion, INotificationService notificationServices) {
         //Lancers de dés
         int[] valeurs = controleSlotMachine.spin();
         int res = Arrays.stream(valeurs).sum();

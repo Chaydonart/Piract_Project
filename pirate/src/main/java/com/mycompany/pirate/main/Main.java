@@ -14,7 +14,7 @@ import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Plateau;
 import com.mycompany.pirate.Services.ServiceDeplacerPion;
-import com.mycompany.pirate.Services.SlotMachineService;
+import com.mycompany.pirate.Services.ServiceSlotMachine;
 
 /**
  *
@@ -36,7 +36,7 @@ public class Main {
         
         // Controlleur
         ServiceDeplacerPion deplacerPionService = new ServiceDeplacerPion(plateau);
-        SlotMachineService smService = new SlotMachineService();
+        ServiceSlotMachine smService = new ServiceSlotMachine();
         ControlDeplacerPion controlDeplacerPion = new ControlDeplacerPion(deplacerPionService, pionRepository);
         ControlSlotMachine controlSlotMachine = new ControlSlotMachine(smService);
         ControlJeu gameLoopController = new ControlJeu(jeu, pionRepository, gameUI,controlDeplacerPion, controlSlotMachine);

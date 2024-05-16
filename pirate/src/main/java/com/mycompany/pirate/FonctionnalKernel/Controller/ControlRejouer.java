@@ -5,8 +5,8 @@
 package com.mycompany.pirate.FonctionnalKernel.Controller;
 
 import com.mycompany.pirate.Interfaces.IServiceRejouer;
-import com.mycompany.pirate.Interfaces.NotificationService;
 import com.mycompany.pirate.Services.ServiceRejouer;
+import com.mycompany.pirate.Interfaces.INotificationService;
 
 /**
  *
@@ -16,7 +16,7 @@ public class ControlRejouer implements IServiceRejouer {
     
     private IServiceRejouer serviceRejouer;
 
-    public ControlRejouer(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine, NotificationService notificationService) {
+    public ControlRejouer(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine, INotificationService notificationService) {
         this.serviceRejouer = new ServiceRejouer(controlDeplacerPion,controlSlotMachine,notificationService);
     }
        

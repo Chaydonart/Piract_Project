@@ -4,17 +4,17 @@
  */
 package com.mycompany.pirate.FonctionnalKernel.Entity;
 
-import com.mycompany.pirate.Interfaces.NotificationService;
 import java.util.Optional;
+import com.mycompany.pirate.Interfaces.INotificationService;
 
 /**
  *
  * @author BEN JAAFAR
  */
 public class CaseDegat extends Case {
-    private NotificationService notificationService;
+    private INotificationService notificationService;
 
-    public CaseDegat(NotificationService notificationService) {
+    public CaseDegat(INotificationService notificationService) {
         this.notificationService = notificationService;
     }
     

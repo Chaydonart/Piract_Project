@@ -7,9 +7,9 @@ package com.mycompany.pirate.Services;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
 import com.mycompany.pirate.Interfaces.IServiceReculer;
-import com.mycompany.pirate.Interfaces.NotificationService;
 import java.util.Arrays;
 import java.util.Optional;
+import com.mycompany.pirate.Interfaces.INotificationService;
 
 /**
  *
@@ -17,11 +17,11 @@ import java.util.Optional;
  */
 public class ServiceReculer implements IServiceReculer {
     private ControlDeplacerPion controlDeplacerPion;
-    private NotificationService notificationService;
+    private INotificationService notificationService;
     private ControlSlotMachine controlSlotMachine;
     private int distanceRecule = 0;
 
-    public ServiceReculer(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine, NotificationService notificationService) {
+    public ServiceReculer(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine, INotificationService notificationService) {
         this.controlDeplacerPion = controlDeplacerPion;
         this.controlSlotMachine = controlSlotMachine;
         this.notificationService = notificationService;

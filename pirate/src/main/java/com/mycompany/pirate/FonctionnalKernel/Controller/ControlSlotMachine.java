@@ -4,7 +4,7 @@
  */
 package com.mycompany.pirate.FonctionnalKernel.Controller;
 
-import com.mycompany.pirate.Services.SlotMachineService;
+import com.mycompany.pirate.Services.ServiceSlotMachine;
 import com.mycompany.pirate.Interfaces.IServiceSlotMachine;
 
 /**
@@ -15,7 +15,7 @@ public class ControlSlotMachine implements IServiceSlotMachine {
     private IServiceSlotMachine smService;
     private int compteurSpin = 0;
 
-    public ControlSlotMachine(SlotMachineService smService) {
+    public ControlSlotMachine(ServiceSlotMachine smService) {
         this.smService = smService;
     }
 

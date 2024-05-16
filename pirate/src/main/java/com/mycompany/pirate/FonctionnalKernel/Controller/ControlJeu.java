@@ -3,17 +3,17 @@ package com.mycompany.pirate.FonctionnalKernel.Controller;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Jeu;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
-import com.mycompany.pirate.Interfaces.NotificationService;
 import java.util.Arrays;
+import com.mycompany.pirate.Interfaces.INotificationService;
 
 public class ControlJeu {
    private Jeu jeu;
     private PionRepository pionRepository;
-    private NotificationService notificationService;
+    private INotificationService notificationService;
     private ControlDeplacerPion controlDeplacerPion;
     private ControlSlotMachine controleSlotMachine;
 
-    public ControlJeu(Jeu jeu, PionRepository pionRepository, NotificationService notificationService,
+    public ControlJeu(Jeu jeu, PionRepository pionRepository, INotificationService notificationService,
                       ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controleSlotMachine) {
         this.jeu = jeu;
         this.pionRepository = pionRepository;
@@ -55,7 +55,7 @@ public class ControlJeu {
         }
     }
     
-    public void setNotificationService(NotificationService notificationService){
+    public void setNotificationService(INotificationService notificationService){
         this.notificationService = notificationService;   
     }
 

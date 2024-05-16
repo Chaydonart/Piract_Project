@@ -2,8 +2,8 @@ package com.mycompany.pirate.FonctionnalKernel.Entity;
 
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
-import com.mycompany.pirate.Interfaces.NotificationService;
 import java.util.function.Supplier;
+import com.mycompany.pirate.Interfaces.INotificationService;
 
 /**
  *
@@ -13,9 +13,9 @@ import java.util.function.Supplier;
 public class Plateau {
     private final int nbCases;
     private Case[] cases;
-    private NotificationService notificationService;
+    private INotificationService notificationService;
 
-    public Plateau(int nbCases, NotificationService notificationService) {
+    public Plateau(int nbCases, INotificationService notificationService) {
         this.nbCases = nbCases;
         this.cases = new Case[nbCases];
         this.notificationService = notificationService;

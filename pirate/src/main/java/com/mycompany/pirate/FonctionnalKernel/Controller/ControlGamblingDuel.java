@@ -6,7 +6,7 @@ package com.mycompany.pirate.FonctionnalKernel.Controller;
 
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.Interfaces.IServiceGamblingDuel;
-import com.mycompany.pirate.Interfaces.NotificationService;
+import com.mycompany.pirate.Interfaces.INotificationService;
 
 /**
  *
@@ -21,7 +21,7 @@ public class ControlGamblingDuel implements IServiceGamblingDuel   {
     }
     
     @Override
-    public void duelDeDes(Pion pion, NotificationService nots){
+    public void duelDeDes(Pion pion, INotificationService nots){
         this.gdService.duelDeDes(pion,nots);
     }
     

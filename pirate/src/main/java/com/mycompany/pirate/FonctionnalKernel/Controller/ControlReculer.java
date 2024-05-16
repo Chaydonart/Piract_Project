@@ -5,8 +5,8 @@
 package com.mycompany.pirate.FonctionnalKernel.Controller;
 
 import com.mycompany.pirate.Interfaces.IServiceReculer;
-import com.mycompany.pirate.Interfaces.NotificationService;
 import com.mycompany.pirate.Services.ServiceReculer;
+import com.mycompany.pirate.Interfaces.INotificationService;
 
 /**
  *
@@ -15,7 +15,7 @@ import com.mycompany.pirate.Services.ServiceReculer;
 public class ControlReculer implements IServiceReculer{
     private IServiceReculer serviceReculer;
    
-    public ControlReculer(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine, NotificationService notificationService) {
+    public ControlReculer(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine, INotificationService notificationService) {
         this.serviceReculer = new ServiceReculer(controlDeplacerPion,controlSlotMachine,notificationService);
     }
     

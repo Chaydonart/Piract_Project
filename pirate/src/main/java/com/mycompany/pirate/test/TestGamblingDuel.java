@@ -6,8 +6,8 @@ import com.mycompany.pirate.FonctionnalKernel.Entity.CaseGambling;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.Interfaces.IServiceGamblingDuel;
 import com.mycompany.pirate.Interfaces.IServiceSlotMachine;
-import com.mycompany.pirate.Interfaces.NotificationService;
 import com.mycompany.pirate.Services.ServiceGameblingDuel;
+import com.mycompany.pirate.Interfaces.INotificationService;
 
 public class TestGamblingDuel extends Tester{
     private IServiceGamblingDuel gds = new ServiceGameblingDuel();

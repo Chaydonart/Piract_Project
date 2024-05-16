@@ -7,9 +7,9 @@ package com.mycompany.pirate.Services;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
 import com.mycompany.pirate.Interfaces.IServiceRejouer;
-import com.mycompany.pirate.Interfaces.NotificationService;
 import java.util.Arrays;
 import java.util.Optional;
+import com.mycompany.pirate.Interfaces.INotificationService;
 
 /**
  *
@@ -17,10 +17,10 @@ import java.util.Optional;
  */
 public class ServiceRejouer implements IServiceRejouer {
     private ControlDeplacerPion controlDeplacerPion;
-    private NotificationService notificationService;
+    private INotificationService notificationService;
     private ControlSlotMachine controlSlotMachine;
 
-    public ServiceRejouer(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine, NotificationService notificationService) {
+    public ServiceRejouer(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine, INotificationService notificationService) {
         this.controlDeplacerPion = controlDeplacerPion;
         this.controlSlotMachine = controlSlotMachine;
         this.notificationService = notificationService;

@@ -7,19 +7,19 @@ package com.mycompany.pirate.FonctionnalKernel.Entity;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlGamblingDuel;
 import com.mycompany.pirate.Services.ServiceGameblingDuel;
 import com.mycompany.pirate.Interfaces.IServiceGamblingDuel;
-import com.mycompany.pirate.Interfaces.NotificationService;
+import com.mycompany.pirate.Interfaces.INotificationService;
 
 /**
  *
  * @author RIBEIRO
  */
 public class CaseGambling extends Case {
-    private NotificationService notificationService;
+    private INotificationService notificationService;
     
     private IServiceGamblingDuel gdDuel = new ServiceGameblingDuel();
     private ControlGamblingDuel controlGamblingDuel = new ControlGamblingDuel(gdDuel);
 
-    public CaseGambling(NotificationService notificationService) {
+    public CaseGambling(INotificationService notificationService) {
         this.notificationService = notificationService;
     }
     

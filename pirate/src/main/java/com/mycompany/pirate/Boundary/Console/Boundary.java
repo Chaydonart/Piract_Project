@@ -8,8 +8,8 @@ import com.mycompany.pirate.FonctionnalKernel.Controller.ControlJeu;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
 import com.mycompany.pirate.Interfaces.IBoundary;
-import com.mycompany.pirate.Interfaces.NotificationService;
 import java.util.Arrays;
+import com.mycompany.pirate.Interfaces.INotificationService;
 
 /**
  *
@@ -17,7 +17,7 @@ import java.util.Arrays;
  * 
  * Va ensuite en plus implementer IPirates
  */
-public class Boundary implements NotificationService, IBoundary{
+public class Boundary implements INotificationService, IBoundary{
     private ControlJeu gameLoopController;
     private final PionRepository pionRepository;
     

@@ -11,7 +11,7 @@ import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Plateau;
 import com.mycompany.pirate.Services.ServiceDeplacerPion;
-import com.mycompany.pirate.Services.SlotMachineService;
+import com.mycompany.pirate.Services.ServiceSlotMachine;
 
 public class TestRes {
     public static Pion joueur1 = new Pion("Joueur 1");
@@ -21,7 +21,7 @@ public class TestRes {
     public static Boundary gameUI = new Boundary(null, pionRepository);
     public static Plateau plateau =  new Plateau(36,gameUI);
     public static ServiceDeplacerPion deplacerPionService = new ServiceDeplacerPion(plateau);
-    public static SlotMachineService smService = new SlotMachineService();
+    public static ServiceSlotMachine smService = new ServiceSlotMachine();
     public static ControlDeplacerPion controlDeplacerPion = new ControlDeplacerPion(new ServiceDeplacerPion(plateau), pionRepository);
     public static ControlSlotMachine controlSlotMachine = new ControlSlotMachine(smService); 
     public static ControlJeu gameLoopController = new ControlJeu(jeu, pionRepository, null, controlDeplacerPion, controlSlotMachine);

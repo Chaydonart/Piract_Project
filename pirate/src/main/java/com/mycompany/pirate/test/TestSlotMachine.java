@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
 import com.mycompany.pirate.Interfaces.IServiceSlotMachine;
-import com.mycompany.pirate.Services.SlotMachineService;
+import com.mycompany.pirate.Services.ServiceSlotMachine;
 
 public class TestSlotMachine extends Tester {
-    private SlotMachineService issm = new SlotMachineService();
+    private ServiceSlotMachine issm = new ServiceSlotMachine();
     private ControlSlotMachine csm = new ControlSlotMachine(issm);
     public TestSlotMachine() {
         super();

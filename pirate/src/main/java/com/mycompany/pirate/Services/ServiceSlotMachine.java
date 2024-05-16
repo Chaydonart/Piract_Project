@@ -11,7 +11,7 @@ import java.util.Random;
  *
  * @author BEN JAAFAR
  */
-public class SlotMachineService implements IServiceSlotMachine {
+public class ServiceSlotMachine implements IServiceSlotMachine {
     
     private final Random random = new Random();
     
