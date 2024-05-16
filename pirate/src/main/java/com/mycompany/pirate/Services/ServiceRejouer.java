@@ -32,7 +32,7 @@ public class ServiceRejouer implements IServiceRejouer {
         if (notificationService != null) {
             notificationService.notify("Le joueur va rejouer");
             notificationService.notify("La machine affiche = " + values[0] + " " +  values[1] + " " + values[2]);
-            notificationService.notify("Résultat de la machine " + resultat);
+            notificationService.notify("Resultat de la machine " + resultat);
         }
         controlDeplacerPion.deplacerPion(resultat); // Déplacer le pion d'une case vers l'avant
     }

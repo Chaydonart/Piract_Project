@@ -21,7 +21,7 @@ public class ControlJeu {
             for (Pion pion : pionRepository.getPions()) {
                 if (jeu.isGameOver()) break;
                 gameUI.afficherMessage("");
-                gameUI.afficherMessage("C'est le tour du pion " + pion.getName());
+                gameUI.afficherMessage("C'est le tour du " + pion.getName());
                 gameUI.spin();
                 
                 if(pion.getVie() <= 0){
@@ -30,7 +30,7 @@ public class ControlJeu {
 
                 // Check if the game is won by checking pion's position or other criteria
                 if (jeu.checkVictory(pion)) {
-                    gameUI.afficherMessage("Le pion " + pion.getName() + " a gagné !");
+                    gameUI.afficherMessage("Le " + pion.getName() + " a gagne !");
                     jeu.setGameOver(true);
                     break;
                 }

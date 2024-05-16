@@ -11,7 +11,7 @@ import com.mycompany.pirate.Interfaces.IServiceDeplacerPion;
 
 /**
  *
- * @author BEN JAAFAR
+ * @author BEN JAAFAR & RIBEIRO
  */
 public class DeplacerPionService implements IServiceDeplacerPion {
     private Plateau plateau;
@@ -35,8 +35,10 @@ public class DeplacerPionService implements IServiceDeplacerPion {
             nouvellePosition = pion.getPosition() + deplacement;
         }
 
+        System.out.println("Le joueur atterrit sur la case " + nouvellePosition);
         pion.setPosition(nouvellePosition);
         plateau.poserPion(pion);
+        
 
         Case caseActuelle = plateau.getCase(pion);
         if(caseActuelle.isSpecial()){

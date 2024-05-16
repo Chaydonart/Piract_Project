@@ -6,9 +6,6 @@ package com.mycompany.pirate.FonctionnalKernel.Controller;
 
 import com.mycompany.pirate.Services.SlotMachineService;
 import com.mycompany.pirate.Interfaces.IServiceSlotMachine;
-import java.util.Arrays;
-import java.util.Random;
-import java.util.stream.IntStream;
 
 /**
  *
