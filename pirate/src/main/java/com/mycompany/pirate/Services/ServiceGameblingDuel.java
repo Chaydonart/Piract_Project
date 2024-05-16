@@ -18,6 +18,7 @@ import java.util.Random;
 public class ServiceGameblingDuel implements IServiceGamblingDuel {
     private final ControleSlotMachine controleSlotMachine;
     private final SlotMachineService smService;
+    private Random random= new Random();
     
     public ServiceGameblingDuel() {
         this.smService = new SlotMachineService();
@@ -29,8 +30,7 @@ public class ServiceGameblingDuel implements IServiceGamblingDuel {
         //Lancers de dés
         int[] valeurs = controleSlotMachine.spin();
         int res = Arrays.stream(valeurs).sum();
-        Random random = new Random();
-        int randomValue = random.nextInt(9);
+        int randomValue = this.random.nextInt(9);
         
         notificationServices.notify("Duel gambling ! Le joueur doit faire une valeur superieur a "+ randomValue);
         notificationServices.notify("La roulette affiche... " + res + " !");
