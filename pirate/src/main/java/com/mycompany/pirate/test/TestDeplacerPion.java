@@ -1,12 +1,8 @@
 package com.mycompany.pirate.test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
-
-import javax.swing.RowFilter.Entry;
 
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
