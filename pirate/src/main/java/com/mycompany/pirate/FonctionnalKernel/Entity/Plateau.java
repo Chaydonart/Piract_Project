@@ -1,6 +1,5 @@
 package com.mycompany.pirate.FonctionnalKernel.Entity;
 
-import java.util.Random;
 import java.util.function.Supplier;
 
 /**
@@ -21,6 +20,7 @@ public class Plateau {
         Supplier<Case> caseNormale = Case::new;
         Supplier<Case> caseSpeciale1 = CaseDegat::new; 
         Supplier<Case> caseSpeciale2 = CaseGambling::new;
+        Supplier<Case> caseSpeciale3 = CaseReculer::new;
         
         for (int i = 0; i < nbCases; i++) {
             Supplier<Case> caseSupplier;
@@ -29,6 +29,7 @@ public class Plateau {
             caseSupplier = switch (i) {
                 case 3, 13, 21, 29, 30 -> caseSpeciale1;
                 case 7, 19, 31 -> caseSpeciale2;
+                case 8, 9, 10, 11, 12 -> caseSpeciale3;
                 default -> caseNormale;
             };
    

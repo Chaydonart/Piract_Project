@@ -33,6 +33,6 @@ public class CaseGambling extends Case {
     
     @Override
     public String toString(){
-        return " atterrit sur une case DUEL !";
+        return " atterrit sur une case GAMBLING !";
     }
 }
