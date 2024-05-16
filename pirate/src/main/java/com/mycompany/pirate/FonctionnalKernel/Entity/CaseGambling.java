@@ -4,12 +4,10 @@
  */
 package com.mycompany.pirate.FonctionnalKernel.Entity;
 
-import java.util.ArrayList;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlGamblingDuel;
 import com.mycompany.pirate.Services.ServiceGameblingDuel;
 import com.mycompany.pirate.Interfaces.IServiceGamblingDuel;
 import com.mycompany.pirate.Interfaces.NotificationService;
-import java.util.Optional;
 
 /**
  *

@@ -5,7 +5,6 @@
 package com.mycompany.pirate.FonctionnalKernel.Entity;
 
 import com.mycompany.pirate.Interfaces.NotificationService;
-import java.util.ArrayList;
 import java.util.Optional;
 
 /**
