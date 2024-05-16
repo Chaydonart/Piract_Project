@@ -30,10 +30,10 @@ public class ServiceRejouer implements IServiceRejouer {
     public void rejouer() {
         int[] values = controlSlotMachine.spin();
         int resultat = Arrays.stream(values).sum();
-        if (notificationService != null) {
-            Optional.ofNullable(notificationService).ifPresent(service -> service.notifyCaseRejouer(values,resultat)); 
+   
+        Optional.ofNullable(notificationService).ifPresent(service -> service.notifyCaseRejouer(values,resultat)); 
             
-        }
+        
         controlDeplacerPion.deplacerPion(resultat); // Déplacer le pion d'une case vers l'avant
     }
 }

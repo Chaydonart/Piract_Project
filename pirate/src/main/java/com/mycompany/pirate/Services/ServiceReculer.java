@@ -31,9 +31,9 @@ public class ServiceReculer implements IServiceReculer {
         //Valeur aléatoire de retour en arrière
         int[] values = controlSlotMachine.spin();
         int resultat = -Arrays.stream(values).sum();
-        if (notificationService != null) {
-            Optional.ofNullable(notificationService).ifPresent(service -> service.notifyCaseReculer(values,resultat)); 
-        }
+       
+        Optional.ofNullable(notificationService).ifPresent(service -> service.notifyCaseReculer(values,resultat)); 
+        
         controlDeplacerPion.deplacerPion(resultat); //Reculer le pion
     }
 }
