@@ -35,6 +35,7 @@ public class ServiceDeplacerPion implements IServiceDeplacerPion {
             nouvellePosition = pion.getPosition() + deplacement;
         }
 
+        //System.out.println("TEST Le joueur atterrit sur la case " + nouvellePosition);
         pion.setPosition(nouvellePosition);
         plateau.poserPion(pion);
         
