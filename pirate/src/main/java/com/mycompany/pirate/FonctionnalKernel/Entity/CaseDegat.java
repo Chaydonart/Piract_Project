@@ -6,6 +6,7 @@ package com.mycompany.pirate.FonctionnalKernel.Entity;
 
 import com.mycompany.pirate.Interfaces.NotificationService;
 import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  *
@@ -24,9 +25,7 @@ public class CaseDegat extends Case {
     public void ajouterPion(Pion pion) {
         occupants.add(pion);
         pion.setVie(pion.getVie() - 1);
-        if (notificationService != null) {
-            notificationService.notify("Le pion " + pion.getName() + " a pris des degats ! Vie restante : " + pion.getVie());
-        }
+        Optional.ofNullable(notificationService).ifPresent(service -> service.notifyCaseDegat(pion.getName(), pion.getVie()));
     }
     
     @Override

@@ -12,20 +12,21 @@ import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
 import com.mycompany.pirate.Interfaces.IBoundary;
 import com.mycompany.pirate.Interfaces.NotificationService;
 import java.util.Arrays;
+import java.util.Scanner;
 
 /**
  *
  * @author BEN JAAFAR
+ * 
+ * Va ensuite en plus implementer IPirates
  */
 public class Boundary implements NotificationService, IBoundary{
-    private ControlSlotMachine controlSlotMachine;
-    private ControlDeplacerPion controlDeplacePion;
     private ControlJeu gameLoopController;
     private PionRepository pionRepository;
+    private Scanner scanner =  new Scanner(System.in); 
+    
+    public Boundary(ControlJeu gameLoopController, PionRepository pionRepository) {
 
-    public Boundary(ControlSlotMachine controlSlotMachine, ControlDeplacerPion controlDeplacePion, ControlJeu gameLoopController, PionRepository pionRepository) {
-        this.controlSlotMachine = controlSlotMachine;
-        this.controlDeplacePion = controlDeplacePion;
         this.gameLoopController = gameLoopController;
         this.pionRepository = pionRepository;
     }
@@ -35,17 +36,14 @@ public class Boundary implements NotificationService, IBoundary{
         gameLoopController.startGame();
     }
 
-    //on utilise une machine a sous comme dé
-    public void spin() {
-        int[] values = controlSlotMachine.spin();
+    //Partie affichage console (temporaire)
+    public void spin(int[] values) {
         afficherMessage("La machine a sous affiche = " + values[0] + " " +  values[1] + " " + values[2]);
         int resultat = Arrays.stream(values).sum();
         afficherMessage("Resultat de la machine " + resultat);
-        deplacerPion(resultat);
     }
 
     public void deplacerPion(int resultatDe) {
-        controlDeplacePion.deplacerPion(resultatDe);
         afficherEtatJeu();
     }
 
@@ -58,12 +56,55 @@ public class Boundary implements NotificationService, IBoundary{
     public void afficherMessage(String message) {
         System.out.println(message);
     }
-
+    
+    
+    // Partie pacerelle dialogue
     @Override
     public void notify(String message) {
         afficherMessage(message);
     }
+    
+    @Override 
+    public void notifySpin(int[] values){
+        spin(values);
+    }
+    
+    @Override 
+    public void notifyDeplacement(int deplacement){
+        deplacerPion(deplacement);
+    }
 
+    @Override
+    public void notifyCaseDegat(String name, int vie) {
+        afficherMessage("Le pion " + name + " a pris des degats ! Vie restante : " + vie);
+    }
+
+    @Override
+    public void notifyCaseRejouer(int[] values, int resultat) {
+        afficherMessage("Le joueur tombe sur une case REJOUER");
+        notifyDeplacement(resultat);
+        afficherMessage("Le joueur va rejouer");
+        afficherMessage("La machine affiche = " + values[0] + " " +  values[1] + " " + values[2]);
+        afficherMessage("Le joueur avance de " + resultat + " cases");
+    }
+
+    @Override
+    public void notifyCaseReculer(int[] values, int resultat) {             
+        afficherMessage("Le joueur tombe sur une case RECULER");
+        notifyDeplacement(resultat);
+        afficherMessage("La machine affiche = " + values[0] + " " +  values[1] + " " + values[2]);
+        afficherMessage("Le joueur recule de " + (-resultat) + " cases");
+    }
+
+    @Override
+    public void notifyCaseGambling(String name,int randomValue,int res) {
+        afficherMessage("Le " + name + " tombe sur une case GAMBLING");
+        afficherMessage("Le " + name + " va donc proceder a un duel contre Gambi le robot !");
+        afficherMessage("Duel gambling ! Le joueur doit faire une valeur superieure a "+ randomValue);
+        afficherMessage("La roulette affiche... " + res + " !");
+    }
+    
+    // Pour intialiser le jeu
     public void setGameLoopController(ControlJeu gameLoopController) {
         this.gameLoopController = gameLoopController; 
     }

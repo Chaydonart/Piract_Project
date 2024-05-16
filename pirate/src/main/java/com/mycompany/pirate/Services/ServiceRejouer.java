@@ -9,7 +9,7 @@ import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
 import com.mycompany.pirate.Interfaces.IServiceRejouer;
 import com.mycompany.pirate.Interfaces.NotificationService;
 import java.util.Arrays;
-import java.util.Map;
+import java.util.Optional;
 
 /**
  *
@@ -19,8 +19,6 @@ public class ServiceRejouer implements IServiceRejouer {
     private ControlDeplacerPion controlDeplacerPion;
     private NotificationService notificationService;
     private ControlSlotMachine controlSlotMachine;
-    private int distanceRejoue = 0;
-    
 
     public ServiceRejouer(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine, NotificationService notificationService) {
         this.controlDeplacerPion = controlDeplacerPion;
@@ -32,16 +30,10 @@ public class ServiceRejouer implements IServiceRejouer {
     public void rejouer() {
         int[] values = controlSlotMachine.spin();
         int resultat = Arrays.stream(values).sum();
-        this.distanceRejoue = resultat;
-        if (notificationService != null) {
-            notificationService.notify("Le joueur tombe sur une case REJOUER");
-            notificationService.notify("Le joueur va rejouer");
-            notificationService.notify("La machine affiche = " + values[0] + " " +  values[1] + " " + values[2]);
-            notificationService.notify("Le joueur avance de " + resultat + " cases");
-        }
+   
+        Optional.ofNullable(notificationService).ifPresent(service -> service.notifyCaseRejouer(values,resultat)); 
+            
+        
         controlDeplacerPion.deplacerPion(resultat); // Déplacer le pion d'une case vers l'avant
-    }
-    public int getDistanceRejoue() {
-        return distanceRejoue;
     }
 }

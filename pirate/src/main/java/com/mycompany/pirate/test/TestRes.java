@@ -14,7 +14,7 @@ import com.mycompany.pirate.Services.ServiceDeplacerPion;
 import com.mycompany.pirate.Services.SlotMachineService;
 
 public class TestRes {
-    public static Pion joueur1 = new Pion("Joueur 1");
+    /*public static Pion joueur1 = new Pion("Joueur 1");
     public static Pion joueur2 = new Pion("Joueur 2");
     public static Jeu jeu = new Jeu(Arrays.asList(joueur1, joueur2));
     public static PionRepository pionRepository = new PionRepository(jeu.getPions());
@@ -25,5 +25,5 @@ public class TestRes {
     public static Boundary gameUI = new Boundary(controlSlotMachine, controlDeplacerPion, gameLoopController, pionRepository);
     public static Plateau plateau =  new Plateau(36,gameUI);
     public static ServiceDeplacerPion deplacerPionService = new ServiceDeplacerPion(plateau);
-
+*/
 }

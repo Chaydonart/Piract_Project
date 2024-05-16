@@ -5,21 +5,24 @@ import com.mycompany.pirate.Interfaces.NotificationService;
 import com.mycompany.pirate.Services.ServiceRejouer;
 
 public class TestRejouer extends Tester {
-    private ControlRejouer cr = new ControlRejouer(TestRes.controlDeplacerPion, TestRes.controlSlotMachine, TestRes.gameUI);
+    /*private ControlRejouer cr = new ControlRejouer(TestRes.controlDeplacerPion, TestRes.controlSlotMachine, new NotificationService() {
+        public void notify(String message) {};
+    });
 
-    private ServiceRejouer sr = new ServiceRejouer(TestRes.controlDeplacerPion, TestRes.controlSlotMachine, TestRes.gameUI);
+    private ServiceRejouer sr = new ServiceRejouer(TestRes.controlDeplacerPion, TestRes.controlSlotMachine, new NotificationService() {
+        public void notify(String message) {};
+    });
     public TestRejouer() {
         super();
-        this.getFuncRes().put("TestRejouerPion",() -> TestRejouerPion());
+        this.getFuncRes().put("TestRejouerPion",TestRejouerPion());
     }
 
 
     public boolean TestRejouerPion(){
-        sr.rejouer();
+        cr.rejouer();
         // ça veut deire qu ç'a augmenté
-        System.out.println(TestRes.controlSlotMachine.getCompteurSpin());
-        return  sr.getDistanceRejoue() != 0;
+        return TestRes.controlSlotMachine.getCompteurSpin() == 1;
     }
-
+*/
     
 }

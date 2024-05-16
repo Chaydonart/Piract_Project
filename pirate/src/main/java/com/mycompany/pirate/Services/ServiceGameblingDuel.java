@@ -9,6 +9,7 @@ import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.Interfaces.IServiceGamblingDuel;
 import com.mycompany.pirate.Interfaces.NotificationService;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Random;
 
 /**
@@ -32,9 +33,7 @@ public class ServiceGameblingDuel implements IServiceGamblingDuel {
         int res = Arrays.stream(valeurs).sum();
         int randomValue = this.random.nextInt(9);
         
-        notificationServices.notify("Duel gambling ! Le joueur doit faire une valeur superieure a "+ randomValue);
-        notificationServices.notify("La roulette affiche... " + res + " !");
-  
+        Optional.ofNullable(notificationServices).ifPresent(service -> service.notifyCaseGambling(pion.getName(),randomValue,res));
         
         //perdant perd une vie
         if (res < randomValue) {
