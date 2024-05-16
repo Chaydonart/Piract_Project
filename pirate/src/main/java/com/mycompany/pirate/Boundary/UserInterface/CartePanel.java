@@ -4,7 +4,7 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
-import static Utilities.FileRef.BACKGROUND_IMAGE;
+import static com.mycompany.pirate.data.FileRef.BACKGROUND_IMAGE;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;

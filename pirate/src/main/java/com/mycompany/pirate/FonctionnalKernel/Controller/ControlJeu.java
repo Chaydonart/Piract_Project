@@ -1,87 +1,49 @@
 package com.mycompany.pirate.FonctionnalKernel.Controller;
 
-import com.mycompany.pirate.Interfaces.IControlJeu;
-import com.mycompany.pirate.Interfaces.IDeplacerPion;
-import com.mycompany.pirate.Interfaces.ISlotMachine;
+import com.mycompany.pirate.Boundary.Console.Boundary;
+import com.mycompany.pirate.FonctionnalKernel.Entity.Jeu;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
+import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Plateau;
+import com.mycompany.pirate.Interfaces.IServiceSlotMachine;
+import com.mycompany.pirate.Interfaces.IServiceDeplacerPion;
 
-public class ControlJeu implements IControlJeu {
-      private boolean jeuTermine = false;
-      private Pion joueur1 = new Pion("Joueur 1");
-      private Pion joueur2 = new Pion("Joueur 2");
-      private Pion[] joueurs = { joueur1, joueur2 };
-      private Plateau plateau = new Plateau(36);
-      
-      // appelle des controlleurs
-      private IDeplacerPion controlDeplacerPion = new ControlDeplacerPion();
-      private ISlotMachine controleSlotMachine = new ControleSlotMachine();
+public class ControlJeu {
+    private Jeu jeu;
+    private PionRepository pionRepository;
+    private Boundary gameUI;
 
-      public void initialiserJeu() {
-            plateau.poserPion(joueur1);
-            plateau.poserPion(joueur2);
-      }
+    public ControlJeu(Jeu jeu, PionRepository pionRepository, Boundary gameUI) {
+        this.jeu = jeu;
+        this.pionRepository = pionRepository;
+        this.gameUI = gameUI;
+    }
 
-      public void jouerTour(Pion joueurCourant) {
-            controleSlotMachine.spin();
-            int deplacement = controleSlotMachine.getSumValues();
-            System.out.println("Case d'origine de " + joueurCourant.getName() + " : case " + joueurCourant.getPosition());
-            System.out.println(joueurCourant.getName() + " avance de " + deplacement + " cases");
-            int nouvellePosition = controlDeplacerPion.deplacerPion(joueurCourant, plateau, deplacement);
-            System.out.println(joueurCourant.getName() + " est a la case " + nouvellePosition);
-            if(joueurCourant.getVie() <= 0){
-                System.out.println(joueurCourant.getName() + " n'a plus de vie");
-                jeuTermine = true;
+    public void startGame() {
+        while (!jeu.isGameOver()) {
+            for (Pion pion : pionRepository.getPions()) {
+                if (jeu.isGameOver()) break;
+                gameUI.afficherMessage("");
+                gameUI.afficherMessage("C'est le tour du pion " + pion.getName());
+                gameUI.spin();
+                
+                if(pion.getVie() <= 0){
+                    jeu.setGameOver(true);
+                }
+
+                // Check if the game is won by checking pion's position or other criteria
+                if (jeu.checkVictory(pion)) {
+                    gameUI.afficherMessage("Le pion " + pion.getName() + " a gagné !");
+                    jeu.setGameOver(true);
+                    break;
+                }
+
+                pionRepository.nextPion();
             }
-            if (nouvellePosition == plateau.getNbCases()) {
-                  jeuTermine = true;
-                  System.out.println(joueurCourant.getName() + " a gagne");
-            }
-      }
+        }
+    }
 
-      public void jouer() {
-            while (!jeuTermine) {
-                  System.out.println("Nouveau tour");
-                  for (int i = 0; i < joueurs.length; i++) {
-                        Pion joueurCourant = joueurs[i];
-                        jouerTour(joueurCourant);
-                        if (jeuTermine) {
-                              System.out.println("FIN DE PARTIE");
-                              break;
-                        } else {
-                            System.out.println("Fin du tour\n");
-                        }
-                  }
-                  
-            }
-      }
-      
-      @Override
-      public int deplacerPion(Pion pion, Plateau plateau, int deplacement){
-         return controlDeplacerPion.deplacerPion(pion, plateau, deplacement);
-      }
-      
-      @Override
-       public int[] spin() {
-          return controleSlotMachine.spin();
-       }
-       
-      @Override
-      public int getSumValues(){
-          return controleSlotMachine.getSumValues();
-      }
-
-      public static void main(String[] args) {
-            ControlJeu controlJeu = new ControlJeu();
-            controlJeu.initialiserJeu();
-            controlJeu.jouer();
-      }
-      
-      public Pion getJoueur1() {
-          return this.joueur1;
-      }
-      
-      public Pion getJoueur2() {
-          return this.joueur2;
-      }
+    public void setGameUI(Boundary gameUI) {
+        this.gameUI = gameUI;
+    }
 }

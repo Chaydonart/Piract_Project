@@ -4,8 +4,8 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
-import static Utilities.values.GREEN_COLOR_BACKGROUND;
-import static Utilities.values.INFO_PANEL_COLOR_BACKGROUND;
+import static com.mycompany.pirate.data.values.GREEN_COLOR_BACKGROUND;
+import static com.mycompany.pirate.data.values.INFO_PANEL_COLOR_BACKGROUND;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JLayeredPane;

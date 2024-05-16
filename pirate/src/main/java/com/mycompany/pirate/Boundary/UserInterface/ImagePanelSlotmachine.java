@@ -9,9 +9,9 @@ import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import static Utilities.FileRef.IMAGE_SLOT_MACHINE;
-import static Utilities.values.GREEN_COLOR_BACKGROUND;
-import static Utilities.values.TRANSPARENT_COLOR_BACKGROUND;
+import static com.mycompany.pirate.data.FileRef.IMAGE_SLOT_MACHINE;
+import static com.mycompany.pirate.data.values.GREEN_COLOR_BACKGROUND;
+import static com.mycompany.pirate.data.values.TRANSPARENT_COLOR_BACKGROUND;
 import java.awt.Graphics;
 
 /**

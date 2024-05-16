@@ -5,47 +5,26 @@
 package com.mycompany.pirate.FonctionnalKernel.Controller;
 
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
-import com.mycompany.pirate.Interfaces.IControlGamblingDuel;
-import com.mycompany.pirate.Interfaces.ISlotMachine;
+import com.mycompany.pirate.Interfaces.IServiceGamblingDuel;
+import com.mycompany.pirate.Interfaces.NotificationService;
 import java.util.Random;
+import com.mycompany.pirate.Interfaces.IServiceSlotMachine;
 
 /**
  *
  * @author RIBEIRO
  */
-public class ControlGamblingDuel implements IControlGamblingDuel {
-    private final ISlotMachine controleSlotMachine ;
-
+public class ControlGamblingDuel implements IServiceGamblingDuel   {
     
-    public ControlGamblingDuel() {
-        this.controleSlotMachine = new ControleSlotMachine();
+    private IServiceGamblingDuel gdService;
+
+    public ControlGamblingDuel(IServiceGamblingDuel gdService) {
+        this.gdService = gdService;
     }
-
-    public void duelDeDes(Pion pion) {
-        //Lancers de dés
-        spin();
-        int lancerPion = getSumValues();
-        Random random = new Random();
-        int value = random.nextInt(6);
-        System.out.println("Duel gambling ! Le joueur doit faire une valeur superieur a "+ value);
-        System.out.println("La roulette affiche... " + lancerPion + " !");
-
-        //perdant perd une vie
-        if (lancerPion < value) {
-            pion.setVie(pion.getVie() - 1);
-            System.out.println(pion.getName() + " a perdu le gambling ! Une vie en moins ");
-        } else {
-            System.out.println("DUEL REUSSI !");
-        }
-    }
-
+    
     @Override
-    public int[] spin() {
-        return controleSlotMachine.spin();
+    public void duelDeDes(Pion pion, NotificationService nots){
+        this.gdService.duelDeDes(pion,nots);
     }
-
-    @Override
-    public int getSumValues() {
-        return controleSlotMachine.getSumValues();
-    }
+    
 }

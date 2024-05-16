@@ -8,6 +8,7 @@ package com.mycompany.pirate.Interfaces;
  *
  * @author BEN JAAFAR
  */
-public interface IBoundary extends IPirates {
+public interface IServiceRejouer {
+     public void rejouer();
     
 }

@@ -4,10 +4,13 @@
  */
 package com.mycompany.pirate.Interfaces;
 
+import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
+
 /**
  *
  * @author BEN JAAFAR
  */
-public interface IBoundary extends IPirates {
+public interface IServiceGamblingDuel {
+    void duelDeDes(Pion pion, NotificationService notificationServices);
     
 }

@@ -5,8 +5,10 @@
 package com.mycompany.pirate.FonctionnalKernel.Entity;
 
 import java.util.ArrayList;
-import com.mycompany.pirate.FonctionnalKernel.Controller.ControlCaseGambling;
-import com.mycompany.pirate.Interfaces.IControlCaseGambling;
+import com.mycompany.pirate.FonctionnalKernel.Controller.ControlGamblingDuel;
+import com.mycompany.pirate.Services.ServiceGameblingDuel;
+import com.mycompany.pirate.Interfaces.IServiceGamblingDuel;
+import com.mycompany.pirate.Interfaces.NotificationService;
 
 /**
  *
@@ -14,16 +16,23 @@ import com.mycompany.pirate.Interfaces.IControlCaseGambling;
  */
 public class CaseGambling extends Case {
     private ArrayList<Pion> occupants;
-    private final IControlCaseGambling controlGamblingDuel = new ControlCaseGambling();
+    private NotificationService notificationService;
+    
+    private IServiceGamblingDuel gdDuel = new ServiceGameblingDuel();
+    private ControlGamblingDuel controlGamblingDuel = new ControlGamblingDuel(gdDuel);
 
-    public CaseGambling() {
+    public CaseGambling(NotificationService notificationService) {
         occupants = new ArrayList<>();
+        this.notificationService = notificationService;
     }
     
      @Override
     public void ajouterPion(Pion pion) {
         occupants.add(pion);
-        controlGamblingDuel.duelDeDes(pion);
+        if (notificationService != null) {
+            notificationService.notify("Le pion " + pion.getName() + " va proceder à un duel !");
+        }
+        controlGamblingDuel.duelDeDes(pion,notificationService);
     }
     
     @Override
@@ -33,6 +42,7 @@ public class CaseGambling extends Case {
     
     @Override
     public String toString(){
-        return " atterrit sur une case GAMBLING !";
+        return " atterrit sur une case DUEL !";
     }
+
 }
