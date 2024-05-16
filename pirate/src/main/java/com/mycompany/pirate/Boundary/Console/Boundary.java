@@ -54,7 +54,7 @@ public class Boundary implements NotificationService, IBoundary{
 
     public void afficherEtatJeu() {
         for (Pion pion : pionRepository.getPions()) {
-            afficherMessage("Pion " + pion.getName() + " est sur la case " + pion.getPosition());
+            afficherMessage("RECAPITULATIF : Pion " + pion.getName() + " est sur la case " + pion.getPosition());
         }
     }
 
