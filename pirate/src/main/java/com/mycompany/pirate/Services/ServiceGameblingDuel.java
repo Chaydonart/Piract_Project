@@ -32,7 +32,7 @@ public class ServiceGameblingDuel implements IServiceGamblingDuel {
         int res = Arrays.stream(valeurs).sum();
         int randomValue = this.random.nextInt(9);
         
-        notificationServices.notify("Duel gambling ! Le joueur doit faire une valeur superieur a "+ randomValue);
+        notificationServices.notify("Duel gambling ! Le joueur doit faire une valeur superieure a "+ randomValue);
         notificationServices.notify("La roulette affiche... " + res + " !");
   
         
