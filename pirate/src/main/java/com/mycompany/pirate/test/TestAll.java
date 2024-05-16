@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestAll {
-    /*private List<Tester> tests = new ArrayList<>();
+    private List<Tester> tests = new ArrayList<>();
     public TestAll() {
         this.tests.add(new TestDeplacerPion());
         this.tests.add(new TestGamblingDuel());
         this.tests.add(new TestRejouer());
         this.tests.add(new TestSlotMachine());
+        this.tests.add(new TestReculer());
         
         this.tests.stream().forEach( t -> t.test());
     }
@@ -17,5 +18,5 @@ public class TestAll {
         TestAll testAll = new TestAll();
         
     }
-    */
+    
 }

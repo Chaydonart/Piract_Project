@@ -10,28 +10,23 @@ import com.mycompany.pirate.Interfaces.NotificationService;
 import com.mycompany.pirate.Services.ServiceGameblingDuel;
 
 public class TestGamblingDuel extends Tester{
-    /*private IServiceGamblingDuel gds = new ServiceGameblingDuel();
+    private IServiceGamblingDuel gds = new ServiceGameblingDuel();
     private ControlGamblingDuel cgd = new ControlGamblingDuel(gds);
 
     public TestGamblingDuel() {
         super();
-        this.getFuncRes().put("TestDuelDeDes",this.TestDuelDeDes());
+        this.getFuncRes().put("TestDuelDeDes",() -> this.TestDuelDeDes());
     }
 
     public boolean TestDuelDeDes(){
         int oldPointDeVie = TestRes.joueur1.getVie();
-        cgd.duelDeDes(TestRes.joueur1,new NotificationService() {
-            @Override
-            public void notify(String message) {
-                
-            }
-        });
+        cgd.duelDeDes(TestRes.joueur1,TestRes.gameUI);
         return TestRes.joueur1.getVie()<=oldPointDeVie;
 
         
     }
 
-*/
+
 
     
 }

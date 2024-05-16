@@ -14,16 +14,16 @@ import com.mycompany.pirate.Services.ServiceDeplacerPion;
 import com.mycompany.pirate.Services.SlotMachineService;
 
 public class TestRes {
-    /*public static Pion joueur1 = new Pion("Joueur 1");
+    public static Pion joueur1 = new Pion("Joueur 1");
     public static Pion joueur2 = new Pion("Joueur 2");
     public static Jeu jeu = new Jeu(Arrays.asList(joueur1, joueur2));
     public static PionRepository pionRepository = new PionRepository(jeu.getPions());
-    public static SlotMachineService smService = new SlotMachineService();
-    public static ControlDeplacerPion controlDeplacerPion = new ControlDeplacerPion(new ServiceDeplacerPion(null), pionRepository);
-    public static ControlSlotMachine controlSlotMachine = new ControlSlotMachine(smService); 
-    public static ControlJeu gameLoopController = new ControlJeu(jeu, pionRepository, null);
-    public static Boundary gameUI = new Boundary(controlSlotMachine, controlDeplacerPion, gameLoopController, pionRepository);
+    public static Boundary gameUI = new Boundary(null, pionRepository);
     public static Plateau plateau =  new Plateau(36,gameUI);
     public static ServiceDeplacerPion deplacerPionService = new ServiceDeplacerPion(plateau);
-*/
+    public static SlotMachineService smService = new SlotMachineService();
+    public static ControlDeplacerPion controlDeplacerPion = new ControlDeplacerPion(new ServiceDeplacerPion(plateau), pionRepository);
+    public static ControlSlotMachine controlSlotMachine = new ControlSlotMachine(smService); 
+    public static ControlJeu gameLoopController = new ControlJeu(jeu, pionRepository, null, controlDeplacerPion, controlSlotMachine);
+
 }

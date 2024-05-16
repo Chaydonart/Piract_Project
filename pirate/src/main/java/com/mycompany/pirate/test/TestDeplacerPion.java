@@ -12,7 +12,6 @@ import com.mycompany.pirate.Services.ServiceDeplacerPion;
 
 public class TestDeplacerPion extends Tester{
     //initialisation pour les tests
-    /*private Random rng = new Random();
     private Plateau p = TestRes.plateau;
     private ServiceDeplacerPion dps = TestRes.deplacerPionService;
     private Pion p1 = TestRes.joueur1;
@@ -32,27 +31,30 @@ public class TestDeplacerPion extends Tester{
     public TestDeplacerPion() {
         //ajout des pions dans plateau
         super();
-        this.getFuncRes().put("testDeplacementValid",testDeplacementValid());
-        this.getFuncRes().put("testDeplacementSurpasse",testDeplacementSurpasse());
+        this.getFuncRes().put("testDeplacementValid",() -> testDeplacementValid());
+        this.getFuncRes().put("testDeplacementSurpasse",() -> testDeplacementSurpasse());
     }
     public boolean testDeplacementValid() {
         int oldPosition = TestRes.joueur1.getPosition();
-        int deplacement = rng.nextInt(5);
+        int deplacement = 3;
         TestRes.deplacerPionService.deplacerPion(TestRes.joueur1, deplacement);
         
+        System.out.println("position inital -> "+oldPosition+ ", deplacement -> "+deplacement+", destination finale ->"+TestRes.joueur1.getPosition());
         return oldPosition+deplacement == TestRes.joueur1.getPosition();
     }
 
     public boolean testDeplacementSurpasse(){
         int deplacement = TestRes.plateau.getNbCases();
+        int oldPosition = TestRes.joueur2.getPosition();
         TestRes.deplacerPionService.deplacerPion(TestRes.joueur2, deplacement);
+        System.out.println("position inital -> "+oldPosition+ ", deplacement -> "+deplacement+", destination finale ->"+TestRes.joueur2.getPosition());
         return TestRes.joueur2.getPosition() == TestRes.plateau.getNbCases();
     }
     
     
 
     
-*/
+
     
 
 }
