@@ -4,11 +4,9 @@
  */
 package com.mycompany.pirate.FonctionnalKernel.Controller;
 
-import com.mycompany.pirate.Interfaces.IControlRejouer;
 import com.mycompany.pirate.Interfaces.IServiceRejouer;
 import com.mycompany.pirate.Interfaces.NotificationService;
 import com.mycompany.pirate.Services.ServiceRejouer;
-import java.util.Arrays;
 
 /**
  *

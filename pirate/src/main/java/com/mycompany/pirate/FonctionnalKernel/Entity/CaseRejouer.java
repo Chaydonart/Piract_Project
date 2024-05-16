@@ -7,9 +7,7 @@ package com.mycompany.pirate.FonctionnalKernel.Entity;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlRejouer;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControleSlotMachine;
-import com.mycompany.pirate.Interfaces.IServiceRejouer;
 import com.mycompany.pirate.Interfaces.NotificationService;
-import com.mycompany.pirate.Services.ServiceRejouer;
 
 /**
  *
