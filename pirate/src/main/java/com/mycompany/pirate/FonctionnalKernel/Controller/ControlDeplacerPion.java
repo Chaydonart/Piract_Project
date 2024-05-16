@@ -28,5 +28,8 @@ public class ControlDeplacerPion {
     public void setDeplacerPionService(ServiceDeplacerPion deplacerPionService) {
         this.deplacePionService = deplacerPionService ; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    public PionRepository getPionRepository() {
+        return pionRepository;
+    }
 
 }

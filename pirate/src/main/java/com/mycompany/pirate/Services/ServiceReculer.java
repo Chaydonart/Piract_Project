@@ -18,6 +18,7 @@ public class ServiceReculer implements IServiceReculer {
     private ControlDeplacerPion controlDeplacerPion;
     private NotificationService notificationService;
     private ControlSlotMachine controlSlotMachine;
+    private int distanceRecule = 0;
 
     public ServiceReculer(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine, NotificationService notificationService) {
         this.controlDeplacerPion = controlDeplacerPion;
@@ -30,11 +31,15 @@ public class ServiceReculer implements IServiceReculer {
         //Valeur aléatoire de retour en arrière
         int[] values = controlSlotMachine.spin();
         int resultat = -Arrays.stream(values).sum();
+        this.distanceRecule = resultat;
         if (notificationService != null) {
             notificationService.notify("Le joueur tombe sur une case RECULER");
             notificationService.notify("La machine affiche = " + values[0] + " " +  values[1] + " " + values[2]);
             notificationService.notify("Le joueur recule de " + (-resultat) + " cases");
         }
         controlDeplacerPion.deplacerPion(resultat); //Reculer le pion
+    }
+    public int getDistanceRecule() {
+        return distanceRecule;
     }
 }

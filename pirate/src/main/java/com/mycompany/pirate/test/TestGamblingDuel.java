@@ -15,17 +15,12 @@ public class TestGamblingDuel extends Tester{
 
     public TestGamblingDuel() {
         super();
-        this.getFuncRes().put("TestDuelDeDes",this.TestDuelDeDes());
+        this.getFuncRes().put("TestDuelDeDes",() -> this.TestDuelDeDes());
     }
 
     public boolean TestDuelDeDes(){
         int oldPointDeVie = TestRes.joueur1.getVie();
-        cgd.duelDeDes(TestRes.joueur1,new NotificationService() {
-            @Override
-            public void notify(String message) {
-                
-            }
-        });
+        cgd.duelDeDes(TestRes.joueur1,TestRes.gameUI);
         return TestRes.joueur1.getVie()<=oldPointDeVie;
 
         

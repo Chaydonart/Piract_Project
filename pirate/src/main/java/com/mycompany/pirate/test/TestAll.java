@@ -11,6 +11,7 @@ public class TestAll {
         this.tests.add(new TestGamblingDuel());
         this.tests.add(new TestRejouer());
         this.tests.add(new TestSlotMachine());
+        this.tests.add(new TestReculer());
 
     }
 
