@@ -16,14 +16,12 @@ import java.util.Optional;
  * @author RIBEIRO
  */
 public class CaseGambling extends Case {
-    private ArrayList<Pion> occupants;
     private NotificationService notificationService;
     
     private IServiceGamblingDuel gdDuel = new ServiceGameblingDuel();
     private ControlGamblingDuel controlGamblingDuel = new ControlGamblingDuel(gdDuel);
 
     public CaseGambling(NotificationService notificationService) {
-        occupants = new ArrayList<>();
         this.notificationService = notificationService;
     }
     

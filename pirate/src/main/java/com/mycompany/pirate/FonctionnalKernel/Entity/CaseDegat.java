@@ -13,11 +13,9 @@ import java.util.Optional;
  * @author BEN JAAFAR
  */
 public class CaseDegat extends Case {
-    private ArrayList<Pion> occupants;
     private NotificationService notificationService;
 
     public CaseDegat(NotificationService notificationService) {
-        occupants = new ArrayList<>();
         this.notificationService = notificationService;
     }
     

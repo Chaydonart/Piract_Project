@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 
 public class Case implements ICase {
-    private ArrayList<Pion> occupants;
+    protected ArrayList<Pion> occupants;
 
     public Case() {
         occupants = new ArrayList<>();
