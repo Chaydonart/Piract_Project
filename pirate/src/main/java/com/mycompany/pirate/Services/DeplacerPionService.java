@@ -28,8 +28,9 @@ public class DeplacerPionService implements IServiceDeplacerPion {
         //Pour reculer s'assurer que le deplacement n'envoie pas à une case négative
         if (pion.getPosition() + deplacement < 1) {
             nouvellePosition = 1;
+        // S'assurer de ne pas dépasser le plateau
         } else if (pion.getPosition() + deplacement > plateau.getNbCases()) {
-            nouvellePosition = plateau.getNbCases(); // S'assurer de ne pas dépasser le plateau
+            nouvellePosition = plateau.getNbCases(); 
         } else {
             nouvellePosition = pion.getPosition() + deplacement;
         }
