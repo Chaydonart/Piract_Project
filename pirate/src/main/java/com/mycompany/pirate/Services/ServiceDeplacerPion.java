@@ -8,6 +8,7 @@ import com.mycompany.pirate.FonctionnalKernel.Entity.Case;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Plateau;
 import com.mycompany.pirate.Interfaces.IServiceDeplacerPion;
+import com.mycompany.pirate.Interfaces.NotificationService;
 
 /**
  *
@@ -15,6 +16,7 @@ import com.mycompany.pirate.Interfaces.IServiceDeplacerPion;
  */
 public class ServiceDeplacerPion implements IServiceDeplacerPion {
     private Plateau plateau;
+    private NotificationService notificationService;
 
     public ServiceDeplacerPion(Plateau plateau) {
         this.plateau = plateau;
@@ -35,7 +37,9 @@ public class ServiceDeplacerPion implements IServiceDeplacerPion {
             nouvellePosition = pion.getPosition() + deplacement;
         }
 
-        System.out.println("Le joueur atterrit sur la case " + nouvellePosition);
+        if (notificationService != null) {
+            notificationService.notify("Le joueur atterrit sur la case " + nouvellePosition);
+        }
         pion.setPosition(nouvellePosition);
         plateau.poserPion(pion);
         
