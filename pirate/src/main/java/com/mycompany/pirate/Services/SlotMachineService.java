@@ -15,7 +15,6 @@ import java.util.Random;
 public class SlotMachineService implements IServiceSlotMachine {
     
     private final Random random = new Random();
-    private int[] values = new int[3];
     
 
     public int[] spin() {
