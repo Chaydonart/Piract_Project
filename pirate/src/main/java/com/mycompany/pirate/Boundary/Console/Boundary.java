@@ -6,27 +6,24 @@ package com.mycompany.pirate.Boundary.Console;
 
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlJeu;
-import com.mycompany.pirate.FonctionnalKernel.Controller.ControleSlotMachine;
-import com.mycompany.pirate.FonctionnalKernel.Entity.Jeu;
+import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
-import com.mycompany.pirate.FonctionnalKernel.Entity.Plateau;
 import com.mycompany.pirate.Interfaces.IBoundary;
 import com.mycompany.pirate.Interfaces.NotificationService;
 import java.util.Arrays;
-import com.mycompany.pirate.Interfaces.IServiceSlotMachine;
 
 /**
  *
  * @author BEN JAAFAR
  */
 public class Boundary implements NotificationService, IBoundary{
-    private ControleSlotMachine controlSlotMachine;
+    private ControlSlotMachine controlSlotMachine;
     private ControlDeplacerPion controlDeplacePion;
     private ControlJeu gameLoopController;
     private PionRepository pionRepository;
 
-    public Boundary(ControleSlotMachine controlSlotMachine, ControlDeplacerPion controlDeplacePion, ControlJeu gameLoopController, PionRepository pionRepository) {
+    public Boundary(ControlSlotMachine controlSlotMachine, ControlDeplacerPion controlDeplacePion, ControlJeu gameLoopController, PionRepository pionRepository) {
         this.controlSlotMachine = controlSlotMachine;
         this.controlDeplacePion = controlDeplacePion;
         this.gameLoopController = gameLoopController;
@@ -38,11 +35,12 @@ public class Boundary implements NotificationService, IBoundary{
         gameLoopController.startGame();
     }
 
+    //on utilise une machine a sous comme dé
     public void spin() {
         int[] values = controlSlotMachine.spin();
-        afficherMessage("La machine affiche = " + values[0] + " " +  values[1] + " " + values[2]);
+        afficherMessage("La machine a sous affiche = " + values[0] + " " +  values[1] + " " + values[2]);
         int resultat = Arrays.stream(values).sum();
-        afficherMessage("Résultat de la machine " + resultat);
+        afficherMessage("Resultat de la machine " + resultat);
         deplacerPion(resultat);
     }
 
@@ -53,7 +51,7 @@ public class Boundary implements NotificationService, IBoundary{
 
     public void afficherEtatJeu() {
         for (Pion pion : pionRepository.getPions()) {
-            afficherMessage("Pion " + pion.getName() + " est sur la case " + pion.getPosition());
+            afficherMessage("RECAPITULATIF : Pion " + pion.getName() + " est sur la case " + pion.getPosition());
         }
     }
 

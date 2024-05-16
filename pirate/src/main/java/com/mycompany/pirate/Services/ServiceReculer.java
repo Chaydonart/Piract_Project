@@ -6,35 +6,35 @@ package com.mycompany.pirate.Services;
 
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
-import com.mycompany.pirate.Interfaces.IServiceRejouer;
+import com.mycompany.pirate.Interfaces.IServiceReculer;
 import com.mycompany.pirate.Interfaces.NotificationService;
 import java.util.Arrays;
 
 /**
  *
- * @author BEN JAAFAR & RIBEIRO
+ * @author RIBEIRO
  */
-public class ServiceRejouer implements IServiceRejouer {
+public class ServiceReculer implements IServiceReculer {
     private ControlDeplacerPion controlDeplacerPion;
     private NotificationService notificationService;
     private ControlSlotMachine controlSlotMachine;
 
-    public ServiceRejouer(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine, NotificationService notificationService) {
+    public ServiceReculer(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine, NotificationService notificationService) {
         this.controlDeplacerPion = controlDeplacerPion;
         this.controlSlotMachine = controlSlotMachine;
         this.notificationService = notificationService;
     }
     
     @Override
-    public void rejouer() {
+    public void reculer() {
+        //Valeur aléatoire de retour en arrière
         int[] values = controlSlotMachine.spin();
-        int resultat = Arrays.stream(values).sum();
+        int resultat = -Arrays.stream(values).sum();
         if (notificationService != null) {
-            notificationService.notify("Le joueur tombe sur une case REJOUER");
-            notificationService.notify("Le joueur va rejouer");
+            notificationService.notify("Le joueur tombe sur une case RECULER");
             notificationService.notify("La machine affiche = " + values[0] + " " +  values[1] + " " + values[2]);
-            notificationService.notify("Le joueur avance de " + resultat + " cases");
+            notificationService.notify("Le joueur recule de " + (-resultat) + " cases");
         }
-        controlDeplacerPion.deplacerPion(resultat); // Déplacer le pion d'une case vers l'avant
+        controlDeplacerPion.deplacerPion(resultat); //Reculer le pion
     }
 }

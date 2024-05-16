@@ -8,12 +8,12 @@ import com.mycompany.pirate.Boundary.Console.Boundary;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlJeu;
 import java.util.Arrays;
-import com.mycompany.pirate.FonctionnalKernel.Controller.ControleSlotMachine;
+import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Jeu;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Plateau;
-import com.mycompany.pirate.Services.DeplacerPionService;
+import com.mycompany.pirate.Services.ServiceDeplacerPion;
 import com.mycompany.pirate.Services.SlotMachineService;
 
 /**
@@ -30,8 +30,8 @@ public class Main {
         SlotMachineService smService = new SlotMachineService();
         
         // Créez les contrôleurs
-        ControlDeplacerPion controlDeplacerPion = new ControlDeplacerPion(new DeplacerPionService(null), pionRepository);
-        ControleSlotMachine controlSlotMachine = new ControleSlotMachine(smService);
+        ControlDeplacerPion controlDeplacerPion = new ControlDeplacerPion(new ServiceDeplacerPion(null), pionRepository);
+        ControlSlotMachine controlSlotMachine = new ControlSlotMachine(smService);
         
         // Créez le GameLoopController avec le GameUI null
         ControlJeu gameLoopController = new ControlJeu(jeu, pionRepository, null);
@@ -48,7 +48,7 @@ public class Main {
         // Mettez à jour le service de déplacement de pion pour utiliser le plateau avec le service de notification
         Plateau plateau =  new Plateau(36,gameUI);
         
-        DeplacerPionService deplacerPionService = new DeplacerPionService(plateau);
+        ServiceDeplacerPion deplacerPionService = new ServiceDeplacerPion(plateau);
         controlDeplacerPion.setDeplacerPionService(deplacerPionService);
         
         plateau.initialiser(controlDeplacerPion,controlSlotMachine);

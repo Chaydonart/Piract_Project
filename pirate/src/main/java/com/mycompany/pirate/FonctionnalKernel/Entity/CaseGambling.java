@@ -30,7 +30,8 @@ public class CaseGambling extends Case {
     public void ajouterPion(Pion pion) {
         occupants.add(pion);
         if (notificationService != null) {
-            notificationService.notify("Le pion " + pion.getName() + " va proceder à un duel !");
+            notificationService.notify("Le " + pion.getName() + " tombe sur une case GAMBLING");
+            notificationService.notify("Le " + pion.getName() + " va donc proceder a un duel contre Gambi le robot !");
         }
         controlGamblingDuel.duelDeDes(pion,notificationService);
     }
@@ -42,7 +43,7 @@ public class CaseGambling extends Case {
     
     @Override
     public String toString(){
-        return " atterrit sur une case DUEL !";
+        return " atterri sur une case DUEL !";
     }
 
 }

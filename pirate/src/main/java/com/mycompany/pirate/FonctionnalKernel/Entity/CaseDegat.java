@@ -25,7 +25,7 @@ public class CaseDegat extends Case {
         occupants.add(pion);
         pion.setVie(pion.getVie() - 1);
         if (notificationService != null) {
-            notificationService.notify("Le pion " + pion.getName() + " a pris des dégâts ! Vie restante : " + pion.getVie());
+            notificationService.notify("Le pion " + pion.getName() + " a pris des degats ! Vie restante : " + pion.getVie());
         }
     }
     

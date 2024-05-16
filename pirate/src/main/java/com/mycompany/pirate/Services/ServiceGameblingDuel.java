@@ -4,7 +4,7 @@
  */
 package com.mycompany.pirate.Services;
 
-import com.mycompany.pirate.FonctionnalKernel.Controller.ControleSlotMachine;
+import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.Interfaces.IServiceGamblingDuel;
 import com.mycompany.pirate.Interfaces.NotificationService;
@@ -16,13 +16,13 @@ import java.util.Random;
  * @author BEN JAAFAR
  */
 public class ServiceGameblingDuel implements IServiceGamblingDuel {
-    private final ControleSlotMachine controleSlotMachine;
+    private final ControlSlotMachine controleSlotMachine;
     private final SlotMachineService smService;
     private Random random= new Random();
     
     public ServiceGameblingDuel() {
         this.smService = new SlotMachineService();
-        this.controleSlotMachine = new ControleSlotMachine(smService);
+        this.controleSlotMachine = new ControlSlotMachine(smService);
     }
     
     @Override
@@ -32,7 +32,7 @@ public class ServiceGameblingDuel implements IServiceGamblingDuel {
         int res = Arrays.stream(valeurs).sum();
         int randomValue = this.random.nextInt(9);
         
-        notificationServices.notify("Duel gambling ! Le joueur doit faire une valeur superieur a "+ randomValue);
+        notificationServices.notify("Duel gambling ! Le joueur doit faire une valeur superieure a "+ randomValue);
         notificationServices.notify("La roulette affiche... " + res + " !");
   
         

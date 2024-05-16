@@ -1,7 +1,6 @@
 package com.mycompany.pirate.Interfaces;
 
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
-import com.mycompany.pirate.FonctionnalKernel.Entity.Plateau;
 
 public interface IServiceDeplacerPion {
     /**
