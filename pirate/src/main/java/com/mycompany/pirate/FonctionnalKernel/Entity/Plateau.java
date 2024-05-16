@@ -11,7 +11,7 @@ import java.util.function.Supplier;
  */
 
 public class Plateau {
-    private int nbCases;
+    private final int nbCases;
     private Case[] cases;
     private NotificationService notificationService;
 
