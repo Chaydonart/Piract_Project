@@ -16,13 +16,18 @@ import java.util.stream.IntStream;
  */
 public class ControleSlotMachine implements IServiceSlotMachine {
     private IServiceSlotMachine smService;
+    private int compteurSpin = 0;
 
     public ControleSlotMachine(SlotMachineService smService) {
         this.smService = smService;
     }
 
     public int[] spin() {
+        this.compteurSpin++;
         return smService.spin();
+    }
+    public int getCompteurSpin() {
+        return compteurSpin;
     }
 
 }

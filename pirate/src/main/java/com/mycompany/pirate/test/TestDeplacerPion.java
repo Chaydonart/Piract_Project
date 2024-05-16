@@ -17,48 +17,46 @@ import com.mycompany.pirate.Services.DeplacerPionService;
 public class TestDeplacerPion extends Tester{
     //initialisation pour les tests
     private Random rng = new Random();
-    private Plateau p = new Plateau(36, null);
-    private DeplacerPionService dps = new DeplacerPionService(p);
-    private Pion p1 = new Pion("p1");
-    private Pion p2 = new Pion("p2");
-    // private List<Pion> lp = new ArrayList<>(){
-    //     {
-    //         add(p1);
-    //         add(p2);
-    //     };
-    // };
-    // private PionRepository pr = new PionRepository(lp);
-    // private ControlDeplacerPion cdp = new ControlDeplacerPion(dps, pr);
-    //fin initialisation
+    private Plateau p = TestRes.plateau;
+    private DeplacerPionService dps = TestRes.deplacerPionService;
+    private Pion p1 = TestRes.joueur1;
+    private Pion p2 = TestRes.joueur2;
+    private List<Pion> lp = new ArrayList<>(){
+        {
+            add(p1);
+            add(p2);
+        };
+    };
+    
+    private PionRepository pr = TestRes.pionRepository;
+    private ControlDeplacerPion cdp = new ControlDeplacerPion(dps, pr);
+    // fin initialisation
     
 
     public TestDeplacerPion() {
-        p.poserPion(p1);
-        p.poserPion(p2);
-        p.initialiser(null, null);
+        //ajout des pions dans plateau
+        super();
         this.getFuncRes().put("testDeplacementValid",testDeplacementValid());
         this.getFuncRes().put("testDeplacementSurpasse",testDeplacementSurpasse());
     }
     public boolean testDeplacementValid() {
-        int oldPosition = p1.getPosition();
+        int oldPosition = TestRes.joueur1.getPosition();
         int deplacement = rng.nextInt(5);
-        dps.deplacerPion(p1,deplacement);
-        return oldPosition+deplacement == p1.getPosition();
+        TestRes.deplacerPionService.deplacerPion(TestRes.joueur1, deplacement);
+        
+        return oldPosition+deplacement == TestRes.joueur1.getPosition();
     }
 
     public boolean testDeplacementSurpasse(){
-        int deplacement = p.getNbCases();
-        dps.deplacerPion(p2, deplacement);
-        return p2.getPosition() == p.getNbCases();
+        int deplacement = TestRes.plateau.getNbCases();
+        TestRes.deplacerPionService.deplacerPion(TestRes.joueur2, deplacement);
+        return TestRes.joueur2.getPosition() == TestRes.plateau.getNbCases();
     }
     
     
 
     
 
-    public static void main(String[] args) {
-        var t = new TestDeplacerPion();
-        t.results();
-    }
+    
 
 }
