@@ -23,11 +23,17 @@ public class DeplacerPionService implements IServiceDeplacerPion {
     @Override
     public void deplacerPion(Pion pion, int deplacement) {
         plateau.retirerPion(pion);
-        int nouvellePosition = pion.getPosition() + deplacement;
+        int nouvellePosition;
 
-        if (nouvellePosition > plateau.getNbCases()) {
+        //Pour reculer s'assurer que le deplacement n'envoie pas à une case négative
+        if (pion.getPosition() + deplacement < 1) {
+            nouvellePosition = 1;
+        } else if (pion.getPosition() + deplacement > plateau.getNbCases()) {
             nouvellePosition = plateau.getNbCases(); // S'assurer de ne pas dépasser le plateau
+        } else {
+            nouvellePosition = pion.getPosition() + deplacement;
         }
+
 
         pion.setPosition(nouvellePosition);
         plateau.poserPion(pion);
