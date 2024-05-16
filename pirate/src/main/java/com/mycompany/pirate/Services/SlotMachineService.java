@@ -15,7 +15,7 @@ public class SlotMachineService implements IServiceSlotMachine {
     
     private final Random random = new Random();
     
-
+    @Override
     public int[] spin() {
         int[] values = new int[3];
         values[0] = random.nextInt(3); 

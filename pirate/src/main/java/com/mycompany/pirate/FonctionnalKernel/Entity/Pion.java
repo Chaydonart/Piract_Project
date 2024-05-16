@@ -39,6 +39,10 @@ public class Pion {
     public boolean isAlive() {
         return alive;
     }
+    
+    public void setAlive(boolean isIt) {
+        this.alive = isIt;
+    }
 
     public int getPosition() {
         return position;

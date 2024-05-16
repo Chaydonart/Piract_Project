@@ -19,7 +19,7 @@ import java.util.Random;
 public class ServiceGameblingDuel implements IServiceGamblingDuel {
     private final ControlSlotMachine controleSlotMachine;
     private final SlotMachineService smService;
-    private Random random= new Random();
+    private Random random = new Random();
     
     public ServiceGameblingDuel() {
         this.smService = new SlotMachineService();
