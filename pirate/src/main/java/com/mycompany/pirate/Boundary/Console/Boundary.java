@@ -7,14 +7,11 @@ package com.mycompany.pirate.Boundary.Console;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlJeu;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
-import com.mycompany.pirate.FonctionnalKernel.Entity.Jeu;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
-import com.mycompany.pirate.FonctionnalKernel.Entity.Plateau;
 import com.mycompany.pirate.Interfaces.IBoundary;
 import com.mycompany.pirate.Interfaces.NotificationService;
 import java.util.Arrays;
-import com.mycompany.pirate.Interfaces.IServiceSlotMachine;
 
 /**
  *
