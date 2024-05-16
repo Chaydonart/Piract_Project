@@ -30,7 +30,7 @@ public class CaseGambling extends Case {
     public void ajouterPion(Pion pion) {
         occupants.add(pion);
         if (notificationService != null) {
-            notificationService.notify("Le pion " + pion.getName() + " va proceder a un duel !");
+            notificationService.notify("Le pion " + pion.getName() + " va proceder a un duel contre Gambi le robot !");
         }
         controlGamblingDuel.duelDeDes(pion,notificationService);
     }

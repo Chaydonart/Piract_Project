@@ -38,11 +38,12 @@ public class Boundary implements NotificationService, IBoundary{
         gameLoopController.startGame();
     }
 
+    //on utilise une machine a sous comme dé
     public void spin() {
         int[] values = controlSlotMachine.spin();
-        afficherMessage("La machine affiche = " + values[0] + " " +  values[1] + " " + values[2]);
+        afficherMessage("La machine a sous affiche = " + values[0] + " " +  values[1] + " " + values[2]);
         int resultat = Arrays.stream(values).sum();
-        afficherMessage("Résultat de la machine " + resultat);
+        afficherMessage("Resultat de la machine " + resultat);
         deplacerPion(resultat);
     }
 
