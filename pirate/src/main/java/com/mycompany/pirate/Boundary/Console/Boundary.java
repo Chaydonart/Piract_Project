@@ -4,15 +4,12 @@
  */
 package com.mycompany.pirate.Boundary.Console;
 
-import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlJeu;
-import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
 import com.mycompany.pirate.Interfaces.IBoundary;
 import com.mycompany.pirate.Interfaces.NotificationService;
 import java.util.Arrays;
-import java.util.Scanner;
 
 /**
  *
@@ -22,11 +19,9 @@ import java.util.Scanner;
  */
 public class Boundary implements NotificationService, IBoundary{
     private ControlJeu gameLoopController;
-    private PionRepository pionRepository;
-    private Scanner scanner =  new Scanner(System.in); 
+    private final PionRepository pionRepository;
     
     public Boundary(ControlJeu gameLoopController, PionRepository pionRepository) {
-
         this.gameLoopController = gameLoopController;
         this.pionRepository = pionRepository;
     }

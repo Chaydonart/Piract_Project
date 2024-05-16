@@ -34,7 +34,7 @@ public class ControlJeu {
                 notificationService.notifySpin(spinResult);
                 
                 int deplacement = Arrays.stream(spinResult).sum();
-                notificationService.notify("Le " + pion.getName() + " se déplace de " + deplacement + " cases.");
+                notificationService.notify("Le " + pion.getName() + " se deplace de " + deplacement + " cases.");
                 
                 controlDeplacerPion.deplacerPion(deplacement);
                 notificationService.notifyDeplacement(deplacement);
