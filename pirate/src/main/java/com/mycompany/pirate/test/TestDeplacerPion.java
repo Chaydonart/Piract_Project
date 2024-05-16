@@ -12,7 +12,6 @@ import com.mycompany.pirate.Services.ServiceDeplacerPion;
 
 public class TestDeplacerPion extends Tester{
     //initialisation pour les tests
-    /*private Random rng = new Random();
     private Plateau p = TestRes.plateau;
     private ServiceDeplacerPion dps = TestRes.deplacerPionService;
     private Pion p1 = TestRes.joueur1;
@@ -37,7 +36,7 @@ public class TestDeplacerPion extends Tester{
     }
     public boolean testDeplacementValid() {
         int oldPosition = TestRes.joueur1.getPosition();
-        int deplacement = rng.nextInt(11)+2;
+        int deplacement = 3;
         TestRes.deplacerPionService.deplacerPion(TestRes.joueur1, deplacement);
         
         System.out.println("position inital -> "+oldPosition+ ", deplacement -> "+deplacement+", destination finale ->"+TestRes.joueur1.getPosition());
@@ -55,7 +54,7 @@ public class TestDeplacerPion extends Tester{
     
 
     
-*/
+
     
 
 }

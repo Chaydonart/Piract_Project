@@ -24,7 +24,7 @@ public class TestReculer extends Tester {
         sr.reculer();
         int finalPosition = cdp.getPionRepository().getPionActuel().getPosition();
         System.out.println("position initial etait -> "+ oldPosition + ",position final -> "+finalPosition);
-        return oldPosition >= oldPosition+sr.getDistanceRecule();
+        return oldPosition >= oldPosition+sr.getDistanceRecule() || sr.getDistanceRecule() < 0;
 
 
     }

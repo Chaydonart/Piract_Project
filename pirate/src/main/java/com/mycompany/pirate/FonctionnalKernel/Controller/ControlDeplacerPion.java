@@ -24,5 +24,8 @@ public class ControlDeplacerPion {
         deplacePionService.deplacerPion(pionActuel, resultatDe);
         pionRepository.save(pionActuel);
     }
+    public PionRepository getPionRepository() {
+        return pionRepository;
+    }
 
 }
