@@ -4,36 +4,27 @@
  */
 package com.mycompany.pirate.FonctionnalKernel.Controller;
 
-import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
-import com.mycompany.pirate.Interfaces.IControlReculer;
-import java.util.Random;
+import com.mycompany.pirate.Interfaces.IServiceReculer;
+import com.mycompany.pirate.Interfaces.NotificationService;
+import com.mycompany.pirate.Services.ServiceReculer;
 
 /**
  *
  * @author RIBEIRO
  */
-public class ControlReculer implements IControlReculer{
-
+public class ControlReculer implements IServiceReculer{
+    private IServiceReculer serviceReculer;
     //Si on recule sur une case spéciale on anime pas 
     //Risque de trop désavantager un joueur avec -5 cases et perdre une vie
-    public ControlReculer() {
+    public ControlReculer(ControlDeplacerPion controlDeplacerPion, ControleSlotMachine controlSlotMachine, NotificationService notificationService) {
+        this.serviceReculer = new ServiceReculer(controlDeplacerPion,controlSlotMachine,notificationService);
     }
-
+    
     @Override
-    public void reculer(Pion pion) {
-        //Valeur aléatoire de retour en arrière
-        Random random = new Random();
-        int value = random.nextInt(4) + 1;
-        System.out.println("Case reculer ! Le joueur doit reculer de "+ value + " cases");
-        int pos = pion.getPosition();
-        
-        //si plus grand -> case depart
-        if (pos < value) {
-            pion.setPosition(1);
-            System.out.println("Le joueur se retrouve a la case 1");
-        } else {
-            pion.setPosition(pos - value);
-            System.out.println("Le joueur se retrouve a la case " + (pos - value));
+    public void reculer() {
+        if (serviceReculer != null) {
+            serviceReculer.reculer();
         }
     }
+    
 }

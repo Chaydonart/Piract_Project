@@ -35,7 +35,6 @@ public class DeplacerPionService implements IServiceDeplacerPion {
             nouvellePosition = pion.getPosition() + deplacement;
         }
 
-
         pion.setPosition(nouvellePosition);
         plateau.poserPion(pion);
 

@@ -4,10 +4,37 @@
  */
 package com.mycompany.pirate.Services;
 
+import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
+import com.mycompany.pirate.FonctionnalKernel.Controller.ControleSlotMachine;
+import com.mycompany.pirate.Interfaces.IServiceReculer;
+import com.mycompany.pirate.Interfaces.NotificationService;
+import java.util.Arrays;
+
 /**
  *
  * @author RIBEIRO
  */
-public class ServiceReculer {
+public class ServiceReculer implements IServiceReculer {
+    private ControlDeplacerPion controlDeplacerPion;
+    private NotificationService notificationService;
+    private ControleSlotMachine controlSlotMachine;
+
+    public ServiceReculer(ControlDeplacerPion controlDeplacerPion, ControleSlotMachine controlSlotMachine, NotificationService notificationService) {
+        this.controlDeplacerPion = controlDeplacerPion;
+        this.controlSlotMachine = controlSlotMachine;
+        this.notificationService = notificationService;
+    }
     
+    @Override
+    public void reculer() {
+        //Valeur aléatoire de retour en arrière
+        int[] values = controlSlotMachine.spin();
+        int resultat = -Arrays.stream(values).sum();
+        if (notificationService != null) {
+            notificationService.notify("Le joueur va reculer");
+            notificationService.notify("La machine affiche = " + values[0] + " " +  values[1] + " " + values[2]);
+            notificationService.notify("Résultat de la machine " + resultat);
+        }
+        controlDeplacerPion.deplacerPion(resultat); //Reculer le pion
+    }
 }

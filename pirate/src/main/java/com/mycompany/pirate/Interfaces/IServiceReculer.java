@@ -4,14 +4,10 @@
  */
 package com.mycompany.pirate.Interfaces;
 
-import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
-
 /**
  *
  * @author RIBEIRO
  */
-public interface IControlReculer {
-    
-    void reculer(Pion pion);
+public interface IServiceReculer {
+    void reculer();
 }
-

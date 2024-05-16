@@ -4,35 +4,26 @@
  */
 package com.mycompany.pirate.FonctionnalKernel.Entity;
 
+import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlReculer;
-import com.mycompany.pirate.Interfaces.IControlReculer;
-import java.util.ArrayList;
+import com.mycompany.pirate.FonctionnalKernel.Controller.ControleSlotMachine;
+import com.mycompany.pirate.Interfaces.NotificationService;
 
 /**
  *
  * @author RIBEIRO
  */
 public class CaseReculer extends Case {
-    private ArrayList<Pion> occupants;
-    private final IControlReculer controlReculer = new ControlReculer();
+    private final ControlReculer controlReculer;
     
-    public CaseReculer() {
-        occupants = new ArrayList<>();
+    public CaseReculer(ControlDeplacerPion controlDeplacerPion, ControleSlotMachine controlSlotMachine, NotificationService notificationService) {
+        this.controlReculer = new ControlReculer(controlDeplacerPion,controlSlotMachine,notificationService);
     }
     
-     @Override
+    @Override
     public void ajouterPion(Pion pion) {
-        occupants.add(pion);
-        controlReculer.reculer(pion);   
-    }
-    
-    @Override
-    public boolean isSpecial(){
-        return true;
-    }
-    
-    @Override
-    public String toString(){
-        return " atterrit sur une case RECULER !";
+        if (controlReculer != null) {
+            controlReculer.reculer();
+        }
     }
 }

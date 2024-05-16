@@ -3,7 +3,6 @@ package com.mycompany.pirate.FonctionnalKernel.Entity;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControleSlotMachine;
 import com.mycompany.pirate.Interfaces.NotificationService;
-import java.util.Random;
 import java.util.function.Supplier;
 
 /**
@@ -47,7 +46,7 @@ public class Plateau {
         Supplier<Case> caseSpeciale1 = () -> new CaseDegat(this.notificationService); 
         Supplier<Case> caseSpeciale2 = () -> new CaseGambling(this.notificationService); 
         Supplier<Case> caseSpeciale3 = () -> new CaseRejouer(controlDeplacerPion,controlSlotMachine, this.notificationService); 
-        //Supplier<Case> caseSpeciale4 = () -> new CaseReculer(controlDeplacerPion,controlSlotMachine, this.notificationService);
+        Supplier<Case> caseSpeciale4 = () -> new CaseReculer(controlDeplacerPion,controlSlotMachine, this.notificationService);
         
         for (int i = 0; i < nbCases; i++) {
             Supplier<Case> caseSupplier;
@@ -57,7 +56,7 @@ public class Plateau {
                 case 3, 13, 21, 29, 30 -> caseSupplier = caseSpeciale1;
                 case 7, 19, 31 -> caseSupplier = caseSpeciale2;
                 case 8, 15, 23 -> caseSupplier = caseSpeciale3;
-                //case 9, 10, 11, 12 -> caseSupplier = caseSpeciale4;
+                case 9, 10, 11, 12 -> caseSupplier = caseSpeciale4;
                 
                 default -> caseSupplier = caseNormale;
             }

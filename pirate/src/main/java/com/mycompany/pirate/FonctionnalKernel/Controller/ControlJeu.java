@@ -4,9 +4,6 @@ import com.mycompany.pirate.Boundary.Console.Boundary;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Jeu;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
-import com.mycompany.pirate.FonctionnalKernel.Entity.Plateau;
-import com.mycompany.pirate.Interfaces.IServiceSlotMachine;
-import com.mycompany.pirate.Interfaces.IServiceDeplacerPion;
 
 public class ControlJeu {
     private Jeu jeu;
