@@ -7,7 +7,21 @@ package com.mycompany.pirate.Interfaces;
 /**
  *
  * @author BEN JAAFAR
+ * 
+ * Adaptateur qui permet le dialogue entre le jeu et la boundary
  */
 public interface NotificationService {
     void notify(String message);
+    
+    void notifySpin(int[] values);
+    
+    void notifyDeplacement(int deplacement);
+    
+    void notifyCaseDegat(String name, int vie);
+    
+    void notifyCaseRejouer(int[] values, int resultat);
+    
+    void notifyCaseReculer(int[] values, int resultat);
+   
+    void notifyCaseGambling(String name,int randomValue,int res);
 }

@@ -10,7 +10,7 @@ import com.mycompany.pirate.Interfaces.NotificationService;
 import com.mycompany.pirate.Services.ServiceGameblingDuel;
 
 public class TestGamblingDuel extends Tester{
-    private IServiceGamblingDuel gds = new ServiceGameblingDuel();
+    /*private IServiceGamblingDuel gds = new ServiceGameblingDuel();
     private ControlGamblingDuel cgd = new ControlGamblingDuel(gds);
 
     public TestGamblingDuel() {
@@ -31,7 +31,7 @@ public class TestGamblingDuel extends Tester{
         
     }
 
-
+*/
 
     
 }

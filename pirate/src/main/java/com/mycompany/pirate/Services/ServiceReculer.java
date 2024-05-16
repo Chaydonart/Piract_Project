@@ -9,6 +9,7 @@ import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
 import com.mycompany.pirate.Interfaces.IServiceReculer;
 import com.mycompany.pirate.Interfaces.NotificationService;
 import java.util.Arrays;
+import java.util.Optional;
 
 /**
  *
@@ -31,9 +32,7 @@ public class ServiceReculer implements IServiceReculer {
         int[] values = controlSlotMachine.spin();
         int resultat = -Arrays.stream(values).sum();
         if (notificationService != null) {
-            notificationService.notify("Le joueur tombe sur une case RECULER");
-            notificationService.notify("La machine affiche = " + values[0] + " " +  values[1] + " " + values[2]);
-            notificationService.notify("Le joueur recule de " + (-resultat) + " cases");
+            Optional.ofNullable(notificationService).ifPresent(service -> service.notifyCaseReculer(values,resultat)); 
         }
         controlDeplacerPion.deplacerPion(resultat); //Reculer le pion
     }

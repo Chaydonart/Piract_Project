@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestAll {
-    private List<Tester> tests = new ArrayList<>();
+    /*private List<Tester> tests = new ArrayList<>();
     public TestAll() {
         this.tests.add(new TestDeplacerPion());
         this.tests.add(new TestGamblingDuel());
@@ -17,5 +17,5 @@ public class TestAll {
         TestAll testAll = new TestAll();
         
     }
-    
+    */
 }

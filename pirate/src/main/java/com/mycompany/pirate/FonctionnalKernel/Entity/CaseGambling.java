@@ -9,6 +9,7 @@ import com.mycompany.pirate.FonctionnalKernel.Controller.ControlGamblingDuel;
 import com.mycompany.pirate.Services.ServiceGameblingDuel;
 import com.mycompany.pirate.Interfaces.IServiceGamblingDuel;
 import com.mycompany.pirate.Interfaces.NotificationService;
+import java.util.Optional;
 
 /**
  *
@@ -29,10 +30,6 @@ public class CaseGambling extends Case {
      @Override
     public void ajouterPion(Pion pion) {
         occupants.add(pion);
-        if (notificationService != null) {
-            notificationService.notify("Le " + pion.getName() + " tombe sur une case GAMBLING");
-            notificationService.notify("Le " + pion.getName() + " va donc proceder a un duel contre Gambi le robot !");
-        }
         controlGamblingDuel.duelDeDes(pion,notificationService);
     }
     

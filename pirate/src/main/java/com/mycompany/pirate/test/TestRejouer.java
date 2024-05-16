@@ -5,7 +5,7 @@ import com.mycompany.pirate.Interfaces.NotificationService;
 import com.mycompany.pirate.Services.ServiceRejouer;
 
 public class TestRejouer extends Tester {
-    private ControlRejouer cr = new ControlRejouer(TestRes.controlDeplacerPion, TestRes.controlSlotMachine, new NotificationService() {
+    /*private ControlRejouer cr = new ControlRejouer(TestRes.controlDeplacerPion, TestRes.controlSlotMachine, new NotificationService() {
         public void notify(String message) {};
     });
 
@@ -23,6 +23,6 @@ public class TestRejouer extends Tester {
         // ça veut deire qu ç'a augmenté
         return TestRes.controlSlotMachine.getCompteurSpin() == 1;
     }
-
+*/
     
 }

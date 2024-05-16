@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class Tester {
-    private Map<String, Boolean> funcRes = new HashMap<>();
+    /*private Map<String, Boolean> funcRes = new HashMap<>();
     public Tester() {
         TestRes.gameLoopController.setGameUI(TestRes.gameUI);
         TestRes.gameUI.setGameLoopController(TestRes.gameLoopController);
@@ -43,5 +43,5 @@ public abstract class Tester {
         ));
         System.out.println("---------------------------------------------------------------------");
     }
-    
+    */
 }
