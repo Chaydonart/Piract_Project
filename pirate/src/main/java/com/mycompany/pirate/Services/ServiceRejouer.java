@@ -30,6 +30,7 @@ public class ServiceRejouer implements IServiceRejouer {
         int[] values = controlSlotMachine.spin();
         int resultat = Arrays.stream(values).sum();
         if (notificationService != null) {
+            notificationService.notify("Le joueur tombe sur une case REJOUER");
             notificationService.notify("Le joueur va rejouer");
             notificationService.notify("La machine affiche = " + values[0] + " " +  values[1] + " " + values[2]);
             notificationService.notify("Resultat de la machine " + resultat);

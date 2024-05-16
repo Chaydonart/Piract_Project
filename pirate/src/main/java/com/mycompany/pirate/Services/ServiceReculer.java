@@ -31,6 +31,7 @@ public class ServiceReculer implements IServiceReculer {
         int[] values = controlSlotMachine.spin();
         int resultat = -Arrays.stream(values).sum();
         if (notificationService != null) {
+            notificationService.notify("Le joueur tombe sur une case RECULER");
             notificationService.notify("Le joueur va reculer");
             notificationService.notify("La machine affiche = " + values[0] + " " +  values[1] + " " + values[2]);
             notificationService.notify("Resultat de la machine " + resultat);
