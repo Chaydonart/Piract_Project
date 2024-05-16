@@ -4,6 +4,7 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
+import java.util.Arrays;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,8 +25,8 @@ public class SlotMachinePanel extends javax.swing.JPanel {
     private Timer timer;
     private final int[] finalValues = new int[3];
     private final int[] currentValues = new int[3];
-    private final int maxValue = 4; // Valeur maximale pour les slots
-    private final int animationDuration = 2000; // Durée de l'animation en millisecondes
+    private static final int maxValue = 4; // Valeur maximale pour les slots
+    private static final int animationDuration = 2000; // Durée de l'animation en millisecondes
     private long animationStartTime;
 
     public SlotMachinePanel() {
@@ -46,18 +47,12 @@ public class SlotMachinePanel extends javax.swing.JPanel {
         setOpaque(false); // Rend le JPanel transparent
     }
 
-   private void start() {
-       timer = new Timer(100, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateSlots();
-            }
-        });
+    private void start() {
+        timer = new Timer(100, e -> updateSlots());
+    
         // Initialiser les valeurs actuelles à zéro
-        for (int i = 0; i < 3; i++) {
-            currentValues[i] = 0;
-        }
-
+        Arrays.fill(currentValues, 0);
+    
         animationStartTime = System.currentTimeMillis();
         timer.start();
     }
@@ -86,7 +81,7 @@ public class SlotMachinePanel extends javax.swing.JPanel {
     
     void setFinalValues(int[] values){
         for(int i=0; i < 3; i++){
-            values[i] = finalValues[i];
+            values=Arrays.copyOf(values,values.length);
         }
     }
 
