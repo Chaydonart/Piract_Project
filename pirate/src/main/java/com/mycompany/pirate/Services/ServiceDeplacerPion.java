@@ -39,11 +39,6 @@ public class ServiceDeplacerPion implements IServiceDeplacerPion {
         pion.setPosition(nouvellePosition);
         plateau.poserPion(pion);
         
-
-        Case caseActuelle = plateau.getCase(pion);
-        if(caseActuelle.isSpecial()){
-            // Logique pour les cases spéciales
-        }
     }
     
 }

@@ -25,9 +25,6 @@ public class CaseDegat extends Case {
         Optional.ofNullable(notificationService).ifPresent(service -> service.notifyCaseDegat(pion.getName(), pion.getVie()));
     }
     
-    @Override
-    public boolean isSpecial(){
-        return true;
-    }
+
     
 }

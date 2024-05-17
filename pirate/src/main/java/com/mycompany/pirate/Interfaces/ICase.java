@@ -16,6 +16,4 @@ public interface ICase {
     public void ajouterPion(Pion pion);
     
     public void retirerPion(Pion pion);
-    
-    public boolean isSpecial();
 }

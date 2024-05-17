@@ -28,15 +28,6 @@ public class CaseGambling extends Case {
         occupants.add(pion);
         controlGamblingDuel.duelDeDes(pion,notificationService);
     }
-    
-    @Override
-    public boolean isSpecial(){
-        return true;
-    }
-    
-    @Override
-    public String toString(){
-        return " atterri sur une case DUEL !";
-    }
+   
 
 }

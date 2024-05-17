@@ -29,9 +29,5 @@ public class Case implements ICase {
     public void retirerPion(Pion pion) {
         occupants.remove(pion);
     }
-    
-    @Override
-    public boolean isSpecial(){
-        return false;
-    }
+   
 }
