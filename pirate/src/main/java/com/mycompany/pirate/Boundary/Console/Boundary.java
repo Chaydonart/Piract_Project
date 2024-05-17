@@ -76,6 +76,7 @@ public class Boundary implements NotificationService, IBoundary{
 
     @Override
     public void notifyCaseDegat(String name, int vie) {
+        afficherMessage("Le joueur tombe sur une case DEGAT");
         afficherMessage("Le pion " + name + " a pris des degats ! Vie restante : " + vie);
     }
 
