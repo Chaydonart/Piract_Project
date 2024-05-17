@@ -35,7 +35,6 @@ public class ControlJeu {
                 int deplacement = Arrays.stream(spinResult).sum();
                 
                 controlDeplacerPion.deplacerPion(deplacement);
-                notificationService.notifyDeplacerPion(deplacement, pion.getName());
                 
                 notificationService.notifyEtatJeu();
            

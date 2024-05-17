@@ -35,7 +35,7 @@ public class Main {
         Plateau plateau =  new Plateau(36,gameUI);
         
         // Controlleur
-        ServiceDeplacerPion deplacerPionService = new ServiceDeplacerPion(plateau);
+        ServiceDeplacerPion deplacerPionService = new ServiceDeplacerPion(plateau,gameUI);
         ServiceSlotMachine smService = new ServiceSlotMachine();
         ControlDeplacerPion controlDeplacerPion = new ControlDeplacerPion(deplacerPionService, pionRepository);
         ControlSlotMachine controlSlotMachine = new ControlSlotMachine(smService);

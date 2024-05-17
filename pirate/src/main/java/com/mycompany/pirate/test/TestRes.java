@@ -20,9 +20,9 @@ public class TestRes {
     public static PionRepository pionRepository = new PionRepository(jeu.getPions());
     public static Boundary gameUI = new Boundary(null, pionRepository);
     public static Plateau plateau =  new Plateau(36,gameUI);
-    public static ServiceDeplacerPion deplacerPionService = new ServiceDeplacerPion(plateau);
+    public static ServiceDeplacerPion deplacerPionService = new ServiceDeplacerPion(plateau,null);
     public static ServiceSlotMachine smService = new ServiceSlotMachine();
-    public static ControlDeplacerPion controlDeplacerPion = new ControlDeplacerPion(new ServiceDeplacerPion(plateau), pionRepository);
+    public static ControlDeplacerPion controlDeplacerPion = new ControlDeplacerPion(new ServiceDeplacerPion(plateau,null), pionRepository);
     public static ControlSlotMachine controlSlotMachine = new ControlSlotMachine(smService); 
     public static ControlJeu gameLoopController = new ControlJeu(jeu, pionRepository, null, controlDeplacerPion, controlSlotMachine);
 
