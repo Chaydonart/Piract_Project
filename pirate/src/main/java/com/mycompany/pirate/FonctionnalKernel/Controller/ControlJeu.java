@@ -27,7 +27,8 @@ public class ControlJeu {
         while (!jeu.isGameOver()) {
             for (Pion pion : pionRepository.getPions()) {
                 if (jeu.isGameOver()) break;
-                 notificationService.notify(pion.getName() + " prend son tour");
+                
+                notificationService.notify(pion.getName() + " prend son tour");
 
                 // Simulation d'un tour de jeu pour le pion
                 int[] spinResult = controleSlotMachine.spin();
