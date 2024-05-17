@@ -25,32 +25,37 @@ public class Boundary implements INotificationService, IBoundary{
         this.gameLoopController = gameLoopController;
         this.pionRepository = pionRepository;
     }
-
+    
+    @Override
     public void start() {
         afficherMessage("Le jeu commence !");
         gameLoopController.startGame();
     }
 
     //Partie affichage console (temporaire)
+     @Override
     public void spin(int[] values) {
         afficherMessage("La machine a sous affiche = " + values[0] + " " +  values[1] + " " + values[2]);
         int resultat = Arrays.stream(values).sum();
         afficherMessage("Resultat de la machine " + resultat);
     }
-
-    public void deplacerPion(int resultatDe) {
-        afficherEtatJeu();
-    }
-
+    
+     @Override
     public void afficherEtatJeu() {
         for (Pion pion : pionRepository.getPions()) {
             afficherMessage("RECAPITULATIF : Pion " + pion.getName() + " est sur la case " + pion.getPosition());
         }
     }
-
+    
+    @Override
     public void afficherMessage(String message) {
         System.out.println(message);
     }
+    
+     @Override    
+    public void deplacerPion(int deplacement, String name){
+         afficherMessage("Le " + name + " avance de " + deplacement + " cases");
+     }
     
     
     // Partie pacerelle dialogue
@@ -65,8 +70,8 @@ public class Boundary implements INotificationService, IBoundary{
     }
     
     @Override 
-    public void notifyDeplacement(int deplacement){
-        deplacerPion(deplacement);
+    public void notifyEtatJeu(){
+        afficherEtatJeu();
     }
 
     @Override
@@ -78,7 +83,7 @@ public class Boundary implements INotificationService, IBoundary{
     @Override
     public void notifyCaseRejouer(int[] values, int resultat) {
         afficherMessage("Le joueur tombe sur une case REJOUER");
-        notifyDeplacement(resultat);
+        notifyEtatJeu();
         afficherMessage("Le joueur va rejouer");
         afficherMessage("La machine affiche = " + values[0] + " " +  values[1] + " " + values[2]);
         afficherMessage("Le joueur avance de " + resultat + " cases");
@@ -87,7 +92,7 @@ public class Boundary implements INotificationService, IBoundary{
     @Override
     public void notifyCaseReculer(int[] values, int resultat) {             
         afficherMessage("Le joueur tombe sur une case RECULER");
-        notifyDeplacement(resultat);
+        notifyEtatJeu();
         afficherMessage("La machine affiche = " + values[0] + " " +  values[1] + " " + values[2]);
         afficherMessage("Le joueur recule de " + (-resultat) + " cases");
     }
@@ -98,6 +103,11 @@ public class Boundary implements INotificationService, IBoundary{
         afficherMessage("Le " + name + " va donc proceder a un duel contre Gambi le robot !");
         afficherMessage("Duel gambling ! Le joueur doit faire une valeur superieure a "+ randomValue);
         afficherMessage("La roulette affiche... " + res + " !");
+    }
+    
+    @Override
+    public void notifyDeplacerPion(int deplacement, String name){
+        deplacerPion(deplacement, name);
     }
     
     // Pour intialiser le jeu

@@ -15,7 +15,7 @@ public interface INotificationService {
     
     void notifySpin(int[] values);
     
-    void notifyDeplacement(int deplacement);
+    void notifyEtatJeu();
     
     void notifyCaseDegat(String name, int vie);
     
@@ -24,4 +24,6 @@ public interface INotificationService {
     void notifyCaseReculer(int[] values, int resultat);
    
     void notifyCaseGambling(String name,int randomValue,int res);
+    
+    void notifyDeplacerPion(int deplacement, String name);
 }

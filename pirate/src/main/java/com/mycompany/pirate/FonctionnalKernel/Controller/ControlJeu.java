@@ -33,11 +33,12 @@ public class ControlJeu {
                 notificationService.notifySpin(spinResult);
                 
                 int deplacement = Arrays.stream(spinResult).sum();
-                notificationService.notify("Le " + pion.getName() + " se deplace de " + deplacement + " cases.");
                 
                 controlDeplacerPion.deplacerPion(deplacement);
-                notificationService.notifyDeplacement(deplacement);
+                notificationService.notifyDeplacerPion(deplacement, pion.getName());
                 
+                notificationService.notifyEtatJeu();
+           
                 if(pion.getVie() <= 0){
                     jeu.setGameOver(true);
                 }
