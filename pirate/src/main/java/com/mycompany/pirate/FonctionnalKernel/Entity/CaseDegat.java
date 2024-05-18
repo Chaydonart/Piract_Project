@@ -5,16 +5,16 @@
 package com.mycompany.pirate.FonctionnalKernel.Entity;
 
 import java.util.Optional;
-import com.mycompany.pirate.Interfaces.INotificationService;
+import com.mycompany.pirate.Interfaces.IDialogue;
 
 /**
  *
  * @author BEN JAAFAR
  */
 public class CaseDegat extends Case {
-    private INotificationService notificationService;
+    private IDialogue notificationService;
 
-    public CaseDegat(INotificationService notificationService) {
+    public CaseDegat(IDialogue notificationService) {
         this.notificationService = notificationService;
     }
     

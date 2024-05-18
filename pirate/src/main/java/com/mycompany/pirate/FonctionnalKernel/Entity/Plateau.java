@@ -3,7 +3,7 @@ package com.mycompany.pirate.FonctionnalKernel.Entity;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
 import java.util.function.Supplier;
-import com.mycompany.pirate.Interfaces.INotificationService;
+import com.mycompany.pirate.Interfaces.IDialogue;
 
 /**
  *
@@ -13,9 +13,9 @@ import com.mycompany.pirate.Interfaces.INotificationService;
 public class Plateau {
     private final int nbCases;
     private Case[] cases;
-    private INotificationService notificationService;
+    private IDialogue notificationService;
 
-    public Plateau(int nbCases, INotificationService notificationService) {
+    public Plateau(int nbCases, IDialogue notificationService) {
         this.nbCases = nbCases;
         this.cases = new Case[nbCases];
         this.notificationService = notificationService;
@@ -44,9 +44,9 @@ public class Plateau {
         // Définition des fournisseurs de cases spéciales
         Supplier<Case> caseNormale = Case::new;
         Supplier<Case> caseSpeciale1 = () -> new CaseDegat(this.notificationService); 
-        Supplier<Case> caseSpeciale2 = () -> new CaseGambling(this.notificationService); 
-        Supplier<Case> caseSpeciale3 = () -> new CaseRejouer(controlDeplacerPion,controlSlotMachine, this.notificationService); 
-        Supplier<Case> caseSpeciale4 = () -> new CaseReculer(controlDeplacerPion,controlSlotMachine, this.notificationService);
+        Supplier<Case> caseSpeciale2 = () -> new CaseGambling(controlSlotMachine, this.notificationService); 
+        Supplier<Case> caseSpeciale3 = () -> new CaseRejouer(controlDeplacerPion, controlSlotMachine, this.notificationService); 
+        Supplier<Case> caseSpeciale4 = () -> new CaseReculer(controlDeplacerPion, controlSlotMachine, this.notificationService);
         
         for (int i = 0; i < nbCases; i++) {
             Supplier<Case> caseSupplier;

@@ -4,11 +4,12 @@
  */
 package com.mycompany.pirate.Interfaces;
 
+import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
+
 /**
  *
  * @author BEN JAAFAR
  */
-public interface IServiceRejouer {
-     public void rejouer();
-    
+public interface IControlDeplacerPion {
+    void deplacerPion(Pion pion, int deplacement);
 }

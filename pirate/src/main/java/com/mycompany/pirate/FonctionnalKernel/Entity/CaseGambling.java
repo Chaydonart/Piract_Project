@@ -5,22 +5,20 @@
 package com.mycompany.pirate.FonctionnalKernel.Entity;
 
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlGamblingDuel;
-import com.mycompany.pirate.Services.ServiceGameblingDuel;
-import com.mycompany.pirate.Interfaces.IServiceGamblingDuel;
-import com.mycompany.pirate.Interfaces.INotificationService;
+import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
+import com.mycompany.pirate.Interfaces.IDialogue;
 
 /**
  *
  * @author RIBEIRO
  */
 public class CaseGambling extends Case {
-    private INotificationService notificationService;
-    
-    private IServiceGamblingDuel gdDuel = new ServiceGameblingDuel();
-    private ControlGamblingDuel controlGamblingDuel = new ControlGamblingDuel(gdDuel);
+    private IDialogue notificationService;
+    private ControlGamblingDuel controlGamblingDuel;
 
-    public CaseGambling(INotificationService notificationService) {
+    public CaseGambling(ControlSlotMachine controlSlotMachine, IDialogue notificationService) {
         this.notificationService = notificationService;
+        this.controlGamblingDuel =  new ControlGamblingDuel(controlSlotMachine);
     }
     
      @Override

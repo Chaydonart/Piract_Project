@@ -4,16 +4,16 @@ import com.mycompany.pirate.FonctionnalKernel.Entity.Jeu;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
 import java.util.Arrays;
-import com.mycompany.pirate.Interfaces.INotificationService;
+import com.mycompany.pirate.Interfaces.IDialogue;
 
 public class ControlJeu {
    private Jeu jeu;
     private PionRepository pionRepository;
-    private INotificationService notificationService;
+    private IDialogue notificationService;
     private ControlDeplacerPion controlDeplacerPion;
     private ControlSlotMachine controleSlotMachine;
 
-    public ControlJeu(Jeu jeu, PionRepository pionRepository, INotificationService notificationService,
+    public ControlJeu(Jeu jeu, PionRepository pionRepository, IDialogue notificationService,
                       ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controleSlotMachine) {
         this.jeu = jeu;
         this.pionRepository = pionRepository;
@@ -34,7 +34,7 @@ public class ControlJeu {
                 
                 int deplacement = Arrays.stream(spinResult).sum();
                 
-                controlDeplacerPion.deplacerPion(deplacement);
+                controlDeplacerPion.deplacerPion(pion,deplacement);
                 
                 notificationService.notifyEtatJeu();
            
@@ -55,7 +55,7 @@ public class ControlJeu {
         }
     }
     
-    public void setNotificationService(INotificationService notificationService){
+    public void setNotificationService(IDialogue notificationService){
         this.notificationService = notificationService;   
     }
 

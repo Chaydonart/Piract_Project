@@ -6,8 +6,8 @@ package com.mycompany.pirate.Interfaces;
 
 /**
  *
- * @author RIBEIRO
+ * @author BEN JAAFAR
  */
-public interface IServiceReculer {
-    void reculer();
+public interface IControlSlotMachine {
+    int[] spin();
 }

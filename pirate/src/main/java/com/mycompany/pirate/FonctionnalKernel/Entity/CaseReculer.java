@@ -7,7 +7,7 @@ package com.mycompany.pirate.FonctionnalKernel.Entity;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlReculer;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
-import com.mycompany.pirate.Interfaces.INotificationService;
+import com.mycompany.pirate.Interfaces.IDialogue;
 
 /**
  *
@@ -16,14 +16,14 @@ import com.mycompany.pirate.Interfaces.INotificationService;
 public class CaseReculer extends Case {
     private final ControlReculer controlReculer;
     
-    public CaseReculer(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine, INotificationService notificationService) {
+    public CaseReculer(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine, IDialogue notificationService) {
         this.controlReculer = new ControlReculer(controlDeplacerPion,controlSlotMachine,notificationService);
     }
     
     @Override
     public void ajouterPion(Pion pion) {
         if (controlReculer != null) {
-            controlReculer.reculer();
+            controlReculer.reculer(pion);
         }
     }
 }

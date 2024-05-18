@@ -4,26 +4,44 @@
  */
 package com.mycompany.pirate.FonctionnalKernel.Controller;
 
-import com.mycompany.pirate.Interfaces.IServiceReculer;
-import com.mycompany.pirate.Services.ServiceReculer;
-import com.mycompany.pirate.Interfaces.INotificationService;
+import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
+import com.mycompany.pirate.Interfaces.IControlReculer;
+import com.mycompany.pirate.Interfaces.IDialogue;
+import java.util.Arrays;
+import java.util.Optional;
 
 /**
  *
  * @author RIBEIRO
  */
-public class ControlReculer implements IServiceReculer{
-    private IServiceReculer serviceReculer;
+public class ControlReculer implements IControlReculer{
+    private ControlDeplacerPion controlDeplacerPion;
+    private IDialogue notificationService;
+    private ControlSlotMachine controlSlotMachine;
+    private int distanceRecule = 0;
    
-    public ControlReculer(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine, INotificationService notificationService) {
-        this.serviceReculer = new ServiceReculer(controlDeplacerPion,controlSlotMachine,notificationService);
+    public ControlReculer(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine, IDialogue notificationService) {
+        this.controlDeplacerPion = controlDeplacerPion;
+        this.notificationService = notificationService;
+        this.controlSlotMachine = controlSlotMachine;
+        
     }
     
     @Override
-    public void reculer() {
-        if (serviceReculer != null) {
-            serviceReculer.reculer();
-        }
+    public void reculer(Pion pion) {
+        //Valeur aléatoire de retour en arrière
+        int[] values = controlSlotMachine.spin();
+        
+        int resultat = -Arrays.stream(values).sum();
+        this.distanceRecule = resultat;
+       
+        Optional.ofNullable(notificationService).ifPresent(service -> service.notifyCaseReculer(values,resultat)); 
+        
+        controlDeplacerPion.deplacerPion(pion,resultat); 
+    }
+    
+    public int getDistanceRecule() {
+        return distanceRecule;
     }
     
 }

@@ -9,7 +9,7 @@ import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
 import com.mycompany.pirate.Interfaces.IBoundary;
 import java.util.Arrays;
-import com.mycompany.pirate.Interfaces.INotificationService;
+import com.mycompany.pirate.Interfaces.IDialogue;
 
 /**
  *
@@ -17,7 +17,7 @@ import com.mycompany.pirate.Interfaces.INotificationService;
  * 
  * Va ensuite en plus implementer IPirates
  */
-public class Boundary implements INotificationService, IBoundary{
+public class Boundary implements IDialogue, IBoundary{
     private ControlJeu gameLoopController;
     private final PionRepository pionRepository;
     

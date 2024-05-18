@@ -10,7 +10,7 @@ package com.mycompany.pirate.Interfaces;
  * 
  * Adaptateur qui permet le dialogue entre le jeu et la boundary
  */
-public interface INotificationService {
+public interface IDialogue {
     void notify(String message);
     
     void notifySpin(int[] values);

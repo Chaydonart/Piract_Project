@@ -4,27 +4,37 @@
  */
 package com.mycompany.pirate.FonctionnalKernel.Controller;
 
-import com.mycompany.pirate.Interfaces.IServiceRejouer;
-import com.mycompany.pirate.Services.ServiceRejouer;
-import com.mycompany.pirate.Interfaces.INotificationService;
+import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
+import com.mycompany.pirate.Interfaces.IControlRejouer;
+import com.mycompany.pirate.Interfaces.IDialogue;
+import java.util.Arrays;
+import java.util.Optional;
 
 /**
  *
  * @author BEN JAAFAR
  */
-public class ControlRejouer implements IServiceRejouer {
+public class ControlRejouer implements IControlRejouer {
     
-    private IServiceRejouer serviceRejouer;
+    private ControlDeplacerPion controlDeplacerPion;
+    private IDialogue notificationService;
+    private ControlSlotMachine controlSlotMachine;
 
-    public ControlRejouer(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine, INotificationService notificationService) {
-        this.serviceRejouer = new ServiceRejouer(controlDeplacerPion,controlSlotMachine,notificationService);
+    public ControlRejouer(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine, IDialogue notificationService) {
+        this.controlDeplacerPion = controlDeplacerPion;
+        this.controlSlotMachine = controlSlotMachine;
+        this.notificationService = notificationService;
     }
        
     @Override
-    public void rejouer() {
-        if (serviceRejouer != null) {
-            serviceRejouer.rejouer();
-        }
+    public void rejouer(Pion pion) {
+        int[] values = controlSlotMachine.spin();
+        int resultat = Arrays.stream(values).sum();
+   
+        Optional.ofNullable(notificationService).ifPresent(service -> service.notifyCaseRejouer(values,resultat)); 
+            
+        
+        controlDeplacerPion.deplacerPion(pion,resultat); 
     }
     
 }

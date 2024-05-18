@@ -10,7 +10,6 @@ import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
  *
  * @author BEN JAAFAR
  */
-public interface IServiceGamblingDuel {
-    void duelDeDes(Pion pion, INotificationService notificationServices);
-    
+public interface IControlRejouer {
+    void rejouer(Pion pion);
 }

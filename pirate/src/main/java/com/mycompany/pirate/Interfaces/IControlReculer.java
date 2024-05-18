@@ -4,10 +4,12 @@
  */
 package com.mycompany.pirate.Interfaces;
 
+import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
+
 /**
  *
  * @author BEN JAAFAR
  */
-public interface IServiceSlotMachine {
-    int[] spin();
+public interface IControlReculer {
+    void reculer(Pion pion);
 }

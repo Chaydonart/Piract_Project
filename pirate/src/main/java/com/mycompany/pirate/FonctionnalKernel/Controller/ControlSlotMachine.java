@@ -4,25 +4,27 @@
  */
 package com.mycompany.pirate.FonctionnalKernel.Controller;
 
-import com.mycompany.pirate.Services.ServiceSlotMachine;
-import com.mycompany.pirate.Interfaces.IServiceSlotMachine;
+import com.mycompany.pirate.Interfaces.IControlSlotMachine;
+import java.util.Random;
 
 /**
  *
  * @author BEN JAAFAR
  */
-public class ControlSlotMachine implements IServiceSlotMachine {
-    private IServiceSlotMachine smService;
+public class ControlSlotMachine implements IControlSlotMachine {
+    private final Random random = new Random();
     private int compteurSpin = 0;
-
-    public ControlSlotMachine(ServiceSlotMachine smService) {
-        this.smService = smService;
-    }
-
+    
+    @Override
     public int[] spin() {
         this.compteurSpin++;
-        return smService.spin();
+        int[] values = new int[3];
+        values[0] = random.nextInt(3); 
+        values[1] = random.nextInt(4) + 1; // Valeurs entre 1 et 4 pour la deuxième case
+        values[2] = random.nextInt(4) + 1; // Valeurs entre 1 et 4 pour la troisième case
+        return values;
     }
+    
     public int getCompteurSpin() {
         return compteurSpin;
     }

@@ -13,8 +13,6 @@ import com.mycompany.pirate.FonctionnalKernel.Entity.Jeu;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Plateau;
-import com.mycompany.pirate.Services.ServiceDeplacerPion;
-import com.mycompany.pirate.Services.ServiceSlotMachine;
 
 /**
  *
@@ -35,10 +33,9 @@ public class Main {
         Plateau plateau =  new Plateau(36,gameUI);
         
         // Controlleur
-        ServiceDeplacerPion deplacerPionService = new ServiceDeplacerPion(plateau,gameUI);
-        ServiceSlotMachine smService = new ServiceSlotMachine();
-        ControlDeplacerPion controlDeplacerPion = new ControlDeplacerPion(deplacerPionService, pionRepository);
-        ControlSlotMachine controlSlotMachine = new ControlSlotMachine(smService);
+        ControlDeplacerPion controlDeplacerPion = new ControlDeplacerPion(plateau,gameUI,pionRepository);
+        ControlSlotMachine controlSlotMachine = new ControlSlotMachine();
+        
         ControlJeu gameLoopController = new ControlJeu(jeu, pionRepository, gameUI,controlDeplacerPion, controlSlotMachine);
         
         //Update controlleur for UI
