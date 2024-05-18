@@ -28,7 +28,7 @@ public class ControlJeu implements IControlDeplacerPion, IControlSlotMachine{
         while (!jeu.isGameOver()) {
             for (Pion pion : pionRepository.getPions()) {
                 if (jeu.isGameOver()) break;
-                 notificationService.notify(pion.getName() + " prend son tour");
+                 notificationService.notifyNouveauTour(pion.getName());
 
                 // Simulation d'un tour de jeu pour le pion
                 int[] spinResult = spin();

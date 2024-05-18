@@ -26,4 +26,6 @@ public interface IDialogue {
     void notifyCaseGambling(String name,int randomValue,int res);
     
     void notifyDeplacerPion(int deplacement, String name);
+    
+    void notifyNouveauTour(String name);
 }
