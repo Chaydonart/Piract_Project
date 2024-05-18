@@ -5,7 +5,9 @@
 package com.mycompany.pirate.FonctionnalKernel.Controller;
 
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
+import com.mycompany.pirate.Interfaces.IControlDeplacerPion;
 import com.mycompany.pirate.Interfaces.IControlRejouer;
+import com.mycompany.pirate.Interfaces.IControlSlotMachine;
 import com.mycompany.pirate.Interfaces.IDialogue;
 import java.util.Arrays;
 import java.util.Optional;
@@ -13,8 +15,10 @@ import java.util.Optional;
 /**
  *
  * @author BEN JAAFAR
+ * 
+ * Controlleur permettant de gerer la mecanique de la case reculer
  */
-public class ControlRejouer implements IControlRejouer {
+public class ControlRejouer implements IControlRejouer, IControlSlotMachine, IControlDeplacerPion {
     
     private ControlDeplacerPion controlDeplacerPion;
     private IDialogue notificationService;
@@ -28,13 +32,20 @@ public class ControlRejouer implements IControlRejouer {
        
     @Override
     public void rejouer(Pion pion) {
-        int[] values = controlSlotMachine.spin();
+        int[] values = spin();
         int resultat = Arrays.stream(values).sum();
-   
-        Optional.ofNullable(notificationService).ifPresent(service -> service.notifyCaseRejouer(values,resultat)); 
-            
-        
-        controlDeplacerPion.deplacerPion(pion,resultat); 
+        Optional.ofNullable(notificationService).ifPresent(service -> service.notifyCaseRejouer(values,resultat));
+        deplacerPion(pion,resultat); 
+    }
+
+    @Override
+    public int[] spin() {
+        return this.controlSlotMachine.spin();
+    }
+
+    @Override
+    public void deplacerPion(Pion pion, int deplacement) {
+        this.controlDeplacerPion.deplacerPion(pion, deplacement);
     }
     
 }

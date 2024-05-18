@@ -6,6 +6,7 @@ package com.mycompany.pirate.FonctionnalKernel.Controller;
 
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.Interfaces.IControlGamblingDuel;
+import com.mycompany.pirate.Interfaces.IControlSlotMachine;
 import com.mycompany.pirate.Interfaces.IDialogue;
 import java.util.Arrays;
 import java.util.Optional;
@@ -15,9 +16,9 @@ import java.util.Random;
  *
  * @author RIBEIRO
  */
-public class ControlGamblingDuel implements IControlGamblingDuel   {
+public class ControlGamblingDuel implements IControlGamblingDuel, IControlSlotMachine   {
     
-    private final ControlSlotMachine controlSlotMachine;
+    private final IControlSlotMachine controlSlotMachine;
     private Random random = new Random();
 
     public ControlGamblingDuel(ControlSlotMachine controlSlotMachine) {
@@ -27,7 +28,7 @@ public class ControlGamblingDuel implements IControlGamblingDuel   {
     @Override
     public void duelDeDes(Pion pion, IDialogue notificationServices) {
         //Lancers de dés
-        int[] valeurs = controlSlotMachine.spin();
+        int[] valeurs = spin();
         int res = Arrays.stream(valeurs).sum();
         int randomValue = this.random.nextInt(9);
         
@@ -40,6 +41,11 @@ public class ControlGamblingDuel implements IControlGamblingDuel   {
         } else {
             notificationServices.notify("DUEL REUSSI !");
         }
+    }
+
+    @Override
+    public int[] spin() {
+       return this.controlSlotMachine.spin();
     }
     
 }

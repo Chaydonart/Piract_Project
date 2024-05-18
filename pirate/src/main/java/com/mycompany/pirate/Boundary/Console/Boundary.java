@@ -17,7 +17,7 @@ import com.mycompany.pirate.Interfaces.IDialogue;
  * 
  * Va ensuite en plus implementer IPirates
  */
-public class Boundary implements IDialogue, IBoundary{
+public class Boundary implements IBoundary {
     private ControlJeu gameLoopController;
     private final PionRepository pionRepository;
     

@@ -39,10 +39,8 @@ public class ControlDeplacerPion implements IControlDeplacerPion {
             nouvellePosition = pion.getPosition() + deplacement;
         }
         Optional.ofNullable(notificationService).ifPresent(service -> service.notifyDeplacerPion(deplacement,pion.getName())); 
-        //System.out.println("TEST Le joueur atterrit sur la case " + nouvellePosition);
         pion.setPosition(nouvellePosition);
         plateau.poserPion(pion);
-        pionRepository.save(pionActuel);
     }
     
     public PionRepository getPionRepository() {

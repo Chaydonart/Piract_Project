@@ -32,7 +32,7 @@ public class PionRepository {
     }
 
     public void save(Pion pion) {
-        // Sauvegarder l'état du pion si nécessaire (pas nécessaire dans ce cas)
+        // Mecanique de malus ici ! 
     }
 
     public void nextPion() {

@@ -5,7 +5,9 @@
 package com.mycompany.pirate.FonctionnalKernel.Controller;
 
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
+import com.mycompany.pirate.Interfaces.IControlDeplacerPion;
 import com.mycompany.pirate.Interfaces.IControlReculer;
+import com.mycompany.pirate.Interfaces.IControlSlotMachine;
 import com.mycompany.pirate.Interfaces.IDialogue;
 import java.util.Arrays;
 import java.util.Optional;
@@ -14,7 +16,7 @@ import java.util.Optional;
  *
  * @author RIBEIRO
  */
-public class ControlReculer implements IControlReculer{
+public class ControlReculer implements IControlReculer, IControlDeplacerPion, IControlSlotMachine {
     private ControlDeplacerPion controlDeplacerPion;
     private IDialogue notificationService;
     private ControlSlotMachine controlSlotMachine;
@@ -29,19 +31,25 @@ public class ControlReculer implements IControlReculer{
     
     @Override
     public void reculer(Pion pion) {
-        //Valeur aléatoire de retour en arrière
-        int[] values = controlSlotMachine.spin();
-        
+        int[] values = spin();;//Valeur aléatoire de retour en arrière
         int resultat = -Arrays.stream(values).sum();
         this.distanceRecule = resultat;
-       
-        Optional.ofNullable(notificationService).ifPresent(service -> service.notifyCaseReculer(values,resultat)); 
-        
-        controlDeplacerPion.deplacerPion(pion,resultat); 
+        Optional.ofNullable(notificationService).ifPresent(service -> service.notifyCaseReculer(values,resultat));
+        deplacerPion(pion,resultat); 
     }
     
     public int getDistanceRecule() {
         return distanceRecule;
+    }
+
+    @Override
+    public void deplacerPion(Pion pion, int deplacement) {
+        this.controlDeplacerPion.deplacerPion(pion, deplacement);
+    }
+
+    @Override
+    public int[] spin() {
+        return this.controlSlotMachine.spin();
     }
     
 }

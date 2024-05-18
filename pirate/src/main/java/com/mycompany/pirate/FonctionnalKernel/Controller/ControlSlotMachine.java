@@ -19,9 +19,9 @@ public class ControlSlotMachine implements IControlSlotMachine {
     public int[] spin() {
         this.compteurSpin++;
         int[] values = new int[3];
-        values[0] = random.nextInt(3); 
-        values[1] = random.nextInt(4) + 1; // Valeurs entre 1 et 4 pour la deuxième case
-        values[2] = random.nextInt(4) + 1; // Valeurs entre 1 et 4 pour la troisième case
+        values[0] = random.nextInt(3); // Uniquement la case 1 va de 0 a 4
+        values[1] = random.nextInt(4) + 1; 
+        values[2] = random.nextInt(4) + 1;
         return values;
     }
     
