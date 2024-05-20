@@ -91,24 +91,22 @@ public class Boundary implements IBoundary {
         afficherMessage("Le joueur tombe sur une case REJOUER");
         notifyEtatJeu();
         afficherMessage("Le joueur va rejouer");
-        afficherMessage("La machine affiche = " + values[0] + " " +  values[1] + " " + values[2]);
-        afficherMessage("Le joueur avance de " + resultat + " cases");
+        spin(values);
+
     }
 
     @Override
     public void notifyCaseReculer(int[] values, int resultat) {             
         afficherMessage("Le joueur tombe sur une case RECULER");
         notifyEtatJeu();
-        afficherMessage("La machine affiche = " + values[0] + " " +  values[1] + " " + values[2]);
-        afficherMessage("Le joueur recule de " + (-resultat) + " cases");
+        spin(values);
     }
 
     @Override
-    public void notifyCaseGambling(String name, int randomValue, int res) {
+    public void notifyCaseGambling(String name, int randomValue) {
         afficherMessage("Le " + name + " tombe sur une case GAMBLING");
         afficherMessage("Le " + name + " va donc procéder à un duel contre Gambi le robot !");
         afficherMessage("Duel gambling ! Le joueur doit faire une valeur supérieure à " + randomValue);
-        afficherMessage("La roulette affiche... " + res + " !");
     }
 
     @Override

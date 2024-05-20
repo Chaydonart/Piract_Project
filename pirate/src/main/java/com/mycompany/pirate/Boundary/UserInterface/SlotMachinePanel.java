@@ -4,6 +4,11 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.Arrays;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -20,14 +25,14 @@ import javax.swing.Timer;
  * @author BEN JAAFAR
  */
 public class SlotMachinePanel extends javax.swing.JPanel {
-    private final JLabel[] slotLabels = new JLabel[3];
+   private final JLabel[] slotLabels = new JLabel[3];
     private final Random random = new Random();
-    private Timer timer;
     private final int[] finalValues = new int[3];
     private final int[] currentValues = new int[3];
     private static final int maxValue = 4; // Valeur maximale pour les slots
     private static final int animationDuration = 2000; // Durée de l'animation en millisecondes
     private long animationStartTime;
+    private Timer timer;
 
     public SlotMachinePanel() {
         setLayout(new GridLayout(1, 3));
@@ -35,25 +40,16 @@ public class SlotMachinePanel extends javax.swing.JPanel {
         for (int i = 0; i < 3; i++) {
             slotLabels[i] = new JLabel();
             slotLabels[i].setHorizontalAlignment(SwingConstants.CENTER);
+            slotLabels[i].setFont(new Font("Arial", Font.BOLD, 36));
             add(slotLabels[i]);
         }
-
-        
-
-        JButton startButton = new JButton("Start");
-        startButton.addActionListener(e -> start());
-        add(startButton);
 
         setOpaque(false); // Rend le JPanel transparent
     }
 
-    private void start() {
-        timer = new Timer(100, e -> updateSlots());
-    
-        // Initialiser les valeurs actuelles à zéro
-        Arrays.fill(currentValues, 0);
-    
+    public void start() {
         animationStartTime = System.currentTimeMillis();
+        timer = new Timer(100, e -> updateSlots());
         timer.start();
     }
 
@@ -74,14 +70,24 @@ public class SlotMachinePanel extends javax.swing.JPanel {
                 slotLabels[i].setText(String.valueOf(finalValues[i]));
             }
         }
-
-        // Assurez-vous que le JPanel est redessiné
-        //repaint();
     }
     
-    void setFinalValues(int[] values){
-        for(int i=0; i < 3; i++){
-            values=Arrays.copyOf(values,values.length);
+     @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g; // Conversion en Graphics2D
+        
+        int slotWidth = getWidth() / 3;
+        int slotHeight = getHeight();
+        
+        // Augmenter la grosseur du trait du rectangle
+        g2d.setStroke(new BasicStroke(10)); // 3 pixels
+        
+        for (int i = 0; i < 3; i++) {
+            int x = i * slotWidth;
+            int y = 0;
+            g.setColor(Color.BLACK); // Couleur des contours
+            g.drawRect(x, y, slotWidth, slotHeight - 2); // Dessin du rectangle autour de chaque case
         }
     }
 
