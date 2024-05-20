@@ -15,7 +15,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.swing.Timer;
 
 /**
  *
@@ -23,14 +22,9 @@ import javax.swing.Timer;
  */
 public class PanelPlayer extends javax.swing.JPanel {
     private String imagePath = "C:\\Users\\BEN JAAFAR\\Desktop\\player.png";
-    private BufferedImage playerImage;
-    private int triangleBase = 200;
-    private int triangleHeight = 500;
-    private Color turnColor = Color.white;
-    private double imageY = 0; // Position verticale de l'image (utilisation de double pour la précision)
-    private double imageSpeed = 0.1; // Vitesse de déplacement de l'image (plus la valeur est petite, plus le mouvement est lent)
-    private boolean movingDown = true; // Indique si l'image se déplace vers le bas
-
+   private BufferedImage playerImage; // Image du joueur
+    private int triangleBase = 200; // Base du triangle
+    private int triangleHeight = 500; // Hauteur du triangle
 
     public PanelPlayer() {
         loadImage();
@@ -41,89 +35,46 @@ public class PanelPlayer extends javax.swing.JPanel {
         try {
             playerImage = ImageIO.read(new File(imagePath));
         } catch (IOException ex) {
-            // Gérer l'erreur de chargement de l'image
-            System.err.println("Erreur lors du chargement de l'image : " + ex.getMessage());
+            ex.printStackTrace();
         }
-        
-        startAnimation();
-    }
-
-    private void startAnimation() {
-        Timer timer = new Timer(10, e -> {
-            // Mettre à jour la position verticale de l'image
-            if (playerImage != null && playerImage.getWidth() != 0) {
-                int imageWidth = triangleBase - 20;
-                int imageHeight = playerImage.getHeight() != 0 ? (int) ((double) playerImage.getHeight() / playerImage.getWidth() * imageWidth) : 0;
-
-                if (imageHeight > triangleHeight - 20) {
-                    imageHeight = triangleHeight - 20;
-                    imageWidth = (int) ((double) playerImage.getWidth() / playerImage.getHeight() * imageHeight);
-                }
-
-                // Déplacer l'image en fonction de la vitesse
-                if (movingDown) {
-                    imageY += imageSpeed;
-                    if (imageY >= triangleHeight - imageHeight) {
-                        // Inverser la direction lorsque l'image atteint le bas
-                        movingDown = false;
-                    }
-                } else {
-                    imageY -= imageSpeed;
-                    if (imageY <= 0) {
-                        // Inverser la direction lorsque l'image atteint le haut
-                        movingDown = true;
-                    }
-                }
-
-                repaint(); // Redessiner le composant avec la nouvelle position de l'image
-            }
-        });
-        timer.start();
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g.create();
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 
         // Dessiner le triangle rectangle
         int[] xPoints = {0, triangleBase, 0};
         int[] yPoints = {0, triangleHeight, triangleHeight};
         Polygon triangle = new Polygon(xPoints, yPoints, 3);
-        g2d.setColor(turnColor);
+        g2d.setColor(Color.WHITE); // Couleur du triangle, changez selon vos besoins
         g2d.fillPolygon(triangle);
 
-        // Dessiner l'image du joueur avec l'animation
+        // Vérifier si l'image du joueur est non nulle
         if (playerImage != null) {
-            int imageWidth = triangleBase - 20;
-            int imageHeight = (int) ((double) playerImage.getHeight() / playerImage.getWidth() * imageWidth);
+         // Calculer la largeur et la hauteur redimensionnées de l'image
+            int imageWidth = triangleBase - 20; // Largeur de l'image avec une marge de 10 pixels de chaque côté
+            int imageHeight = (int) ((double) playerImage.getHeight() / playerImage.getWidth() * imageWidth); // Conserver le ratio de l'image
 
-            if (imageHeight > triangleHeight - 20) {
-                imageHeight = triangleHeight - 20;
-                imageWidth = (int) ((double) playerImage.getWidth() / playerImage.getHeight() * imageHeight);
+            // Assurer que l'image ne dépasse pas la hauteur du triangle
+            if (imageHeight > triangleHeight) {
+                imageHeight = triangleHeight - 20; // Hauteur de l'image avec une marge de 10 pixels en haut et en bas
+                imageWidth = (int) ((double) playerImage.getWidth() / playerImage.getHeight() * imageHeight); // Conserver le ratio de l'image
             }
 
-            int imageX = (triangleBase - imageWidth) / 2;
+            // Calculer la position pour centrer l'image à la base du triangle
+            int imageX = (triangleBase - imageWidth) / 2; // Centrer horizontalement à la base
+            int imageY = triangleHeight - imageHeight; // Placer l'image en bas du triangle
 
-            // Convertir imageY en int pour dessiner l'image
-            int imageYInt = (int) imageY;
-
-            g2d.setClip(triangle);
-            g2d.drawImage(playerImage, imageX, imageYInt, imageWidth, imageHeight, this);
-            g2d.setClip(null);
+            // Dessiner l'image redimensionnée à l'intérieur du triangle
+            g2d.setClip(triangle); // Définir le clip pour que l'image soit dessinée à l'intérieur du triangle
+            g2d.drawImage(playerImage, imageX, imageY, imageWidth, imageHeight, this);
+            g2d.setClip(null); // Réinitialiser le clip
         }
+    }
 
-        g2d.dispose();
-    }
-    
-    public void setTurn(boolean bool) {
-        if (bool) {
-            this.turnColor = Color.blue;
-        } else {
-            this.turnColor = Color.white;
-        }
-        repaint(); // Redessine le composant avec les nouvelles dimensions du triangle
-    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
