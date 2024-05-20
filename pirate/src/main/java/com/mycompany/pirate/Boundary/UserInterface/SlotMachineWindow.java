@@ -25,7 +25,7 @@ class SlotMachineWindow extends JWindow{
 
         slotMachinePanel = new SlotMachinePanel(); // Utilisez le SlotMachinePanel que vous avez déjà créé
         add(slotMachinePanel, BorderLayout.CENTER);
-
+        
         // Lancer automatiquement l'animation de la slot machine
         ((SlotMachinePanel) slotMachinePanel).start();
 

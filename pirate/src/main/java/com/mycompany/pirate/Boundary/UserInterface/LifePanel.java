@@ -22,18 +22,28 @@ import java.awt.RenderingHints;
  * @author BEN JAAFAR
  */
 public class LifePanel extends javax.swing.JPanel {
-  private boolean isPlayer1 = true;
+ private boolean isPlayer1 = true;
     private int viesRestantes = 5;
     private Color playerColor = Color.GRAY;
-    private BufferedImage lifeImage; // Image pour représenter une vie
-    private int lifeImageWidth = 30; // Largeur souhaitée pour l'image de vie
-    private int lifeImageHeight = 30; // Hauteur souhaitée pour l'image de vie
+    private BufferedImage lifeImage;
+    private int lifeImageWidth = 30;
+    private int lifeImageHeight = 30;
+    private LifeAnimation[] animations;
 
     public LifePanel() {
         loadImage();
-        setBackground(TRANSPARENT_COLOR_BACKGROUND);
         setDoubleBuffered(true);
-        setPreferredSize(new Dimension(150, 50)); // Taille fixe pour le panneau
+        setOpaque(false);
+        setPreferredSize(new Dimension(150, 50));
+        startAnimations();
+    }
+
+    private void startAnimations() {
+        animations = new LifeAnimation[viesRestantes];
+        for (int i = 0; i < viesRestantes; i++) {
+            animations[i] = new LifeAnimation(i * 100);
+            animations[i].start();
+        }
     }
 
     private void loadImage() {
@@ -47,42 +57,71 @@ public class LifePanel extends javax.swing.JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
-        // Vérifier si lifeImage est nul
+
         if (lifeImage != null) {
             Graphics2D g2d = (Graphics2D) g;
             g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 
-            int bottomY = getHeight() - 20; // Position verticale basse
-            int imageSpacing = 5; // Espace entre chaque image de vie
+            int bottomY = getHeight() - 20;
+            int imageSpacing = 5;
+            int startX = getWidth() / 2 - (lifeImageWidth + imageSpacing) * (viesRestantes / 2);
 
-            // Position horizontale en fonction de la couleur du joueur
-            int startX;
-            if (playerColor == Color.GREEN) {
-                startX = 20; // Position à gauche si la couleur est verte
-            } else {
-                startX = getWidth() - 5 * (lifeImageWidth + imageSpacing); // Position à droite pour toute autre couleur
-            }
-
-            // Dessine chaque image de vie en fonction du nombre de vies restantes
             for (int i = 0; i < viesRestantes; i++) {
-                int imageX = startX + (lifeImageWidth + imageSpacing) * i; // Position horizontale de l'image
-                g2d.drawImage(lifeImage, imageX, bottomY - lifeImageHeight, lifeImageWidth, lifeImageHeight, this); // Dessiner l'image de vie redimensionnée
+                int imageX = startX + (lifeImageWidth + imageSpacing) * i;
+                int imageY = bottomY - lifeImageHeight / 2 + animations[i].getYOffset();
+                g2d.drawImage(lifeImage, imageX, imageY, lifeImageWidth, lifeImageHeight, this);
             }
         }
     }
 
-    // Plus tard on va juste lire les variables du jeu
     public void perdreVie() {
         if (viesRestantes > 0) {
             viesRestantes--;
-            repaint(); 
+            repaint();
         }
     }
 
     public void setPlayer2() {
         this.isPlayer1 = false;
         loadImage();
+    }
+
+    private class LifeAnimation extends Thread {
+        private int yOffset = 0;
+        private boolean running = true;
+
+        public LifeAnimation(int delay) {
+            setDaemon(true);
+            try {
+                Thread.sleep(delay);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public void run() {
+            double time = 0.0;
+            double amplitude = 5.0; // Hauteur du mouvement
+            double frequency = 0.02; // Vitesse du mouvement
+            while (running) {
+                try {
+                    Thread.sleep(16); // Environ 60 FPS
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                yOffset = (int) (amplitude * Math.sin(frequency * time)); // Interpolation sinusoidale
+                time += 1.0;
+                repaint();
+            }
+        }
+
+        public int getYOffset() {
+            return yOffset;
+        }
+
+        public void stopAnimation() {
+            running = false;
+        }
     }
 
     @SuppressWarnings("unchecked")
