@@ -4,33 +4,38 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  *
  * @author BEN JAAFAR
  */
-public class AnimatedGIF extends javax.swing.JPanel {
- private ImageIcon gifIcon;
-    private JLabel gifLabel;
+public class PanelSlotButton extends javax.swing.JPanel {
 
-    public AnimatedGIF() {
-        setOpaque(false);
-        // Charger le GIF depuis le fichier
-        gifIcon = new ImageIcon("C:\\Users\\BEN JAAFAR\\Desktop\\roulette.gif");
-        
-        // Créer un JLabel pour afficher le GIF
-        gifLabel = new JLabel(gifIcon);
-        
-        // Ajouter le JLabel au JPanel
-        add(gifLabel);
-        
-        // Démarrer l'animation du GIF
-        ((ImageIcon) gifLabel.getIcon()).setImageObserver(gifLabel);
+     public PanelSlotButton() {
+        setPreferredSize(new Dimension(200, 200)); // Taille du bouton de la slot machine
+        setBackground(Color.BLACK); // Couleur de fond
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                // Lorsque le bouton est cliqué, ouvrir la fenêtre de la slot machine
+                openSlotMachineWindow();
+            }
+        });
     }
 
+    private void openSlotMachineWindow() {
+        SlotMachineWindow window = new SlotMachineWindow();
+        window.setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
+        window.setVisible(true);
+    }
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 

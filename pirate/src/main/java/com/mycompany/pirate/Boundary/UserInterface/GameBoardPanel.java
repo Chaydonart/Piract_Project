@@ -1,13 +1,10 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
-import static com.mycompany.pirate.data.values.BLACK_CUSTOM;
-import static com.mycompany.pirate.data.values.GREEN_COLOR_BACKGROUND;
 import static com.mycompany.pirate.data.values.GREEN_CUSTOM;
-import static com.mycompany.pirate.data.values.RED_CUSTOM;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -19,27 +16,17 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.RenderingHints;
 import javax.swing.BorderFactory;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 /**
  *
  * @author BEN JAAFAR
  */
-public class Board extends javax.swing.JFrame {
-    public Board() {
-        setLocationRelativeTo(null);
-	setResizable(false);
-        // Configuration de la fenêtre principale
-        setTitle("Jeu de l'oie - Disposition Roulette");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 800);
-        setLocationRelativeTo(null);
+public class GameBoardPanel extends javax.swing.JPanel {
 
+    public GameBoardPanel() {
         // Panneau principal avec GridBagLayout
-        JPanel panel = new JPanel(new GridBagLayout());
+        setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
         // Configuration des contraintes pour chaque cellule
@@ -48,36 +35,39 @@ public class Board extends javax.swing.JFrame {
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
 
+        // Disposition des numéros de la roulette
+        int[][] numbers = {
+            { 3,  6,  9, 12, 15, 18, 21, 24, 27, 30, 33, 36 },
+            { 2,  5,  8, 11, 14, 17, 20, 23, 26, 29, 32, 35 },
+            { 1,  4,  7, 10, 13, 16, 19, 22, 25, 28, 31, 34 }
+        };
+
         // Créer et ajouter les cellules du plateau de jeu en disposition roulette
-        int rows = 12;
-        int cols = 3;
+        int rows = numbers.length;
+        int cols = numbers[0].length;
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 gbc.gridx = col;
                 gbc.gridy = row;
 
                 // Créer une cellule de plateau
-                int cellNumber = row * cols + col + 1;
+                int cellNumber = numbers[row][col];
                 CellPanel cell = new CellPanel(cellNumber);
                 
-                panel.add(cell, gbc);
+                add(cell, gbc);
             }
         }
 
-        // Ajouter le panneau au cadre principal
-        add(panel);
-    
-        panel.setBackground(GREEN_CUSTOM);
+        // Ajouter la cellule "0"
+        gbc.gridx = 0;
+        gbc.gridy = rows;
+        gbc.gridwidth = cols;
+        CellPanel zeroCell = new CellPanel(0);
+        add(zeroCell, gbc);
+
+        setBackground(GREEN_CUSTOM);
     }
 
-    public static void main(String[] args) {
-        // Exécution de l'application
-        SwingUtilities.invokeLater(() -> {
-            Board frame = new Board();
-            frame.setVisible(true);
-        });
-    }
-    
     private class CellPanel extends JPanel {
         private int cellNumber;
 
@@ -95,12 +85,12 @@ public class Board extends javax.swing.JFrame {
             this.setBorder(BorderFactory.createLineBorder(Color.WHITE, 4)); // Bordure noire de 2 pixels
 
             // Déterminer la couleur de la cellule
-            if ((cellNumber % 2 == 0 && cellNumber <= 36) || cellNumber == 0) {
+            if (cellNumber == 0) {
+                g2d.setColor(Color.GREEN);
+            } else if (isRed(cellNumber)) {
                 g2d.setColor(Color.RED);
-            } else if (cellNumber <= 36) {
-                g2d.setColor(Color.BLACK);
             } else {
-                g2d.setColor(Color.GREEN); // Cellule "0"
+                g2d.setColor(Color.BLACK);
             }
 
             // Dessiner le cercle
@@ -119,15 +109,23 @@ public class Board extends javax.swing.JFrame {
             int textY = y + ((diameter - fm.getHeight()) / 2) + fm.getAscent();
             g2d.drawString(text, textX, textY);
         }
+
+        private boolean isRed(int number) {
+            // Liste des numéros rouges sur une roulette
+            int[] redNumbers = {1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36};
+            for (int n : redNumbers) {
+                if (n == number) return true;
+            }
+            return false;
+        }
     }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 400, Short.MAX_VALUE)
@@ -136,13 +134,7 @@ public class Board extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    /**
-     * @param args the command line arguments
-     */
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
