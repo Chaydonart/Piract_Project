@@ -26,7 +26,7 @@ public class ControlGamblingDuel implements IControlGamblingDuel, IControlSlotMa
     }
     
     @Override
-    public void duelDeDes(Pion pion, IDialogue notificationServices) {
+    public int duelDeDes(Pion pion, IDialogue notificationServices) {
         int randomValue = this.random.nextInt(9);
         Optional.ofNullable(notificationServices).ifPresent(service -> service.notifyCaseGambling(pion.getName(),randomValue));
         
@@ -38,9 +38,12 @@ public class ControlGamblingDuel implements IControlGamblingDuel, IControlSlotMa
         //perdant perd une vie
         if (res < randomValue) {
             pion.setVie(pion.getVie() - 1);
-            notificationServices.notify(pion.getName() + " a perdu le gambling ! Vie restante : " + pion.getVie());
+            Optional.ofNullable(notificationServices).ifPresent(service -> service.notify(pion.getName() + " a perdu le gambling ! Vie restante : " + pion.getVie()));
+            
+            return -1;
         } else {
-            notificationServices.notify("DUEL REUSSI !");
+        	Optional.ofNullable(notificationServices).ifPresent(service -> service.notify("DUEL REUSSI !"));
+            return 0;
         }
     }
 

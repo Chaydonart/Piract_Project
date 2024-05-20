@@ -12,6 +12,6 @@ import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
  */
 public interface IControlGamblingDuel {
     
-    public void duelDeDes(Pion pion, IDialogue notificationServices);
+    public int duelDeDes(Pion pion, IDialogue notificationServices);
     
 }

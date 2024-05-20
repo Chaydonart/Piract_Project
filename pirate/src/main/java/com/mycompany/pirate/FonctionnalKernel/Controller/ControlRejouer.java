@@ -23,6 +23,7 @@ public class ControlRejouer implements IControlRejouer, IControlSlotMachine, ICo
     private ControlDeplacerPion controlDeplacerPion;
     private IDialogue notificationService;
     private ControlSlotMachine controlSlotMachine;
+    private int distanceRejoue;
 
     public ControlRejouer(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine, IDialogue notificationService) {
         this.controlDeplacerPion = controlDeplacerPion;
@@ -34,6 +35,7 @@ public class ControlRejouer implements IControlRejouer, IControlSlotMachine, ICo
     public void rejouer(Pion pion) {
         int[] values = spin();
         int resultat = Arrays.stream(values).sum();
+        this.distanceRejoue = resultat;
         Optional.ofNullable(notificationService).ifPresent(service -> service.notifyCaseRejouer(values,resultat));
         deplacerPion(pion,resultat); 
     }
@@ -47,5 +49,8 @@ public class ControlRejouer implements IControlRejouer, IControlSlotMachine, ICo
     public void deplacerPion(Pion pion, int deplacement) {
         this.controlDeplacerPion.deplacerPion(pion, deplacement);
     }
+    public int getDistanceRejoue() {
+		return distanceRejoue;
+	}
     
 }
