@@ -20,41 +20,10 @@ import java.awt.event.MouseEvent;
  */
 public class PionPanel extends javax.swing.JPanel {
 
-    private int initialX;
-    private int initialY;
-    private int currentX;
-    private int currentY;
-    private Color pionColor;
+    private Color pionColor = Color.RED;
+    private int cellPosition = 0;
 
     public PionPanel() {
-        setDoubleBuffered(true);
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                initialX = e.getX();
-                initialY = e.getY();
-            }
-        });
-
-        addMouseMotionListener(new MouseAdapter() {
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                int deltaX = e.getX() - initialX;
-                int deltaY = e.getY() - initialY;
-                currentX += deltaX;
-                currentY += deltaY;
-                setLocation(currentX, currentY);
-            }
-        });
-        
-         addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                // Mettez à jour les coordonnées actuelles en fonction de la nouvelle taille
-                currentX = getX();
-                currentY = getY();
-            }
-        });
         setOpaque(false); // Rend le fond transparent
     }
     
@@ -80,6 +49,10 @@ public class PionPanel extends javax.swing.JPanel {
 
     public void setColor(Color color) {
         this.pionColor = color;
+    }
+    
+    public void setCellPosition(int cellPos){
+        this.cellPosition = cellPos;
     }
 
     @SuppressWarnings("unchecked")

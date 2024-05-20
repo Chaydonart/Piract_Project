@@ -6,6 +6,7 @@ package com.mycompany.pirate.Boundary.UserInterface;
 
 import static com.mycompany.pirate.data.values.GREEN_CUSTOM;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -65,7 +66,7 @@ public class GameBoardPanel extends javax.swing.JPanel {
         CellPanel zeroCell = new CellPanel(0);
         add(zeroCell, gbc);
 
-        setBackground(GREEN_CUSTOM);
+        setOpaque(false);
     }
 
     private class CellPanel extends JPanel {
@@ -118,6 +119,34 @@ public class GameBoardPanel extends javax.swing.JPanel {
             }
             return false;
         }
+        
+        public int getCellNumber() {
+            return cellNumber;
+        }
+    }
+    
+    public void deplacerPion(PionPanel pion, int destinationCellNumber) {
+        // Trouver les coordonnées de la cellule de destination
+        for (Component component : getComponents()) {
+                if (component instanceof CellPanel) {
+                    CellPanel cellPanel = (CellPanel) component;
+                    if (cellPanel.getCellNumber() == destinationCellNumber) {
+                        
+                        int destinationX = cellPanel.getX() + (cellPanel.getWidth() - pion.getWidth()) / 2;
+                        int destinationY = cellPanel.getY() + (cellPanel.getHeight() - pion.getHeight()) / 2;
+
+                        // Ajuster les coordonnées pour centrer exactement le pion sur la cellule
+                        destinationX += (cellPanel.getWidth() - pion.getWidth()) / 4;
+                        destinationY += (cellPanel.getHeight() - pion.getHeight()) ;
+
+                        // Déplacer le pion à la position de la cellule de destination
+                        pion.setLocation(destinationX, destinationY);
+                        pion.setCellPosition(destinationCellNumber);
+                        repaint(); // Redessiner pour afficher le pion à sa nouvelle position
+                        break;
+                    }
+                }
+            }
     }
     
     @SuppressWarnings("unchecked")

@@ -5,6 +5,7 @@
 package com.mycompany.pirate.Boundary.UserInterface;
 
 import static com.mycompany.pirate.data.values.GREEN_CUSTOM;
+import javax.swing.JLayeredPane;
 
 /**
  *
@@ -12,6 +13,7 @@ import static com.mycompany.pirate.data.values.GREEN_CUSTOM;
  */
 public class uiTesting extends javax.swing.JFrame {
     private boolean testingTurn = true;
+    private int testDeplacer = 0;
     /**
      * Creates new form uiTesting
      */
@@ -22,8 +24,12 @@ public class uiTesting extends javax.swing.JFrame {
         jLayeredPane2.setBackground(GREEN_CUSTOM);
         setLocationRelativeTo(null);
 	setResizable(false);
+        lifePanel2.setPlayer2();
+        jLayeredPane3.setLayer(gameBoardPanel1, 5);
+        jLayeredPane3.setLayer(pionPanel1, 10);
+        
+        gameBoardPanel1.deplacerPion(pionPanel1,1);
 
-        lifePanel2.setPlayer2();    
         pack();
         
     }
@@ -39,6 +45,7 @@ public class uiTesting extends javax.swing.JFrame {
 
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jLayeredPane3 = new javax.swing.JLayeredPane();
+        pionPanel1 = new com.mycompany.pirate.Boundary.UserInterface.PionPanel();
         gameBoardPanel1 = new com.mycompany.pirate.Boundary.UserInterface.GameBoardPanel();
         panelSlotButton1 = new com.mycompany.pirate.Boundary.UserInterface.PanelSlotButton();
         jButton1 = new javax.swing.JButton();
@@ -66,6 +73,17 @@ public class uiTesting extends javax.swing.JFrame {
 
         jLayeredPane3.setBackground(new java.awt.Color(51, 204, 0));
 
+        javax.swing.GroupLayout pionPanel1Layout = new javax.swing.GroupLayout(pionPanel1);
+        pionPanel1.setLayout(pionPanel1Layout);
+        pionPanel1Layout.setHorizontalGroup(
+            pionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 21, Short.MAX_VALUE)
+        );
+        pionPanel1Layout.setVerticalGroup(
+            pionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 23, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout panelSlotButton1Layout = new javax.swing.GroupLayout(panelSlotButton1);
         panelSlotButton1.setLayout(panelSlotButton1Layout);
         panelSlotButton1Layout.setHorizontalGroup(
@@ -84,6 +102,7 @@ public class uiTesting extends javax.swing.JFrame {
             }
         });
 
+        jLayeredPane3.setLayer(pionPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(gameBoardPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(panelSlotButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -98,6 +117,8 @@ public class uiTesting extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(pionPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(146, 146, 146)
                 .addComponent(panelSlotButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(239, 239, 239))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane3Layout.createSequentialGroup()
@@ -113,7 +134,9 @@ public class uiTesting extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(gameBoardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(panelSlotButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelSlotButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pionPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jLayeredPane2.setBackground(new java.awt.Color(204, 255, 204));
@@ -205,6 +228,9 @@ public class uiTesting extends javax.swing.JFrame {
         panelPlayer2.setTurn(testingTurn);
         panelPlayer21.setTurn(!testingTurn);
         testingTurn = !testingTurn;
+        
+        gameBoardPanel1.deplacerPion(pionPanel1, testDeplacer);
+        testDeplacer++;
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -254,5 +280,6 @@ public class uiTesting extends javax.swing.JFrame {
     private com.mycompany.pirate.Boundary.UserInterface.PanelPlayer panelPlayer2;
     private com.mycompany.pirate.Boundary.UserInterface.PanelPlayer2 panelPlayer21;
     private com.mycompany.pirate.Boundary.UserInterface.PanelSlotButton panelSlotButton1;
+    private com.mycompany.pirate.Boundary.UserInterface.PionPanel pionPanel1;
     // End of variables declaration//GEN-END:variables
 }
