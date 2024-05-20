@@ -34,7 +34,7 @@ public class Main {
         
         // Controlleur
         ControlDeplacerPion controlDeplacerPion = new ControlDeplacerPion(plateau,gameUI,pionRepository);
-        ControlSlotMachine controlSlotMachine = new ControlSlotMachine();
+        ControlSlotMachine controlSlotMachine = new ControlSlotMachine(gameUI);
         
         ControlJeu gameLoopController = new ControlJeu(jeu, pionRepository, gameUI,controlDeplacerPion, controlSlotMachine);
         

@@ -23,7 +23,7 @@ public interface IDialogue {
     
     void notifyCaseReculer(int[] values, int resultat);
    
-    void notifyCaseGambling(String name,int randomValue,int res);
+    void notifyCaseGambling(String name,int randomValue);
     
     void notifyDeplacerPion(int deplacement, String name);
     

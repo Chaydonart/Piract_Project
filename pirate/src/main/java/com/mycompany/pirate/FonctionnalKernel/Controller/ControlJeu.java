@@ -32,10 +32,10 @@ public class ControlJeu implements IControlDeplacerPion, IControlSlotMachine{
 
                 // Simulation d'un tour de jeu pour le pion
                 int[] spinResult = spin();
-                notificationService.notifySpin(spinResult);
                 
                 int deplacement = Arrays.stream(spinResult).sum();
                 deplacerPion(pion,deplacement);
+                
                 notificationService.notifyEtatJeu();
            
                 if(pion.getVie() <= 0){
