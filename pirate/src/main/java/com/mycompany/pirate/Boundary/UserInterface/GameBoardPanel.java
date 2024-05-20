@@ -86,7 +86,7 @@ public class GameBoardPanel extends javax.swing.JPanel {
 
             // Déterminer la couleur de la cellule
             if (cellNumber == 0) {
-                g2d.setColor(Color.GREEN);
+                g2d.setColor(GREEN_CUSTOM);
             } else if (isRed(cellNumber)) {
                 g2d.setColor(Color.RED);
             } else {
@@ -95,17 +95,17 @@ public class GameBoardPanel extends javax.swing.JPanel {
 
             // Dessiner le cercle
             int diameter = Math.min(getWidth(), getHeight()) - 10; // Ajuster pour les marges
-            int diameter2 = (Math.min(getWidth(), getHeight()) - 10) + 20; // Ajuster pour les marges
-            int x = (getWidth() - diameter2) / 2;
+           
+            int x = (getWidth() - diameter) / 2;
             int y = (getHeight() - diameter) / 2;
-            g2d.fillOval(x, y, diameter2, diameter );
+            g2d.fillOval(x, y, diameter, diameter );
 
             // Dessiner le numéro de la cellule
             g2d.setColor(Color.WHITE);
             g2d.setFont(new Font("Arial", Font.BOLD, 25));
             FontMetrics fm = g2d.getFontMetrics();
             String text = Integer.toString(cellNumber);
-            int textX = x + (diameter2 - fm.stringWidth(text)) / 2;
+            int textX = x + (diameter - fm.stringWidth(text)) / 2;
             int textY = y + ((diameter - fm.getHeight()) / 2) + fm.getAscent();
             g2d.drawString(text, textX, textY);
         }

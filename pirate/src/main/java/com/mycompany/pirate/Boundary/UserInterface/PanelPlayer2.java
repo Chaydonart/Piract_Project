@@ -4,6 +4,8 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
+import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_2;
+import static com.mycompany.pirate.data.values.RED_CUSTOM;
 import static com.mycompany.pirate.data.values.TRANSPARENT_COLOR_BACKGROUND;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -22,7 +24,7 @@ import javax.swing.Timer;
  * @author BEN JAAFAR
  */
 public class PanelPlayer2 extends javax.swing.JPanel {
-    private String imagePath = "C:\\Users\\BEN JAAFAR\\Desktop\\player2.png";
+    private String imagePath = IMAGE_PLAYER_2;
     private BufferedImage playerImage; // Image du joueur
     private int triangleBase = 200; // Base du triangle
     private int triangleHeight = 500; // Hauteur du triangle
@@ -66,7 +68,7 @@ public class PanelPlayer2 extends javax.swing.JPanel {
                 // Déplacer l'image en fonction de la vitesse
                 if (movingDown) {
                     imageY += imageSpeed;
-                    if (imageY >= triangleHeight - imageHeight) {
+                    if (imageY >= triangleHeight - imageHeight - 150) {
                         // Inverser la direction lorsque l'image atteint le bas
                         movingDown = false;
                     }
@@ -110,7 +112,7 @@ public class PanelPlayer2 extends javax.swing.JPanel {
             }
 
             // Calculer la position pour centrer l'image à la base du triangle
-            int imageX = (triangleBase - imageWidth) / 2; // Centrer horizontalement à la base
+            int imageX = (triangleBase - imageWidth) / 2 + 10; // Centrer horizontalement à la base
             int imageYInt = (int) imageY; // Convertir imageY en int pour dessiner l'image
 
             // Dessiner l'image redimensionnée à l'intérieur du triangle
@@ -123,7 +125,7 @@ public class PanelPlayer2 extends javax.swing.JPanel {
     
     public void setTurn(boolean bool) {
         if (bool) {
-            this.turnColor = Color.blue;
+            this.turnColor = RED_CUSTOM;
         } else {
             this.turnColor = Color.white;
         }

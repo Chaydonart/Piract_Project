@@ -4,6 +4,8 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
+import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_1;
+import static com.mycompany.pirate.data.values.RED_CUSTOM;
 import static com.mycompany.pirate.data.values.TRANSPARENT_COLOR_BACKGROUND;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -22,7 +24,7 @@ import javax.swing.Timer;
  * @author BEN JAAFAR
  */
 public class PanelPlayer extends javax.swing.JPanel {
-    private String imagePath = "C:\\Users\\BEN JAAFAR\\Desktop\\player.png";
+    private String imagePath = IMAGE_PLAYER_1;
     private BufferedImage playerImage;
     private int triangleBase = 200;
     private int triangleHeight = 500;
@@ -35,6 +37,7 @@ public class PanelPlayer extends javax.swing.JPanel {
     public PanelPlayer() {
         loadImage();
         setPreferredSize(new Dimension(triangleBase, triangleHeight));
+        imageY = triangleHeight - (triangleBase - 20) * ((double) playerImage.getHeight() / playerImage.getWidth()) - 10;
     }
 
     private void loadImage() {
@@ -49,37 +52,37 @@ public class PanelPlayer extends javax.swing.JPanel {
     }
 
     private void startAnimation() {
-        Timer timer = new Timer(10, e -> {
-            // Mettre à jour la position verticale de l'image
-            if (playerImage != null && playerImage.getWidth() != 0) {
-                int imageWidth = triangleBase - 20;
-                int imageHeight = playerImage.getHeight() != 0 ? (int) ((double) playerImage.getHeight() / playerImage.getWidth() * imageWidth) : 0;
+     Timer timer = new Timer(10, e -> {
+         // Mettre à jour la position verticale de l'image
+         if (playerImage != null && playerImage.getWidth() != 0) {
+             int imageWidth = triangleBase - 20;
+             int imageHeight = playerImage.getHeight() != 0 ? (int) ((double) playerImage.getHeight() / playerImage.getWidth() * imageWidth) : 0;
 
-                if (imageHeight > triangleHeight - 20) {
-                    imageHeight = triangleHeight - 20;
-                    imageWidth = (int) ((double) playerImage.getWidth() / playerImage.getHeight() * imageHeight);
-                }
+             if (imageHeight > triangleHeight - 20) {
+                 imageHeight = triangleHeight - 20;
+                 imageWidth = (int) ((double) playerImage.getWidth() / playerImage.getHeight() * imageHeight);
+             }
 
-                // Déplacer l'image en fonction de la vitesse
-                if (movingDown) {
-                    imageY += imageSpeed;
-                    if (imageY >= triangleHeight - imageHeight) {
-                        // Inverser la direction lorsque l'image atteint le bas
-                        movingDown = false;
-                    }
-                } else {
-                    imageY -= imageSpeed;
-                    if (imageY <= 0) {
-                        // Inverser la direction lorsque l'image atteint le haut
-                        movingDown = true;
-                    }
-                }
+             // Déplacer l'image en fonction de la vitesse
+             if (movingDown) {
+                 imageY += imageSpeed;
+                 if (imageY >= triangleHeight - imageHeight) {
+                     // Inverser la direction lorsque l'image atteint le bas
+                     movingDown = false;
+                 }
+             } else {
+                 imageY -= imageSpeed;
+                 if (imageY <= 150) { // Changement ici
+                     // Inverser la direction lorsque l'image atteint le haut
+                     movingDown = true;
+                 }
+             }
 
-                repaint(); // Redessiner le composant avec la nouvelle position de l'image
-            }
-        });
-        timer.start();
-    }
+             repaint(); // Redessiner le composant avec la nouvelle position de l'image
+         }
+     });
+     timer.start();
+ }
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -103,7 +106,7 @@ public class PanelPlayer extends javax.swing.JPanel {
                 imageWidth = (int) ((double) playerImage.getWidth() / playerImage.getHeight() * imageHeight);
             }
 
-            int imageX = (triangleBase - imageWidth) / 2;
+            int imageX = (triangleBase - imageWidth) / 2 - 10;
 
             // Convertir imageY en int pour dessiner l'image
             int imageYInt = (int) imageY;
@@ -118,7 +121,7 @@ public class PanelPlayer extends javax.swing.JPanel {
     
     public void setTurn(boolean bool) {
         if (bool) {
-            this.turnColor = Color.blue;
+            this.turnColor = RED_CUSTOM;
         } else {
             this.turnColor = Color.white;
         }

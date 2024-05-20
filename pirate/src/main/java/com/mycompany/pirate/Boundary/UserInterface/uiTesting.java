@@ -123,7 +123,7 @@ public class uiTesting extends javax.swing.JFrame {
         lifePanel1.setLayout(lifePanel1Layout);
         lifePanel1Layout.setHorizontalGroup(
             lifePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
+            .addGap(0, 194, Short.MAX_VALUE)
         );
         lifePanel1Layout.setVerticalGroup(
             lifePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,14 +134,15 @@ public class uiTesting extends javax.swing.JFrame {
         panelPlayer2.setLayout(panelPlayer2Layout);
         panelPlayer2Layout.setHorizontalGroup(
             panelPlayer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lifePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+            .addGroup(panelPlayer2Layout.createSequentialGroup()
+                .addComponent(lifePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelPlayer2Layout.setVerticalGroup(
             panelPlayer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(panelPlayer2Layout.createSequentialGroup()
-                .addContainerGap(434, Short.MAX_VALUE)
-                .addComponent(lifePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addGap(0, 450, Short.MAX_VALUE)
+                .addComponent(lifePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jLayeredPane2.add(panelPlayer2, java.awt.BorderLayout.PAGE_END);
