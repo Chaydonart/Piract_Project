@@ -4,7 +4,11 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
+import static com.mycompany.pirate.data.FileRef.FX_CLICK;
+import static com.mycompany.pirate.data.FileRef.FX_OFF_SLOTMACHINE;
+import static com.mycompany.pirate.data.FileRef.FX_ON_SLOTMACHINE;
 import static com.mycompany.pirate.data.FileRef.IMAGE_SLOT_MACHINE;
+import com.mycompany.pirate.data.SoundPlayer;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -18,30 +22,42 @@ import javax.swing.ImageIcon;
 /**
  *
  * @author BEN JAAFAR
+ * Panel faisant office de bouton pour lancer la machine a sous
  */
 public class PanelSlotButton extends javax.swing.JPanel {
     private Image slotMachineImage;
+    private SoundPlayer fxOnSlotmachine = new SoundPlayer(FX_ON_SLOTMACHINE);
+    private SoundPlayer fxOffSlotmachine = new SoundPlayer(FX_OFF_SLOTMACHINE);
+    private SoundPlayer fxClick = new SoundPlayer(FX_CLICK);
     private boolean isMouseOver = false;
     
      public PanelSlotButton() {
         loadSlotMachineImage();
-        setPreferredSize(new Dimension(200, 200)); // Taille du bouton de la slot machine
+        setPreferredSize(new Dimension(200, 200)); 
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                fxClick.play();
                 openSlotMachineWindow();
             }
             
-             @Override
+            /*
+            * Gere l'animation interactive 
+            */
+            @Override
             public void mouseEntered(MouseEvent e) {
                 isMouseOver = true;
+                fxOffSlotmachine.stop();
+                fxOnSlotmachine.play();
                 repaint();
             }
             
             @Override
             public void mouseExited(MouseEvent e) {
                 isMouseOver = false;
+                fxOnSlotmachine.stop();
+                fxOffSlotmachine.play();
                 repaint();
             }
         });
@@ -66,8 +82,10 @@ public class PanelSlotButton extends javax.swing.JPanel {
         int width = getWidth();
         int height = getHeight();
         
+        /*
+        * Si la souris est sur l'image on l'agrandis
+        */
         if (isMouseOver) {
-            // Agrandir l'image de 10%
             width = (int)(width * 1.1);
             height = (int)(height * 1.1);
         }
@@ -75,9 +93,9 @@ public class PanelSlotButton extends javax.swing.JPanel {
         int x = (getWidth() - width) / 2;
         int y = (getHeight() - height) / 2;
         
-        // Dessine l'image de la machine à sous
         g.drawImage(slotMachineImage, x, y, width, height, this);
     }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

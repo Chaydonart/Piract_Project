@@ -4,6 +4,9 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
+import static com.mycompany.pirate.data.FileRef.FX_CHANGE_TURN;
+import static com.mycompany.pirate.data.FileRef.OST_MAINTHEME;
+import com.mycompany.pirate.data.SoundPlayer;
 import static com.mycompany.pirate.data.values.GREEN_CUSTOM;
 import javax.swing.JLayeredPane;
 
@@ -14,6 +17,12 @@ import javax.swing.JLayeredPane;
 public class uiTesting extends javax.swing.JFrame {
     private boolean testingTurn = true;
     private int testDeplacer = 0;
+    
+    /*
+    * Mettre tout les sons et les changer dans un SoundGestionnaire
+    */
+    private SoundPlayer mainTheme = new SoundPlayer(OST_MAINTHEME);
+    private SoundPlayer changeTurn = new SoundPlayer(FX_CHANGE_TURN);
     /**
      * Creates new form uiTesting
      */
@@ -31,6 +40,9 @@ public class uiTesting extends javax.swing.JFrame {
         gameBoardPanel1.deplacerPion(pionPanel1,1);
 
         pack();
+        
+        mainTheme.loop();
+        mainTheme.play();
         
     }
 
@@ -228,9 +240,12 @@ public class uiTesting extends javax.swing.JFrame {
         panelPlayer2.setTurn(testingTurn);
         panelPlayer21.setTurn(!testingTurn);
         testingTurn = !testingTurn;
+        changeTurn.play();
         
         gameBoardPanel1.deplacerPion(pionPanel1, testDeplacer);
         testDeplacer++;
+        
+        lifePanel1.perdreVie();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

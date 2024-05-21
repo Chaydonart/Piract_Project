@@ -20,7 +20,7 @@ import java.awt.Graphics;
  */
 public class ImagePanelSlotmachine extends javax.swing.JPanel {
 
-     private Image backgroundImage;
+    private Image backgroundImage;
 
     public ImagePanelSlotmachine() {
         try {

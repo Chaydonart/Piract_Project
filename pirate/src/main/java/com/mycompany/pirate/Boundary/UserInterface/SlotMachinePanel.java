@@ -46,17 +46,19 @@ public class SlotMachinePanel extends javax.swing.JPanel {
 
         setOpaque(false); // Rend le JPanel transparent
     }
-
+    
     public void start() {
         animationStartTime = System.currentTimeMillis();
         timer = new Timer(100, e -> updateSlots());
         timer.start();
     }
-
+    
+    /*
+    * Va gerer "l'animation", toutes les 100ms on va changer la valeurs des labels
+    */
     private void updateSlots() {
         long elapsedTime = System.currentTimeMillis() - animationStartTime;
 
-        // Générer de nouvelles valeurs de slot pour l'animation
         if (elapsedTime < animationDuration) {
             for (int i = 0; i < 3; i++) {
                 currentValues[i] = random.nextInt(maxValue + 1);
@@ -66,28 +68,30 @@ public class SlotMachinePanel extends javax.swing.JPanel {
             // Arrêter l'animation et afficher les valeurs finales
             timer.stop();
             for (int i = 0; i < 3; i++) {
-                finalValues[i] = random.nextInt(maxValue + 1); // Remplacez par les valeurs du contrôleur
+                finalValues[i] = random.nextInt(maxValue + 1);
                 slotLabels[i].setText(String.valueOf(finalValues[i]));
             }
         }
     }
     
-     @Override
+    /*
+    * Permet de faire le cadrage pour simuler la vitre d'une machine a sous
+    */
+    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g; // Conversion en Graphics2D
+        Graphics2D g2d = (Graphics2D) g;
         
         int slotWidth = getWidth() / 3;
         int slotHeight = getHeight();
         
-        // Augmenter la grosseur du trait du rectangle
-        g2d.setStroke(new BasicStroke(10)); // 3 pixels
+        g2d.setStroke(new BasicStroke(10));
         
         for (int i = 0; i < 3; i++) {
             int x = i * slotWidth;
             int y = 0;
-            g.setColor(Color.BLACK); // Couleur des contours
-            g.drawRect(x, y, slotWidth, slotHeight - 2); // Dessin du rectangle autour de chaque case
+            g.setColor(Color.BLACK); 
+            g.drawRect(x, y, slotWidth, slotHeight - 2);
         }
     }
 

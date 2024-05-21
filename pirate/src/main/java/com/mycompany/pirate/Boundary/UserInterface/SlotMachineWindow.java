@@ -4,6 +4,8 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
+import static com.mycompany.pirate.data.FileRef.FX_MACHINE_ROULETTE;
+import com.mycompany.pirate.data.SoundPlayer;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,25 +20,30 @@ import javax.swing.Timer;
  * @author BEN JAAFAR
  */
 class SlotMachineWindow extends JWindow{
-     private final JPanel slotMachinePanel;
+    private final JPanel slotMachinePanel;
+    private SoundPlayer machineRoulette = new SoundPlayer(FX_MACHINE_ROULETTE);
+     
 
     public SlotMachineWindow() {
-        setSize(600, 300); // Taille de la fenêtre de la slot machine
+        machineRoulette.play();
+        machineRoulette.loop();
+        setSize(600, 300); 
 
-        slotMachinePanel = new SlotMachinePanel(); // Utilisez le SlotMachinePanel que vous avez déjà créé
+        slotMachinePanel = new SlotMachinePanel(); 
         add(slotMachinePanel, BorderLayout.CENTER);
         
-        // Lancer automatiquement l'animation de la slot machine
-        ((SlotMachinePanel) slotMachinePanel).start();
+        ((SlotMachinePanel) slotMachinePanel).start(); // lancer l'animation de la slotmachine
 
-        // Ajouter un écouteur pour fermer la fenêtre après un délai
+        //On ferme la fenetre apres 3sec
         Timer timer = new Timer(3000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose(); // Fermer la fenêtre
+                dispose(); 
+                machineRoulette.stop();
+                machineRoulette.close();
             }
         });
-        timer.setRepeats(false); // Ne répétez pas le délai
-        timer.start(); // Démarrer le décompte
+        timer.setRepeats(false);
+        timer.start(); 
     }
 }
