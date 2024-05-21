@@ -5,6 +5,7 @@
 package com.mycompany.pirate.Boundary.UserInterface;
 
 import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_2;
+import static com.mycompany.pirate.data.values.BLUE_CUSTOM;
 import static com.mycompany.pirate.data.values.RED_CUSTOM;
 import static com.mycompany.pirate.data.values.TRANSPARENT_COLOR_BACKGROUND;
 import java.awt.Color;

@@ -8,7 +8,7 @@ package com.mycompany.pirate.Interfaces;
  *
  * @author BEN JAAFAR
  */
-public interface IBoundary extends IPirates, IDialogue {
+public interface IBoundary extends IDialogue {
     void start();
     void spin(int[] values);
     void afficherEtatJeu();

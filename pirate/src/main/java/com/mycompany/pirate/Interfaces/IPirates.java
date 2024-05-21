@@ -9,5 +9,18 @@ package com.mycompany.pirate.Interfaces;
  * @author BEN JAAFAR
  */
 public interface IPirates {
+    /* Il nous faut
+    
+    startGUI()
+    
+    deplcerPion()
+    
+    spinMachine()
+    
+    changerTurn()
+    
+    */
+    
+    public void startGUI();
     
 }

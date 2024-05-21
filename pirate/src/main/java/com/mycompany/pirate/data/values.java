@@ -15,6 +15,7 @@ public class values {
      public static final Color RED_CUSTOM = new Color(170,39,23);
      public static final Color GREEN_CUSTOM = new Color(60,63,65);
      public static final Color BLACK_CUSTOM = new Color(74,32,41);
+     public static final Color BLUE_CUSTOM = new Color(108,154,175);
      public static final Color INFO_PANEL_COLOR_BACKGROUND = new Color(24, 101, 45);
      public static final Color TRANSPARENT_COLOR_BACKGROUND = new Color(255, 0, 0, 0);
 }

@@ -4,13 +4,19 @@
  */
 package com.mycompany.pirate.Boundary.Console;
 
+import com.mycompany.pirate.Boundary.UserInterface.uiTesting;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlJeu;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
 import com.mycompany.pirate.Interfaces.IBoundary;
 import java.util.Arrays;
 import com.mycompany.pirate.Interfaces.IDialogue;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -19,9 +25,10 @@ import java.util.Scanner;
  * Va ensuite en plus implementer IPirates
  */
 public class Boundary implements IBoundary {
-      private ControlJeu gameLoopController;
+    private ControlJeu gameLoopController;
     private final PionRepository pionRepository;
     private final Scanner scanner;
+    private uiTesting GUI;
 
     public Boundary(ControlJeu gameLoopController, PionRepository pionRepository) {
         this.gameLoopController = gameLoopController;
@@ -33,7 +40,9 @@ public class Boundary implements IBoundary {
     public void start() {
         afficherMessage("Le jeu commence !");
         afficherMessage("Appuyez sur Entrée pour démarrer le jeu...");
-        scanner.nextLine(); // Attendre que l'utilisateur appuie sur Entrée
+        scanner.nextLine(); 
+        GUI = new uiTesting();
+        GUI.startGUI();
         gameLoopController.startGame();
     }
 
@@ -61,7 +70,8 @@ public class Boundary implements IBoundary {
 
     @Override    
     public void deplacerPion(int deplacement, String name) {
-        afficherMessage("Le " + name + " avance de " + deplacement + " cases");
+       afficherMessage("Le " + name + " avance de " + deplacement + " cases");
+       GUI.deplacerPion(deplacement);
     }
 
     // Partie pacerelle dialogue
@@ -123,4 +133,5 @@ public class Boundary implements IBoundary {
     public void setGameLoopController(ControlJeu gameLoopController) {
         this.gameLoopController = gameLoopController; 
     }
+
 }

@@ -28,10 +28,14 @@ public class PanelPlayer extends javax.swing.JPanel {
     private BufferedImage playerImage;
     private int triangleBase = 200;
     private int triangleHeight = 500;
+    
+    // Etat de tour
     private Color turnColor = Color.white;
-    private double imageY = 0; // Position verticale de l'image (utilisation de double pour la précision)
-    private double imageSpeed = 0.1; // Vitesse de déplacement de l'image (plus la valeur est petite, plus le mouvement est lent)
-    private boolean movingDown = true; // Indique si l'image se déplace vers le bas
+    
+    // Animation
+    private double imageY = 0; 
+    private double imageSpeed = 0.1; 
+    private boolean movingDown = true; 
 
 
     public PanelPlayer() {
@@ -44,7 +48,6 @@ public class PanelPlayer extends javax.swing.JPanel {
         try {
             playerImage = ImageIO.read(new File(imagePath));
         } catch (IOException ex) {
-            // Gérer l'erreur de chargement de l'image
             System.err.println("Erreur lors du chargement de l'image : " + ex.getMessage());
         }
         
@@ -125,7 +128,7 @@ public class PanelPlayer extends javax.swing.JPanel {
         } else {
             this.turnColor = Color.white;
         }
-        repaint(); // Redessine le composant avec les nouvelles dimensions du triangle
+        repaint(); 
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
