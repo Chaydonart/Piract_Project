@@ -20,8 +20,9 @@ import javax.swing.Timer;
  * @author BEN JAAFAR
  */
 class SlotMachineWindow extends JWindow{
-    private final JPanel slotMachinePanel;
+    private SlotMachinePanel slotMachinePanel;
     private SoundPlayer machineRoulette = new SoundPlayer(FX_MACHINE_ROULETTE);
+    private int[] valuesOfSlotPanel;
      
 
     public SlotMachineWindow() {
@@ -30,6 +31,7 @@ class SlotMachineWindow extends JWindow{
         setSize(600, 300); 
 
         slotMachinePanel = new SlotMachinePanel(); 
+        valuesOfSlotPanel = slotMachinePanel.getFinalValues();
         add(slotMachinePanel, BorderLayout.CENTER);
         
         ((SlotMachinePanel) slotMachinePanel).start(); // lancer l'animation de la slotmachine
@@ -46,4 +48,7 @@ class SlotMachineWindow extends JWindow{
         timer.setRepeats(false);
         timer.start(); 
     }
+    public int[] getValuesOfSlotPanel() {
+		return valuesOfSlotPanel;
+	}
 }

@@ -20,6 +20,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
+import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
+
 /**
  *
  * @author BEN JAAFAR
@@ -27,15 +29,17 @@ import javax.swing.Timer;
 public class SlotMachinePanel extends javax.swing.JPanel {
    private final JLabel[] slotLabels = new JLabel[3];
     private final Random random = new Random();
-    private final int[] finalValues = new int[3];
+    private int[] finalValues = new int[3];
     private final int[] currentValues = new int[3];
     private static final int maxValue = 4; // Valeur maximale pour les slots
     private static final int animationDuration = 2000; // Durée de l'animation en millisecondes
     private long animationStartTime;
     private Timer timer;
+    private ControlSlotMachine csm = new ControlSlotMachine(null);
 
     public SlotMachinePanel() {
         setLayout(new GridLayout(1, 3));
+        finalValues = csm.spin();
 
         for (int i = 0; i < 3; i++) {
             slotLabels[i] = new JLabel();
@@ -58,7 +62,7 @@ public class SlotMachinePanel extends javax.swing.JPanel {
     */
     private void updateSlots() {
         long elapsedTime = System.currentTimeMillis() - animationStartTime;
-
+        int values[] = csm.spin();
         if (elapsedTime < animationDuration) {
             for (int i = 0; i < 3; i++) {
                 currentValues[i] = random.nextInt(maxValue + 1);
@@ -68,8 +72,9 @@ public class SlotMachinePanel extends javax.swing.JPanel {
             // Arrêter l'animation et afficher les valeurs finales
             timer.stop();
             for (int i = 0; i < 3; i++) {
-                finalValues[i] = random.nextInt(maxValue + 1);
-                slotLabels[i].setText(String.valueOf(finalValues[i]));
+            	slotLabels[i].setText(String.valueOf(finalValues[i]));
+//                finalValues[i] = random.nextInt(maxValue + 1);
+//                slotLabels[i].setText(String.valueOf(finalValues[i]));
             }
         }
     }
@@ -110,6 +115,11 @@ public class SlotMachinePanel extends javax.swing.JPanel {
             .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+	public int[] getFinalValues() {
+		// TODO Auto-generated method stub
+		return finalValues;
+	}
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

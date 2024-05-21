@@ -54,6 +54,9 @@ public class PionPanel extends javax.swing.JPanel {
     public void setCellPosition(int cellPos){
         this.cellPosition = cellPos;
     }
+    public int getCellPosition() {
+		return cellPosition;
+	}
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

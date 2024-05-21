@@ -4,11 +4,15 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
+import com.mycompany.pirate.FonctionnalKernel.Controller.ControlJeu;
 import com.mycompany.pirate.Interfaces.IPirates;
 import static com.mycompany.pirate.data.FileRef.FX_CHANGE_TURN;
 import static com.mycompany.pirate.data.FileRef.OST_MAINTHEME;
 import com.mycompany.pirate.data.SoundPlayer;
 import static com.mycompany.pirate.data.values.GREEN_CUSTOM;
+
+import java.util.Arrays;
+
 import javax.swing.JButton;
 import javax.swing.JLayeredPane;
 
@@ -230,16 +234,18 @@ public class uiTesting extends javax.swing.JFrame implements IPirates {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        panelPlayer2.setTurn(testingTurn);
-        panelPlayer21.setTurn(!testingTurn);
-        testingTurn = !testingTurn;
-        changeTurn.play();
-        
-        gameBoardPanel1.deplacerPion(pionPanel1, testDeplacer);
-        testDeplacer++;
-
+    	int[] slotValues = this.panelSlotButton1.getSlotValues();
+    	if( slotValues != null) {
+    		int deplacement = Arrays.stream(slotValues).sum();
+	        panelPlayer2.setTurn(testingTurn);
+	        panelPlayer21.setTurn(!testingTurn);
+	        testingTurn = !testingTurn;
+	        changeTurn.play();
+	        
+	        gameBoardPanel1.deplacerPion(pionPanel1, pionPanel1.getCellPosition()+deplacement);
+	        this.panelSlotButton1.setSlotValues(null);
+    	}
     }//GEN-LAST:event_jButton1ActionPerformed
-
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

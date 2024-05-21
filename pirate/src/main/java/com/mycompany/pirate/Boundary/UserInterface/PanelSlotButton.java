@@ -17,6 +17,8 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Arrays;
+
 import javax.swing.ImageIcon;
 
 /**
@@ -30,6 +32,7 @@ public class PanelSlotButton extends javax.swing.JPanel {
     private SoundPlayer fxOffSlotmachine = new SoundPlayer(FX_OFF_SLOTMACHINE);
     private SoundPlayer fxClick = new SoundPlayer(FX_CLICK);
     private boolean isMouseOver = false;
+    private int[] slotValues;
     
      public PanelSlotButton() {
         loadSlotMachineImage();
@@ -73,7 +76,16 @@ public class PanelSlotButton extends javax.swing.JPanel {
         SlotMachineWindow window = new SlotMachineWindow();
         window.setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
         window.setVisible(true);
+        this.slotValues = window.getValuesOfSlotPanel();
+        
+//        pour tester l'obtention des valeurs de SlotMachine
+//        System.out.println("machine gave :");
+//        Arrays.stream(this.slotValues).forEach(System.out::print);
+//        System.out.println();
     }
+    public int[] getSlotValues() {
+		return slotValues;
+	}
     
     
     @Override
@@ -111,6 +123,12 @@ public class PanelSlotButton extends javax.swing.JPanel {
             .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+	public void setSlotValues(int[] values) {
+		// TODO Auto-generated method stub
+		this.slotValues = null;
+		
+	}
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
