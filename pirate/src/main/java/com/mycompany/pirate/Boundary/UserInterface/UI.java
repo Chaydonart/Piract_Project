@@ -64,7 +64,7 @@ public class UI extends JFrame implements IPirates {
         panelSlotButton1 = new com.mycompany.pirate.Boundary.UserInterface.PanelSlotButton();
         jButton1 = new javax.swing.JButton();
         jLayeredPane2 = new javax.swing.JLayeredPane();
-        panelPlayer2 = new com.mycompany.pirate.Boundary.UserInterface.PanelPlayer();
+        panelPlayer2 = new com.mycompany.pirate.Boundary.UserInterface.PanelPlayer1();
         lifePanel1 = new com.mycompany.pirate.Boundary.UserInterface.LifePanel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         panelPlayer21 = new com.mycompany.pirate.Boundary.UserInterface.PanelPlayer2();
@@ -258,7 +258,7 @@ public class UI extends JFrame implements IPirates {
     private javax.swing.JLayeredPane jLayeredPane3;
     private com.mycompany.pirate.Boundary.UserInterface.LifePanel lifePanel1;
     private com.mycompany.pirate.Boundary.UserInterface.LifePanel lifePanel2;
-    private com.mycompany.pirate.Boundary.UserInterface.PanelPlayer panelPlayer2;
+    private com.mycompany.pirate.Boundary.UserInterface.PanelPlayer1 panelPlayer2;
     private com.mycompany.pirate.Boundary.UserInterface.PanelPlayer2 panelPlayer21;
     public com.mycompany.pirate.Boundary.UserInterface.PanelSlotButton panelSlotButton1;
     private com.mycompany.pirate.Boundary.UserInterface.PionPanel pionPanel1;

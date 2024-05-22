@@ -5,88 +5,62 @@
 package com.mycompany.pirate.Boundary.UserInterface;
 
 import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_1;
-import static com.mycompany.pirate.data.values.RED_CUSTOM;
-import static com.mycompany.pirate.data.values.TRANSPARENT_COLOR_BACKGROUND;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
 /**
  *
  * @author BEN JAAFAR
  */
-public class PanelPlayer extends javax.swing.JPanel {
-    private String imagePath = IMAGE_PLAYER_1;
-    private BufferedImage playerImage;
-    private int triangleBase = 200;
-    private int triangleHeight = 500;
-    
-    // Etat de tour
-    private Color turnColor = Color.white;
-    
-    // Animation
-    private double imageY = 0; 
-    private double imageSpeed = 0.1; 
-    private boolean movingDown = true; 
+public class PanelPlayer1 extends PanelPlayerDisplay {
+    private double imageY = 0;
+    private double imageSpeed = 0.1;
+    private boolean movingDown = true;
 
-
-    public PanelPlayer() {
-        loadImage();
+    public PanelPlayer1() {
+        loadImage(IMAGE_PLAYER_1);
         setPreferredSize(new Dimension(triangleBase, triangleHeight));
         imageY = triangleHeight - (triangleBase - 20) * ((double) playerImage.getHeight() / playerImage.getWidth()) - 10;
-    }
-
-    private void loadImage() {
-        try {
-            playerImage = ImageIO.read(new File(imagePath));
-        } catch (IOException ex) {
-            System.err.println("Erreur lors du chargement de l'image : " + ex.getMessage());
-        }
-        
         startAnimation();
     }
 
-    private void startAnimation() {
-     Timer timer = new Timer(10, e -> {
-         // Mettre à jour la position verticale de l'image
-         if (playerImage != null && playerImage.getWidth() != 0) {
-             int imageWidth = triangleBase - 20;
-             int imageHeight = playerImage.getHeight() != 0 ? (int) ((double) playerImage.getHeight() / playerImage.getWidth() * imageWidth) : 0;
+    @Override
+    public void startAnimation() {
+        Timer timer = new Timer(20, e -> {
+            // Mettre à jour la position verticale de l'image
+            if (playerImage != null && playerImage.getWidth() != 0) {
+                int imageWidth = triangleBase - 20;
+                int imageHeight = playerImage.getHeight() != 0 ? (int) ((double) playerImage.getHeight() / playerImage.getWidth() * imageWidth) : 0;
 
-             if (imageHeight > triangleHeight - 20) {
-                 imageHeight = triangleHeight - 20;
-                 imageWidth = (int) ((double) playerImage.getWidth() / playerImage.getHeight() * imageHeight);
-             }
+                if (imageHeight > triangleHeight - 20) {
+                    imageHeight = triangleHeight - 20;
+                    imageWidth = (int) ((double) playerImage.getWidth() / playerImage.getHeight() * imageHeight);
+                }
 
-             // Déplacer l'image en fonction de la vitesse
-             if (movingDown) {
-                 imageY += imageSpeed;
-                 if (imageY >= triangleHeight - imageHeight) {
-                     // Inverser la direction lorsque l'image atteint le bas
-                     movingDown = false;
-                 }
-             } else {
-                 imageY -= imageSpeed;
-                 if (imageY <= 150) { // Changement ici
-                     // Inverser la direction lorsque l'image atteint le haut
-                     movingDown = true;
-                 }
-             }
+                // Déplacer l'image en fonction de la vitesse
+                if (movingDown) {
+                    imageY += imageSpeed;
+                    if (imageY >= triangleHeight - imageHeight) {
+                        // Inverser la direction lorsque l'image atteint le bas
+                        movingDown = false;
+                    }
+                } else {
+                    imageY -= imageSpeed;
+                    if (imageY <= 150) { // Changement ici
+                        // Inverser la direction lorsque l'image atteint le haut
+                        movingDown = true;
+                    }
+                }
 
-             repaint(); // Redessiner le composant avec la nouvelle position de l'image
-         }
-     });
-     timer.start();
- }
-
+                repaint(); // Redessiner le composant avec la nouvelle position de l'image
+            }
+        });
+        timer.start();
+    }
+    
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -122,14 +96,7 @@ public class PanelPlayer extends javax.swing.JPanel {
         g2d.dispose();
     }
     
-    public void setTurn(boolean bool) {
-        if (bool) {
-            this.turnColor = RED_CUSTOM;
-        } else {
-            this.turnColor = Color.white;
-        }
-        repaint(); 
-    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

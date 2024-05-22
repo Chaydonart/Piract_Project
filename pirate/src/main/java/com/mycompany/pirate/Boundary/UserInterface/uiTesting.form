@@ -44,11 +44,11 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jLayeredPane2" min="-2" max="-2" attributes="0"/>
+              <Component id="LayeredPanePlayer1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLayeredPane3" min="-2" max="-2" attributes="0"/>
+              <Component id="LayeredPaneMain" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLayeredPane1" min="-2" max="-2" attributes="0"/>
+              <Component id="LayeredPanePlayer2" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -56,16 +56,16 @@
       <Group type="103" groupAlignment="1" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLayeredPane1" min="-2" max="-2" attributes="0"/>
+              <Component id="LayeredPanePlayer2" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="17" max="32767" attributes="0"/>
           </Group>
-          <Component id="jLayeredPane2" max="32767" attributes="0"/>
-          <Component id="jLayeredPane3" alignment="0" max="32767" attributes="0"/>
+          <Component id="LayeredPanePlayer1" max="32767" attributes="0"/>
+          <Component id="LayeredPaneMain" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JLayeredPane" name="jLayeredPane3">
+    <Container class="javax.swing.JLayeredPane" name="LayeredPaneMain">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="cc" red="33" type="rgb"/>
@@ -77,20 +77,15 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="gameBoardPanel1" min="-2" pref="627" max="-2" attributes="0"/>
+                  <Component id="PanelGameboard" min="-2" pref="627" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  <Component id="pionPanel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="PanelPion1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
-                  <Component id="panelSlotButton1" min="-2" pref="153" max="-2" attributes="0"/>
+                  <Component id="PanelButtonSlotMachine" min="-2" pref="153" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="239" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="272" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -98,20 +93,18 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="gameBoardPanel1" min="-2" pref="292" max="-2" attributes="0"/>
+                  <Component id="PanelGameboard" min="-2" pref="292" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="panelSlotButton1" min="-2" pref="166" max="-2" attributes="0"/>
-                      <Component id="pionPanel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="PanelButtonSlotMachine" min="-2" pref="166" max="-2" attributes="0"/>
+                      <Component id="PanelPion1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="com.mycompany.pirate.Boundary.UserInterface.PionPanel" name="pionPanel1">
+        <Container class="com.mycompany.pirate.Boundary.UserInterface.PionPanel" name="PanelPion1">
 
           <Layout>
             <DimensionLayout dim="0">
@@ -126,9 +119,9 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Component class="com.mycompany.pirate.Boundary.UserInterface.GameBoardPanel" name="gameBoardPanel1">
+        <Component class="com.mycompany.pirate.Boundary.UserInterface.GameBoardPanel" name="PanelGameboard">
         </Component>
-        <Container class="com.mycompany.pirate.Boundary.UserInterface.PanelSlotButton" name="panelSlotButton1">
+        <Container class="com.mycompany.pirate.Boundary.UserInterface.PanelSlotButton" name="PanelButtonSlotMachine">
 
           <Layout>
             <DimensionLayout dim="0">
@@ -143,17 +136,9 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Component class="javax.swing.JButton" name="jButton1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="PLAYER TURN"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
-          </Events>
-        </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JLayeredPane" name="jLayeredPane2">
+    <Container class="javax.swing.JLayeredPane" name="LayeredPanePlayer1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="cc" green="ff" red="cc" type="rgb"/>
@@ -162,7 +147,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
       <SubComponents>
-        <Container class="com.mycompany.pirate.Boundary.UserInterface.PanelPlayer" name="panelPlayer2">
+        <Container class="com.mycompany.pirate.Boundary.UserInterface.PanelPlayer1" name="PanelDisplayerPlayer1">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
               <BorderConstraints direction="Last"/>
@@ -173,7 +158,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="lifePanel1" pref="194" max="32767" attributes="0"/>
+                      <Component id="PanleLifePlayer2" pref="194" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -182,13 +167,13 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="450" max="32767" attributes="0"/>
-                      <Component id="lifePanel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="PanleLifePlayer2" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="com.mycompany.pirate.Boundary.UserInterface.LifePanel" name="lifePanel1">
+            <Container class="com.mycompany.pirate.Boundary.UserInterface.LifePanel" name="PanleLifePlayer2">
 
               <Layout>
                 <DimensionLayout dim="0">
@@ -207,7 +192,7 @@
         </Container>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JLayeredPane" name="jLayeredPane1">
+    <Container class="javax.swing.JLayeredPane" name="LayeredPanePlayer2">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="5b" green="69" red="0" type="rgb"/>
@@ -219,7 +204,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
       <SubComponents>
-        <Container class="com.mycompany.pirate.Boundary.UserInterface.PanelPlayer2" name="panelPlayer21">
+        <Container class="com.mycompany.pirate.Boundary.UserInterface.PanelPlayer2" name="PanelDisplayPlayer2">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
               <BorderConstraints direction="Center"/>
@@ -229,20 +214,20 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lifePanel2" alignment="1" pref="200" max="32767" attributes="0"/>
+                  <Component id="PanelLifePlayer2" alignment="1" pref="200" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="lifePanel2" min="-2" max="-2" attributes="0"/>
+                      <Component id="PanelLifePlayer2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="450" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="com.mycompany.pirate.Boundary.UserInterface.LifePanel" name="lifePanel2">
+            <Container class="com.mycompany.pirate.Boundary.UserInterface.LifePanel" name="PanelLifePlayer2">
 
               <Layout>
                 <DimensionLayout dim="0">

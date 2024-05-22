@@ -5,9 +5,7 @@
 package com.mycompany.pirate.Boundary.UserInterface;
 
 import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_2;
-import static com.mycompany.pirate.data.values.BLUE_CUSTOM;
 import static com.mycompany.pirate.data.values.RED_CUSTOM;
-import static com.mycompany.pirate.data.values.TRANSPARENT_COLOR_BACKGROUND;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -24,37 +22,21 @@ import javax.swing.Timer;
  *
  * @author BEN JAAFAR
  */
-public class PanelPlayer2 extends javax.swing.JPanel {
-    private String imagePath = IMAGE_PLAYER_2;
-    private BufferedImage playerImage; // Image du joueur
-    private int triangleBase = 200; // Base du triangle
-    private int triangleHeight = 500; // Hauteur du triangle
-    
-    private Color turnColor = Color.white;
+public class PanelPlayer2 extends PanelPlayerDisplay {
 
     private double imageY = 0; // Position verticale de l'image (utilisation de double pour la précision)
     private double imageSpeed = 0.1; // Vitesse de déplacement de l'image (plus la valeur est petite, plus le mouvement est lent)
     private boolean movingDown = true; // Indique si l'image se déplace vers le bas
 
     public PanelPlayer2() {
-        loadImage();
+        loadImage(IMAGE_PLAYER_2);
         setPreferredSize(new Dimension(triangleBase, triangleHeight));
         startAnimation();
     }
 
-    private void loadImage() {
-        try {
-            playerImage = ImageIO.read(new File(imagePath));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void setImageSpeed(double speed) {
-        this.imageSpeed = speed;
-    }
-
-    private void startAnimation() {
+    
+    @Override
+    public void startAnimation() {
         Timer timer = new Timer(20, e -> {
             // Mettre à jour la position verticale de l'image
             if (playerImage != null && playerImage.getWidth() != 0) {
@@ -122,15 +104,6 @@ public class PanelPlayer2 extends javax.swing.JPanel {
             g2d.setClip(null); // Réinitialiser le clip
         }
     
-    }
-    
-    public void setTurn(boolean bool) {
-        if (bool) {
-            this.turnColor = RED_CUSTOM;
-        } else {
-            this.turnColor = Color.white;
-        }
-        repaint(); // Redessine le composant avec les nouvelles dimensions du triangle
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
