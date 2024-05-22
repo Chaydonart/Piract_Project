@@ -20,7 +20,6 @@ import utils.SoundPlayer;
  */
 public class UI extends javax.swing.JFrame implements IPirates {
     private boolean testingTurn = true;
-    private int testDeplacer = 0;
     /*
     * Mettre tout les sons et les changer dans un SoundGestionnaire
     */
@@ -49,8 +48,8 @@ public class UI extends javax.swing.JFrame implements IPirates {
 
         
         //On met nos pions sur la case 0 
-        PanelGameboard.deplacerPion(PanelPion1, 0);
-        PanelGameboard.deplacerPion(PanelPion2, 0);
+        PanelGameboard.deplacerPion(PanelPion1, 0, null);
+        PanelGameboard.deplacerPion(PanelPion2, 0, null);
         
         // On joue la musique
         mainTheme.loop();
@@ -64,10 +63,26 @@ public class UI extends javax.swing.JFrame implements IPirates {
     }
     
     //Permet de gerer le deplacerPion
-    public void deplacerPion(int destinationCellNumber){
-        int currentIndex = PanelPion1.getCellPosition();
-        PanelGameboard.deplacerPion(PanelPion1,currentIndex + destinationCellNumber);
-        PanelPion1.setCellPosition(currentIndex + destinationCellNumber);
+    public void deplacerPion(int destinationCellNumber, String name){
+        
+        PionPanel currentPlayer = null;
+        switch(name){
+            case "Joueur 1":
+                currentPlayer = PanelPion1;
+                break;
+            case "Joueur 2":
+                currentPlayer = PanelPion2;
+                break;
+        }     
+        int currentIndex = currentPlayer.getCellPosition();
+        CountDownLatch latchAnimationEnd = new CountDownLatch(1);
+        PanelGameboard.deplacerPion(currentPlayer,currentIndex + destinationCellNumber,() -> latchAnimationEnd.countDown());
+        try {
+            latchAnimationEnd.await();
+            currentPlayer.setCellPosition(currentIndex + destinationCellNumber);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
     
     //Permet de gerer la machine a sous son animation etc...

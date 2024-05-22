@@ -25,7 +25,6 @@ public class ControlDeplacerPion implements IControlDeplacerPion {
     
     @Override
     public void deplacerPion(Pion pion, int deplacement) {
-        Pion pionActuel = pionRepository.getPionActuel();
         plateau.retirerPion(pion);
         int nouvellePosition;
 

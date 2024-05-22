@@ -8,7 +8,6 @@ import static com.mycompany.pirate.data.FileRef.FX_MACHINE_ROULETTE;
 import utils.SoundPlayer;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
-import javax.swing.JPanel;
 import javax.swing.JWindow;
 import javax.swing.Timer;
 
@@ -30,7 +29,9 @@ class SlotMachineWindow extends JWindow{
             dispose();
             fxMachineRoulette.stop();
             fxMachineRoulette.close();
-            endAnimation.run();
+            if(endAnimation != null){
+                endAnimation.run();   
+            }
         });
         timer.setRepeats(false);
         timer.start(); 

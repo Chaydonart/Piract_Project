@@ -74,7 +74,7 @@ public class GameBoardPanel extends javax.swing.JPanel {
         setOpaque(false);
     }
     
-    public void deplacerPion(PionPanel pion, int destinationCellNumber) {
+    public void deplacerPion(PionPanel pion, int destinationCellNumber, Runnable onAnimationEnd) {
         for (Component component : getComponents()) {
             if (component instanceof CellPanel) {
                 CellPanel cellPanel = (CellPanel) component;
@@ -88,21 +88,20 @@ public class GameBoardPanel extends javax.swing.JPanel {
                         case 2 -> destinationX += pion.getWidth() * 1.5;
                     }
                     
-                    animatePionMovement(pion, destinationX, destinationY, destinationCellNumber);
+                    animatePionMovement(pion, destinationX, destinationY, destinationCellNumber, onAnimationEnd);
                     break;
                 }
             }
         }
     }
 
-    private void animatePionMovement(PionPanel pion, int destinationX, int destinationY, int destinationCellNumber) {
-        //System.out.println("GUI animatioPionMovement in gameboardpanel");
+    private void animatePionMovement(PionPanel pion, int destinationX, int destinationY, int destinationCellNumber, Runnable onAnimationEnd) {
         int startX = pion.getX();
         int startY = pion.getY();
         int deltaX = destinationX - startX;
         int deltaY = destinationY - startY;
-        int steps = 30; 
-        int delay = 1; 
+        int steps = 30;
+        int delay = 1;
 
         Timer timer = new Timer(delay, new ActionListener() {
             int step = 0;
@@ -119,12 +118,25 @@ public class GameBoardPanel extends javax.swing.JPanel {
                     ((Timer) e.getSource()).stop();
                     pion.setLocation(destinationX, destinationY);
                     pion.setCellPosition(destinationCellNumber);
+
+                    // Ajoute un délai d'une seconde ici
+                    Timer delayTimer = new Timer(500, new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            if(onAnimationEnd != null){
+                                onAnimationEnd.run();  
+                            }
+                        }
+                    });
+                    delayTimer.setRepeats(false); // Exécute onAnimationEnd.run() une seule fois
+                    delayTimer.start();
                 }
             }
         });
 
         timer.start();
     }
+
     
     private class CellPanel extends JPanel {
         private int cellNumber;

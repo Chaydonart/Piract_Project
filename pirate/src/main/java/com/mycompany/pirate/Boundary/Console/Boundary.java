@@ -55,8 +55,7 @@ public class Boundary implements IBoundary {
 
     @Override    
     public void deplacerPion(int deplacement, String name) {
-       afficherMessage("Le " + name + " avance de " + deplacement + " cases");
-       GUI.deplacerPion(deplacement);
+       GUI.deplacerPion(deplacement,name);
     }
 
     // Partie pacerelle dialogue
