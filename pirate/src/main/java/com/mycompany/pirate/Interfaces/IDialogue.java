@@ -19,9 +19,9 @@ public interface IDialogue {
     
     void notifyCaseDegat(String name, int vie);
     
-    void notifyCaseRejouer(int[] values, int resultat);
+    void notifyCaseRejouer();
     
-    void notifyCaseReculer(int[] values, int resultat);
+    void notifyCaseReculer();
    
     void notifyCaseGambling(String name,int randomValue);
     

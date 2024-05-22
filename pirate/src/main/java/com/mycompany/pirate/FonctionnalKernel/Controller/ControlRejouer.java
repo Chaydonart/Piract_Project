@@ -33,10 +33,10 @@ public class ControlRejouer implements IControlRejouer, IControlSlotMachine, ICo
        
     @Override
     public void rejouer(Pion pion) {
+        Optional.ofNullable(notificationService).ifPresent(service -> service.notifyCaseRejouer());
         int[] values = spin();
         int resultat = Arrays.stream(values).sum();
         this.distanceRejoue = resultat;
-        Optional.ofNullable(notificationService).ifPresent(service -> service.notifyCaseRejouer(values,resultat));
         deplacerPion(pion,resultat); 
     }
 
