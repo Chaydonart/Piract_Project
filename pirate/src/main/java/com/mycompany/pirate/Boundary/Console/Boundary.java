@@ -85,14 +85,12 @@ public class Boundary implements IBoundary {
         afficherMessage("Le joueur tombe sur une case REJOUER");
         notifyEtatJeu();
         afficherMessage("Le joueur va rejouer");
-        spin(values);
     }
 
     @Override
     public void notifyCaseReculer(int[] values, int resultat) {             
         afficherMessage("Le joueur tombe sur une case RECULER");
         notifyEtatJeu();
-        spin(values);
     }
 
     @Override
