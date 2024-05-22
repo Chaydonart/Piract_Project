@@ -4,31 +4,31 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
-import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_2;
+import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_1;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
-import java.awt.RenderingHints;
 import javax.swing.Timer;
 
 /**
  *
  * @author BEN JAAFAR
  */
-public class PanelPlayer2 extends PanelPlayerDisplay {
+public class PanelPlayer1 extends PanelPlayerDisplay {
+    private double imageY = 0;
+    private double imageSpeed = 0.2;
+    private boolean movingDown = true;
 
-    private double imageY = 20; // Position verticale de l'image (utilisation de double pour la précision)
-    private double imageSpeed = 0.2; // Vitesse de déplacement de l'image (plus la valeur est petite, plus le mouvement est lent)
-    private boolean movingDown = true; // Indique si l'image se déplace vers le bas
-
-    public PanelPlayer2() {
-        loadImage(IMAGE_PLAYER_2);
+    public PanelPlayer1() {
+        loadImage(IMAGE_PLAYER_1);
         setPreferredSize(new Dimension(triangleBase, triangleHeight));
+        if(playerImage != null){
+            imageY = triangleHeight - (triangleBase - 20) * ((double) playerImage.getHeight() / playerImage.getWidth()) - 10;
+        }
         startAnimation();
     }
 
-    
     @Override
     public void startAnimation() {
         Timer timer = new Timer(20, e -> {
@@ -44,55 +44,59 @@ public class PanelPlayer2 extends PanelPlayerDisplay {
                 // Déplacer l'image en fonction de la vitesse
                 if (movingDown) {
                     imageY += imageSpeed;
-                    if (imageY >= triangleHeight - imageHeight - 150) {
+                    if (imageY >= triangleHeight - imageHeight) {
                         movingDown = false;
                     }
                 } else {
                     imageY -= imageSpeed;
-                    if (imageY <= 0) {
+                    if (imageY <= 150) { // Changement ici
                         movingDown = true;
                     }
                 }
 
-                repaint(); 
+                repaint();
             }
         });
         timer.start();
     }
-
+    
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        Graphics2D g2d = (Graphics2D) g.create();
 
-        int[] xPoints = {0, triangleBase, triangleBase};
-        int[] yPoints = {0, 0, triangleHeight};
+        // Dessiner le triangle rectangle
+        int[] xPoints = {0, triangleBase, 0};
+        int[] yPoints = {0, triangleHeight, triangleHeight};
         Polygon triangle = new Polygon(xPoints, yPoints, 3);
         g2d.setColor(turnColor);
         g2d.fillPolygon(triangle);
 
-        if (playerImage != null) {  
-            int imageWidth = triangleBase - 20; 
-            int imageHeight = (int) ((double) playerImage.getHeight() / playerImage.getWidth() * imageWidth); 
+        // Dessiner l'image du joueur avec l'animation
+        if (playerImage != null) {
+            int imageWidth = triangleBase - 20;
+            int imageHeight = (int) ((double) playerImage.getHeight() / playerImage.getWidth() * imageWidth);
 
-            // Assurer que l'image ne dépasse pas la hauteur du triangle
-            if (imageHeight > triangleHeight) {
-                imageHeight = triangleHeight - 20; 
-                imageWidth = (int) ((double) playerImage.getWidth() / playerImage.getHeight() * imageHeight); 
+            if (imageHeight > triangleHeight - 20) {
+                imageHeight = triangleHeight - 20;
+                imageWidth = (int) ((double) playerImage.getWidth() / playerImage.getHeight() * imageHeight);
             }
 
-            // Calculer la position pour centrer l'image à la base du triangle
-            int imageX = (triangleBase - imageWidth) / 2 + 10; 
-            int imageYInt = (int) imageY; 
+            int imageX = (triangleBase - imageWidth) / 2 - 10;
 
-            // Dessiner l'image redimensionnée à l'intérieur du triangle
+            // Convertir imageY en int pour dessiner l'image
+            int imageYInt = (int) imageY;
+
             g2d.setClip(triangle);
             g2d.drawImage(playerImage, imageX, imageYInt, imageWidth, imageHeight, this);
-            g2d.setClip(null); 
+            g2d.setClip(null);
         }
-    
+
+        g2d.dispose();
     }
+    
+    
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -100,11 +104,11 @@ public class PanelPlayer2 extends PanelPlayerDisplay {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 286, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 454, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

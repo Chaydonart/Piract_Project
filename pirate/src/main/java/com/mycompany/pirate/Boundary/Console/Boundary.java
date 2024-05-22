@@ -5,21 +5,10 @@
 package com.mycompany.pirate.Boundary.Console;
 
 import com.mycompany.pirate.Boundary.UserInterface.UI;
-import com.mycompany.pirate.Boundary.UserInterface.uiTesting;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlJeu;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
 import com.mycompany.pirate.Interfaces.IBoundary;
-import java.util.Arrays;
-import com.mycompany.pirate.Interfaces.IDialogue;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Scanner;
-import java.util.concurrent.CountDownLatch;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
 
 /**
  *
@@ -29,7 +18,7 @@ import javax.swing.SwingWorker;
  */
 public class Boundary implements IBoundary {
     private final PionRepository pionRepository;
-    private uiTesting GUI;
+    private UI GUI;
 
     public Boundary(ControlJeu gameLoopController, PionRepository pionRepository) {
         this.pionRepository = pionRepository;
@@ -37,7 +26,7 @@ public class Boundary implements IBoundary {
 
     @Override
     public void start() {
-        GUI = new uiTesting();
+        GUI = new UI();
         GUI.startGUI();
     }
 

@@ -4,24 +4,19 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
-import static com.mycompany.pirate.data.values.TRANSPARENT_COLOR_BACKGROUND;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /**
  *
  * @author BEN JAAFAR
  */
 public class PionPanel extends javax.swing.JPanel {
-
     private Color pionColor = Color.RED;
     private int cellPosition = 0;
+    public int player_number = 0;
 
     public PionPanel() {
         setOpaque(false); 
@@ -48,9 +43,10 @@ public class PionPanel extends javax.swing.JPanel {
     public void setCellPosition(int cellPos){
         this.cellPosition = cellPos;
     }
-    public int getCellPosition() {
-		return cellPosition;
-	}
+    
+    public int getCellPosition(){
+        return cellPosition;
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

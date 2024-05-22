@@ -4,19 +4,13 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
-import static com.mycompany.pirate.data.values.usingCustomFonts;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.Arrays;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Random;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
@@ -48,7 +42,7 @@ public class SlotMachinePanel extends javax.swing.JPanel {
         setOpaque(false); // Make the JPanel transparent
     }
 
-    public void startAnimation() {
+    public void startAnimation(int[] values) {
         animationStartTime = System.currentTimeMillis();
         timer = new Timer(100, e -> updateSlots());
         timer.start();

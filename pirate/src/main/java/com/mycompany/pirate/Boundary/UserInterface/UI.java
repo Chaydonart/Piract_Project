@@ -1,22 +1,24 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
 import com.mycompany.pirate.Interfaces.IPirates;
 import static com.mycompany.pirate.data.FileRef.FX_CHANGE_TURN;
 import static com.mycompany.pirate.data.FileRef.OST_MAINTHEME;
-import com.mycompany.pirate.data.SoundPlayer;
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JFrame;
+import java.util.concurrent.CountDownLatch;
+import javax.swing.SwingUtilities;
+import utils.SoundPlayer;
 
 /**
  *
  * @author BEN JAAFAR
  */
-public class UI extends JFrame implements IPirates {
+public class UI extends javax.swing.JFrame implements IPirates {
     private boolean testingTurn = true;
     private int testDeplacer = 0;
     /*
@@ -26,12 +28,34 @@ public class UI extends JFrame implements IPirates {
     private SoundPlayer changeTurn = new SoundPlayer(FX_CHANGE_TURN);
 
     public UI() {
-        initComponents();        
+        initComponents();   
+        initUIParameters();
         setLocationRelativeTo(null);
 	setResizable(false);
-        lifePanel2.setPlayer2();
+    }
+    
+    private void initUIParameters(){
+        //Pour changer l'image chargée (design)
+        PanelLifePlayer2.setPlayer2();
+        
+        //Etat de base (c'est le joueur 1 qui commence)
+        PanelDisplayerPlayer1.setTurn(true);
+        PanelPion1.player_number = 1;
+        PanelPion2.player_number = 2;
+        
+        //On met les bon niveau de layer 
+        //LayeredPaneMain.setLayer(PanelPion1, javax.swing.JLayeredPane.POPUP_LAYER);
+        //LayeredPaneMain.setLayer(PanelPion1, javax.swing.JLayeredPane.POPUP_LAYER);
+
+        
+        //On met nos pions sur la case 0 
+        PanelGameboard.deplacerPion(PanelPion1, 0);
+        PanelGameboard.deplacerPion(PanelPion2, 0);
+        
+        // On joue la musique
         mainTheme.loop();
         mainTheme.play();
+        
 
     }
     
@@ -39,12 +63,45 @@ public class UI extends JFrame implements IPirates {
         setVisible(true);
     }
     
+    //Permet de gerer le deplacerPion
     public void deplacerPion(int destinationCellNumber){
-        gameBoardPanel1.deplacerPion(pionPanel1,destinationCellNumber);
+        int currentIndex = PanelPion1.getCellPosition();
+        PanelGameboard.deplacerPion(PanelPion1,currentIndex + destinationCellNumber);
+        PanelPion1.setCellPosition(currentIndex + destinationCellNumber);
     }
     
-    public void setPanelClickListener(Runnable listener) {
-        panelSlotButton1.addMouseListener(new MouseAdapter() {
+    //Permet de gerer la machine a sous son animation etc...
+    public void spinMachine(int[] values) {
+        CountDownLatch latchClick = new CountDownLatch(1);
+        CountDownLatch latchAnimationEnd = new CountDownLatch(1);
+
+        SwingUtilities.invokeLater(() -> {
+            try {
+                // Code pour démarrer l'animation de la machine à sous
+                setPanelClickListener(() -> latchClick.countDown());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        try {
+            latchClick.await();  // Attend que le joueur appuie sur le bouton
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            return;
+        }
+
+        PanelButtonSlotMachine.startAnimation(values, () -> latchAnimationEnd.countDown());
+
+        try {
+            latchAnimationEnd.await();  // Attend que l'animation soit terminée
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+    
+    private void setPanelClickListener(Runnable listener) {
+        PanelButtonSlotMachine.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 listener.run();
@@ -52,23 +109,30 @@ public class UI extends JFrame implements IPirates {
         });
     }
     
+    public void nouveauTour(){
+        PanelDisplayerPlayer1.setTurn(testingTurn);
+        PanelDisplayPlayer2.setTurn(!testingTurn);
+        testingTurn = !testingTurn;
+        changeTurn.play();
+    }
     
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jInternalFrame1 = new javax.swing.JInternalFrame();
-        jLayeredPane3 = new javax.swing.JLayeredPane();
-        pionPanel1 = new com.mycompany.pirate.Boundary.UserInterface.PionPanel();
-        gameBoardPanel1 = new com.mycompany.pirate.Boundary.UserInterface.GameBoardPanel();
-        panelSlotButton1 = new com.mycompany.pirate.Boundary.UserInterface.PanelSlotButton();
-        jButton1 = new javax.swing.JButton();
-        jLayeredPane2 = new javax.swing.JLayeredPane();
-        panelPlayer2 = new com.mycompany.pirate.Boundary.UserInterface.PanelPlayer();
-        lifePanel1 = new com.mycompany.pirate.Boundary.UserInterface.LifePanel();
-        jLayeredPane1 = new javax.swing.JLayeredPane();
-        panelPlayer21 = new com.mycompany.pirate.Boundary.UserInterface.PanelPlayer2();
-        lifePanel2 = new com.mycompany.pirate.Boundary.UserInterface.LifePanel();
+        LayeredPaneMain = new javax.swing.JLayeredPane();
+        PanelPion1 = new com.mycompany.pirate.Boundary.UserInterface.PionPanel();
+        PanelPion1.setColor(Color.BLUE);
+        PanelPion2 = new com.mycompany.pirate.Boundary.UserInterface.PionPanel();
+        PanelGameboard = new com.mycompany.pirate.Boundary.UserInterface.GameBoardPanel();
+        PanelButtonSlotMachine = new com.mycompany.pirate.Boundary.UserInterface.PanelSlotButton();
+        LayeredPanePlayer1 = new javax.swing.JLayeredPane();
+        PanelDisplayerPlayer1 = new com.mycompany.pirate.Boundary.UserInterface.PanelPlayer1();
+        PanleLifePlayer2 = new com.mycompany.pirate.Boundary.UserInterface.LifePanel();
+        LayeredPanePlayer2 = new javax.swing.JLayeredPane();
+        PanelDisplayPlayer2 = new com.mycompany.pirate.Boundary.UserInterface.PanelPlayer2();
+        PanelLifePlayer2 = new com.mycompany.pirate.Boundary.UserInterface.LifePanel();
 
         jInternalFrame1.setVisible(true);
 
@@ -85,183 +149,181 @@ public class UI extends JFrame implements IPirates {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLayeredPane3.setBackground(new java.awt.Color(51, 204, 0));
+        LayeredPaneMain.setBackground(new java.awt.Color(51, 204, 0));
 
-        javax.swing.GroupLayout pionPanel1Layout = new javax.swing.GroupLayout(pionPanel1);
-        pionPanel1.setLayout(pionPanel1Layout);
-        pionPanel1Layout.setHorizontalGroup(
-            pionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 21, Short.MAX_VALUE)
+        PanelPion1.setPreferredSize(new java.awt.Dimension(25, 25));
+
+        javax.swing.GroupLayout PanelPion1Layout = new javax.swing.GroupLayout(PanelPion1);
+        PanelPion1.setLayout(PanelPion1Layout);
+        PanelPion1Layout.setHorizontalGroup(
+            PanelPion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 25, Short.MAX_VALUE)
         );
-        pionPanel1Layout.setVerticalGroup(
-            pionPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 23, Short.MAX_VALUE)
+        PanelPion1Layout.setVerticalGroup(
+            PanelPion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 25, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout panelSlotButton1Layout = new javax.swing.GroupLayout(panelSlotButton1);
-        panelSlotButton1.setLayout(panelSlotButton1Layout);
-        panelSlotButton1Layout.setHorizontalGroup(
-            panelSlotButton1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        PanelPion2.setPreferredSize(new java.awt.Dimension(25, 25));
+
+        javax.swing.GroupLayout PanelPion2Layout = new javax.swing.GroupLayout(PanelPion2);
+        PanelPion2.setLayout(PanelPion2Layout);
+        PanelPion2Layout.setHorizontalGroup(
+            PanelPion2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 25, Short.MAX_VALUE)
+        );
+        PanelPion2Layout.setVerticalGroup(
+            PanelPion2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 25, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout PanelButtonSlotMachineLayout = new javax.swing.GroupLayout(PanelButtonSlotMachine);
+        PanelButtonSlotMachine.setLayout(PanelButtonSlotMachineLayout);
+        PanelButtonSlotMachineLayout.setHorizontalGroup(
+            PanelButtonSlotMachineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 153, Short.MAX_VALUE)
         );
-        panelSlotButton1Layout.setVerticalGroup(
-            panelSlotButton1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        PanelButtonSlotMachineLayout.setVerticalGroup(
+            PanelButtonSlotMachineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 166, Short.MAX_VALUE)
         );
 
-        jButton1.setText("PLAYER TURN");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        LayeredPaneMain.setLayer(PanelPion1, javax.swing.JLayeredPane.POPUP_LAYER);
+        LayeredPaneMain.setLayer(PanelPion2, javax.swing.JLayeredPane.POPUP_LAYER);
+        LayeredPaneMain.setLayer(PanelGameboard, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        LayeredPaneMain.setLayer(PanelButtonSlotMachine, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jLayeredPane3.setLayer(pionPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(gameBoardPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(panelSlotButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jLayeredPane3Layout = new javax.swing.GroupLayout(jLayeredPane3);
-        jLayeredPane3.setLayout(jLayeredPane3Layout);
-        jLayeredPane3Layout.setHorizontalGroup(
-            jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane3Layout.createSequentialGroup()
+        javax.swing.GroupLayout LayeredPaneMainLayout = new javax.swing.GroupLayout(LayeredPaneMain);
+        LayeredPaneMain.setLayout(LayeredPaneMainLayout);
+        LayeredPaneMainLayout.setHorizontalGroup(
+            LayeredPaneMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LayeredPaneMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(gameBoardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(pionPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(146, 146, 146)
-                .addComponent(panelSlotButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(239, 239, 239))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(272, 272, 272))
+                .addComponent(PanelGameboard, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
+            .addGroup(LayeredPaneMainLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(PanelPion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(183, 183, 183)
+                .addComponent(PanelButtonSlotMachine, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PanelPion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(79, 79, 79))
         );
-        jLayeredPane3Layout.setVerticalGroup(
-            jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(gameBoardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelSlotButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pionPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        LayeredPaneMainLayout.setVerticalGroup(
+            LayeredPaneMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LayeredPaneMainLayout.createSequentialGroup()
+                .addContainerGap(53, Short.MAX_VALUE)
+                .addComponent(PanelGameboard, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(LayeredPaneMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(LayeredPaneMainLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(LayeredPaneMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PanelButtonSlotMachine, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(LayeredPaneMainLayout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(PanelPion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(LayeredPaneMainLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(PanelPion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
-        jLayeredPane2.setBackground(new java.awt.Color(204, 255, 204));
-        jLayeredPane2.setLayout(new java.awt.BorderLayout());
+        LayeredPanePlayer1.setBackground(new java.awt.Color(204, 255, 204));
+        LayeredPanePlayer1.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout lifePanel1Layout = new javax.swing.GroupLayout(lifePanel1);
-        lifePanel1.setLayout(lifePanel1Layout);
-        lifePanel1Layout.setHorizontalGroup(
-            lifePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout PanleLifePlayer2Layout = new javax.swing.GroupLayout(PanleLifePlayer2);
+        PanleLifePlayer2.setLayout(PanleLifePlayer2Layout);
+        PanleLifePlayer2Layout.setHorizontalGroup(
+            PanleLifePlayer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 194, Short.MAX_VALUE)
         );
-        lifePanel1Layout.setVerticalGroup(
-            lifePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        PanleLifePlayer2Layout.setVerticalGroup(
+            PanleLifePlayer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout panelPlayer2Layout = new javax.swing.GroupLayout(panelPlayer2);
-        panelPlayer2.setLayout(panelPlayer2Layout);
-        panelPlayer2Layout.setHorizontalGroup(
-            panelPlayer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelPlayer2Layout.createSequentialGroup()
-                .addComponent(lifePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+        javax.swing.GroupLayout PanelDisplayerPlayer1Layout = new javax.swing.GroupLayout(PanelDisplayerPlayer1);
+        PanelDisplayerPlayer1.setLayout(PanelDisplayerPlayer1Layout);
+        PanelDisplayerPlayer1Layout.setHorizontalGroup(
+            PanelDisplayerPlayer1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelDisplayerPlayer1Layout.createSequentialGroup()
+                .addComponent(PanleLifePlayer2, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        panelPlayer2Layout.setVerticalGroup(
-            panelPlayer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(panelPlayer2Layout.createSequentialGroup()
+        PanelDisplayerPlayer1Layout.setVerticalGroup(
+            PanelDisplayerPlayer1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(PanelDisplayerPlayer1Layout.createSequentialGroup()
                 .addGap(0, 450, Short.MAX_VALUE)
-                .addComponent(lifePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(PanleLifePlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jLayeredPane2.add(panelPlayer2, java.awt.BorderLayout.PAGE_END);
+        LayeredPanePlayer1.add(PanelDisplayerPlayer1, java.awt.BorderLayout.PAGE_END);
 
-        jLayeredPane1.setBackground(new java.awt.Color(0, 105, 91));
-        jLayeredPane1.setForeground(new java.awt.Color(0, 105, 91));
-        jLayeredPane1.setLayout(new java.awt.BorderLayout());
+        LayeredPanePlayer2.setBackground(new java.awt.Color(0, 105, 91));
+        LayeredPanePlayer2.setForeground(new java.awt.Color(0, 105, 91));
+        LayeredPanePlayer2.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout lifePanel2Layout = new javax.swing.GroupLayout(lifePanel2);
-        lifePanel2.setLayout(lifePanel2Layout);
-        lifePanel2Layout.setHorizontalGroup(
-            lifePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout PanelLifePlayer2Layout = new javax.swing.GroupLayout(PanelLifePlayer2);
+        PanelLifePlayer2.setLayout(PanelLifePlayer2Layout);
+        PanelLifePlayer2Layout.setHorizontalGroup(
+            PanelLifePlayer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 200, Short.MAX_VALUE)
         );
-        lifePanel2Layout.setVerticalGroup(
-            lifePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        PanelLifePlayer2Layout.setVerticalGroup(
+            PanelLifePlayer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout panelPlayer21Layout = new javax.swing.GroupLayout(panelPlayer21);
-        panelPlayer21.setLayout(panelPlayer21Layout);
-        panelPlayer21Layout.setHorizontalGroup(
-            panelPlayer21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lifePanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+        javax.swing.GroupLayout PanelDisplayPlayer2Layout = new javax.swing.GroupLayout(PanelDisplayPlayer2);
+        PanelDisplayPlayer2.setLayout(PanelDisplayPlayer2Layout);
+        PanelDisplayPlayer2Layout.setHorizontalGroup(
+            PanelDisplayPlayer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(PanelLifePlayer2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
         );
-        panelPlayer21Layout.setVerticalGroup(
-            panelPlayer21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelPlayer21Layout.createSequentialGroup()
-                .addComponent(lifePanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 450, Short.MAX_VALUE))
+        PanelDisplayPlayer2Layout.setVerticalGroup(
+            PanelDisplayPlayer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelDisplayPlayer2Layout.createSequentialGroup()
+                .addComponent(PanelLifePlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 456, Short.MAX_VALUE))
         );
 
-        jLayeredPane1.add(panelPlayer21, java.awt.BorderLayout.CENTER);
+        LayeredPanePlayer2.add(PanelDisplayPlayer2, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(LayeredPanePlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(LayeredPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(LayeredPanePlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
-            .addComponent(jLayeredPane2)
-            .addComponent(jLayeredPane3, javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LayeredPanePlayer1)
+            .addComponent(LayeredPaneMain, javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addComponent(LayeredPanePlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
-    }// </editor-fold>                        
+    }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        panelPlayer2.setTurn(testingTurn);
-        panelPlayer21.setTurn(!testingTurn);
-        testingTurn = !testingTurn;
-        changeTurn.play();
-        
-        gameBoardPanel1.deplacerPion(pionPanel1, testDeplacer);
-        testDeplacer++;
-
-    }                                        
-
-    // Variables declaration - do not modify                     
-    private com.mycompany.pirate.Boundary.UserInterface.GameBoardPanel gameBoardPanel1;
-    private javax.swing.JButton jButton1;
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLayeredPane LayeredPaneMain;
+    private javax.swing.JLayeredPane LayeredPanePlayer1;
+    private javax.swing.JLayeredPane LayeredPanePlayer2;
+    private com.mycompany.pirate.Boundary.UserInterface.PanelSlotButton PanelButtonSlotMachine;
+    private com.mycompany.pirate.Boundary.UserInterface.PanelPlayer2 PanelDisplayPlayer2;
+    private com.mycompany.pirate.Boundary.UserInterface.PanelPlayer1 PanelDisplayerPlayer1;
+    private com.mycompany.pirate.Boundary.UserInterface.GameBoardPanel PanelGameboard;
+    private com.mycompany.pirate.Boundary.UserInterface.LifePanel PanelLifePlayer2;
+    private com.mycompany.pirate.Boundary.UserInterface.PionPanel PanelPion1;
+    private com.mycompany.pirate.Boundary.UserInterface.PionPanel PanelPion2;
+    private com.mycompany.pirate.Boundary.UserInterface.LifePanel PanleLifePlayer2;
     private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JLayeredPane jLayeredPane2;
-    private javax.swing.JLayeredPane jLayeredPane3;
-    private com.mycompany.pirate.Boundary.UserInterface.LifePanel lifePanel1;
-    private com.mycompany.pirate.Boundary.UserInterface.LifePanel lifePanel2;
-    private com.mycompany.pirate.Boundary.UserInterface.PanelPlayer panelPlayer2;
-    private com.mycompany.pirate.Boundary.UserInterface.PanelPlayer2 panelPlayer21;
-    public com.mycompany.pirate.Boundary.UserInterface.PanelSlotButton panelSlotButton1;
-    private com.mycompany.pirate.Boundary.UserInterface.PionPanel pionPanel1;
-    // End of variables declaration                   
+    // End of variables declaration//GEN-END:variables
 }
-
