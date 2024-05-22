@@ -82,11 +82,10 @@ public class GameBoardPanel extends javax.swing.JPanel {
                     int destinationX = cellPanel.getX() + (cellPanel.getWidth() ) / 2;
                     int destinationY = cellPanel.getY() + cellPanel.getHeight() + (pion.getWidth() / 2);
                     
+                    //Pour eviter que les pions s'overlape
                     switch(pion.player_number){
-                        case 1 : 
-                            destinationX -= pion.getWidth() * 1.5;
-                        case 2 : 
-                            destinationX += pion.getWidth();
+                        case 1 -> destinationX -= pion.getWidth() * 1.5;
+                        case 2 -> destinationX += pion.getWidth() * 1.5;
                     }
                     
                     animatePionMovement(pion, destinationX, destinationY, destinationCellNumber);

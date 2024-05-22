@@ -122,6 +122,9 @@
               <Dimension value="[25, 25]"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JLayeredPane.layer" type="java.lang.Integer" value="300"/>
+          </AuxValues>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -143,6 +146,7 @@
             </Property>
           </Properties>
           <AuxValues>
+            <AuxValue name="JLayeredPane.layer" type="java.lang.Integer" value="300"/>
             <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="PanelPion1.setColor(Color.BLUE);"/>
           </AuxValues>
 
