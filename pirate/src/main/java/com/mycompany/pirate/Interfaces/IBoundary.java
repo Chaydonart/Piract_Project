@@ -14,4 +14,5 @@ public interface IBoundary extends IDialogue {
     void afficherEtatJeu();
     void afficherMessage(String message);
     void deplacerPion(int deplacement, String name);
+    void tourSuivant();
 }

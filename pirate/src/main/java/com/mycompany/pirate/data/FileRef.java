@@ -26,5 +26,7 @@ public class FileRef {
     public static final String FX_OFF_SLOTMACHINE = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\fx\\FX_onSlotMachine.wav";
     public static final String FX_CLICK = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\fx\\FX_click.wav";
     public static final String FX_MACHINE_ROULETTE = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\fx\\FX_machine_roulette.wav";
-
+    
+    //FONTS
+    public static final String FONT_CASINO = "src\\main\\java\\com\\mycompany\\pirate\\res\\fonts\\RetroSigned-DYYY0.ttf";
 }

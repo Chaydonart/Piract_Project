@@ -26,12 +26,13 @@ import javax.swing.ImageIcon;
  */
 public class PanelSlotButton extends javax.swing.JPanel {
     private Image slotMachineImage;
+    SlotMachineWindow window;
     private SoundPlayer fxOnSlotmachine = new SoundPlayer(FX_ON_SLOTMACHINE);
     private SoundPlayer fxOffSlotmachine = new SoundPlayer(FX_OFF_SLOTMACHINE);
     private SoundPlayer fxClick = new SoundPlayer(FX_CLICK);
     private boolean isMouseOver = false;
-    
-     public PanelSlotButton() {
+
+    public PanelSlotButton() {
         loadSlotMachineImage();
         setPreferredSize(new Dimension(200, 200)); 
         addMouseListener(new MouseAdapter() {
@@ -41,10 +42,7 @@ public class PanelSlotButton extends javax.swing.JPanel {
                 fxClick.play();
                 openSlotMachineWindow();
             }
-            
-            /*
-            * Gere l'animation interactive 
-            */
+
             @Override
             public void mouseEntered(MouseEvent e) {
                 isMouseOver = true;
@@ -52,7 +50,7 @@ public class PanelSlotButton extends javax.swing.JPanel {
                 fxOnSlotmachine.play();
                 repaint();
             }
-            
+
             @Override
             public void mouseExited(MouseEvent e) {
                 isMouseOver = false;
@@ -62,34 +60,33 @@ public class PanelSlotButton extends javax.swing.JPanel {
             }
         });
     }
-     
+
     private void loadSlotMachineImage() {
-        // Charge l'image de la machine à sous (remplacez "slot_machine.png" par le chemin de votre image)
         slotMachineImage = new ImageIcon(IMAGE_SLOT_MACHINE).getImage();
     }
 
-
     private void openSlotMachineWindow() {
-        SlotMachineWindow window = new SlotMachineWindow();
-        window.setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
+        window = new SlotMachineWindow();
+        window.setLocationRelativeTo(null); 
         window.setVisible(true);
     }
-    
-    
+
+
+    public void startAnimation(int[] values) {
+        window.startAnimation(values);
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
-       super.paintComponent(g);
+        super.paintComponent(g);
         int width = getWidth();
         int height = getHeight();
         
-        /*
-        * Si la souris est sur l'image on l'agrandis
-        */
         if (isMouseOver) {
-            width = (int)(width * 1.1);
-            height = (int)(height * 1.1);
+            width = (int) (width * 1.1);
+            height = (int) (height * 1.1);
         }
-        
+
         int x = (getWidth() - width) / 2;
         int y = (getHeight() - height) / 2;
         
