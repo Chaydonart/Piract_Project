@@ -12,6 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.concurrent.CountDownLatch;
 import javax.swing.SwingUtilities;
+import utils.ScreenShake;
 import utils.SoundPlayer;
 
 /**
@@ -142,8 +143,8 @@ public class UI extends javax.swing.JFrame implements IPirates {
         jInternalFrame1 = new javax.swing.JInternalFrame();
         LayeredPaneMain = new javax.swing.JLayeredPane();
         PanelPion1 = new com.mycompany.pirate.Boundary.UserInterface.PionPanel();
-        PanelPion1.setColor(Color.BLUE);
         PanelPion2 = new com.mycompany.pirate.Boundary.UserInterface.PionPanel();
+        PanelPion2.setColor(Color.BLACK);
         PanelGameboard = new com.mycompany.pirate.Boundary.UserInterface.GameBoardPanel();
         PanelButtonSlotMachine = new com.mycompany.pirate.Boundary.UserInterface.PanelSlotButton();
         LayeredPanePlayer1 = new javax.swing.JLayeredPane();
@@ -170,17 +171,17 @@ public class UI extends javax.swing.JFrame implements IPirates {
 
         LayeredPaneMain.setBackground(new java.awt.Color(51, 204, 0));
 
-        PanelPion1.setPreferredSize(new java.awt.Dimension(25, 25));
+        PanelPion1.setPreferredSize(new java.awt.Dimension(30, 30));
 
         javax.swing.GroupLayout PanelPion1Layout = new javax.swing.GroupLayout(PanelPion1);
         PanelPion1.setLayout(PanelPion1Layout);
         PanelPion1Layout.setHorizontalGroup(
             PanelPion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
+            .addGap(0, 30, Short.MAX_VALUE)
         );
         PanelPion1Layout.setVerticalGroup(
             PanelPion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
+            .addGap(0, 30, Short.MAX_VALUE)
         );
 
         PanelPion2.setPreferredSize(new java.awt.Dimension(25, 25));
@@ -217,34 +218,28 @@ public class UI extends javax.swing.JFrame implements IPirates {
         LayeredPaneMainLayout.setHorizontalGroup(
             LayeredPaneMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LayeredPaneMainLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(PanelGameboard, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
-            .addGroup(LayeredPaneMainLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
                 .addComponent(PanelPion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(183, 183, 183)
+                .addGap(221, 221, 221)
                 .addComponent(PanelButtonSlotMachine, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(PanelPion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79))
+                .addGap(15, 15, 15))
+            .addGroup(LayeredPaneMainLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(PanelGameboard, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         LayeredPaneMainLayout.setVerticalGroup(
             LayeredPaneMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LayeredPaneMainLayout.createSequentialGroup()
-                .addContainerGap(53, Short.MAX_VALUE)
-                .addComponent(PanelGameboard, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(LayeredPaneMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(LayeredPaneMainLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LayeredPaneMainLayout.createSequentialGroup()
+                        .addComponent(PanelGameboard, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(LayeredPaneMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(PanelButtonSlotMachine, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(LayeredPaneMainLayout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(PanelPion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(LayeredPaneMainLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(PanelPion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(PanelButtonSlotMachine, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(PanelPion1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PanelPion2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         LayeredPanePlayer1.setBackground(new java.awt.Color(204, 255, 204));
@@ -325,7 +320,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
             .addComponent(LayeredPaneMain, javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                 .addComponent(LayeredPanePlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 17, Short.MAX_VALUE))
         );
 
         pack();

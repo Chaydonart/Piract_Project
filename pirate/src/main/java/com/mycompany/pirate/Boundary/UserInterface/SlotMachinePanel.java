@@ -4,6 +4,8 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
+import static com.mycompany.pirate.data.FileRef.FX_MACHINE_ROULETTE_RESULT;
+import static com.mycompany.pirate.data.FileRef.OST_MAINTHEME;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -14,12 +16,14 @@ import java.util.Random;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
+import utils.SoundPlayer;
 
 /**
  *
  * @author BEN JAAFAR
  */
 public class SlotMachinePanel extends javax.swing.JPanel {
+    private SoundPlayer FX_result = new SoundPlayer(FX_MACHINE_ROULETTE_RESULT);
     private final JLabel[] slotLabels = new JLabel[3];
     private final Random random = new Random();
     private int[] finalValues;
@@ -61,6 +65,8 @@ public class SlotMachinePanel extends javax.swing.JPanel {
                 slotLabels[i].setText(String.valueOf(finalValues[i]));
             }
             timer.stop();
+            FX_result.play();
+            
         }
     }
 

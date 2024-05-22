@@ -21,6 +21,8 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -120,12 +122,9 @@ public class GameBoardPanel extends javax.swing.JPanel {
                     pion.setCellPosition(destinationCellNumber);
 
                     // Ajoute un délai d'une seconde ici
-                    Timer delayTimer = new Timer(500, new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            if(onAnimationEnd != null){
-                                onAnimationEnd.run();  
-                            }
+                    Timer delayTimer = new Timer(500, (ActionEvent ev) -> {
+                        if (onAnimationEnd != null) {
+                            onAnimationEnd.run();
                         }
                     });
                     delayTimer.setRepeats(false); // Exécute onAnimationEnd.run() une seule fois
@@ -140,6 +139,9 @@ public class GameBoardPanel extends javax.swing.JPanel {
     
     private class CellPanel extends JPanel {
         private int cellNumber;
+
+        private static final List<Integer> RED_NUMBERS = Arrays.asList(1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36);
+
 
         public CellPanel(int cellNumber) {
             setOpaque(false);
@@ -181,12 +183,7 @@ public class GameBoardPanel extends javax.swing.JPanel {
         }
 
         private boolean isRed(int number) {
-            // Liste des numéros rouges
-            int[] redNumbers = {1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36};
-            for (int n : redNumbers) {
-                if (n == number) return true;
-            }
-            return false;
+            return RED_NUMBERS.contains(number);
         }
         
         public int getCellNumber() {
