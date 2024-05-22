@@ -32,7 +32,6 @@ public class PanelPlayer1 extends PanelPlayerDisplay {
     @Override
     public void startAnimation() {
         Timer timer = new Timer(20, e -> {
-            // Mettre à jour la position verticale de l'image
             if (playerImage != null && playerImage.getWidth() != 0) {
                 int imageWidth = triangleBase - 20;
                 int imageHeight = playerImage.getHeight() != 0 ? (int) ((double) playerImage.getHeight() / playerImage.getWidth() * imageWidth) : 0;
@@ -46,18 +45,16 @@ public class PanelPlayer1 extends PanelPlayerDisplay {
                 if (movingDown) {
                     imageY += imageSpeed;
                     if (imageY >= triangleHeight - imageHeight) {
-                        // Inverser la direction lorsque l'image atteint le bas
                         movingDown = false;
                     }
                 } else {
                     imageY -= imageSpeed;
                     if (imageY <= 150) { // Changement ici
-                        // Inverser la direction lorsque l'image atteint le haut
                         movingDown = true;
                     }
                 }
 
-                repaint(); // Redessiner le composant avec la nouvelle position de l'image
+                repaint();
             }
         });
         timer.start();

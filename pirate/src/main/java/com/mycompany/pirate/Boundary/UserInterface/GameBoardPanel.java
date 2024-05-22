@@ -79,18 +79,8 @@ public class GameBoardPanel extends javax.swing.JPanel {
             if (component instanceof CellPanel) {
                 CellPanel cellPanel = (CellPanel) component;
                 if (cellPanel.getCellNumber() == destinationCellNumber) {
-                    int destinationX = cellPanel.getX() + (cellPanel.getWidth() - pion.getWidth()) / 2;
-                    int destinationY = cellPanel.getY() + (cellPanel.getHeight() - pion.getHeight()) / 2;
-
-                    // Ajuster les coordonnées pour centrer exactement le pion sur la cellule
-                    if (destinationCellNumber == 0) {
-                        // Cas particulier pour la position 0 (cellule plus grande)
-                        destinationX += (cellPanel.getWidth() - pion.getWidth()) / 4;
-                        destinationY += (cellPanel.getHeight() - pion.getHeight()) / 2;
-                    } else {
-                        destinationX += (cellPanel.getWidth() - pion.getWidth()) / 2;
-                        destinationY += (cellPanel.getHeight() - pion.getHeight()) / 2;
-                    }
+                    int destinationX = cellPanel.getX() + (cellPanel.getWidth() ) / 2;
+                    int destinationY = cellPanel.getY() + cellPanel.getHeight() + (pion.getWidth() / 2);
 
                     // Début de l'animation
                     animatePionMovement(pion, destinationX, destinationY, destinationCellNumber);

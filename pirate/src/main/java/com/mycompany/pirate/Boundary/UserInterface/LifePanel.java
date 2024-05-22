@@ -23,10 +23,9 @@ import java.awt.RenderingHints;
 public class LifePanel extends javax.swing.JPanel {
  private boolean isPlayer1 = true;
     private int viesRestantes = 5;
-    private Color playerColor = Color.GRAY;
     private BufferedImage lifeImage;
-    private int lifeImageWidth = 30;
-    private int lifeImageHeight = 30;
+    private final int lifeImageWidth = 30;
+    private final int lifeImageHeight = 30;
     private LifeAnimation[] animations;
 
     public LifePanel() {

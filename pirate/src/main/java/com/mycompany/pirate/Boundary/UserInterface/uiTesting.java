@@ -42,7 +42,7 @@ public class uiTesting extends javax.swing.JFrame implements IPirates {
         PanelDisplayerPlayer1.setTurn(true);
         
         //On met les bon niveau de layer 
-        LayeredPaneMain.setLayer(PanelPion1, 2);
+        LayeredPaneMain.setLayer(PanelPion1, 3);
         LayeredPaneMain.setLayer(PanelPion1, 2);
         LayeredPaneMain.setLayer(PanelGameboard, 1);
         

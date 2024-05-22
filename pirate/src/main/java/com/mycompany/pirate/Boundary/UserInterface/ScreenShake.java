@@ -13,6 +13,8 @@ import javax.swing.Timer;
 /**
  *
  * @author BEN JAAFAR
+ * 
+ * Effet qui permet de shake un Panel (animation)
  */
 public class ScreenShake {
       public static void shakePanel(JPanel panel, int shakeDuration, int shakeDistance) {
