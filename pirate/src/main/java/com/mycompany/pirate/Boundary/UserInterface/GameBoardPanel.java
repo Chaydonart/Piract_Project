@@ -81,8 +81,14 @@ public class GameBoardPanel extends javax.swing.JPanel {
                 if (cellPanel.getCellNumber() == destinationCellNumber) {
                     int destinationX = cellPanel.getX() + (cellPanel.getWidth() ) / 2;
                     int destinationY = cellPanel.getY() + cellPanel.getHeight() + (pion.getWidth() / 2);
-
-                    // Début de l'animation
+                    
+                    switch(pion.player_number){
+                        case 1 : 
+                            destinationX -= pion.getWidth() * 1.5;
+                        case 2 : 
+                            destinationX += pion.getWidth();
+                    }
+                    
                     animatePionMovement(pion, destinationX, destinationY, destinationCellNumber);
                     break;
                 }

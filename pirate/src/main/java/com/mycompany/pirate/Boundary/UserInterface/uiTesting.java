@@ -40,11 +40,13 @@ public class uiTesting extends javax.swing.JFrame implements IPirates {
         
         //Etat de base (c'est le joueur 1 qui commence)
         PanelDisplayerPlayer1.setTurn(true);
+        PanelPion1.player_number = 1;
+        PanelPion2.player_number = 2;
         
         //On met les bon niveau de layer 
-        LayeredPaneMain.setLayer(PanelPion1, 3);
-        LayeredPaneMain.setLayer(PanelPion1, 2);
-        LayeredPaneMain.setLayer(PanelGameboard, 1);
+        LayeredPaneMain.setLayer(PanelPion1, javax.swing.JLayeredPane.POPUP_LAYER);
+        LayeredPaneMain.setLayer(PanelPion1, javax.swing.JLayeredPane.POPUP_LAYER);
+
         
         //On met nos pions sur la case 0 
         PanelGameboard.deplacerPion(PanelPion1, 0);

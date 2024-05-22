@@ -14,9 +14,9 @@ import java.awt.Graphics2D;
  * @author BEN JAAFAR
  */
 public class PionPanel extends javax.swing.JPanel {
-
     private Color pionColor = Color.RED;
     private int cellPosition = 0;
+    public int player_number = 0;
 
     public PionPanel() {
         setOpaque(false); 
