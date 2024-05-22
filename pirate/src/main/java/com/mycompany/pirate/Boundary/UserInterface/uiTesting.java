@@ -278,7 +278,7 @@ public class uiTesting extends javax.swing.JFrame implements IPirates {
             PanelDisplayPlayer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelDisplayPlayer2Layout.createSequentialGroup()
                 .addComponent(PanelLifePlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 450, Short.MAX_VALUE))
+                .addGap(0, 456, Short.MAX_VALUE))
         );
 
         LayeredPanePlayer2.add(PanelDisplayPlayer2, java.awt.BorderLayout.CENTER);
@@ -296,12 +296,11 @@ public class uiTesting extends javax.swing.JFrame implements IPirates {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(LayeredPanePlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
             .addComponent(LayeredPanePlayer1)
             .addComponent(LayeredPaneMain, javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addComponent(LayeredPanePlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
