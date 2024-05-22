@@ -4,6 +4,8 @@
  */
 package com.mycompany.pirate.Interfaces;
 
+import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
+
 /**
  *
  * @author BEN JAAFAR
@@ -17,11 +19,11 @@ public interface IDialogue {
     
     void notifyEtatJeu();
     
-    void notifyCaseDegat(String name, int vie);
+    void notifyCaseDegat(String name);
     
-    void notifyCaseRejouer(int[] values, int resultat);
+    void notifyCaseRejouer(String name, int resultat);
     
-    void notifyCaseReculer(int[] values, int resultat);
+    void notifyCaseReculer(String name, int resultat);
    
     void notifyCaseGambling(String name,int randomValue);
     

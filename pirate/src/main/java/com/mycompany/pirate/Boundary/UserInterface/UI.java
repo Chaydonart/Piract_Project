@@ -149,7 +149,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
         PanelButtonSlotMachine = new com.mycompany.pirate.Boundary.UserInterface.PanelSlotButton();
         LayeredPanePlayer1 = new javax.swing.JLayeredPane();
         PanelDisplayerPlayer1 = new com.mycompany.pirate.Boundary.UserInterface.PanelPlayer1();
-        PanleLifePlayer2 = new com.mycompany.pirate.Boundary.UserInterface.LifePanel();
+        PanelLifePlayer1 = new com.mycompany.pirate.Boundary.UserInterface.LifePanel();
         LayeredPanePlayer2 = new javax.swing.JLayeredPane();
         PanelDisplayPlayer2 = new com.mycompany.pirate.Boundary.UserInterface.PanelPlayer2();
         PanelLifePlayer2 = new com.mycompany.pirate.Boundary.UserInterface.LifePanel();
@@ -245,14 +245,14 @@ public class UI extends javax.swing.JFrame implements IPirates {
         LayeredPanePlayer1.setBackground(new java.awt.Color(204, 255, 204));
         LayeredPanePlayer1.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout PanleLifePlayer2Layout = new javax.swing.GroupLayout(PanleLifePlayer2);
-        PanleLifePlayer2.setLayout(PanleLifePlayer2Layout);
-        PanleLifePlayer2Layout.setHorizontalGroup(
-            PanleLifePlayer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout PanelLifePlayer1Layout = new javax.swing.GroupLayout(PanelLifePlayer1);
+        PanelLifePlayer1.setLayout(PanelLifePlayer1Layout);
+        PanelLifePlayer1Layout.setHorizontalGroup(
+            PanelLifePlayer1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 194, Short.MAX_VALUE)
         );
-        PanleLifePlayer2Layout.setVerticalGroup(
-            PanleLifePlayer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        PanelLifePlayer1Layout.setVerticalGroup(
+            PanelLifePlayer1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
@@ -261,14 +261,14 @@ public class UI extends javax.swing.JFrame implements IPirates {
         PanelDisplayerPlayer1Layout.setHorizontalGroup(
             PanelDisplayerPlayer1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelDisplayerPlayer1Layout.createSequentialGroup()
-                .addComponent(PanleLifePlayer2, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                .addComponent(PanelLifePlayer1, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
                 .addContainerGap())
         );
         PanelDisplayerPlayer1Layout.setVerticalGroup(
             PanelDisplayerPlayer1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(PanelDisplayerPlayer1Layout.createSequentialGroup()
                 .addGap(0, 450, Short.MAX_VALUE)
-                .addComponent(PanleLifePlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(PanelLifePlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         LayeredPanePlayer1.add(PanelDisplayerPlayer1, java.awt.BorderLayout.PAGE_END);
@@ -337,7 +337,20 @@ public class UI extends javax.swing.JFrame implements IPirates {
     private com.mycompany.pirate.Boundary.UserInterface.LifePanel PanelLifePlayer2;
     private com.mycompany.pirate.Boundary.UserInterface.PionPanel PanelPion1;
     private com.mycompany.pirate.Boundary.UserInterface.PionPanel PanelPion2;
-    private com.mycompany.pirate.Boundary.UserInterface.LifePanel PanleLifePlayer2;
+    private com.mycompany.pirate.Boundary.UserInterface.LifePanel PanelLifePlayer1;
     private javax.swing.JInternalFrame jInternalFrame1;
     // End of variables declaration//GEN-END:variables
+
+	public void degat(String name) {
+		// TODO Auto-generated method stub
+		switch(name) {
+		case "Joueur 1":
+			this.PanelLifePlayer1.perdreVie();
+			break;
+		case "Joueur 2":
+			this.PanelLifePlayer2.perdreVie();
+			break;
+		}
+		
+	}
 }

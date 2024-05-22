@@ -31,10 +31,11 @@ public class ControlReculer implements IControlReculer, IControlDeplacerPion, IC
     
     @Override
     public void reculer(Pion pion) {
+    	Optional.ofNullable(notificationService).ifPresent(service -> service.notifyDeplacerPion(0, pion.getName()));
         int[] values = spin();;//Valeur aléatoire de retour en arrière
         int resultat = -Arrays.stream(values).sum();
         this.distanceRecule = resultat;
-        Optional.ofNullable(notificationService).ifPresent(service -> service.notifyCaseReculer(values,resultat));
+        Optional.ofNullable(notificationService).ifPresent(service -> service.notifyCaseReculer(pion.getName(),resultat));
         deplacerPion(pion,resultat); 
     }
     

@@ -79,24 +79,27 @@ public class Boundary implements IBoundary {
     }
 
     @Override
-    public void notifyCaseDegat(String name, int vie) {
-        afficherMessage("Le joueur tombe sur une case DÉGÂTS");
-        afficherMessage("Le pion " + name + " a pris des dégâts ! Vie restante : " + vie);
+    public void notifyCaseDegat(String name) {
+//        afficherMessage("Le joueur tombe sur une case DÉGÂTS");
+//        afficherMessage("Le pion " + name + " a pris des dégâts");
+        GUI.degat(name);
     }
 
     @Override
-    public void notifyCaseRejouer(int[] values, int resultat) {
-        afficherMessage("Le joueur tombe sur une case REJOUER");
-        notifyEtatJeu();
-        afficherMessage("Le joueur va rejouer");
-        spin(values);
+    public void notifyCaseRejouer(String name, int resultat) {
+//        afficherMessage("Le joueur tombe sur une case REJOUER");
+//        notifyEtatJeu();
+//        afficherMessage("Le joueur va rejouer");
+    	//TODO les animations pour l'interface
+        deplacerPion(resultat, name);
     }
 
     @Override
-    public void notifyCaseReculer(int[] values, int resultat) {             
-        afficherMessage("Le joueur tombe sur une case RECULER");
-        notifyEtatJeu();
-        spin(values);
+    public void notifyCaseReculer(String name, int resultat) {             
+//        afficherMessage("Le joueur tombe sur une case RECULER");
+//        notifyEtatJeu();
+    	//TODO les animations pour l'interface
+        deplacerPion(resultat, name);
     }
 
     @Override

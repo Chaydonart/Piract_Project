@@ -14,6 +14,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.ImageIcon;
 
 /**
@@ -32,7 +34,6 @@ public class PanelSlotButton extends javax.swing.JPanel {
     public PanelSlotButton() {
         loadSlotMachineImage();
         setPreferredSize(new Dimension(200, 200)); 
-        
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

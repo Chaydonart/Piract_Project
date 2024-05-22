@@ -22,7 +22,7 @@ public class CaseDegat extends Case {
     public void ajouterPion(Pion pion) {
         occupants.add(pion);
         pion.setVie(pion.getVie() - 1);
-        Optional.ofNullable(notificationService).ifPresent(service -> service.notifyCaseDegat(pion.getName(), pion.getVie()));
+        Optional.ofNullable(notificationService).ifPresent(service -> service.notifyCaseDegat(pion.getName()));
     }
     
 
