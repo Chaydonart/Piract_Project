@@ -61,6 +61,12 @@ public class Boundary implements IBoundary {
     public void notifyFinPartie() {
     	GUI.finPartie();
     }
+    @Override
+    public void notifyDuelReussi(Pion pion) {
+    	// TODO Auto-generated method stub
+    	GUI.duelReussi(pion);
+    	
+    }
 
     // Partie pacerelle dialogue
     @Override

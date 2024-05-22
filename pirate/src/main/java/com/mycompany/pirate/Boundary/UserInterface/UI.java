@@ -4,6 +4,7 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
+import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.Interfaces.IPirates;
 import static com.mycompany.pirate.data.FileRef.FX_CHANGE_TURN;
 import static com.mycompany.pirate.data.FileRef.OST_MAINTHEME;
@@ -351,6 +352,11 @@ public class UI extends javax.swing.JFrame implements IPirates {
 			this.PanelLifePlayer2.perdreVie();
 			break;
 		}
+		
+	}
+
+	public void duelReussi(Pion pion) {
+		// TODO Auto-generated method stub
 		
 	}
 }

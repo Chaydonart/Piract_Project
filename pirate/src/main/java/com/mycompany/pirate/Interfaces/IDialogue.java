@@ -32,4 +32,6 @@ public interface IDialogue {
     void notifyNouveauTour(String name);
     
     void notifyFinPartie();
+
+	void notifyDuelReussi(Pion pion);
 }

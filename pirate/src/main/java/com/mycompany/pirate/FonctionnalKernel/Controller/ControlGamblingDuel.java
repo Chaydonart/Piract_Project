@@ -44,7 +44,7 @@ public class ControlGamblingDuel implements IControlGamblingDuel, IControlSlotMa
             
             return -1;
         } else {
-        	Optional.ofNullable(notificationServices).ifPresent(service -> service.notify("DUEL REUSSI !"));
+        	Optional.ofNullable(notificationServices).ifPresent(service -> service.notifyDuelReussi(pion));
             return 0;
         }
     }
