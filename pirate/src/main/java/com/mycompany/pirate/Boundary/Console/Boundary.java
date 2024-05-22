@@ -57,6 +57,10 @@ public class Boundary implements IBoundary {
     public void deplacerPion(int deplacement, String name) {
        GUI.deplacerPion(deplacement,name);
     }
+    
+    public void notifyFinPartie() {
+    	GUI.finPartie();
+    }
 
     // Partie pacerelle dialogue
     @Override

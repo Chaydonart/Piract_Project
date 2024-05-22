@@ -19,7 +19,8 @@ import utils.SoundPlayer;
  * @author BEN JAAFAR
  */
 public class UI extends javax.swing.JFrame implements IPirates {
-    private boolean testingTurn = true;
+    private boolean turn = true;
+    private boolean partieFini = false;
     /*
     * Mettre tout les sons et les changer dans un SoundGestionnaire
     */
@@ -114,6 +115,9 @@ public class UI extends javax.swing.JFrame implements IPirates {
             Thread.currentThread().interrupt();
         }
     }
+    public void finPartie() {
+    	this.PanelButtonSlotMachine.setEnabled(false);
+    }
     
     private void setPanelClickListener(Runnable listener) {
         PanelButtonSlotMachine.addMouseListener(new MouseAdapter() {
@@ -125,9 +129,9 @@ public class UI extends javax.swing.JFrame implements IPirates {
     }
     
     public void nouveauTour(){
-        PanelDisplayerPlayer1.setTurn(testingTurn);
-        PanelDisplayPlayer2.setTurn(!testingTurn);
-        testingTurn = !testingTurn;
+        PanelDisplayerPlayer1.setTurn(turn);
+        PanelDisplayPlayer2.setTurn(!turn);
+        turn = !turn;
         changeTurn.play();
     }
     
