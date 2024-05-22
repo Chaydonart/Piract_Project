@@ -5,7 +5,7 @@
 package com.mycompany.pirate.Boundary.UserInterface;
 
 import static com.mycompany.pirate.data.FileRef.FX_MACHINE_ROULETTE;
-import com.mycompany.pirate.data.SoundPlayer;
+import utils.SoundPlayer;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
@@ -18,6 +18,7 @@ import javax.swing.Timer;
  */
 class SlotMachineWindow extends JWindow{
     private SoundPlayer fxMachineRoulette = new SoundPlayer(FX_MACHINE_ROULETTE);
+    private Runnable endAnimation;
 
     public SlotMachineWindow() {
         fxMachineRoulette.play();
@@ -29,14 +30,18 @@ class SlotMachineWindow extends JWindow{
             dispose();
             fxMachineRoulette.stop();
             fxMachineRoulette.close();
+            endAnimation.run();
         });
         timer.setRepeats(false);
         timer.start(); 
     }
     
-    public void startAnimation(int[] values){
-        JPanel slotMachinePanel = new SlotMachinePanel(values); 
-        add(slotMachinePanel, BorderLayout.CENTER);
-        ((SlotMachinePanel) slotMachinePanel).startAnimation(); 
+    
+    public void startAnimation(int[] values, Runnable onAnimationEnd) {
+        SlotMachinePanel slotMachinePanel = new SlotMachinePanel(values); 
+        add(slotMachinePanel, BorderLayout.CENTER); 
+        slotMachinePanel.startAnimation(values);
+        this.endAnimation = onAnimationEnd;
     }
+
 }

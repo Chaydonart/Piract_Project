@@ -7,12 +7,12 @@ package com.mycompany.pirate.Boundary.UserInterface;
 import com.mycompany.pirate.Interfaces.IPirates;
 import static com.mycompany.pirate.data.FileRef.FX_CHANGE_TURN;
 import static com.mycompany.pirate.data.FileRef.OST_MAINTHEME;
-import com.mycompany.pirate.data.SoundPlayer;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.concurrent.CountDownLatch;
 import javax.swing.SwingUtilities;
+import utils.SoundPlayer;
 
 /**
  *
@@ -72,26 +72,32 @@ public class UI extends javax.swing.JFrame implements IPirates {
     
     //Permet de gerer la machine a sous son animation etc...
     public void spinMachine(int[] values) {
-        CountDownLatch latch = new CountDownLatch(1);
+        CountDownLatch latchClick = new CountDownLatch(1);
+        CountDownLatch latchAnimationEnd = new CountDownLatch(1);
 
         SwingUtilities.invokeLater(() -> {
             try {
                 // Code pour démarrer l'animation de la machine à sous
-                setPanelClickListener(() -> latch.countDown());
+                setPanelClickListener(() -> latchClick.countDown());
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
 
         try {
-            latch.await();  // Attend que le joueur appuie sur le bouton
+            latchClick.await();  // Attend que le joueur appuie sur le bouton
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             return;
         }
 
-        PanelButtonSlotMachine.startAnimation(values);
+        PanelButtonSlotMachine.startAnimation(values, () -> latchAnimationEnd.countDown());
 
+        try {
+            latchAnimationEnd.await();  // Attend que l'animation soit terminée
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
     
     private void setPanelClickListener(Runnable listener) {

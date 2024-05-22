@@ -8,7 +8,7 @@ import static com.mycompany.pirate.data.FileRef.FX_CLICK;
 import static com.mycompany.pirate.data.FileRef.FX_OFF_SLOTMACHINE;
 import static com.mycompany.pirate.data.FileRef.FX_ON_SLOTMACHINE;
 import static com.mycompany.pirate.data.FileRef.IMAGE_SLOT_MACHINE;
-import com.mycompany.pirate.data.SoundPlayer;
+import utils.SoundPlayer;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -69,9 +69,10 @@ public class PanelSlotButton extends javax.swing.JPanel {
         window.setVisible(true);
     }
 
-    public void startAnimation(int[] values) {
-        window.startAnimation(values);
-    }
+public void startAnimation(int[] values, Runnable onAnimationEnd) {
+    // Code pour démarrer l'animation
+    window.startAnimation(values, onAnimationEnd);
+}
 
     @Override
     protected void paintComponent(Graphics g) {

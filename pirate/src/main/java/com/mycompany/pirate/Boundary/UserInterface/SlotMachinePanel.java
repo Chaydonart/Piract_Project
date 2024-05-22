@@ -42,7 +42,7 @@ public class SlotMachinePanel extends javax.swing.JPanel {
         setOpaque(false); // Make the JPanel transparent
     }
 
-    public void startAnimation() {
+    public void startAnimation(int[] values) {
         animationStartTime = System.currentTimeMillis();
         timer = new Timer(100, e -> updateSlots());
         timer.start();
