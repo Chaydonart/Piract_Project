@@ -122,12 +122,9 @@ public class GameBoardPanel extends javax.swing.JPanel {
                     pion.setCellPosition(destinationCellNumber);
 
                     // Ajoute un délai d'une seconde ici
-                    Timer delayTimer = new Timer(500, new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            if(onAnimationEnd != null){
-                                onAnimationEnd.run();  
-                            }
+                    Timer delayTimer = new Timer(500, (ActionEvent ev) -> {
+                        if (onAnimationEnd != null) {
+                            onAnimationEnd.run();
                         }
                     });
                     delayTimer.setRepeats(false); // Exécute onAnimationEnd.run() une seule fois
