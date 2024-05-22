@@ -20,21 +20,13 @@ import javax.swing.Timer;
  * @author BEN JAAFAR
  */
 class SlotMachineWindow extends JWindow{
-    private SlotMachinePanel slotMachinePanel;
+    private JPanel slotMachinePanel;
     private SoundPlayer machineRoulette = new SoundPlayer(FX_MACHINE_ROULETTE);
-    private int[] valuesOfSlotPanel;
-     
 
     public SlotMachineWindow() {
         machineRoulette.play();
         machineRoulette.loop();
-        setSize(600, 300); 
-
-        slotMachinePanel = new SlotMachinePanel(); 
-        valuesOfSlotPanel = slotMachinePanel.getFinalValues();
-        add(slotMachinePanel, BorderLayout.CENTER);
-        
-        ((SlotMachinePanel) slotMachinePanel).start(); // lancer l'animation de la slotmachine
+        setSize(600, 300);   
 
         //On ferme la fenetre apres 3sec
         Timer timer = new Timer(3000, new ActionListener() {
@@ -48,7 +40,10 @@ class SlotMachineWindow extends JWindow{
         timer.setRepeats(false);
         timer.start(); 
     }
-    public int[] getValuesOfSlotPanel() {
-		return valuesOfSlotPanel;
-	}
+    
+    public void startAnimation(int[] values){
+        slotMachinePanel = new SlotMachinePanel(values); 
+        add(slotMachinePanel, BorderLayout.CENTER);
+        ((SlotMachinePanel) slotMachinePanel).startAnimation(); 
+    }
 }

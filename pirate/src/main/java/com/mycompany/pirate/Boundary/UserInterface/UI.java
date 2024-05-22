@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
@@ -8,20 +8,15 @@ import com.mycompany.pirate.Interfaces.IPirates;
 import static com.mycompany.pirate.data.FileRef.FX_CHANGE_TURN;
 import static com.mycompany.pirate.data.FileRef.OST_MAINTHEME;
 import com.mycompany.pirate.data.SoundPlayer;
-import static com.mycompany.pirate.data.values.GREEN_CUSTOM;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.concurrent.CountDownLatch;
-import javax.swing.JButton;
-import javax.swing.JLayeredPane;
-import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
+import javax.swing.JFrame;
 
 /**
  *
  * @author BEN JAAFAR
  */
-public class uiTesting extends javax.swing.JFrame implements IPirates {
+public class UI extends JFrame implements IPirates {
     private boolean testingTurn = true;
     private int testDeplacer = 0;
     /*
@@ -30,14 +25,13 @@ public class uiTesting extends javax.swing.JFrame implements IPirates {
     private SoundPlayer mainTheme = new SoundPlayer(OST_MAINTHEME);
     private SoundPlayer changeTurn = new SoundPlayer(FX_CHANGE_TURN);
 
-    public uiTesting() {
+    public UI() {
         initComponents();        
         setLocationRelativeTo(null);
 	setResizable(false);
         lifePanel2.setPlayer2();
         mainTheme.loop();
         mainTheme.play();
-        panelPlayer2.setTurn(true);
 
     }
     
@@ -45,36 +39,11 @@ public class uiTesting extends javax.swing.JFrame implements IPirates {
         setVisible(true);
     }
     
-    //Permet de gerer le deplacerPion
     public void deplacerPion(int destinationCellNumber){
         gameBoardPanel1.deplacerPion(pionPanel1,destinationCellNumber);
     }
     
-    //Permet de gerer la machine a sous son animation etc...
-    public void spinMachine(int[] values) {
-        CountDownLatch latch = new CountDownLatch(1);
-
-        SwingUtilities.invokeLater(() -> {
-            try {
-                // Code pour démarrer l'animation de la machine à sous
-                setPanelClickListener(() -> latch.countDown());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-
-        try {
-            latch.await();  // Attend que le joueur appuie sur le bouton
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            return;
-        }
-
-        panelSlotButton1.startAnimation(values);
-
-    }
-    
-    private void setPanelClickListener(Runnable listener) {
+    public void setPanelClickListener(Runnable listener) {
         panelSlotButton1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -83,15 +52,9 @@ public class uiTesting extends javax.swing.JFrame implements IPirates {
         });
     }
     
-    public void nouveauTour(){
-        panelPlayer2.setTurn(testingTurn);
-        panelPlayer21.setTurn(!testingTurn);
-        testingTurn = !testingTurn;
-        changeTurn.play();
-    }
     
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jInternalFrame1 = new javax.swing.JInternalFrame();
@@ -273,9 +236,9 @@ public class uiTesting extends javax.swing.JFrame implements IPirates {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         panelPlayer2.setTurn(testingTurn);
         panelPlayer21.setTurn(!testingTurn);
         testingTurn = !testingTurn;
@@ -284,9 +247,9 @@ public class uiTesting extends javax.swing.JFrame implements IPirates {
         gameBoardPanel1.deplacerPion(pionPanel1, testDeplacer);
         testDeplacer++;
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }                                        
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private com.mycompany.pirate.Boundary.UserInterface.GameBoardPanel gameBoardPanel1;
     private javax.swing.JButton jButton1;
     private javax.swing.JInternalFrame jInternalFrame1;
@@ -299,5 +262,6 @@ public class uiTesting extends javax.swing.JFrame implements IPirates {
     private com.mycompany.pirate.Boundary.UserInterface.PanelPlayer2 panelPlayer21;
     public com.mycompany.pirate.Boundary.UserInterface.PanelSlotButton panelSlotButton1;
     private com.mycompany.pirate.Boundary.UserInterface.PionPanel pionPanel1;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }
+

@@ -24,25 +24,19 @@ public class PionPanel extends javax.swing.JPanel {
     private int cellPosition = 0;
 
     public PionPanel() {
-        setOpaque(false); // Rend le fond transparent
+        setOpaque(false); 
     }
     
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-        // Convertir Graphics en Graphics2D pour utiliser setStroke()
         Graphics2D g2d = (Graphics2D) g;
-
-        // Définir l'épaisseur du contour
         float contourWidth = 2.0f; // épaisseur personnalisée
         g2d.setStroke(new BasicStroke(contourWidth));
 
-        // Dessiner le contour blanc
         g2d.setColor(Color.WHITE);
         g2d.drawOval(0, 0, getWidth(), getHeight());
 
-        // Remplir le cercle avec la couleur du pion
         g2d.setColor(pionColor);
         g2d.fillOval(0, 0, getWidth(), getHeight());
     }

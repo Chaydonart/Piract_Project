@@ -4,6 +4,7 @@
  */
 package com.mycompany.pirate.Boundary.Console;
 
+import com.mycompany.pirate.Boundary.UserInterface.UI;
 import com.mycompany.pirate.Boundary.UserInterface.uiTesting;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlJeu;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
@@ -13,10 +14,12 @@ import java.util.Arrays;
 import com.mycompany.pirate.Interfaces.IDialogue;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
+import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 
 /**
  *
@@ -25,37 +28,30 @@ import javax.swing.SwingUtilities;
  * Va ensuite en plus implementer IPirates
  */
 public class Boundary implements IBoundary {
-    private ControlJeu gameLoopController;
     private final PionRepository pionRepository;
-    private final Scanner scanner;
     private uiTesting GUI;
 
     public Boundary(ControlJeu gameLoopController, PionRepository pionRepository) {
-        this.gameLoopController = gameLoopController;
         this.pionRepository = pionRepository;
-        this.scanner = new Scanner(System.in);
     }
 
     @Override
     public void start() {
-        afficherMessage("Le jeu commence !");
-        afficherMessage("Appuyez sur Entrée pour démarrer le jeu...");
-        scanner.nextLine(); 
         GUI = new uiTesting();
         GUI.startGUI();
-        gameLoopController.startGame();
     }
 
     //Partie affichage console (temporaire)
     @Override
     public void spin(int[] values) {
-        afficherMessage("Appuyez sur Entrée pour lancer la machine à sous...");
-        scanner.nextLine(); // Attendre que l'utilisateur appuie sur Entrée
-        afficherMessage("La machine à sous affiche = " + values[0] + " " +  values[1] + " " + values[2]);
-        int resultat = Arrays.stream(values).sum();
-        afficherMessage("Résultat de la machine " + resultat);
+        this.GUI.spinMachine(values);
     }
-
+    
+    @Override 
+    public void tourSuivant(){
+        this.GUI.nouveauTour();
+    }
+    
     @Override
     public void afficherEtatJeu() {
         for (Pion pion : pionRepository.getPions()) {
@@ -102,7 +98,6 @@ public class Boundary implements IBoundary {
         notifyEtatJeu();
         afficherMessage("Le joueur va rejouer");
         spin(values);
-
     }
 
     @Override
@@ -126,12 +121,7 @@ public class Boundary implements IBoundary {
     
     @Override
     public void notifyNouveauTour(String name){
-        afficherMessage("# " + name + " prend son tour #");
-    }
-
-    // Pour initialiser le jeu
-    public void setGameLoopController(ControlJeu gameLoopController) {
-        this.gameLoopController = gameLoopController; 
+        tourSuivant();
     }
 
 }
