@@ -12,7 +12,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import static com.mycompany.pirate.data.FileRef.IMAGE_LIFE_PLAYER_1;
 import static com.mycompany.pirate.data.FileRef.IMAGE_LIFE_PLAYER_2;
-import static com.mycompany.pirate.data.values.TRANSPARENT_COLOR_BACKGROUND;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;

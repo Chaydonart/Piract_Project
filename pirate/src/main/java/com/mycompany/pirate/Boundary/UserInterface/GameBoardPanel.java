@@ -25,6 +25,9 @@ import javax.swing.Timer;
 /**
  *
  * @author BEN JAAFAR
+ * 
+ * Panel qui trace un plateau avec un gridlayout 
+ * Permet aussi de deplacer les pions grace aux coordonnes des cellules
  */
 public class GameBoardPanel extends javax.swing.JPanel {
 
@@ -70,7 +73,64 @@ public class GameBoardPanel extends javax.swing.JPanel {
 
         setOpaque(false);
     }
+    
+    public void deplacerPion(PionPanel pion, int destinationCellNumber) {
+        for (Component component : getComponents()) {
+            if (component instanceof CellPanel) {
+                CellPanel cellPanel = (CellPanel) component;
+                if (cellPanel.getCellNumber() == destinationCellNumber) {
+                    int destinationX = cellPanel.getX() + (cellPanel.getWidth() - pion.getWidth()) / 2;
+                    int destinationY = cellPanel.getY() + (cellPanel.getHeight() - pion.getHeight()) / 2;
 
+                    // Ajuster les coordonnées pour centrer exactement le pion sur la cellule
+                    if (destinationCellNumber == 0) {
+                        // Cas particulier pour la position 0 (cellule plus grande)
+                        destinationX += (cellPanel.getWidth() - pion.getWidth()) / 4;
+                        destinationY += (cellPanel.getHeight() - pion.getHeight()) / 2;
+                    } else {
+                        destinationX += (cellPanel.getWidth() - pion.getWidth()) / 2;
+                        destinationY += (cellPanel.getHeight() - pion.getHeight()) / 2;
+                    }
+
+                    // Début de l'animation
+                    animatePionMovement(pion, destinationX, destinationY, destinationCellNumber);
+                    break;
+                }
+            }
+        }
+    }
+
+    private void animatePionMovement(PionPanel pion, int destinationX, int destinationY, int destinationCellNumber) {
+        //System.out.println("GUI animatioPionMovement in gameboardpanel");
+        int startX = pion.getX();
+        int startY = pion.getY();
+        int deltaX = destinationX - startX;
+        int deltaY = destinationY - startY;
+        int steps = 30; 
+        int delay = 1; 
+
+        Timer timer = new Timer(delay, new ActionListener() {
+            int step = 0;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                step++;
+                double progress = (double) step / steps;
+                int currentX = startX + (int) (deltaX * progress);
+                int currentY = startY + (int) (deltaY * progress);
+                pion.setLocation(currentX, currentY);
+
+                if (step >= steps) {
+                    ((Timer) e.getSource()).stop();
+                    pion.setLocation(destinationX, destinationY);
+                    pion.setCellPosition(destinationCellNumber);
+                }
+            }
+        });
+
+        timer.start();
+    }
+    
     private class CellPanel extends JPanel {
         private int cellNumber;
 
@@ -127,58 +187,6 @@ public class GameBoardPanel extends javax.swing.JPanel {
         }
     }
     
-    public void deplacerPion(PionPanel pion, int destinationCellNumber) {
-       //System.out.println("GUI deplacerPion in gameboardpanel");
-        for (Component component : getComponents()) {
-            if (component instanceof CellPanel) {
-                CellPanel cellPanel = (CellPanel) component;
-                if (cellPanel.getCellNumber() == destinationCellNumber) {
-                    int destinationX = cellPanel.getX() + (cellPanel.getWidth() - pion.getWidth()) / 2;
-                    int destinationY = cellPanel.getY() + (cellPanel.getHeight() - pion.getHeight()) / 2;
-
-                    // Ajuster les coordonnées pour centrer exactement le pion sur la cellule
-                    destinationX += (cellPanel.getWidth() - pion.getWidth()) / 4;
-                    destinationY += (cellPanel.getHeight() - pion.getHeight());
-
-                    // Début de l'animation
-                    animatePionMovement(pion, destinationX, destinationY, destinationCellNumber);
-                    break;
-                }
-            }
-        }
-    }
-
-    private void animatePionMovement(PionPanel pion, int destinationX, int destinationY, int destinationCellNumber) {
-        //System.out.println("GUI animatioPionMovement in gameboardpanel");
-        int startX = pion.getX();
-        int startY = pion.getY();
-        int deltaX = destinationX - startX;
-        int deltaY = destinationY - startY;
-        int steps = 30; 
-        int delay = 1; 
-
-        Timer timer = new Timer(delay, new ActionListener() {
-            int step = 0;
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                step++;
-                double progress = (double) step / steps;
-                int currentX = startX + (int) (deltaX * progress);
-                int currentY = startY + (int) (deltaY * progress);
-                pion.setLocation(currentX, currentY);
-
-                if (step >= steps) {
-                    ((Timer) e.getSource()).stop();
-                    pion.setLocation(destinationX, destinationY);
-                    pion.setCellPosition(destinationCellNumber);
-                }
-            }
-        });
-
-        timer.start();
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

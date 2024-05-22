@@ -17,13 +17,15 @@ import javax.swing.Timer;
  */
 public class PanelPlayer1 extends PanelPlayerDisplay {
     private double imageY = 0;
-    private double imageSpeed = 0.1;
+    private double imageSpeed = 0.2;
     private boolean movingDown = true;
 
     public PanelPlayer1() {
         loadImage(IMAGE_PLAYER_1);
         setPreferredSize(new Dimension(triangleBase, triangleHeight));
-        imageY = triangleHeight - (triangleBase - 20) * ((double) playerImage.getHeight() / playerImage.getWidth()) - 10;
+        if(playerImage != null){
+            imageY = triangleHeight - (triangleBase - 20) * ((double) playerImage.getHeight() / playerImage.getWidth()) - 10;
+        }
         startAnimation();
     }
 

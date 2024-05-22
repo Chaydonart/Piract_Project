@@ -4,15 +4,10 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
-import static com.mycompany.pirate.data.values.TRANSPARENT_COLOR_BACKGROUND;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /**
  *
@@ -47,6 +42,10 @@ public class PionPanel extends javax.swing.JPanel {
     
     public void setCellPosition(int cellPos){
         this.cellPosition = cellPos;
+    }
+    
+    public int getCellPosition(){
+        return cellPosition;
     }
 
     @SuppressWarnings("unchecked")

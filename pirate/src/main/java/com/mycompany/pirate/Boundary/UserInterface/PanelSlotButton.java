@@ -9,12 +9,9 @@ import static com.mycompany.pirate.data.FileRef.FX_OFF_SLOTMACHINE;
 import static com.mycompany.pirate.data.FileRef.FX_ON_SLOTMACHINE;
 import static com.mycompany.pirate.data.FileRef.IMAGE_SLOT_MACHINE;
 import com.mycompany.pirate.data.SoundPlayer;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
@@ -35,6 +32,7 @@ public class PanelSlotButton extends javax.swing.JPanel {
     public PanelSlotButton() {
         loadSlotMachineImage();
         setPreferredSize(new Dimension(200, 200)); 
+        
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -70,7 +68,6 @@ public class PanelSlotButton extends javax.swing.JPanel {
         window.setLocationRelativeTo(null); 
         window.setVisible(true);
     }
-
 
     public void startAnimation(int[] values) {
         window.startAnimation(values);

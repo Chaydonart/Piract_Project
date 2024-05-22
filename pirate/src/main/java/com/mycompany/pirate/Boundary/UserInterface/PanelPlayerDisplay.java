@@ -4,10 +4,8 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
-import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_1;
 import static com.mycompany.pirate.data.values.RED_CUSTOM;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +14,7 @@ import javax.imageio.ImageIO;
 /**
  *
  * @author BEN JAAFAR
+ * PanelDisplayer qui permet d'avoir les methodes generique pour les PanelPlayer
  */
 public abstract class PanelPlayerDisplay extends javax.swing.JPanel {
     protected BufferedImage playerImage;
