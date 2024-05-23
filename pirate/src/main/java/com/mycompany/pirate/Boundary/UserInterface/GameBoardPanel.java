@@ -123,8 +123,6 @@ public class GameBoardPanel extends javax.swing.JPanel {
                     ((Timer) e.getSource()).stop();
                     pion.setLocation(destinationX, destinationY);
                     pion.setCellPosition(destinationCellNumber);
-
-                    // Ajoute un délai d'une seconde ici
                     Timer delayTimer = new Timer(500, (ActionEvent ev) -> {
                         if (onAnimationEnd != null) {
                             onAnimationEnd.run();
@@ -157,7 +155,7 @@ public class GameBoardPanel extends javax.swing.JPanel {
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D) g;
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            this.setBorder(BorderFactory.createLineBorder(Color.WHITE, 4)); // Bordure noire de 2 pixels
+            this.setBorder(BorderFactory.createLineBorder(Color.WHITE, 4)); 
 
             // Déterminer la couleur de la cellule
             if (cellNumber == 0) {
@@ -168,14 +166,12 @@ public class GameBoardPanel extends javax.swing.JPanel {
                 g2d.setColor(Color.BLACK);
             }
 
-            // Dessiner le cercle
-            int diameter = Math.min(getWidth(), getHeight()) - 10; // Ajuster pour les marges
+            int diameter = Math.min(getWidth(), getHeight()) - 10; 
            
             int x = (getWidth() - diameter) / 2;
             int y = (getHeight() - diameter) / 2;
             g2d.fillOval(x, y, diameter, diameter );
 
-            // Dessiner le numéro de la cellule
             g2d.setColor(Color.WHITE);
             g2d.setFont(new Font("Arial", Font.BOLD, 25));
             FontMetrics fm = g2d.getFontMetrics();

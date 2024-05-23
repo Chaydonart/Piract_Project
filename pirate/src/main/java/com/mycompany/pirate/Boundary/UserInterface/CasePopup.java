@@ -72,7 +72,7 @@ public class CasePopup extends JWindow {
         Graphics2D g2d = (Graphics2D) g.create();
     
         g2d.setComposite(AlphaComposite.SrcOver.derive(alpha));
-        // Draw the image
+
         Image image = imageIcon.getImage();
         int x = (getWidth() - imageSizeScaled) / 2;
         int y = (getHeight() - imageSizeScaled) / 2;

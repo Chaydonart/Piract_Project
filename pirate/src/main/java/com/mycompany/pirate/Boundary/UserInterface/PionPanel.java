@@ -26,7 +26,7 @@ public class PionPanel extends javax.swing.JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        float contourWidth = 3.0f; // épaisseur personnalisée
+        float contourWidth = 3.0f; 
         g2d.setStroke(new BasicStroke(contourWidth));
 
         int centerX = getWidth() / 2;

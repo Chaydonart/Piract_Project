@@ -101,15 +101,15 @@ public class LifePanel extends javax.swing.JPanel {
 
         public void run() {
             double time = 0.0;
-            double amplitude = 5.0; // Hauteur du mouvement
-            double frequency = 0.02; // Vitesse du mouvement
+            double amplitude = 5.0; 
+            double frequency = 0.02; 
             while (running) {
                 try {
-                    Thread.sleep(16); // Environ 60 FPS
+                    Thread.sleep(16); 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                yOffset = (int) (amplitude * Math.sin(frequency * time)); // Interpolation sinusoidale
+                yOffset = (int) (amplitude * Math.sin(frequency * time)); 
                 time += 1.0;
                 repaint();
             }

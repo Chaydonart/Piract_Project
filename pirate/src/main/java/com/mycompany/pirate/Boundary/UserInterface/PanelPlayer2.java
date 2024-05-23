@@ -91,17 +91,14 @@ public class PanelPlayer2 extends PanelPlayerDisplay {
             int imageWidth = triangleBase - 20; 
             int imageHeight = (int) ((double) playerImage.getHeight() / playerImage.getWidth() * imageWidth); 
 
-            // Assurer que l'image ne dépasse pas la hauteur du triangle
             if (imageHeight > triangleHeight) {
                 imageHeight = triangleHeight - 20; 
                 imageWidth = (int) ((double) playerImage.getWidth() / playerImage.getHeight() * imageHeight); 
             }
 
-            // Calculer la position pour centrer l'image à la base du triangle
             int imageX = (triangleBase - imageWidth) / 2 + 10; 
             int imageYInt = (int) imageY; 
 
-            // Dessiner l'image redimensionnée à l'intérieur du triangle
             g2d.setClip(triangle);
             g2d.drawImage(playerImage, imageX, imageYInt, imageWidth, imageHeight, this);
             g2d.setClip(null); 
