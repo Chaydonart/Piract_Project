@@ -22,7 +22,7 @@ import java.util.List;
 
 /**
  *
- * @author BEN JAAFAR
+ * @author BEN JAAFAR & RIBEIRO
  * 
  * Panel qui trace un plateau avec un gridlayout 
  * Permet aussi de deplacer les pions grace aux coordonnes des cellules
