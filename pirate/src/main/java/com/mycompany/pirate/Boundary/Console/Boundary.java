@@ -77,13 +77,12 @@ public class Boundary implements IBoundary {
     @Override
     public void notifyCaseDegat(String name, int vie) {
        this.GUI.takeDamage(name);
+       this.GUI.caseBombe();
     }
 
     @Override
     public void notifyCaseRejouer() {
-        afficherMessage("Le joueur tombe sur une case REJOUER");
-        notifyEtatJeu();
-        afficherMessage("Le joueur va rejouer");
+        this.GUI.caseRejouer();
     }
 
     @Override

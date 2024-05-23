@@ -18,6 +18,10 @@ public class FileRef {
     public static final String IMAGE_PLAYER_2 = "src\\main\\java\\com\\mycompany\\pirate\\res\\player2.png";
     public static final String IMAGE_PLAYER_2_DAMAGE = "src\\main\\java\\com\\mycompany\\pirate\\res\\player2_damage.png";
     public static final String BACKGROUND_IMAGE = "src\\main\\java\\res\\plateau.png";
+    public static final String POPUP_BOMBE = "src\\main\\java\\com\\mycompany\\pirate\\res\\POPUP_bombe.png";
+    public static final String POPUP_REJOUER = "src\\main\\java\\com\\mycompany\\pirate\\res\\POPUP_rejouer.png";
+
+
    
     //MUSICS(only .wav)
     public static final String OST_MAINTHEME = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\music\\OST_main_theme.wav";
@@ -31,6 +35,7 @@ public class FileRef {
     public static final String FX_MACHINE_ROULETTE_RESULT = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\fx\\FX_machine_result.wav";
     public static final String FX_DAMAGE = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\fx\\FX_damage.wav";
     public static final String FX_GAMBLING_DUEL_VICTORY = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\fx\\FX_gambingmachine_victory.wav";
+    public static final String FX_POPUP_CASE = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\fx\\FX_popup_case.wav";
 
 
     //FONTS

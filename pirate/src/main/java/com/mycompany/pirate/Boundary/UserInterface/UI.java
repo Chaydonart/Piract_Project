@@ -4,6 +4,8 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
+import static com.mycompany.pirate.Boundary.UserInterface.CasePopupManager.popupCaseRejouer;
+import static com.mycompany.pirate.Boundary.UserInterface.CasePopupManager.popupCaseBomb;
 import com.mycompany.pirate.Boundary.UserInterface.PanelPlayerDisplay.PlayerState;
 import com.mycompany.pirate.Interfaces.IPirates;
 import static com.mycompany.pirate.data.FileRef.FX_CHANGE_TURN;
@@ -62,14 +64,10 @@ public class UI extends javax.swing.JFrame implements IPirates {
         // To change the loaded image (design)
         PanelLifePlayer2.setPlayer2();
 
-        // Default state (Player 1 starts)
+        // Default state (Player 1 start)
         PanelDisplayerPlayer1.setTurn(true);
         PanelPion1.player_number = 1;
         PanelPion2.player_number = 2;
-
-        // Set the correct layer levels
-        // LayeredPaneMain.setLayer(PanelPion1, javax.swing.JLayeredPane.POPUP_LAYER);
-        // LayeredPaneMain.setLayer(PanelPion1, javax.swing.JLayeredPane.POPUP_LAYER);
 
         // Place the pieces on cell 0
         PanelGameboard.deplacerPion(PanelPion1, 0, null);
@@ -85,7 +83,6 @@ public class UI extends javax.swing.JFrame implements IPirates {
         setVisible(true);
     }
 
-    // Manage piece movement
     @Override
     public void movePiece(int destinationCellNumber, String name) {
         PionPanel currentPlayer = pionPanels.get(name);
@@ -134,18 +131,6 @@ public class UI extends javax.swing.JFrame implements IPirates {
         }
     }
 
-    private void setPanelClickListener(Runnable listener) {
-        PanelButtonSlotMachine.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                listener.run();
-                PanelButtonSlotMachine.deactivateListeners();
-                PanelDisplayerPlayer1.setState(PlayerState.IDLE);
-                PanelDisplayPlayer2.setState(PlayerState.IDLE);
-            }
-        });
-    }
-
     public void newTurn() {
         PanelDisplayerPlayer1.setTurn(testingTurn);
         PanelDisplayPlayer2.setTurn(!testingTurn);
@@ -175,6 +160,26 @@ public class UI extends javax.swing.JFrame implements IPirates {
         } else {
            takeDamage(name);
         }
+    }
+    
+    public void caseBombe(){
+       popupCaseBomb();
+    }
+    
+    public void caseRejouer(){
+       popupCaseRejouer();
+    }
+    
+    private void setPanelClickListener(Runnable listener) {
+        PanelButtonSlotMachine.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                listener.run();
+                PanelButtonSlotMachine.deactivateListeners();
+                PanelDisplayerPlayer1.setState(PlayerState.IDLE);
+                PanelDisplayPlayer2.setState(PlayerState.IDLE);
+            }
+        });
     }
     
     @SuppressWarnings("unchecked")
@@ -383,4 +388,5 @@ public class UI extends javax.swing.JFrame implements IPirates {
     private com.mycompany.pirate.Boundary.UserInterface.PionPanel PanelPion2;
     private javax.swing.JInternalFrame jInternalFrame1;
     // End of variables declaration//GEN-END:variables
+
 }
