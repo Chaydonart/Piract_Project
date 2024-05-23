@@ -5,6 +5,7 @@
 package com.mycompany.pirate.Boundary.UserInterface;
 
 import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_2;
+import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_2_DAMAGE;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -18,14 +19,21 @@ import javax.swing.Timer;
  */
 public class PanelPlayer2 extends PanelPlayerDisplay {
 
-    private double imageY = 20; // Position verticale de l'image (utilisation de double pour la précision)
-    private double imageSpeed = 0.2; // Vitesse de déplacement de l'image (plus la valeur est petite, plus le mouvement est lent)
-    private boolean movingDown = true; // Indique si l'image se déplace vers le bas
+  private double imageY = 0;
+    private double imageSpeed = 0.2;
+    private boolean movingDown = true;
 
     public PanelPlayer2() {
-        loadImage(IMAGE_PLAYER_2);
+        loadImages();
         setPreferredSize(new Dimension(triangleBase, triangleHeight));
+        updateImage();
         startAnimation();
+    }
+
+    private void loadImages() {
+        idleImage = loadImageFromFile(IMAGE_PLAYER_2);
+        victoryImage = loadImageFromFile(IMAGE_PLAYER_2_DAMAGE);
+        damageImage = loadImageFromFile(IMAGE_PLAYER_2);
     }
 
     

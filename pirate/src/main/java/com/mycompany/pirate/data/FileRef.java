@@ -14,7 +14,9 @@ public class FileRef {
     public static final String IMAGE_LIFE_PLAYER_2= "src\\main\\java\\com\\mycompany\\pirate\\res\\LifeRessourcePlayer2.png";
     public static final String IMAGE_SLOT_MACHINE = "src\\main\\java\\com\\mycompany\\pirate\\res\\slotMachine.png";
     public static final String IMAGE_PLAYER_1 = "src\\main\\java\\com\\mycompany\\pirate\\res\\player.png";
+    public static final String IMAGE_PLAYER_1_DAMAGE = "src\\main\\java\\com\\mycompany\\pirate\\res\\player1_damage.png";
     public static final String IMAGE_PLAYER_2 = "src\\main\\java\\com\\mycompany\\pirate\\res\\player2.png";
+    public static final String IMAGE_PLAYER_2_DAMAGE = "src\\main\\java\\com\\mycompany\\pirate\\res\\player2_damage.png";
     public static final String BACKGROUND_IMAGE = "src\\main\\java\\res\\plateau.png";
    
     //MUSICS(only .wav)
