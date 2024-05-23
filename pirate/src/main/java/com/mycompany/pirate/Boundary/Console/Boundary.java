@@ -9,6 +9,8 @@ import com.mycompany.pirate.FonctionnalKernel.Controller.ControlJeu;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
 import com.mycompany.pirate.Interfaces.IBoundary;
+import com.mycompany.pirate.Interfaces.IDialogue;
+import com.mycompany.pirate.Interfaces.IPirates;
 
 /**
  *
@@ -16,7 +18,7 @@ import com.mycompany.pirate.Interfaces.IBoundary;
  * 
  * Va ensuite en plus implementer IPirates
  */
-public class Boundary implements IBoundary {
+public class Boundary implements IPirates,IDialogue {
     private final PionRepository pionRepository;
     private UI GUI;
 
@@ -25,61 +27,65 @@ public class Boundary implements IBoundary {
     }
 
     @Override
-    public void start() {
+    public void startGUI() {
         GUI = new UI();
         GUI.startGUI();
     }
 
     //Partie affichage console (temporaire)
     @Override
-    public void spin(int[] values) {
+    public void spinMachine(int[] values) {
         this.GUI.spinMachine(values);
     }
     
-    @Override 
-    public void tourSuivant(){
-        this.GUI.newTurn();
+    @Override
+    public void notifySpin(int[] values) {
+    	spinMachine(values);
     }
+//    @Override 
+//    public void tourSuivant(){
+//        this.GUI.newTurn();
+//    }
+//    
+//    @Override
+//    public void afficherEtatJeu() {
+//    	for (Pion pion : pionRepository.getPions()) {
+//            notify("RÉCAPITULATIF : Pion " + pion.getName() + " est sur la case " + pion.getPosition());
+//        }
+//    }
+
+//    @Override
+//    public void afficherMessage(String message) {
+//        System.out.println(message);
+//    }
+
     
-    @Override
-    public void afficherEtatJeu() {
-        for (Pion pion : pionRepository.getPions()) {
-            afficherMessage("RÉCAPITULATIF : Pion " + pion.getName() + " est sur la case " + pion.getPosition());
-        }
-    }
-
-    @Override
-    public void afficherMessage(String message) {
-        System.out.println(message);
-    }
-
-    @Override    
-    public void deplacerPion(int deplacement, String name) {
-       GUI.movePiece(deplacement,name);
-    }
 
     // Partie pacerelle dialogue
     @Override
     public void notify(String message) {
-        afficherMessage(message);
+        System.out.println(message);
     }
 
-    @Override 
-    public void notifySpin(int[] values) {
-        spin(values);
-    }
 
     @Override 
     public void notifyEtatJeu() {
-        afficherEtatJeu();
+    	for (Pion pion : pionRepository.getPions()) {
+            notify("RÉCAPITULATIF : Pion " + pion.getName() + " est sur la case " + pion.getPosition());
+        }
     }
 
     @Override
     public void notifyCaseDegat(String name, int vie) {
-       this.GUI.takeDamage(name);
-       this.GUI.caseBombe();
+    	caseBombe();
+    	this.GUI.takeDamage(name);
     }
 
+    @Override
+    public void caseBombe() {
+    	this.GUI.caseBombe();
+ 
+    }
     @Override
     public void notifyCaseRejouer(String name) {
         this.GUI.caseRejouer(name);
@@ -97,22 +103,67 @@ public class Boundary implements IBoundary {
 
     @Override
     public void notifyDeplacerPion(int deplacement, String name) {
-        deplacerPion(deplacement, name);
+        movePiece(deplacement, name);
+    }
+    @Override
+    public void movePiece(int deplacement, String name) {
+    	this.GUI.movePiece(deplacement, name);
     }
     
     @Override
     public void notifyNouveauTour(String name){
-        tourSuivant();
+        newTurn();
+    }
+    @Override
+    public void newTurn() {
+    	this.GUI.newTurn();
     }
 
     @Override
     public void notifyFinDeJeu() {
-       this.GUI.endGame();
+       endGame();
+    }
+    @Override
+    public void endGame() {
+    	GUI.endGame();
+    	
     }
     
     @Override
     public void notifyDuelResult(String name, boolean win){
         this.GUI.gamblingDuelResult(name,win);
     }
+
+	@Override
+	public void takeDamage(String name) {
+		this.GUI.takeDamage(name);
+	}
+
+	@Override
+	public void gamblingDuelResult(String name, boolean win) {
+		this.GUI.gamblingDuelResult(name, win);
+		
+	}
+
+	
+
+	@Override
+	public void caseRejouer(String name) {
+		this.GUI.caseRejouer(name);
+		
+	}
+
+	@Override
+	public void caseReculer() {
+		this.GUI.caseReculer();
+		
+	}
+
+	@Override
+	public void caseGambling(int value) {
+		this.GUI.caseGambling(value);
+		
+	}
+
 
 }

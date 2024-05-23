@@ -432,4 +432,6 @@ public class UI extends javax.swing.JFrame implements IPirates {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
+
+
 }
