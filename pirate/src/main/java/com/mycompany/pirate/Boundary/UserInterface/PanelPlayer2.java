@@ -6,6 +6,7 @@ package com.mycompany.pirate.Boundary.UserInterface;
 
 import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_2;
 import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_2_DAMAGE;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -24,6 +25,7 @@ public class PanelPlayer2 extends PanelPlayerDisplay {
 
     public PanelPlayer2() {
         loadImages();
+        colorBackground = Color.BLACK;
         setPreferredSize(new Dimension(triangleBase, triangleHeight));
         updateImage();
         startAnimation();

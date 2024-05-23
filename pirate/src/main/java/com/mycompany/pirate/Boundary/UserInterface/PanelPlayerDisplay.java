@@ -23,6 +23,7 @@ public abstract class PanelPlayerDisplay extends javax.swing.JPanel {
     protected BufferedImage damageImage;
     protected int triangleBase = 200;
     protected int triangleHeight = 500;
+    protected Color colorBackground = Color.white;
 
     // Etat de tour
     protected Color turnColor = Color.white;
@@ -70,7 +71,7 @@ public abstract class PanelPlayerDisplay extends javax.swing.JPanel {
     
     public void setTurn(boolean bool) {
         if (bool) {
-            this.turnColor = RED_CUSTOM;
+            this.turnColor = colorBackground;
         } else {
             this.turnColor = Color.white;
         }

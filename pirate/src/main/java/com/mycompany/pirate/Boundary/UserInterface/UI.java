@@ -4,9 +4,6 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
-import static com.mycompany.pirate.Boundary.UserInterface.CasePopupManager.popupCaseRejouer;
-import static com.mycompany.pirate.Boundary.UserInterface.CasePopupManager.popupCaseBomb;
-import static com.mycompany.pirate.Boundary.UserInterface.CasePopupManager.popupCaseReculer;
 import com.mycompany.pirate.Boundary.UserInterface.PanelPlayerDisplay.PlayerState;
 import com.mycompany.pirate.Interfaces.IPirates;
 import static com.mycompany.pirate.data.FileRef.FX_CHANGE_TURN;
@@ -31,6 +28,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
     private Map<String, LifePanel> lifePanels;
     private Map<String, PanelPlayerDisplay> displayPanels;
     private Map<String, PionPanel> pionPanels;
+    private CasePopupManager casePopupManager = new CasePopupManager();
 
     /*
     * Put all the sounds and change them in a SoundManager
@@ -161,18 +159,24 @@ public class UI extends javax.swing.JFrame implements IPirates {
         } else {
            takeDamage(name);
         }
+        casePopupManager.closePopup();
     }
     
     public void caseBombe(){
-       popupCaseBomb();
+       casePopupManager.popupCaseBomb();
     }
     
     public void caseRejouer(){
-       popupCaseRejouer();
+       casePopupManager.popupCaseRejouer();
     }
     
     public void caseReculer(){
-       popupCaseReculer();
+       casePopupManager.popupCaseReculer();
+    }
+    
+    public void caseGambling(int value){
+       casePopupManager.popupCaseGambi();
+       casePopupManager.showPopup(this,"RELANCE EST FAIT AU DESSUS DE : " + value);
     }
     
     private void setPanelClickListener(Runnable listener) {
@@ -204,6 +208,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
         LayeredPanePlayer2 = new javax.swing.JLayeredPane();
         PanelDisplayPlayer2 = new com.mycompany.pirate.Boundary.UserInterface.PanelPlayer2();
         PanelLifePlayer2 = new com.mycompany.pirate.Boundary.UserInterface.LifePanel();
+        jPanel1 = new javax.swing.JPanel();
 
         jInternalFrame1.setVisible(true);
 
@@ -272,14 +277,14 @@ public class UI extends javax.swing.JFrame implements IPirates {
                 .addContainerGap()
                 .addGroup(LayeredPaneMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(LayeredPaneMainLayout.createSequentialGroup()
-                        .addComponent(PanelGameboard, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(LayeredPaneMainLayout.createSequentialGroup()
                         .addComponent(PanelPion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(PanelButtonSlotMachine, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(211, 211, 211)
-                        .addComponent(PanelPion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(PanelPion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(LayeredPaneMainLayout.createSequentialGroup()
+                        .addComponent(PanelGameboard, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         LayeredPaneMainLayout.setVerticalGroup(
@@ -359,6 +364,17 @@ public class UI extends javax.swing.JFrame implements IPirates {
 
         LayeredPanePlayer2.add(PanelDisplayPlayer2, java.awt.BorderLayout.CENTER);
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -369,6 +385,11 @@ public class UI extends javax.swing.JFrame implements IPirates {
                 .addComponent(LayeredPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LayeredPanePlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -377,6 +398,11 @@ public class UI extends javax.swing.JFrame implements IPirates {
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                 .addComponent(LayeredPanePlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 17, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
@@ -395,6 +421,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
     private com.mycompany.pirate.Boundary.UserInterface.PionPanel PanelPion1;
     private com.mycompany.pirate.Boundary.UserInterface.PionPanel PanelPion2;
     private javax.swing.JInternalFrame jInternalFrame1;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
 }

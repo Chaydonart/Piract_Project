@@ -91,10 +91,8 @@ public class Boundary implements IBoundary {
     }
 
     @Override
-    public void notifyCaseGambling(String name, int randomValue) {
-        afficherMessage("Le " + name + " tombe sur une case GAMBLING");
-        afficherMessage("Le " + name + " va donc procéder à un duel contre Gambi le robot !");
-        afficherMessage("Duel gambling ! Le joueur doit faire une valeur supérieure à " + randomValue);
+    public void notifyCaseGambling(int randomValue) {
+        this.GUI.caseGambling(randomValue);
     }
 
     @Override

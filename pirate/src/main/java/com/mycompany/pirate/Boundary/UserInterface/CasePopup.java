@@ -21,9 +21,9 @@ import utils.SoundPlayer;
  */
 public class CasePopup extends JWindow {
     private ImageIcon imageIcon;
-    private float alpha = 1f;
+    protected float alpha = 1f;
     private Timer timer;
-    private int imageSizeScaled = 250;
+    int imageSizeScaled = 250;
     private SoundPlayer popupSound = new SoundPlayer(FX_POPUP_CASE);
 
     public CasePopup(ImageIcon imageIcon, int displayTime) {

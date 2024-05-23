@@ -6,6 +6,7 @@ package com.mycompany.pirate.Boundary.UserInterface;
 
 import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_1;
 import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_1_DAMAGE;
+import static com.mycompany.pirate.data.values.RED_CUSTOM;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -25,6 +26,7 @@ public class PanelPlayer1 extends PanelPlayerDisplay {
         loadImages();
         setPreferredSize(new Dimension(triangleBase, triangleHeight));
         updateImage();
+        colorBackground = RED_CUSTOM;
         if(playerImage != null){
             imageY = triangleHeight - (triangleBase - 20) * ((double) playerImage.getHeight() / playerImage.getWidth()) - 10;
         }

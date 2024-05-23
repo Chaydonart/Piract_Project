@@ -28,7 +28,7 @@ public class ControlGamblingDuel implements IControlGamblingDuel, IControlSlotMa
     @Override
     public int duelDeDes(Pion pion, IDialogue notificationServices) {
         int randomValue = this.random.nextInt(9);
-        Optional.ofNullable(notificationServices).ifPresent(service -> service.notifyCaseGambling(pion.getName(),randomValue));
+        Optional.ofNullable(notificationServices).ifPresent(service -> service.notifyCaseGambling(randomValue));
         
         //Lancers de dés
         int[] valeurs = spin();
