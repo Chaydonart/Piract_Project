@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.mycompany.pirate.Boundary.UserInterface;
 
 import static com.mycompany.pirate.data.values.GREEN_CUSTOM;
@@ -32,6 +28,8 @@ import java.util.List;
  * Permet aussi de deplacer les pions grace aux coordonnes des cellules
  */
 public class GameBoardPanel extends javax.swing.JPanel {
+
+    private static final int PIECE_Y_OFFSET = -50; // Ajustement de la position verticale des pions
 
     public GameBoardPanel() {
         setLayout(new GridBagLayout());
@@ -80,14 +78,48 @@ public class GameBoardPanel extends javax.swing.JPanel {
         // Limitation de la destination entre 0 et 36
         destinationCellNumber = Math.max(0, Math.min(destinationCellNumber, 36));
 
+        // Trouver la case de départ
+        int startCellNumber = pion.getCellPosition();
+
+        // Créer une liste des cases à parcourir
+        List<Integer> path = createPath(startCellNumber, destinationCellNumber);
+
+        // Animer le mouvement à travers le chemin
+        animatePath(pion, path, 0, onAnimationEnd);
+    }
+
+    private List<Integer> createPath(int start, int end) {
+        // Assure que start est toujours inférieur ou égal à end
+        if (start > end) {
+            int temp = start;
+            start = end;
+            end = temp;
+        }
+
+        List<Integer> path = new java.util.ArrayList<>();
+        for (int i = start; i <= end; i++) {
+            path.add(i);
+        }
+        return path;
+    }
+
+    private void animatePath(PionPanel pion, List<Integer> path, int index, Runnable onAnimationEnd) {
+        if (index >= path.size()) {
+            if (onAnimationEnd != null) {
+                onAnimationEnd.run();
+            }
+            return;
+        }
+
+        int cellNumber = path.get(index);
         for (Component component : getComponents()) {
             if (!(component instanceof CellPanel))
                 continue;
 
             CellPanel cellPanel = (CellPanel) component;
-            if (cellPanel.getCellNumber() == destinationCellNumber) {
+            if (cellPanel.getCellNumber() == cellNumber) {
                 int destinationX = cellPanel.getX() + cellPanel.getWidth() / 2;
-                int destinationY = cellPanel.getY() + cellPanel.getHeight() + pion.getWidth() / 2;
+                int destinationY = cellPanel.getY() + cellPanel.getHeight() / 2 - PIECE_Y_OFFSET;
 
                 // Ajustement pour éviter le chevauchement des pions
                 if (pion.player_number == 1)
@@ -95,11 +127,12 @@ public class GameBoardPanel extends javax.swing.JPanel {
                 else if (pion.player_number == 2)
                     destinationX += 15;
 
-                animatePionMovement(pion, destinationX, destinationY, destinationCellNumber, onAnimationEnd);
+                animatePionMovement(pion, destinationX, destinationY, cellNumber, () -> animatePath(pion, path, index + 1, onAnimationEnd));
                 break;
             }
         }
     }
+
     private void animatePionMovement(PionPanel pion, int destinationX, int destinationY, int destinationCellNumber, Runnable onAnimationEnd) {
         int startX = pion.getX();
         int startY = pion.getY();
@@ -124,7 +157,7 @@ public class GameBoardPanel extends javax.swing.JPanel {
                     pion.setLocation(destinationX, destinationY);
                     pion.setCellPosition(destinationCellNumber);
 
-                    // Ajoute un délai d'une seconde ici
+                    // Ajouter un délai ici si nécessaire
                     Timer delayTimer = new Timer(500, (ActionEvent ev) -> {
                         if (onAnimationEnd != null) {
                             onAnimationEnd.run();
@@ -138,13 +171,11 @@ public class GameBoardPanel extends javax.swing.JPanel {
 
         timer.start();
     }
-
     
     private class CellPanel extends JPanel {
         private int cellNumber;
 
         private static final List<Integer> RED_NUMBERS = Arrays.asList(1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36);
-
 
         public CellPanel(int cellNumber) {
             setOpaque(false);
@@ -170,10 +201,9 @@ public class GameBoardPanel extends javax.swing.JPanel {
 
             // Dessiner le cercle
             int diameter = Math.min(getWidth(), getHeight()) - 10; // Ajuster pour les marges
-           
             int x = (getWidth() - diameter) / 2;
             int y = (getHeight() - diameter) / 2;
-            g2d.fillOval(x, y, diameter, diameter );
+            g2d.fillOval(x, y, diameter, diameter);
 
             // Dessiner le numéro de la cellule
             g2d.setColor(Color.WHITE);
@@ -188,12 +218,15 @@ public class GameBoardPanel extends javax.swing.JPanel {
         private boolean isRed(int number) {
             return RED_NUMBERS.contains(number);
         }
-        
+
         public int getCellNumber() {
             return cellNumber;
         }
     }
-    
+
+
+
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
