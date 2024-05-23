@@ -129,29 +129,28 @@ public class GameBoardPanel extends javax.swing.JPanel {
         int deltaY = destinationY - startY;
         int steps = 15; // - de steps = + de vitesse pour le pion
         int delay = 1; // délais entre les steps (1 par defaut pour pas dépasser d'autres evenements)
-        double arcHeightFactor = 0.2; // ajuster la hauteur des sauts
 
         Timer timer = new Timer(delay, new ActionListener() {
             int step = 0;
             @Override
             public void actionPerformed(ActionEvent e) {
                 step++;
-                double t = (double) step / steps;
-                double arcX = startX + deltaX * t + Math.sin(Math.PI * t) * (Math.abs(deltaY) * arcHeightFactor);
-                double arcY = startY + deltaY * t;
-                pion.setLocation((int) arcX, (int) arcY);
-
+                double progress = (double) step / steps;
+                int currentX = startX + (int) (deltaX * progress);
+                int currentY = startY + (int) (deltaY * progress);
+                pion.setLocation(currentX, currentY);
                 if (step >= steps) {
                     ((Timer) e.getSource()).stop();
                     pion.setLocation(destinationX, destinationY);
                     pion.setCellPosition(destinationCellNumber);
 
+                    // Ajouter un délai ici si nécessaire
                     Timer delayTimer = new Timer(10, (ActionEvent ev) -> {
                         if (onAnimationEnd != null) {
                             onAnimationEnd.run();
                         }
                     });
-                    delayTimer.setRepeats(false);
+                    delayTimer.setRepeats(false); // Exécute onAnimationEnd.run() une seule fois
                     delayTimer.start();
                 }
             }
@@ -159,7 +158,6 @@ public class GameBoardPanel extends javax.swing.JPanel {
         timer.setInitialDelay(0);
         timer.start();
     }
-
 
     private class CellPanel extends JPanel {
         private int cellNumber;
