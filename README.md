@@ -1,4 +1,4 @@
-To play the game, just run the Main file. 
+Pour jouer au jeu, lancer le Main.java
 
 # Optimisation necessaire : 
   - Mettre en place le SoundRepository pour centraliser les chargements des sons du jeu
