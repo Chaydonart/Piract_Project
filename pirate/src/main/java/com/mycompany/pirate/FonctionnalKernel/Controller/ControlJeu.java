@@ -46,6 +46,7 @@ public class ControlJeu implements IControlDeplacerPion, IControlSlotMachine{
                 if (jeu.checkVictory(pion)) {
                     notificationService.notify("Le " + pion.getName() + " a gagne !");
                     jeu.setGameOver(true);
+                    notificationService.notifyFinDeJeu();
                     break;
                 }
 

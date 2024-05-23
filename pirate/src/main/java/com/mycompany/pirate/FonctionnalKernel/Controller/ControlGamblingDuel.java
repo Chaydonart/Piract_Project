@@ -39,10 +39,11 @@ public class ControlGamblingDuel implements IControlGamblingDuel, IControlSlotMa
         if (res < randomValue) {
             pion.setVie(pion.getVie() - 1);
             Optional.ofNullable(notificationServices).ifPresent(service -> service.notify(pion.getName() + " a perdu le gambling ! Vie restante : " + pion.getVie()));
-            
+            Optional.ofNullable(notificationServices).ifPresent(service -> service.notifyDuelResult(pion.getName(),false));
             return -1;
         } else {
         	Optional.ofNullable(notificationServices).ifPresent(service -> service.notify("DUEL REUSSI !"));
+                Optional.ofNullable(notificationServices).ifPresent(service -> service.notifyDuelResult(pion.getName(),true));
             return 0;
         }
     }

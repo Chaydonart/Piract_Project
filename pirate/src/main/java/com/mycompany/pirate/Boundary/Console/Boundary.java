@@ -115,8 +115,8 @@ public class Boundary implements IBoundary {
     }
     
     @Override
-    public void notifyDuelReussi(){
-        this.GUI.successfulDuel();
+    public void notifyDuelResult(String name, boolean win){
+        this.GUI.gamblingDuelResult(name,win);
     }
 
 }

@@ -80,6 +80,9 @@ public class GameBoardPanel extends javax.swing.JPanel {
         for (Component component : getComponents()) {
             if (component instanceof CellPanel) {
                 CellPanel cellPanel = (CellPanel) component;
+                if(destinationCellNumber >= 36){
+                    destinationCellNumber = 36;
+                }
                 if (cellPanel.getCellNumber() == destinationCellNumber) {
                     int destinationX = cellPanel.getX() + (cellPanel.getWidth() ) / 2;
                     int destinationY = cellPanel.getY() + cellPanel.getHeight() + (pion.getWidth() / 2);

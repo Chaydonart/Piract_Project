@@ -6,10 +6,13 @@ package com.mycompany.pirate.Boundary.UserInterface;
 
 import com.mycompany.pirate.Interfaces.IPirates;
 import static com.mycompany.pirate.data.FileRef.FX_CHANGE_TURN;
+import static com.mycompany.pirate.data.FileRef.FX_DAMAGE;
+import static com.mycompany.pirate.data.FileRef.FX_GAMBLING_DUEL_VICTORY;
 import static com.mycompany.pirate.data.FileRef.OST_MAINTHEME;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import javax.swing.SwingUtilities;
 import utils.ScreenShake;
@@ -21,18 +24,37 @@ import utils.SoundPlayer;
  */
 public class UI extends javax.swing.JFrame implements IPirates {
     private boolean testingTurn = true;
+    private Map<String, LifePanel> lifePanels;
+    private Map<String, PanelPlayerDisplay> displayPanels;
+    private Map<String, PionPanel> pionPanels;
 
     /*
     * Put all the sounds and change them in a SoundManager
     */
     private SoundPlayer mainTheme = new SoundPlayer(OST_MAINTHEME);
     private SoundPlayer changeTurn = new SoundPlayer(FX_CHANGE_TURN);
+    private SoundPlayer takeDamage = new SoundPlayer(FX_DAMAGE);
+    private SoundPlayer gamblingDuelVictory = new SoundPlayer(FX_GAMBLING_DUEL_VICTORY);
+    
 
     public UI() {
         initComponents();   
         initUIParameters();
         setLocationRelativeTo(null);
         setResizable(false);
+        
+        this.lifePanels = Map.of(
+                "Joueur 1", PanelLifePlayer1,
+                "Joueur 2", PanelLifePlayer2
+        );
+        this.displayPanels = Map.of(
+                "Joueur 1", PanelDisplayerPlayer1,
+                "Joueur 2", PanelDisplayPlayer2
+        );
+        this.pionPanels = Map.of(
+                "Joueur 1", PanelPion1,
+                "Joueur 2", PanelPion2
+        );
     }
 
     private void initUIParameters() {
@@ -65,19 +87,17 @@ public class UI extends javax.swing.JFrame implements IPirates {
     // Manage piece movement
     @Override
     public void movePiece(int destinationCellNumber, String name) {
-        PionPanel currentPlayer = null;
-        switch(name) {
-            case "Joueur 1" -> currentPlayer = PanelPion1;
-            case "Joueur 2" -> currentPlayer = PanelPion2;
-        }
-        int currentIndex = currentPlayer.getCellPosition();
-        CountDownLatch latchAnimationEnd = new CountDownLatch(1);
-        PanelGameboard.deplacerPion(currentPlayer, currentIndex + destinationCellNumber, () -> latchAnimationEnd.countDown());
-        try {
-            latchAnimationEnd.await();
-            currentPlayer.setCellPosition(currentIndex + destinationCellNumber);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+        PionPanel currentPlayer = pionPanels.get(name);
+        if (currentPlayer != null) {
+            int currentIndex = currentPlayer.getCellPosition();
+            CountDownLatch latchAnimationEnd = new CountDownLatch(1);
+            PanelGameboard.deplacerPion(currentPlayer, currentIndex + destinationCellNumber, () -> latchAnimationEnd.countDown());
+            try {
+                latchAnimationEnd.await();
+                currentPlayer.setCellPosition(currentIndex + destinationCellNumber);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
         }
     }
 
@@ -96,7 +116,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
         });
 
         try {
-            latchClick.await();  // Wait for the player to press the button
+            latchClick.await();  
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             return;
@@ -105,7 +125,9 @@ public class UI extends javax.swing.JFrame implements IPirates {
         PanelButtonSlotMachine.startAnimation(values, () -> latchAnimationEnd.countDown());
 
         try {
-            latchAnimationEnd.await();  // Wait for the animation to finish
+            latchAnimationEnd.await();
+            PanelButtonSlotMachine.activateListeners();
+            // Wait for the animation to finish
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
@@ -116,6 +138,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
             @Override
             public void mouseClicked(MouseEvent e) {
                 listener.run();
+                PanelButtonSlotMachine.deactivateListeners();
             }
         });
     }
@@ -129,19 +152,25 @@ public class UI extends javax.swing.JFrame implements IPirates {
 
     public void endGame() {
         this.PanelButtonSlotMachine.setEnabled(false);
+        this.PanelButtonSlotMachine.deactivateListeners();
         // Add a victory window
     }
 
     public void takeDamage(String name) {
-        // TODO Auto-generated method stub
-        switch(name) {
-            case "Player 1" -> this.PanelLifePlayer1.perdreVie();
-            case "Player 2" -> this.PanelLifePlayer2.perdreVie();
+        ScreenShake shakeEffect = new ScreenShake();
+        if (lifePanels.containsKey(name) && displayPanels.containsKey(name)) {
+            lifePanels.get(name).perdreVie();
+            shakeEffect.shakePanel(displayPanels.get(name), 200, 50);
+            takeDamage.play();
         }
     }
 
-    public void successfulDuel() {
-        // TODO
+    public void gamblingDuelResult(String name, boolean win) {
+        if(win) {
+           gamblingDuelVictory.play();
+        } else {
+           takeDamage(name);
+        }
     }
     
     @SuppressWarnings("unchecked")
@@ -289,7 +318,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
         PanelLifePlayer2.setLayout(PanelLifePlayer2Layout);
         PanelLifePlayer2Layout.setHorizontalGroup(
             PanelLifePlayer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
+            .addGap(0, 194, Short.MAX_VALUE)
         );
         PanelLifePlayer2Layout.setVerticalGroup(
             PanelLifePlayer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,7 +329,9 @@ public class UI extends javax.swing.JFrame implements IPirates {
         PanelDisplayPlayer2.setLayout(PanelDisplayPlayer2Layout);
         PanelDisplayPlayer2Layout.setHorizontalGroup(
             PanelDisplayPlayer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelLifePlayer2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDisplayPlayer2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(PanelLifePlayer2, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
         );
         PanelDisplayPlayer2Layout.setVerticalGroup(
             PanelDisplayPlayer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

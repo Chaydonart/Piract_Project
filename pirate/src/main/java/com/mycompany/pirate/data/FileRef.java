@@ -27,7 +27,10 @@ public class FileRef {
     public static final String FX_CLICK = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\fx\\FX_click.wav";
     public static final String FX_MACHINE_ROULETTE = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\fx\\FX_machine_roulette.wav";
     public static final String FX_MACHINE_ROULETTE_RESULT = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\fx\\FX_machine_result.wav";
-    
+    public static final String FX_DAMAGE = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\fx\\FX_damage.wav";
+    public static final String FX_GAMBLING_DUEL_VICTORY = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\fx\\FX_gambingmachine_victory.wav";
+
+
     //FONTS
     public static final String FONT_CASINO = "src\\main\\java\\com\\mycompany\\pirate\\res\\fonts\\RetroSigned-DYYY0.ttf";
 }

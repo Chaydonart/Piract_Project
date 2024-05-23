@@ -23,7 +23,8 @@ public interface IDialogue {
     
     void notifyCaseReculer();
    
-    void notifyCaseGambling(String name,int randomValue);
+    void notifyCaseGambling(String name, int randomValue);  
+    void notifyDuelResult(String name, boolean win);
     
     void notifyDeplacerPion(int deplacement, String name);
     
@@ -31,5 +32,5 @@ public interface IDialogue {
     
     void notifyFinDeJeu();
     
-    void notifyDuelReussi();
+  
 }
