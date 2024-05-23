@@ -30,7 +30,7 @@ public class Main {
         Boundary gameUI = new Boundary(null, pionRepository);
         
         //Plteau
-        Plateau plateau =  new Plateau(37,gameUI);
+        Plateau plateau =  new Plateau(36,gameUI);
         
         // Controlleur
         ControlDeplacerPion controlDeplacerPion = new ControlDeplacerPion(plateau,gameUI,pionRepository);

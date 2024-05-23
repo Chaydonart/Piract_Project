@@ -12,6 +12,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import static com.mycompany.pirate.data.FileRef.IMAGE_LIFE_PLAYER_1;
 import static com.mycompany.pirate.data.FileRef.IMAGE_LIFE_PLAYER_2;
+import static com.mycompany.pirate.data.values.MAX_LIFE;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -22,7 +23,7 @@ import java.awt.RenderingHints;
  */
 public class LifePanel extends javax.swing.JPanel {
  private boolean isPlayer1 = true;
-    private int viesRestantes = 5;
+    private int viesRestantes = MAX_LIFE;
     private BufferedImage lifeImage;
     private final int lifeImageWidth = 30;
     private final int lifeImageHeight = 30;

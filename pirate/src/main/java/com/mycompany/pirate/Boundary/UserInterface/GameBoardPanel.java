@@ -127,7 +127,7 @@ public class GameBoardPanel extends javax.swing.JPanel {
         int startY = pion.getY();
         int deltaX = destinationX - startX;
         int deltaY = destinationY - startY;
-        int steps = 15; // - de steps = + de vitesse pour le pion
+        int steps = 20; // - de steps = + de vitesse pour le pion
         int delay = 1; // délais entre les steps (1 par defaut pour pas dépasser d'autres evenements)
 
         Timer timer = new Timer(delay, new ActionListener() {

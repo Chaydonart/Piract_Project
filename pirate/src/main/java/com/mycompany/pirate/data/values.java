@@ -13,8 +13,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,6 +27,8 @@ public class values {
     public static final Color BLUE_CUSTOM = new Color(108,154,175);
     public static final Color INFO_PANEL_COLOR_BACKGROUND = new Color(24, 101, 45);
     public static final Color TRANSPARENT_COLOR_BACKGROUND = new Color(255, 0, 0, 0);
+    
+    public static final int MAX_LIFE = 3;
     
     //need fix not working
     public static void usingCustomFonts() {
