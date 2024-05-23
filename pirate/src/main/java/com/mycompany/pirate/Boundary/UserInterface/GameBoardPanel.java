@@ -77,29 +77,29 @@ public class GameBoardPanel extends javax.swing.JPanel {
     }
     
     public void deplacerPion(PionPanel pion, int destinationCellNumber, Runnable onAnimationEnd) {
+        // Limitation de la destination entre 0 et 36
+        destinationCellNumber = Math.max(0, Math.min(destinationCellNumber, 36));
+
         for (Component component : getComponents()) {
-            if (component instanceof CellPanel) {
-                CellPanel cellPanel = (CellPanel) component;
-                if(destinationCellNumber >= 36){
-                    destinationCellNumber = 36;
-                }
-                if (cellPanel.getCellNumber() == destinationCellNumber) {
-                    int destinationX = cellPanel.getX() + (cellPanel.getWidth() ) / 2;
-                    int destinationY = cellPanel.getY() + cellPanel.getHeight() + (pion.getWidth() / 2);
-                    
-                    //Pour eviter que les pions s'overlape
-                    switch(pion.player_number){
-                        case 1 -> destinationX -= 15;
-                        case 2 -> destinationX += 15;
-                    }
-                    
-                    animatePionMovement(pion, destinationX, destinationY, destinationCellNumber, onAnimationEnd);
-                    break;
-                }
+            if (!(component instanceof CellPanel))
+                continue;
+
+            CellPanel cellPanel = (CellPanel) component;
+            if (cellPanel.getCellNumber() == destinationCellNumber) {
+                int destinationX = cellPanel.getX() + cellPanel.getWidth() / 2;
+                int destinationY = cellPanel.getY() + cellPanel.getHeight() + pion.getWidth() / 2;
+
+                // Ajustement pour éviter le chevauchement des pions
+                if (pion.player_number == 1)
+                    destinationX -= 15;
+                else if (pion.player_number == 2)
+                    destinationX += 15;
+
+                animatePionMovement(pion, destinationX, destinationY, destinationCellNumber, onAnimationEnd);
+                break;
             }
         }
     }
-
     private void animatePionMovement(PionPanel pion, int destinationX, int destinationY, int destinationCellNumber, Runnable onAnimationEnd) {
         int startX = pion.getX();
         int startY = pion.getY();
