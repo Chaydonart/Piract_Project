@@ -24,6 +24,7 @@ public interface IDialogue {
     void notifyCaseReculer();
    
     void notifyCaseGambling(int randomValue);  
+    
     void notifyDuelResult(String name, boolean win);
     
     void notifyDeplacerPion(int deplacement, String name);

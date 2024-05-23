@@ -12,17 +12,17 @@ import com.mycompany.pirate.Interfaces.IDialogue;
  * @author BEN JAAFAR
  */
 public class CaseDegat extends Case {
-    private IDialogue notificationService;
+    private IDialogue dialogue;
 
-    public CaseDegat(IDialogue notificationService) {
-        this.notificationService = notificationService;
+    public CaseDegat(IDialogue dialogue) {
+        this.dialogue = dialogue;
     }
     
     @Override
     public void ajouterPion(Pion pion) {
         occupants.add(pion);
         pion.setVie(pion.getVie() - 1);
-        Optional.ofNullable(notificationService).ifPresent(service -> service.notifyCaseDegat(pion.getName(), pion.getVie()));
+        Optional.ofNullable(dialogue).ifPresent(service -> service.notifyCaseDegat(pion.getName(), pion.getVie()));
     }
     
 

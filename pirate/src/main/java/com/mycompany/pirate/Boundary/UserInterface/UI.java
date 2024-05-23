@@ -167,20 +167,23 @@ public class UI extends javax.swing.JFrame implements IPirates {
     
     public void caseBombe(){
        casePopupManager.popupCaseBomb();
+       casePopupManager.showPopup(this,"CASE DEGATS ! OH NON TU PERDS UNE VIE !");
     }
     
     public void caseRejouer(String name){
        casePopupManager.popupCaseRejouer();
+       casePopupManager.showPopup(this,"CASE REJOUER ! LANCE LA MACHINE ET REJOUE !");
        displayPanels.get(name).setState(PlayerState.VICTORY);
     }
     
     public void caseReculer(){
        casePopupManager.popupCaseReculer();
+       casePopupManager.showPopup(this,"CASE RECULER ! LANCE LA MACHINE ET RECULE !");
     }
     
     public void caseGambling(int value){
        casePopupManager.popupCaseGambi();
-       casePopupManager.showPopup(this,"RELANCE POUR TENTER DE FAIRE AU DESSUS OU EGALE A " + value);
+       casePopupManager.showPopup(this,"DUEL CONTRE GAMBI LE ROBOT ! FAIS PLUS QUE " + value + " POUR LE BATTRE !");
     }
     
     private void setPanelClickListener(Runnable listener) {

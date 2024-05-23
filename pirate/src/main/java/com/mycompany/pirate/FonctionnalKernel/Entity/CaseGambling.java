@@ -13,18 +13,18 @@ import com.mycompany.pirate.Interfaces.IDialogue;
  * @author RIBEIRO
  */
 public class CaseGambling extends Case {
-    private IDialogue notificationService;
+    private IDialogue dialogue;
     private ControlGamblingDuel controlGamblingDuel;
 
-    public CaseGambling(ControlSlotMachine controlSlotMachine, IDialogue notificationService) {
-        this.notificationService = notificationService;
+    public CaseGambling(ControlSlotMachine controlSlotMachine, IDialogue dialogue) {
+        this.dialogue = dialogue;
         this.controlGamblingDuel =  new ControlGamblingDuel(controlSlotMachine);
     }
     
      @Override
     public void ajouterPion(Pion pion) {
         occupants.add(pion);
-        controlGamblingDuel.duelDeDes(pion,notificationService);
+        controlGamblingDuel.duelDeDes(pion,dialogue);
     }
    
 
