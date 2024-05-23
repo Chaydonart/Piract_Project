@@ -9,20 +9,8 @@ package com.mycompany.pirate.Interfaces;
  * @author BEN JAAFAR
  */
 public interface IPirates {
-    /* Il nous faut
-    
-    startGUI()
-    
-    deplcerPion()
-    
-    spinMachine()
-    
-    changerTurn()
-    
-    */
     public void movePiece(int deplacement, String name);
     public void startGUI();
-    
     public void spinMachineUI(int[] values);
     public void newTurn();
     public void endGame(String name);
