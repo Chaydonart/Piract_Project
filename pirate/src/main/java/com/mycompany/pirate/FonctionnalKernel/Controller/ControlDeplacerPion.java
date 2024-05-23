@@ -29,10 +29,10 @@ public class ControlDeplacerPion implements IControlDeplacerPion {
         int nouvellePosition;
 
         //Pour reculer s'assurer que le deplacement n'envoie pas à une case négative
-        if (pion.getPosition() + deplacement <= 1) {
+        if (pion.getPosition() + deplacement < 1) {
             nouvellePosition = 1;
         // S'assurer de ne pas dépasser le plateau
-        } else if (pion.getPosition() + deplacement > plateau.getNbCases()) {
+        } else if (pion.getPosition() + deplacement > 37) {
             nouvellePosition = plateau.getNbCases(); 
         } else {
             nouvellePosition = pion.getPosition() + deplacement;
