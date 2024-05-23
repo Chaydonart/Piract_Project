@@ -28,4 +28,8 @@ public interface IDialogue {
     void notifyDeplacerPion(int deplacement, String name);
     
     void notifyNouveauTour(String name);
+    
+    void notifyFinDeJeu();
+    
+    void notifyDuelReussi();
 }

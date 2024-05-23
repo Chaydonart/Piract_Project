@@ -38,7 +38,7 @@ public class Boundary implements IBoundary {
     
     @Override 
     public void tourSuivant(){
-        this.GUI.nouveauTour();
+        this.GUI.newTurn();
     }
     
     @Override
@@ -55,7 +55,7 @@ public class Boundary implements IBoundary {
 
     @Override    
     public void deplacerPion(int deplacement, String name) {
-       GUI.deplacerPion(deplacement,name);
+       GUI.movePiece(deplacement,name);
     }
 
     // Partie pacerelle dialogue
@@ -108,6 +108,16 @@ public class Boundary implements IBoundary {
     @Override
     public void notifyNouveauTour(String name){
         tourSuivant();
+    }
+
+    @Override
+    public void notifyFinDeJeu() {
+       this.GUI.endGame();
+    }
+    
+    @Override
+    public void notifyDuelReussi(){
+        this.GUI.successfulDuel();
     }
 
 }

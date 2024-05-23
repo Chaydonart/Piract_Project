@@ -20,7 +20,7 @@ public interface IPirates {
     changerTurn()
     
     */
-    public void deplacerPion(int deplacement, String name);
+    public void movePiece(int deplacement, String name);
     public void startGUI();
     
 }
