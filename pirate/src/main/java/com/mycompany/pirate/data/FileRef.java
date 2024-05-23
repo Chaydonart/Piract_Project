@@ -43,6 +43,7 @@ public class FileRef {
     public static final String FX_GAMBLING_DUEL_VICTORY = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\fx\\FX_gambingmachine_victory.wav";
     public static final String FX_POPUP_CASE = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\fx\\FX_popup_case.wav";
     public static final String FX_WIN = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\fx\\FX_win.wav";
+    public static final String FX_SAUT_PION = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\fx\\FX_saut.wav";
 
     
     //VOICELINE

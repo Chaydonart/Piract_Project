@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package com.mycompany.pirate.Boundary.UserInterface;
+import static com.mycompany.pirate.data.FileRef.FX_SAUT_PION;
 import static com.mycompany.pirate.data.values.GREEN_CUSTOM;
 import java.awt.Color;
 import java.awt.Component;
@@ -22,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import java.util.Arrays;
 import java.util.List;
+import utils.SoundPlayer;
 /**
  *
  * @author BEN JAAFAR & RIBEIRO
@@ -31,6 +33,8 @@ import java.util.List;
  */
 public class GameBoardPanel extends javax.swing.JPanel {
     private static final int PIECE_Y_OFFSET = -50; // Ajustement de la position verticale des pions
+    private SoundPlayer fxSaut = new SoundPlayer(FX_SAUT_PION);
+
     public GameBoardPanel() {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -87,6 +91,7 @@ public class GameBoardPanel extends javax.swing.JPanel {
         }
         return path;
     }
+    
     private void animatePath(PionPanel pion, List<Integer> path, int index, Runnable onAnimationEnd) {
         if (index >= path.size()) {
             if (onAnimationEnd != null) {
@@ -134,7 +139,8 @@ public class GameBoardPanel extends javax.swing.JPanel {
                     ((Timer) e.getSource()).stop();
                     pion.setLocation(destinationX, destinationY);
                     pion.setCellPosition(destinationCellNumber);
-
+                    fxSaut.stop();
+                    fxSaut.play();
                     Timer delayTimer = new Timer(10, (ActionEvent ev) -> {
                         if (onAnimationEnd != null) {
                             onAnimationEnd.run();
