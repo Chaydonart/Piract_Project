@@ -27,9 +27,9 @@ public interface IPirates {
     public void newTurn();
     public void endGame();
     public void takeDamage(String name);
-    public void gamblingDuelReussi(String name, boolean win);
-    public void caseBombe(String name);
-    public void caseRejouer();
+    public void gamblingDuelResult(String name, boolean win);
+    public void caseBombe();
+    public void caseRejouer(String name);
     public void caseReculer();
     public void caseGambling(int value);
     

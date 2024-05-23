@@ -430,22 +430,5 @@ public class UI extends javax.swing.JFrame implements IPirates {
     // End of variables declaration//GEN-END:variables
 
 
-	@Override
-	public void gamblingDuelReussi(String name, boolean win) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void caseRejouer() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void caseBombe(String name) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

@@ -77,12 +77,12 @@ public class Boundary implements IPirates,IDialogue {
 
     @Override
     public void notifyCaseDegat(String name, int vie) {
-    	caseBombe(name);
+    	caseBombe();
+    	this.GUI.takeDamage(name);
     }
 
     @Override
-    public void caseBombe(String name) {
-    	this.GUI.takeDamage(name);
+    public void caseBombe() {
     	this.GUI.caseBombe();
  
     }
@@ -140,16 +140,16 @@ public class Boundary implements IPirates,IDialogue {
 	}
 
 	@Override
-	public void gamblingDuelReussi(String name, boolean win) {
-		this.GUI.gamblingDuelReussi(name, win);
+	public void gamblingDuelResult(String name, boolean win) {
+		this.GUI.gamblingDuelResult(name, win);
 		
 	}
 
 	
 
 	@Override
-	public void caseRejouer() {
-		this.GUI.caseRejouer();
+	public void caseRejouer(String name) {
+		this.GUI.caseRejouer(name);
 		
 	}
 
@@ -164,5 +164,6 @@ public class Boundary implements IPirates,IDialogue {
 		this.GUI.caseGambling(value);
 		
 	}
+
 
 }
