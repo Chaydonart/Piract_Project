@@ -1,32 +1,49 @@
 package com.mycompany.pirate.FonctionnalKernel.Controller;
 
-import com.mycompany.pirate.Services.ServiceDeplacerPion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
-import com.mycompany.pirate.Interfaces.IServiceDeplacerPion;
+import com.mycompany.pirate.FonctionnalKernel.Entity.Plateau;
+import com.mycompany.pirate.Interfaces.IControlDeplacerPion;
+import java.util.Optional;
+import com.mycompany.pirate.Interfaces.IDialogue;
 
 /**
  *
  * @author ESSENGUE MATIS
  */
-public class ControlDeplacerPion {
-
-    private IServiceDeplacerPion deplacePionService;
+public class ControlDeplacerPion implements IControlDeplacerPion {
+    
     private PionRepository pionRepository;
+    private Plateau plateau;
+    private IDialogue notificationService;
 
-    public ControlDeplacerPion(ServiceDeplacerPion deplacePionService, PionRepository pionRepository) {
-        this.deplacePionService = deplacePionService;
+    public ControlDeplacerPion(Plateau plateau, IDialogue notificationService, PionRepository pionRepository) {
         this.pionRepository = pionRepository;
+        this.plateau = plateau;
+        this.notificationService = notificationService;
     }
+    
+    @Override
+    public void deplacerPion(Pion pion, int deplacement) {
+        plateau.retirerPion(pion);
+        int nouvellePosition;
 
-    public void deplacerPion(int resultatDe) {
-        Pion pionActuel = pionRepository.getPionActuel();
-        deplacePionService.deplacerPion(pionActuel, resultatDe);
-        pionRepository.save(pionActuel);
+        //Pour reculer s'assurer que le deplacement n'envoie pas à une case négative
+        if (pion.getPosition() + deplacement <= 1) {
+            nouvellePosition = 1;
+        // S'assurer de ne pas dépasser le plateau
+        } else if (pion.getPosition() + deplacement > plateau.getNbCases()) {
+            nouvellePosition = plateau.getNbCases(); 
+        } else {
+            nouvellePosition = pion.getPosition() + deplacement;
+        }
+        Optional.ofNullable(notificationService).ifPresent(service -> service.notifyDeplacerPion(deplacement,pion.getName())); 
+        pion.setPosition(nouvellePosition);
+        plateau.poserPion(pion);
     }
-
-    public void setDeplacerPionService(ServiceDeplacerPion deplacerPionService) {
-        this.deplacePionService = deplacerPionService ; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+    public PionRepository getPionRepository() {
+        return pionRepository;
     }
 
 }

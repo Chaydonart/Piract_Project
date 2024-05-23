@@ -4,19 +4,17 @@
  */
 package com.mycompany.pirate.FonctionnalKernel.Entity;
 
-import com.mycompany.pirate.Interfaces.NotificationService;
-import java.util.ArrayList;
+import java.util.Optional;
+import com.mycompany.pirate.Interfaces.IDialogue;
 
 /**
  *
  * @author BEN JAAFAR
  */
 public class CaseDegat extends Case {
-    private ArrayList<Pion> occupants;
-    private NotificationService notificationService;
+    private IDialogue notificationService;
 
-    public CaseDegat(NotificationService notificationService) {
-        occupants = new ArrayList<>();
+    public CaseDegat(IDialogue notificationService) {
         this.notificationService = notificationService;
     }
     
@@ -24,14 +22,9 @@ public class CaseDegat extends Case {
     public void ajouterPion(Pion pion) {
         occupants.add(pion);
         pion.setVie(pion.getVie() - 1);
-        if (notificationService != null) {
-            notificationService.notify("Le pion " + pion.getName() + " a pris des degats ! Vie restante : " + pion.getVie());
-        }
+        Optional.ofNullable(notificationService).ifPresent(service -> service.notifyCaseDegat(pion.getName(), pion.getVie()));
     }
     
-    @Override
-    public boolean isSpecial(){
-        return true;
-    }
+
     
 }

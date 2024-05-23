@@ -4,68 +4,117 @@
  */
 package com.mycompany.pirate.Boundary.Console;
 
-import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
+import com.mycompany.pirate.Boundary.UserInterface.UI;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlJeu;
-import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
 import com.mycompany.pirate.Interfaces.IBoundary;
-import com.mycompany.pirate.Interfaces.NotificationService;
-import java.util.Arrays;
 
 /**
  *
  * @author BEN JAAFAR
+ * 
+ * Va ensuite en plus implementer IPirates
  */
-public class Boundary implements NotificationService, IBoundary{
-    private ControlSlotMachine controlSlotMachine;
-    private ControlDeplacerPion controlDeplacePion;
-    private ControlJeu gameLoopController;
-    private PionRepository pionRepository;
+public class Boundary implements IBoundary {
+    private final PionRepository pionRepository;
+    private UI GUI;
 
-    public Boundary(ControlSlotMachine controlSlotMachine, ControlDeplacerPion controlDeplacePion, ControlJeu gameLoopController, PionRepository pionRepository) {
-        this.controlSlotMachine = controlSlotMachine;
-        this.controlDeplacePion = controlDeplacePion;
-        this.gameLoopController = gameLoopController;
+    public Boundary(ControlJeu gameLoopController, PionRepository pionRepository) {
         this.pionRepository = pionRepository;
     }
 
+    @Override
     public void start() {
-        afficherMessage("Le jeu commence !");
-        gameLoopController.startGame();
+        GUI = new UI();
+        GUI.startGUI();
     }
 
-    //on utilise une machine a sous comme dé
-    public void spin() {
-        int[] values = controlSlotMachine.spin();
-        afficherMessage("La machine a sous affiche = " + values[0] + " " +  values[1] + " " + values[2]);
-        int resultat = Arrays.stream(values).sum();
-        afficherMessage("Resultat de la machine " + resultat);
-        deplacerPion(resultat);
+    //Partie affichage console (temporaire)
+    @Override
+    public void spin(int[] values) {
+        this.GUI.spinMachine(values);
     }
-
-    public void deplacerPion(int resultatDe) {
-        controlDeplacePion.deplacerPion(resultatDe);
-        afficherEtatJeu();
+    
+    @Override 
+    public void tourSuivant(){
+        this.GUI.newTurn();
     }
-
+    
+    @Override
     public void afficherEtatJeu() {
         for (Pion pion : pionRepository.getPions()) {
-            afficherMessage("RECAPITULATIF : Pion " + pion.getName() + " est sur la case " + pion.getPosition());
+            afficherMessage("RÉCAPITULATIF : Pion " + pion.getName() + " est sur la case " + pion.getPosition());
         }
     }
 
+    @Override
     public void afficherMessage(String message) {
         System.out.println(message);
     }
 
+    @Override    
+    public void deplacerPion(int deplacement, String name) {
+       GUI.movePiece(deplacement,name);
+    }
+
+    // Partie pacerelle dialogue
     @Override
     public void notify(String message) {
         afficherMessage(message);
     }
 
-    public void setGameLoopController(ControlJeu gameLoopController) {
-        this.gameLoopController = gameLoopController; 
+    @Override 
+    public void notifySpin(int[] values) {
+        spin(values);
+    }
+
+    @Override 
+    public void notifyEtatJeu() {
+        afficherEtatJeu();
+    }
+
+    @Override
+    public void notifyCaseDegat(String name, int vie) {
+       this.GUI.takeDamage(name);
+       this.GUI.caseBombe();
+    }
+
+    @Override
+    public void notifyCaseRejouer() {
+        this.GUI.caseRejouer();
+    }
+
+    @Override
+    public void notifyCaseReculer() {             
+        this.GUI.caseReculer();
+    }
+
+    @Override
+    public void notifyCaseGambling(String name, int randomValue) {
+        afficherMessage("Le " + name + " tombe sur une case GAMBLING");
+        afficherMessage("Le " + name + " va donc procéder à un duel contre Gambi le robot !");
+        afficherMessage("Duel gambling ! Le joueur doit faire une valeur supérieure à " + randomValue);
+    }
+
+    @Override
+    public void notifyDeplacerPion(int deplacement, String name) {
+        deplacerPion(deplacement, name);
     }
     
+    @Override
+    public void notifyNouveauTour(String name){
+        tourSuivant();
+    }
+
+    @Override
+    public void notifyFinDeJeu() {
+       this.GUI.endGame();
+    }
+    
+    @Override
+    public void notifyDuelResult(String name, boolean win){
+        this.GUI.gamblingDuelResult(name,win);
+    }
+
 }

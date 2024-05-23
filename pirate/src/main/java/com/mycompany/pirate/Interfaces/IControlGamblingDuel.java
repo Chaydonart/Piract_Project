@@ -10,8 +10,8 @@ import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
  *
  * @author BEN JAAFAR
  */
-public interface IControlGamblingDuel extends ISlotMachine {
+public interface IControlGamblingDuel {
     
-    public void duelDeDes(Pion pion);
+    public int duelDeDes(Pion pion, IDialogue notificationServices);
     
 }

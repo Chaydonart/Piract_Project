@@ -14,6 +14,7 @@ import java.util.List;
  * Le PionRepository agit comme une couche d'abstraction entre les entités (les pions)
  * et les contrôleurs qui ont besoin d'accéder à ces entités. Il fournit des méthodes 
  * pour manipuler la collection de pions de manière cohérente.
+ * Cela permet notammenet d'avoir le joueur courant.
  * 
  */
 
@@ -31,7 +32,7 @@ public class PionRepository {
     }
 
     public void save(Pion pion) {
-        // Sauvegarder l'état du pion si nécessaire (pas nécessaire dans ce cas)
+        // Mecanique de malus ici ! 
     }
 
     public void nextPion() {

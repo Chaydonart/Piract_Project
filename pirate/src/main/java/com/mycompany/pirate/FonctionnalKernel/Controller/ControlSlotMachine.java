@@ -4,25 +4,36 @@
  */
 package com.mycompany.pirate.FonctionnalKernel.Controller;
 
-import com.mycompany.pirate.Services.SlotMachineService;
-import com.mycompany.pirate.Interfaces.IServiceSlotMachine;
+import com.mycompany.pirate.Interfaces.IControlSlotMachine;
+import com.mycompany.pirate.Interfaces.IDialogue;
+
+import java.util.Optional;
+import java.util.Random;
 
 /**
  *
  * @author BEN JAAFAR
  */
-public class ControlSlotMachine implements IServiceSlotMachine {
-    private IServiceSlotMachine smService;
+public class ControlSlotMachine implements IControlSlotMachine {
+    private final Random random = new Random();
     private int compteurSpin = 0;
-
-    public ControlSlotMachine(SlotMachineService smService) {
-        this.smService = smService;
+    private IDialogue dialogue;
+    
+    public ControlSlotMachine(IDialogue dialogue){
+        this.dialogue = dialogue;
     }
-
+    
+    @Override
     public int[] spin() {
         this.compteurSpin++;
-        return smService.spin();
+        int[] values = new int[3];
+        values[0] = random.nextInt(3); // Uniquement la case 1 va de 0 a 4
+        values[1] = random.nextInt(4) + 1; 
+        values[2] = random.nextInt(4) + 1;
+        Optional.ofNullable(dialogue).ifPresent(service -> service.notifySpin(values));
+        return values;
     }
+    
     public int getCompteurSpin() {
         return compteurSpin;
     }

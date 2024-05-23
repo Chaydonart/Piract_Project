@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 
 public class Case implements ICase {
-    private ArrayList<Pion> occupants;
+    protected ArrayList<Pion> occupants;
 
     public Case() {
         occupants = new ArrayList<>();
@@ -29,9 +29,5 @@ public class Case implements ICase {
     public void retirerPion(Pion pion) {
         occupants.remove(pion);
     }
-    
-    @Override
-    public boolean isSpecial(){
-        return false;
-    }
+   
 }

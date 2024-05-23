@@ -4,82 +4,52 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
-import static com.mycompany.pirate.data.values.TRANSPARENT_COLOR_BACKGROUND;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /**
  *
  * @author BEN JAAFAR
  */
 public class PionPanel extends javax.swing.JPanel {
-
-    private int initialX;
-    private int initialY;
-    private int currentX;
-    private int currentY;
-    private Color pionColor;
+    private Color pionColor = Color.RED;
+    private int cellPosition = 0;
+    public int player_number = 0;
 
     public PionPanel() {
-        setDoubleBuffered(true);
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                initialX = e.getX();
-                initialY = e.getY();
-            }
-        });
-
-        addMouseMotionListener(new MouseAdapter() {
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                int deltaX = e.getX() - initialX;
-                int deltaY = e.getY() - initialY;
-                currentX += deltaX;
-                currentY += deltaY;
-                setLocation(currentX, currentY);
-            }
-        });
-        
-         addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                // Mettez à jour les coordonnées actuelles en fonction de la nouvelle taille
-                currentX = getX();
-                currentY = getY();
-            }
-        });
-        setOpaque(false); // Rend le fond transparent
+        setOpaque(false); 
     }
     
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-        // Convertir Graphics en Graphics2D pour utiliser setStroke()
         Graphics2D g2d = (Graphics2D) g;
-
-        // Définir l'épaisseur du contour
-        float contourWidth = 2.0f; // épaisseur personnalisée
+        float contourWidth = 3.0f; // épaisseur personnalisée
         g2d.setStroke(new BasicStroke(contourWidth));
 
-        // Dessiner le contour blanc
-        g2d.setColor(Color.WHITE);
-        g2d.drawOval(0, 0, getWidth(), getHeight());
+        int centerX = getWidth() / 2;
+        int centerY = getHeight() / 2;
+        int radius = Math.min(getWidth(), getHeight()) / 2;
 
-        // Remplir le cercle avec la couleur du pion
+        g2d.setColor(Color.WHITE);
+        g2d.drawOval(centerX - radius, centerY - radius, 2 * radius, 2 * radius);
+
         g2d.setColor(pionColor);
-        g2d.fillOval(0, 0, getWidth(), getHeight());
+        g2d.fillOval(centerX - radius + (int)contourWidth, centerY - radius + (int)contourWidth, 2 * radius - 2 * (int)contourWidth, 2 * radius - 2 * (int)contourWidth);
     }
 
     public void setColor(Color color) {
         this.pionColor = color;
+    }
+    
+    public void setCellPosition(int cellPos){
+        this.cellPosition = cellPos;
+    }
+    
+    public int getCellPosition(){
+        return cellPosition;
     }
 
     @SuppressWarnings("unchecked")

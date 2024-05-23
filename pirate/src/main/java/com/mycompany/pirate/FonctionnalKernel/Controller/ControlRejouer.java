@@ -4,27 +4,53 @@
  */
 package com.mycompany.pirate.FonctionnalKernel.Controller;
 
-import com.mycompany.pirate.Interfaces.IServiceRejouer;
-import com.mycompany.pirate.Interfaces.NotificationService;
-import com.mycompany.pirate.Services.ServiceRejouer;
+import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
+import com.mycompany.pirate.Interfaces.IControlDeplacerPion;
+import com.mycompany.pirate.Interfaces.IControlRejouer;
+import com.mycompany.pirate.Interfaces.IControlSlotMachine;
+import com.mycompany.pirate.Interfaces.IDialogue;
+import java.util.Arrays;
+import java.util.Optional;
 
 /**
  *
  * @author BEN JAAFAR
+ * 
+ * Controlleur permettant de gerer la mecanique de la case reculer
  */
-public class ControlRejouer implements IServiceRejouer {
+public class ControlRejouer implements IControlRejouer, IControlSlotMachine, IControlDeplacerPion {
     
-    private IServiceRejouer serviceRejouer;
+    private ControlDeplacerPion controlDeplacerPion;
+    private IDialogue notificationService;
+    private ControlSlotMachine controlSlotMachine;
+    private int distanceRejoue;
 
-    public ControlRejouer(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine, NotificationService notificationService) {
-        this.serviceRejouer = new ServiceRejouer(controlDeplacerPion,controlSlotMachine,notificationService);
+    public ControlRejouer(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine, IDialogue notificationService) {
+        this.controlDeplacerPion = controlDeplacerPion;
+        this.controlSlotMachine = controlSlotMachine;
+        this.notificationService = notificationService;
     }
        
     @Override
-    public void rejouer() {
-        if (serviceRejouer != null) {
-            serviceRejouer.rejouer();
-        }
+    public void rejouer(Pion pion) {
+        Optional.ofNullable(notificationService).ifPresent(service -> service.notifyCaseRejouer());
+        int[] values = spin();
+        int resultat = Arrays.stream(values).sum();
+        this.distanceRejoue = resultat;
+        deplacerPion(pion,resultat); 
     }
+
+    @Override
+    public int[] spin() {
+        return this.controlSlotMachine.spin();
+    }
+
+    @Override
+    public void deplacerPion(Pion pion, int deplacement) {
+        this.controlDeplacerPion.deplacerPion(pion, deplacement);
+    }
+    public int getDistanceRejoue() {
+		return distanceRejoue;
+	}
     
 }

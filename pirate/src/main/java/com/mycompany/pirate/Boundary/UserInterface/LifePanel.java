@@ -12,70 +12,116 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import static com.mycompany.pirate.data.FileRef.IMAGE_LIFE_PLAYER_1;
 import static com.mycompany.pirate.data.FileRef.IMAGE_LIFE_PLAYER_2;
-import static com.mycompany.pirate.data.values.TRANSPARENT_COLOR_BACKGROUND;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 /**
  *
  * @author BEN JAAFAR
  */
 public class LifePanel extends javax.swing.JPanel {
-    private boolean isPlayer1 = true;
+ private boolean isPlayer1 = true;
     private int viesRestantes = 5;
-    private Color playerColor = Color.GRAY;
-    private BufferedImage lifeImage; // Image pour représenter une vie
+    private BufferedImage lifeImage;
+    private final int lifeImageWidth = 30;
+    private final int lifeImageHeight = 30;
+    private LifeAnimation[] animations;
 
-    public LifePanel() {    
+    public LifePanel() {
         loadImage();
-        setBackground(TRANSPARENT_COLOR_BACKGROUND);
         setDoubleBuffered(true);
+        setOpaque(false);
+        setPreferredSize(new Dimension(150, 50));
+        startAnimations();
     }
-    
-    private void loadImage(){
+
+    private void startAnimations() {
+        animations = new LifeAnimation[viesRestantes];
+        for (int i = 0; i < viesRestantes; i++) {
+            animations[i] = new LifeAnimation(i * 100);
+            animations[i].start();
+        }
+    }
+
+    private void loadImage() {
         try {
             lifeImage = isPlayer1 ? ImageIO.read(new File(IMAGE_LIFE_PLAYER_1)) : ImageIO.read(new File(IMAGE_LIFE_PLAYER_2));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
-    
-@Override
-protected void paintComponent(Graphics g) {
-    super.paintComponent(g);
-    
-    // Vérifier si lifeImage est nul
-    if (lifeImage != null) {
-        int bottomY = getHeight() - 20; // Position verticale basse
-        int imageWidth = lifeImage.getWidth(); // Largeur de l'image de vie
-        int imageHeight = lifeImage.getHeight(); // Hauteur de l'image de vie
-        int imageSpacing = 10; // Espace entre chaque image de vie
 
-        // Position horizontale en fonction de la couleur du joueur
-        int startX;
-        if (playerColor == Color.GREEN) {
-            startX = 20; // Position à gauche si la couleur est verte
-        } else {
-            startX = getWidth() - 5 * (imageWidth + imageSpacing); // Position à droite pour toute autre couleur
-        }
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
 
-        // Dessine chaque image de vie en fonction du nombre de vies restantes
-        for (int i = 0; i < viesRestantes; i++) {
-            int imageX = startX + (imageWidth + imageSpacing) * i; // Position horizontale de l'image
-            g.drawImage(lifeImage, imageX, bottomY - imageHeight, this); // Dessiner l'image de vie
+        if (lifeImage != null) {
+            Graphics2D g2d = (Graphics2D) g;
+            g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+
+            int bottomY = getHeight() - 20;
+            int imageSpacing = 5;
+            // Ajustez le calcul de startX pour centrer les images
+            int totalWidth = (lifeImageWidth + imageSpacing) * viesRestantes - imageSpacing;
+            int startX = (getWidth() - totalWidth) / 2;
+
+            for (int i = 0; i < viesRestantes; i++) {
+                int imageX = startX + (lifeImageWidth + imageSpacing) * i;
+                int imageY = bottomY - lifeImageHeight / 2 + animations[i].getYOffset();
+                g2d.drawImage(lifeImage, imageX, imageY, lifeImageWidth, lifeImageHeight, this);
+            }
         }
     }
-}
 
-    // Plus tard on va juste lire les variables du jeu
     public void perdreVie() {
         if (viesRestantes > 0) {
             viesRestantes--;
-            repaint(); 
+            repaint();
         }
     }
 
     public void setPlayer2() {
         this.isPlayer1 = false;
         loadImage();
+    }
+
+    private class LifeAnimation extends Thread {
+        private int yOffset = 0;
+        private boolean running = true;
+
+        public LifeAnimation(int delay) {
+            setDaemon(true);
+            try {
+                Thread.sleep(delay);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public void run() {
+            double time = 0.0;
+            double amplitude = 5.0; // Hauteur du mouvement
+            double frequency = 0.02; // Vitesse du mouvement
+            while (running) {
+                try {
+                    Thread.sleep(16); // Environ 60 FPS
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                yOffset = (int) (amplitude * Math.sin(frequency * time)); // Interpolation sinusoidale
+                time += 1.0;
+                repaint();
+            }
+        }
+
+        public int getYOffset() {
+            return yOffset;
+        }
+
+        public void stopAnimation() {
+            running = false;
+        }
     }
 
     @SuppressWarnings("unchecked")
