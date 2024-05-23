@@ -6,7 +6,6 @@ package com.mycompany.pirate.Boundary.UserInterface;
 
 import static com.mycompany.pirate.data.values.GREEN_CUSTOM;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -16,24 +15,17 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.RenderingHints;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import javax.swing.Timer;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  *
  * @author BEN JAAFAR
- * 
- * Panel qui trace un plateau avec un gridlayout 
- * Permet aussi de deplacer les pions grace aux coordonnes des cellules
  */
 public class GameBoardPanel extends javax.swing.JPanel {
 
     public GameBoardPanel() {
+        // Panneau principal avec GridBagLayout
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -73,78 +65,11 @@ public class GameBoardPanel extends javax.swing.JPanel {
         CellPanel zeroCell = new CellPanel(0);
         add(zeroCell, gbc);
 
-        setOpaque(false);
-    }
-    
-    public void deplacerPion(PionPanel pion, int destinationCellNumber, Runnable onAnimationEnd) {
-        for (Component component : getComponents()) {
-            if (component instanceof CellPanel) {
-                CellPanel cellPanel = (CellPanel) component;
-                if(destinationCellNumber >= 36){
-                    destinationCellNumber = 36;
-                }
-                if (cellPanel.getCellNumber() == destinationCellNumber) {
-                    int destinationX = cellPanel.getX() + (cellPanel.getWidth() ) / 2;
-                    int destinationY = cellPanel.getY() + cellPanel.getHeight() + (pion.getWidth() / 2);
-                    
-                    //Pour eviter que les pions s'overlape
-                    switch(pion.player_number){
-                        case 1 -> destinationX -= 15;
-                        case 2 -> destinationX += 15;
-                    }
-                    
-                    animatePionMovement(pion, destinationX, destinationY, destinationCellNumber, onAnimationEnd);
-                    break;
-                }
-            }
-        }
+        setBackground(GREEN_CUSTOM);
     }
 
-    private void animatePionMovement(PionPanel pion, int destinationX, int destinationY, int destinationCellNumber, Runnable onAnimationEnd) {
-        int startX = pion.getX();
-        int startY = pion.getY();
-        int deltaX = destinationX - startX;
-        int deltaY = destinationY - startY;
-        int steps = 30;
-        int delay = 1;
-
-        Timer timer = new Timer(delay, new ActionListener() {
-            int step = 0;
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                step++;
-                double progress = (double) step / steps;
-                int currentX = startX + (int) (deltaX * progress);
-                int currentY = startY + (int) (deltaY * progress);
-                pion.setLocation(currentX, currentY);
-
-                if (step >= steps) {
-                    ((Timer) e.getSource()).stop();
-                    pion.setLocation(destinationX, destinationY);
-                    pion.setCellPosition(destinationCellNumber);
-
-                    // Ajoute un délai d'une seconde ici
-                    Timer delayTimer = new Timer(500, (ActionEvent ev) -> {
-                        if (onAnimationEnd != null) {
-                            onAnimationEnd.run();
-                        }
-                    });
-                    delayTimer.setRepeats(false); // Exécute onAnimationEnd.run() une seule fois
-                    delayTimer.start();
-                }
-            }
-        });
-
-        timer.start();
-    }
-
-    
     private class CellPanel extends JPanel {
         private int cellNumber;
-
-        private static final List<Integer> RED_NUMBERS = Arrays.asList(1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36);
-
 
         public CellPanel(int cellNumber) {
             setOpaque(false);
@@ -161,7 +86,7 @@ public class GameBoardPanel extends javax.swing.JPanel {
 
             // Déterminer la couleur de la cellule
             if (cellNumber == 0) {
-                g2d.setColor(GREEN_CUSTOM);
+                g2d.setColor(Color.GREEN);
             } else if (isRed(cellNumber)) {
                 g2d.setColor(Color.RED);
             } else {
@@ -170,27 +95,28 @@ public class GameBoardPanel extends javax.swing.JPanel {
 
             // Dessiner le cercle
             int diameter = Math.min(getWidth(), getHeight()) - 10; // Ajuster pour les marges
-           
-            int x = (getWidth() - diameter) / 2;
+            int diameter2 = (Math.min(getWidth(), getHeight()) - 10) + 20; // Ajuster pour les marges
+            int x = (getWidth() - diameter2) / 2;
             int y = (getHeight() - diameter) / 2;
-            g2d.fillOval(x, y, diameter, diameter );
+            g2d.fillOval(x, y, diameter2, diameter );
 
             // Dessiner le numéro de la cellule
             g2d.setColor(Color.WHITE);
             g2d.setFont(new Font("Arial", Font.BOLD, 25));
             FontMetrics fm = g2d.getFontMetrics();
             String text = Integer.toString(cellNumber);
-            int textX = x + (diameter - fm.stringWidth(text)) / 2;
+            int textX = x + (diameter2 - fm.stringWidth(text)) / 2;
             int textY = y + ((diameter - fm.getHeight()) / 2) + fm.getAscent();
             g2d.drawString(text, textX, textY);
         }
 
         private boolean isRed(int number) {
-            return RED_NUMBERS.contains(number);
-        }
-        
-        public int getCellNumber() {
-            return cellNumber;
+            // Liste des numéros rouges sur une roulette
+            int[] redNumbers = {1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36};
+            for (int n : redNumbers) {
+                if (n == number) return true;
+            }
+            return false;
         }
     }
     

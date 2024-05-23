@@ -30,7 +30,7 @@ public class Main {
         Boundary gameUI = new Boundary(null, pionRepository);
         
         //Plteau
-        Plateau plateau =  new Plateau(37,gameUI);
+        Plateau plateau =  new Plateau(36,gameUI);
         
         // Controlleur
         ControlDeplacerPion controlDeplacerPion = new ControlDeplacerPion(plateau,gameUI,pionRepository);
@@ -38,12 +38,14 @@ public class Main {
         
         ControlJeu gameLoopController = new ControlJeu(jeu, pionRepository, gameUI,controlDeplacerPion, controlSlotMachine);
         
+        //Update controlleur for UI
+        gameUI.setGameLoopController(gameLoopController);
+        
         //Initialisation du plateau avec les controlleurs pour les cases speciales 
         plateau.initialiser(controlDeplacerPion,controlSlotMachine);
         
         // Démarrez le jeu en appelant start() sur gameUI
         gameUI.start();
-        gameLoopController.startGame();
     }
 }
 

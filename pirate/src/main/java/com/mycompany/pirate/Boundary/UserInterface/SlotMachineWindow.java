@@ -4,10 +4,12 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
-import static com.mycompany.pirate.data.FileRef.FX_MACHINE_ROULETTE;
-import utils.SoundPlayer;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JWindow;
 import javax.swing.Timer;
 
@@ -16,33 +18,25 @@ import javax.swing.Timer;
  * @author BEN JAAFAR
  */
 class SlotMachineWindow extends JWindow{
-    private SoundPlayer fxMachineRoulette = new SoundPlayer(FX_MACHINE_ROULETTE);
-    private Runnable endAnimation;
+     private final JPanel slotMachinePanel;
 
     public SlotMachineWindow() {
-        fxMachineRoulette.play();
-        fxMachineRoulette.loop();
-        setSize(600, 300);   
+        setSize(600, 300); // Taille de la fenêtre de la slot machine
 
-        //On ferme la fenetre apres 3sec
-        Timer timer = new Timer(3000, (ActionEvent e) -> {
-            dispose();
-            fxMachineRoulette.stop();
-            fxMachineRoulette.close();
-            if(endAnimation != null){
-                endAnimation.run();   
+        slotMachinePanel = new SlotMachinePanel(); // Utilisez le SlotMachinePanel que vous avez déjà créé
+        add(slotMachinePanel, BorderLayout.CENTER);
+
+        // Lancer automatiquement l'animation de la slot machine
+        ((SlotMachinePanel) slotMachinePanel).start();
+
+        // Ajouter un écouteur pour fermer la fenêtre après un délai
+        Timer timer = new Timer(3000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Fermer la fenêtre
             }
         });
-        timer.setRepeats(false);
-        timer.start(); 
+        timer.setRepeats(false); // Ne répétez pas le délai
+        timer.start(); // Démarrer le décompte
     }
-    
-    
-    public void startAnimation(int[] values, Runnable onAnimationEnd) {
-        SlotMachinePanel slotMachinePanel = new SlotMachinePanel(values); 
-        add(slotMachinePanel, BorderLayout.CENTER); 
-        slotMachinePanel.startAnimation(values);
-        this.endAnimation = onAnimationEnd;
-    }
-
 }

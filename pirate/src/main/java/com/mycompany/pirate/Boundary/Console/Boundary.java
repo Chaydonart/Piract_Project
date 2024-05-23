@@ -4,11 +4,13 @@
  */
 package com.mycompany.pirate.Boundary.Console;
 
-import com.mycompany.pirate.Boundary.UserInterface.UI;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlJeu;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
 import com.mycompany.pirate.Interfaces.IBoundary;
+import java.util.Arrays;
+import com.mycompany.pirate.Interfaces.IDialogue;
+import java.util.Scanner;
 
 /**
  *
@@ -17,30 +19,34 @@ import com.mycompany.pirate.Interfaces.IBoundary;
  * Va ensuite en plus implementer IPirates
  */
 public class Boundary implements IBoundary {
+      private ControlJeu gameLoopController;
     private final PionRepository pionRepository;
-    private UI GUI;
+    private final Scanner scanner;
 
     public Boundary(ControlJeu gameLoopController, PionRepository pionRepository) {
+        this.gameLoopController = gameLoopController;
         this.pionRepository = pionRepository;
+        this.scanner = new Scanner(System.in);
     }
 
     @Override
     public void start() {
-        GUI = new UI();
-        GUI.startGUI();
+        afficherMessage("Le jeu commence !");
+        afficherMessage("Appuyez sur Entrée pour démarrer le jeu...");
+        scanner.nextLine(); // Attendre que l'utilisateur appuie sur Entrée
+        gameLoopController.startGame();
     }
 
     //Partie affichage console (temporaire)
     @Override
     public void spin(int[] values) {
-        this.GUI.spinMachine(values);
+        afficherMessage("Appuyez sur Entrée pour lancer la machine à sous...");
+        scanner.nextLine(); // Attendre que l'utilisateur appuie sur Entrée
+        afficherMessage("La machine à sous affiche = " + values[0] + " " +  values[1] + " " + values[2]);
+        int resultat = Arrays.stream(values).sum();
+        afficherMessage("Résultat de la machine " + resultat);
     }
-    
-    @Override 
-    public void tourSuivant(){
-        this.GUI.newTurn();
-    }
-    
+
     @Override
     public void afficherEtatJeu() {
         for (Pion pion : pionRepository.getPions()) {
@@ -55,7 +61,7 @@ public class Boundary implements IBoundary {
 
     @Override    
     public void deplacerPion(int deplacement, String name) {
-       GUI.movePiece(deplacement,name);
+        afficherMessage("Le " + name + " avance de " + deplacement + " cases");
     }
 
     // Partie pacerelle dialogue
@@ -76,18 +82,24 @@ public class Boundary implements IBoundary {
 
     @Override
     public void notifyCaseDegat(String name, int vie) {
-       this.GUI.takeDamage(name);
-       this.GUI.caseBombe();
+        afficherMessage("Le joueur tombe sur une case DÉGÂTS");
+        afficherMessage("Le pion " + name + " a pris des dégâts ! Vie restante : " + vie);
     }
 
     @Override
-    public void notifyCaseRejouer() {
-        this.GUI.caseRejouer();
+    public void notifyCaseRejouer(int[] values, int resultat) {
+        afficherMessage("Le joueur tombe sur une case REJOUER");
+        notifyEtatJeu();
+        afficherMessage("Le joueur va rejouer");
+        spin(values);
+
     }
 
     @Override
-    public void notifyCaseReculer() {             
-        this.GUI.caseReculer();
+    public void notifyCaseReculer(int[] values, int resultat) {             
+        afficherMessage("Le joueur tombe sur une case RECULER");
+        notifyEtatJeu();
+        spin(values);
     }
 
     @Override
@@ -104,17 +116,11 @@ public class Boundary implements IBoundary {
     
     @Override
     public void notifyNouveauTour(String name){
-        tourSuivant();
+        afficherMessage("# " + name + " prend son tour #");
     }
 
-    @Override
-    public void notifyFinDeJeu() {
-       this.GUI.endGame();
+    // Pour initialiser le jeu
+    public void setGameLoopController(ControlJeu gameLoopController) {
+        this.gameLoopController = gameLoopController; 
     }
-    
-    @Override
-    public void notifyDuelResult(String name, boolean win){
-        this.GUI.gamblingDuelResult(name,win);
-    }
-
 }

@@ -19,18 +19,13 @@ public interface IDialogue {
     
     void notifyCaseDegat(String name, int vie);
     
-    void notifyCaseRejouer();
+    void notifyCaseRejouer(int[] values, int resultat);
     
-    void notifyCaseReculer();
+    void notifyCaseReculer(int[] values, int resultat);
    
-    void notifyCaseGambling(String name, int randomValue);  
-    void notifyDuelResult(String name, boolean win);
+    void notifyCaseGambling(String name,int randomValue);
     
     void notifyDeplacerPion(int deplacement, String name);
     
     void notifyNouveauTour(String name);
-    
-    void notifyFinDeJeu();
-    
-  
 }

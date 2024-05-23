@@ -20,13 +20,13 @@ import javax.imageio.ImageIO;
  *
  * @author BEN JAAFAR
  */
-public class PanelPlayer2 extends javax.swing.JPanel {
-    private String imagePath = "C:\\Users\\BEN JAAFAR\\Desktop\\player2.png";
-    private BufferedImage playerImage; // Image du joueur
+public class PanelPlayer extends javax.swing.JPanel {
+    private String imagePath = "C:\\Users\\BEN JAAFAR\\Desktop\\player.png";
+   private BufferedImage playerImage; // Image du joueur
     private int triangleBase = 200; // Base du triangle
     private int triangleHeight = 500; // Hauteur du triangle
 
-    public PanelPlayer2() {
+    public PanelPlayer() {
         loadImage();
         setPreferredSize(new Dimension(triangleBase, triangleHeight));
     }
@@ -39,22 +39,22 @@ public class PanelPlayer2 extends javax.swing.JPanel {
         }
     }
 
-   @Override
+    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 
-        // Dessiner le triangle rectangle inversé
-        int[] xPoints = {0, triangleBase, triangleBase};
-        int[] yPoints = {0, 0, triangleHeight};
+        // Dessiner le triangle rectangle
+        int[] xPoints = {0, triangleBase, 0};
+        int[] yPoints = {0, triangleHeight, triangleHeight};
         Polygon triangle = new Polygon(xPoints, yPoints, 3);
         g2d.setColor(Color.WHITE); // Couleur du triangle, changez selon vos besoins
         g2d.fillPolygon(triangle);
 
         // Vérifier si l'image du joueur est non nulle
         if (playerImage != null) {
-            // Calculer les dimensions redimensionnées de l'image
+         // Calculer la largeur et la hauteur redimensionnées de l'image
             int imageWidth = triangleBase - 20; // Largeur de l'image avec une marge de 10 pixels de chaque côté
             int imageHeight = (int) ((double) playerImage.getHeight() / playerImage.getWidth() * imageWidth); // Conserver le ratio de l'image
 
@@ -74,6 +74,8 @@ public class PanelPlayer2 extends javax.swing.JPanel {
             g2d.setClip(null); // Réinitialiser le clip
         }
     }
+
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -81,11 +83,11 @@ public class PanelPlayer2 extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 286, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 454, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
