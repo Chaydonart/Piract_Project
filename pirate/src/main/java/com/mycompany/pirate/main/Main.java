@@ -42,7 +42,7 @@ public class Main {
         plateau.initialiser(controlDeplacerPion,controlSlotMachine);
         
         // Démarrez le jeu en appelant start() sur gameUI
-        gameUI.start();
+        gameUI.startGUI();
         gameLoopController.startGame();
     }
 }
