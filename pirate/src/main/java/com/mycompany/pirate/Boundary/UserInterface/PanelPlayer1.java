@@ -8,6 +8,8 @@ import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_1;
 import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_1_DAMAGE;
 import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_1_VICTORY;
 import static com.mycompany.pirate.data.values.RED_CUSTOM;
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -80,6 +82,9 @@ public class PanelPlayer1 extends PanelPlayerDisplay {
         Polygon triangle = new Polygon(xPoints, yPoints, 3);
         g2d.setColor(turnColor);
         g2d.fillPolygon(triangle);
+        g2d.setColor(Color.BLACK);
+        g2d.setStroke(new BasicStroke(10));
+        g2d.drawPolygon(triangle);
 
         if (playerImage != null) {
             int imageWidth = triangleBase - 20;

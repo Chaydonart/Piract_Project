@@ -81,8 +81,8 @@ public class Boundary implements IBoundary {
     }
 
     @Override
-    public void notifyCaseRejouer() {
-        this.GUI.caseRejouer();
+    public void notifyCaseRejouer(String name) {
+        this.GUI.caseRejouer(name);
     }
 
     @Override

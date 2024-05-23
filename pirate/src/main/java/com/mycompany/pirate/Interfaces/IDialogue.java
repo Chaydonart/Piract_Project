@@ -19,7 +19,7 @@ public interface IDialogue {
     
     void notifyCaseDegat(String name, int vie);
     
-    void notifyCaseRejouer();
+    void notifyCaseRejouer(String name);
     
     void notifyCaseReculer();
    
