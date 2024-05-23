@@ -99,7 +99,8 @@ public class UI extends javax.swing.JFrame implements IPirates {
     }
 
     // Manage the slot machine, its animation, etc.
-    public void spinMachine(int[] values) {
+    @Override
+    public void spinMachineUI(int[] values) {
         CountDownLatch latchClick = new CountDownLatch(1);
         CountDownLatch latchAnimationEnd = new CountDownLatch(1);
 
@@ -130,13 +131,15 @@ public class UI extends javax.swing.JFrame implements IPirates {
         }
     }
 
+    @Override
     public void newTurn() {
         PanelDisplayerPlayer1.setTurn(testingTurn);
         PanelDisplayPlayer2.setTurn(!testingTurn);
         testingTurn = !testingTurn;
         changeTurn.play();
     }
-
+    
+    @Override
     public void endGame() {
         this.PanelButtonSlotMachine.setEnabled(false);
         this.PanelButtonSlotMachine.deactivateListeners();
@@ -144,7 +147,8 @@ public class UI extends javax.swing.JFrame implements IPirates {
         // Add a victory window
         
     }
-
+    
+    @Override
     public void takeDamage(String name) {
         displayPanels.get(name).setState(PlayerState.DAMAGE);
         ScreenShake shakeEffect = new ScreenShake();
@@ -154,7 +158,8 @@ public class UI extends javax.swing.JFrame implements IPirates {
             takeDamage.play();
         }
     }
-
+    
+    @Override
     public void gamblingDuelResult(String name, boolean win) {
         if(win) {
            gamblingDuelVictory.play();
@@ -165,22 +170,26 @@ public class UI extends javax.swing.JFrame implements IPirates {
         casePopupManager.closePopup();
     }
     
+    @Override
     public void caseBombe(){
        casePopupManager.popupCaseBomb();
        casePopupManager.showPopup(this,"CASE DEGATS ! OH NON TU PERDS UNE VIE !");
     }
     
+    @Override
     public void caseRejouer(String name){
        casePopupManager.popupCaseRejouer();
        casePopupManager.showPopup(this,"CASE REJOUER ! LANCE LA MACHINE ET REJOUE !");
        displayPanels.get(name).setState(PlayerState.VICTORY);
     }
     
+    @Override
     public void caseReculer(){
        casePopupManager.popupCaseReculer();
        casePopupManager.showPopup(this,"CASE RECULER ! LANCE LA MACHINE ET RECULE !");
     }
     
+    @Override
     public void caseGambling(int value){
        casePopupManager.popupCaseGambi();
        casePopupManager.showPopup(this,"DUEL CONTRE GAMBI LE ROBOT ! FAIS PLUS QUE " + value + " POUR LE BATTRE !");
@@ -194,6 +203,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
                 PanelButtonSlotMachine.deactivateListeners();
                 PanelDisplayerPlayer1.setState(PlayerState.IDLE);
                 PanelDisplayPlayer2.setState(PlayerState.IDLE);
+                casePopupManager.closePopup();
             }
         });
     }
@@ -215,7 +225,6 @@ public class UI extends javax.swing.JFrame implements IPirates {
         LayeredPanePlayer2 = new javax.swing.JLayeredPane();
         PanelDisplayPlayer2 = new com.mycompany.pirate.Boundary.UserInterface.PanelPlayer2();
         PanelLifePlayer2 = new com.mycompany.pirate.Boundary.UserInterface.LifePanel();
-        jPanel1 = new javax.swing.JPanel();
 
         jInternalFrame1.setVisible(true);
 
@@ -374,17 +383,6 @@ public class UI extends javax.swing.JFrame implements IPirates {
 
         LayeredPanePlayer2.add(PanelDisplayPlayer2, java.awt.BorderLayout.CENTER);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -395,22 +393,12 @@ public class UI extends javax.swing.JFrame implements IPirates {
                 .addComponent(LayeredPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(LayeredPanePlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(LayeredPanePlayer1, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
             .addComponent(LayeredPaneMain, javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(LayeredPanePlayer2, javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
@@ -429,7 +417,6 @@ public class UI extends javax.swing.JFrame implements IPirates {
     private com.mycompany.pirate.Boundary.UserInterface.PionPanel PanelPion1;
     private com.mycompany.pirate.Boundary.UserInterface.PionPanel PanelPion2;
     private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
 

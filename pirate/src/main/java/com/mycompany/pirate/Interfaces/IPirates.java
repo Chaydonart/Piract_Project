@@ -23,7 +23,7 @@ public interface IPirates {
     public void movePiece(int deplacement, String name);
     public void startGUI();
     
-    public void spinMachine(int[] values);
+    public void spinMachineUI(int[] values);
     public void newTurn();
     public void endGame();
     public void takeDamage(String name);
