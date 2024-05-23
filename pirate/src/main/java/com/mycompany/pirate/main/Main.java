@@ -13,6 +13,7 @@ import com.mycompany.pirate.FonctionnalKernel.Entity.Jeu;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Plateau;
+import static com.mycompany.pirate.data.values.BOARD_SIZE;
 
 /**
  *
@@ -30,7 +31,7 @@ public class Main {
         Boundary gameUI = new Boundary(null, pionRepository);
         
         //Plteau
-        Plateau plateau =  new Plateau(37,gameUI);
+        Plateau plateau =  new Plateau(BOARD_SIZE,gameUI);
         
         // Controlleur
         ControlDeplacerPion controlDeplacerPion = new ControlDeplacerPion(plateau,gameUI,pionRepository);

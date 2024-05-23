@@ -6,6 +6,7 @@ import com.mycompany.pirate.FonctionnalKernel.Entity.Plateau;
 import com.mycompany.pirate.Interfaces.IControlDeplacerPion;
 import java.util.Optional;
 import com.mycompany.pirate.Interfaces.IDialogue;
+import static com.mycompany.pirate.data.values.BOARD_SIZE;
 
 /**
  *
@@ -32,7 +33,7 @@ public class ControlDeplacerPion implements IControlDeplacerPion {
         if (pion.getPosition() + deplacement < 1) {
             nouvellePosition = 1;
         // S'assurer de ne pas dépasser le plateau
-        } else if (pion.getPosition() + deplacement > 37) {
+        } else if (pion.getPosition() + deplacement > BOARD_SIZE) {
             nouvellePosition = plateau.getNbCases(); 
         } else {
             nouvellePosition = pion.getPosition() + deplacement;

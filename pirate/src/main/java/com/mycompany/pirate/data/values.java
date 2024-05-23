@@ -29,6 +29,7 @@ public class values {
     public static final Color TRANSPARENT_COLOR_BACKGROUND = new Color(255, 0, 0, 0);
     
     public static final int MAX_LIFE = 3;
+    public static final int BOARD_SIZE = 37;
     
     //need fix not working
     public static void usingCustomFonts() {

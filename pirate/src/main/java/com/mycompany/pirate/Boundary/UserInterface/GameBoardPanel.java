@@ -4,6 +4,7 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 import static com.mycompany.pirate.data.FileRef.FX_SAUT_PION;
+import static com.mycompany.pirate.data.values.BOARD_SIZE;
 import static com.mycompany.pirate.data.values.GREEN_CUSTOM;
 import java.awt.Color;
 import java.awt.Component;
@@ -73,7 +74,7 @@ public class GameBoardPanel extends javax.swing.JPanel {
     }
     
     public void deplacerPion(PionPanel pion, int destinationCellNumber, Runnable onAnimationEnd) {
-        destinationCellNumber = Math.max(0, Math.min(destinationCellNumber, 36));
+        destinationCellNumber = Math.max(0, Math.min(destinationCellNumber, BOARD_SIZE - 1));
         int startCellNumber = pion.getCellPosition();
         List<Integer> path = createPath(startCellNumber, destinationCellNumber);
         animatePath(pion, path, 0, onAnimationEnd);
