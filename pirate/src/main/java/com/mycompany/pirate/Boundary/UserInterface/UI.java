@@ -140,6 +140,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
     public void endGame() {
         this.PanelButtonSlotMachine.setEnabled(false);
         this.PanelButtonSlotMachine.deactivateListeners();
+        mainTheme.stop();
         // Add a victory window
     }
 
