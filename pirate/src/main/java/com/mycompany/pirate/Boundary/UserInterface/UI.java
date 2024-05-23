@@ -176,7 +176,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
     
     public void caseGambling(int value){
        casePopupManager.popupCaseGambi();
-       casePopupManager.showPopup(this,"RELANCE EST FAIT AU DESSUS DE : " + value);
+       casePopupManager.showPopup(this,"RELANCE POUR TENTER DE FAIRE AU DESSUS OU EGALE A " + value);
     }
     
     private void setPanelClickListener(Runnable listener) {

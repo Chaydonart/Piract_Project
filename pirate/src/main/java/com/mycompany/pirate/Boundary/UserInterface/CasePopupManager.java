@@ -58,11 +58,11 @@ public class CasePopupManager {
         textPopup = new JWindow();
 
         JLabel messageLabel = new JLabel(message);
-        messageLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Ajout de marges pour l'esthétique
+        messageLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
 
         Dimension labelSize = messageLabel.getPreferredSize();
 
-        textPopup.setSize(labelSize.width + 20, labelSize.height + 20);
+        textPopup.setSize(labelSize.width + 50, labelSize.height + 10);
 
         int x = parent.getX() + (parent.getWidth() - textPopup.getWidth()) / 2;
 
@@ -71,11 +71,11 @@ public class CasePopupManager {
         textPopup.setLocation(x, y);
         textPopup.add(messageLabel);
 
-        // Ajout d'un WindowListener pour fermer la popup lorsque la fenêtre parente est fermée
+
         parent.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                textPopup.dispose(); // Fermer la popup lorsque la fenêtre parente est fermée
+                textPopup.dispose(); 
             }
         });
 
@@ -83,7 +83,6 @@ public class CasePopupManager {
     }
 
     public void closePopup() {
-        // Fermer la popup en la rendant invisible et en la libérant de la mémoire
         if (textPopup != null) {
             textPopup.setVisible(false);
             textPopup.dispose();
