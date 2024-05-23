@@ -16,8 +16,10 @@ public class FileRef {
     public static final String IMAGE_SLOT_MACHINE = "src\\main\\java\\com\\mycompany\\pirate\\res\\slotMachine.png";
     public static final String IMAGE_PLAYER_1 = "src\\main\\java\\com\\mycompany\\pirate\\res\\player.png";
     public static final String IMAGE_PLAYER_1_DAMAGE = "src\\main\\java\\com\\mycompany\\pirate\\res\\player1_damage.png";
+    public static final String IMAGE_PLAYER_1_VICTORY = "src\\main\\java\\com\\mycompany\\pirate\\res\\player1_victory.png";
     public static final String IMAGE_PLAYER_2 = "src\\main\\java\\com\\mycompany\\pirate\\res\\player2.png";
     public static final String IMAGE_PLAYER_2_DAMAGE = "src\\main\\java\\com\\mycompany\\pirate\\res\\player2_damage.png";
+    public static final String IMAGE_PLAYER_2_VICTORY = "src\\main\\java\\com\\mycompany\\pirate\\res\\player2_victory.png";    
     public static final String POPUP_BOMBE = "src\\main\\java\\com\\mycompany\\pirate\\res\\POPUP_bombe.png";
     public static final String POPUP_REJOUER = "src\\main\\java\\com\\mycompany\\pirate\\res\\POPUP_rejouer.png";
     public static final String POPUP_RECULER= "src\\main\\java\\com\\mycompany\\pirate\\res\\POPUP_reculer.png";

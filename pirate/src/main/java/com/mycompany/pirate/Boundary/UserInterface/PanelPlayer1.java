@@ -6,6 +6,7 @@ package com.mycompany.pirate.Boundary.UserInterface;
 
 import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_1;
 import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_1_DAMAGE;
+import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_1_VICTORY;
 import static com.mycompany.pirate.data.values.RED_CUSTOM;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -35,7 +36,7 @@ public class PanelPlayer1 extends PanelPlayerDisplay {
 
     private void loadImages() {
         idleImage = loadImageFromFile(IMAGE_PLAYER_1);
-        victoryImage = loadImageFromFile(IMAGE_PLAYER_1);
+        victoryImage = loadImageFromFile(IMAGE_PLAYER_1_VICTORY);
         damageImage = loadImageFromFile(IMAGE_PLAYER_1_DAMAGE);
     }
 

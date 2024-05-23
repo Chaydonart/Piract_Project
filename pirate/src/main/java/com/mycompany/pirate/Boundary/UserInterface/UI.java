@@ -142,6 +142,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
         this.PanelButtonSlotMachine.deactivateListeners();
         mainTheme.stop();
         // Add a victory window
+        
     }
 
     public void takeDamage(String name) {
@@ -157,6 +158,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
     public void gamblingDuelResult(String name, boolean win) {
         if(win) {
            gamblingDuelVictory.play();
+           displayPanels.get(name).setState(PlayerState.VICTORY);
         } else {
            takeDamage(name);
         }
