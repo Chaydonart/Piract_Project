@@ -87,8 +87,7 @@ public class Boundary implements IBoundary {
 
     @Override
     public void notifyCaseReculer() {             
-        afficherMessage("Le joueur tombe sur une case RECULER");
-        notifyEtatJeu();
+        this.GUI.caseReculer();
     }
 
     @Override

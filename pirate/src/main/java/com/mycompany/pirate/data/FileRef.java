@@ -7,6 +7,7 @@ package com.mycompany.pirate.data;
 /**
  *
  * @author BEN JAAFAR
+ * Permet de facilement changer nos assets dans le jeu
  */
 public class FileRef {
     //Images
@@ -17,13 +18,11 @@ public class FileRef {
     public static final String IMAGE_PLAYER_1_DAMAGE = "src\\main\\java\\com\\mycompany\\pirate\\res\\player1_damage.png";
     public static final String IMAGE_PLAYER_2 = "src\\main\\java\\com\\mycompany\\pirate\\res\\player2.png";
     public static final String IMAGE_PLAYER_2_DAMAGE = "src\\main\\java\\com\\mycompany\\pirate\\res\\player2_damage.png";
-    public static final String BACKGROUND_IMAGE = "src\\main\\java\\res\\plateau.png";
     public static final String POPUP_BOMBE = "src\\main\\java\\com\\mycompany\\pirate\\res\\POPUP_bombe.png";
     public static final String POPUP_REJOUER = "src\\main\\java\\com\\mycompany\\pirate\\res\\POPUP_rejouer.png";
-
-
-   
-    //MUSICS(only .wav)
+    public static final String POPUP_RECULER= "src\\main\\java\\com\\mycompany\\pirate\\res\\POPUP_reculer.png";
+    
+    //MUSICS
     public static final String OST_MAINTHEME = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\music\\OST_main_theme.wav";
     
     //FX
@@ -37,7 +36,6 @@ public class FileRef {
     public static final String FX_GAMBLING_DUEL_VICTORY = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\fx\\FX_gambingmachine_victory.wav";
     public static final String FX_POPUP_CASE = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\fx\\FX_popup_case.wav";
 
-
-    //FONTS
+    //FONTS (not used)
     public static final String FONT_CASINO = "src\\main\\java\\com\\mycompany\\pirate\\res\\fonts\\RetroSigned-DYYY0.ttf";
 }
