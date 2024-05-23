@@ -76,8 +76,7 @@ public class Boundary implements IBoundary {
 
     @Override
     public void notifyCaseDegat(String name, int vie) {
-        afficherMessage("Le joueur tombe sur une case DÉGÂTS");
-        afficherMessage("Le pion " + name + " a pris des dégâts ! Vie restante : " + vie);
+       this.GUI.takeDamage(name);
     }
 
     @Override

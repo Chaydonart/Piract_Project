@@ -67,12 +67,8 @@ public class UI extends javax.swing.JFrame implements IPirates {
     public void movePiece(int destinationCellNumber, String name) {
         PionPanel currentPlayer = null;
         switch(name) {
-            case "Player 1":
-                currentPlayer = PanelPion1;
-                break;
-            case "Player 2":
-                currentPlayer = PanelPion2;
-                break;
+            case "Joueur 1" -> currentPlayer = PanelPion1;
+            case "Joueur 2" -> currentPlayer = PanelPion2;
         }
         int currentIndex = currentPlayer.getCellPosition();
         CountDownLatch latchAnimationEnd = new CountDownLatch(1);
