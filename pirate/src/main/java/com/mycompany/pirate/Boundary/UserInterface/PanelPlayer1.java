@@ -5,11 +5,18 @@
 package com.mycompany.pirate.Boundary.UserInterface;
 
 import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_1;
+import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_1_DAMAGE;
+import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_1_VICTORY;
+import static com.mycompany.pirate.data.FileRef.OST_MAINTHEME;
+import static com.mycompany.pirate.data.values.RED_CUSTOM;
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import javax.swing.Timer;
+import utils.SoundPlayer;
 
 /**
  *
@@ -23,10 +30,18 @@ public class PanelPlayer1 extends PanelPlayerDisplay {
     public PanelPlayer1() {
         loadImage(IMAGE_PLAYER_1);
         setPreferredSize(new Dimension(triangleBase, triangleHeight));
+        updateImage();
+        colorBackground = RED_CUSTOM;
         if(playerImage != null){
             imageY = triangleHeight - (triangleBase - 20) * ((double) playerImage.getHeight() / playerImage.getWidth()) - 10;
         }
         startAnimation();
+    }
+
+    private void loadImages() {
+        idleImage = loadImageFromFile(IMAGE_PLAYER_1);
+        victoryImage = loadImageFromFile(IMAGE_PLAYER_1_VICTORY);
+        damageImage = loadImageFromFile(IMAGE_PLAYER_1_DAMAGE);
     }
 
     @Override
@@ -71,6 +86,9 @@ public class PanelPlayer1 extends PanelPlayerDisplay {
         Polygon triangle = new Polygon(xPoints, yPoints, 3);
         g2d.setColor(turnColor);
         g2d.fillPolygon(triangle);
+        g2d.setColor(Color.BLACK);
+        g2d.setStroke(new BasicStroke(10));
+        g2d.drawPolygon(triangle);
 
         // Dessiner l'image du joueur avec l'animation
         if (playerImage != null) {

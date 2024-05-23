@@ -4,7 +4,12 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
+import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_1_VICTORY;
 import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_2;
+import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_2_DAMAGE;
+import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_2_VICTORY;
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -17,15 +22,21 @@ import javax.swing.Timer;
  * @author BEN JAAFAR
  */
 public class PanelPlayer2 extends PanelPlayerDisplay {
-
-    private double imageY = 20; // Position verticale de l'image (utilisation de double pour la précision)
-    private double imageSpeed = 0.2; // Vitesse de déplacement de l'image (plus la valeur est petite, plus le mouvement est lent)
-    private boolean movingDown = true; // Indique si l'image se déplace vers le bas
+    private double imageY = 0;
+    private double imageSpeed = 0.2;
+    private boolean movingDown = true;
 
     public PanelPlayer2() {
-        loadImage(IMAGE_PLAYER_2);
+        loadImages();
+        colorBackground = Color.BLACK;
         setPreferredSize(new Dimension(triangleBase, triangleHeight));
         startAnimation();
+    }
+
+    private void loadImages() {
+        idleImage = loadImageFromFile(IMAGE_PLAYER_2);
+        victoryImage = loadImageFromFile(IMAGE_PLAYER_2_VICTORY);
+        damageImage = loadImageFromFile(IMAGE_PLAYER_2_DAMAGE);
     }
 
     
@@ -71,22 +82,22 @@ public class PanelPlayer2 extends PanelPlayerDisplay {
         Polygon triangle = new Polygon(xPoints, yPoints, 3);
         g2d.setColor(turnColor);
         g2d.fillPolygon(triangle);
+        g2d.setColor(Color.BLACK);
+        g2d.setStroke(new BasicStroke(10));
+        g2d.drawPolygon(triangle);
 
         if (playerImage != null) {  
             int imageWidth = triangleBase - 20; 
             int imageHeight = (int) ((double) playerImage.getHeight() / playerImage.getWidth() * imageWidth); 
 
-            // Assurer que l'image ne dépasse pas la hauteur du triangle
             if (imageHeight > triangleHeight) {
                 imageHeight = triangleHeight - 20; 
                 imageWidth = (int) ((double) playerImage.getWidth() / playerImage.getHeight() * imageHeight); 
             }
 
-            // Calculer la position pour centrer l'image à la base du triangle
             int imageX = (triangleBase - imageWidth) / 2 + 10; 
             int imageYInt = (int) imageY; 
 
-            // Dessiner l'image redimensionnée à l'intérieur du triangle
             g2d.setClip(triangle);
             g2d.drawImage(playerImage, imageX, imageYInt, imageWidth, imageHeight, this);
             g2d.setClip(null); 

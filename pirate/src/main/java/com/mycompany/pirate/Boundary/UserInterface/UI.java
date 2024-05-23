@@ -8,6 +8,7 @@ import com.mycompany.pirate.Interfaces.IPirates;
 import static com.mycompany.pirate.data.FileRef.FX_CHANGE_TURN;
 import static com.mycompany.pirate.data.FileRef.FX_DAMAGE;
 import static com.mycompany.pirate.data.FileRef.FX_GAMBLING_DUEL_VICTORY;
+import static com.mycompany.pirate.data.FileRef.FX_WIN;
 import static com.mycompany.pirate.data.FileRef.OST_MAINTHEME;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
@@ -27,6 +28,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
     private Map<String, LifePanel> lifePanels;
     private Map<String, PanelPlayerDisplay> displayPanels;
     private Map<String, PionPanel> pionPanels;
+    private CasePopupManager casePopupManager = new CasePopupManager();
 
     /*
     * Put all the sounds and change them in a SoundManager
@@ -34,6 +36,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
     private SoundPlayer mainTheme = new SoundPlayer(OST_MAINTHEME);
     private SoundPlayer changeTurn = new SoundPlayer(FX_CHANGE_TURN);
     private SoundPlayer takeDamage = new SoundPlayer(FX_DAMAGE);
+    private SoundPlayer winFx = new SoundPlayer(FX_WIN);
     private SoundPlayer gamblingDuelVictory = new SoundPlayer(FX_GAMBLING_DUEL_VICTORY);
     
 
@@ -61,14 +64,10 @@ public class UI extends javax.swing.JFrame implements IPirates {
         // To change the loaded image (design)
         PanelLifePlayer2.setPlayer2();
 
-        // Default state (Player 1 starts)
+        // Default state (Player 1 start)
         PanelDisplayerPlayer1.setTurn(true);
         PanelPion1.player_number = 1;
         PanelPion2.player_number = 2;
-
-        // Set the correct layer levels
-        // LayeredPaneMain.setLayer(PanelPion1, javax.swing.JLayeredPane.POPUP_LAYER);
-        // LayeredPaneMain.setLayer(PanelPion1, javax.swing.JLayeredPane.POPUP_LAYER);
 
         // Place the pieces on cell 0
         PanelGameboard.deplacerPion(PanelPion1, 0, null);
@@ -84,7 +83,6 @@ public class UI extends javax.swing.JFrame implements IPirates {
         setVisible(true);
     }
 
-    // Manage piece movement
     @Override
     public void movePiece(int destinationCellNumber, String name) {
         PionPanel currentPlayer = pionPanels.get(name);
@@ -95,6 +93,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
             try {
                 latchAnimationEnd.await();
                 currentPlayer.setCellPosition(currentIndex + destinationCellNumber);
+                PanelButtonSlotMachine.activateListeners();
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
@@ -102,7 +101,8 @@ public class UI extends javax.swing.JFrame implements IPirates {
     }
 
     // Manage the slot machine, its animation, etc.
-    public void spinMachine(int[] values) {
+    @Override
+    public void spinMachineUI(int[] values) {
         CountDownLatch latchClick = new CountDownLatch(1);
         CountDownLatch latchAnimationEnd = new CountDownLatch(1);
 
@@ -126,36 +126,35 @@ public class UI extends javax.swing.JFrame implements IPirates {
 
         try {
             latchAnimationEnd.await();
-            PanelButtonSlotMachine.activateListeners();
             // Wait for the animation to finish
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
     }
 
-    private void setPanelClickListener(Runnable listener) {
-        PanelButtonSlotMachine.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                listener.run();
-                PanelButtonSlotMachine.deactivateListeners();
-            }
-        });
-    }
-
+    @Override
     public void newTurn() {
         PanelDisplayerPlayer1.setTurn(testingTurn);
         PanelDisplayPlayer2.setTurn(!testingTurn);
         testingTurn = !testingTurn;
         changeTurn.play();
     }
-
-    public void endGame() {
+    
+    @Override
+    public void endGame(String name) {
         this.PanelButtonSlotMachine.setEnabled(false);
         this.PanelButtonSlotMachine.deactivateListeners();
-        // Add a victory window
+        mainTheme.stop();
+        winFx.play();
+        
+        this.setVisible(false);
+        this.dispose();
+        
+        new FrameWinPlayer(name);
+        
     }
-
+    
+    @Override
     public void takeDamage(String name) {
         ScreenShake shakeEffect = new ScreenShake();
         if (lifePanels.containsKey(name) && displayPanels.containsKey(name)) {
@@ -164,13 +163,55 @@ public class UI extends javax.swing.JFrame implements IPirates {
             takeDamage.play();
         }
     }
-
+    
+    @Override
     public void gamblingDuelResult(String name, boolean win) {
         if(win) {
            gamblingDuelVictory.play();
+           displayPanels.get(name).setState(PlayerState.VICTORY);
         } else {
            takeDamage(name);
         }
+        casePopupManager.closePopup();
+        PanelButtonSlotMachine.activateListeners();
+    }
+    
+    @Override
+    public void caseBombe(){
+       casePopupManager.popupCaseBomb();
+       casePopupManager.showPopup(this,"CASE DEGATS ! OH NON TU PERDS UNE VIE !");
+    }
+    
+    @Override
+    public void caseRejouer(String name){
+       casePopupManager.popupCaseRejouer();
+       casePopupManager.showPopup(this,"CASE REJOUER ! LANCE LA MACHINE ET REJOUE !");
+       displayPanels.get(name).setState(PlayerState.VICTORY);
+    }
+    
+    @Override
+    public void caseReculer(){
+       casePopupManager.popupCaseReculer();
+       casePopupManager.showPopup(this,"CASE RECULER ! LANCE LA MACHINE ET RECULE !");
+    }
+    
+    @Override
+    public void caseGambling(int value){
+       casePopupManager.popupCaseGambi();
+       casePopupManager.showPopup(this,"DUEL CONTRE GAMBI LE ROBOT ! FAIS PLUS QUE " + value + " POUR LE BATTRE !");
+    }
+    
+    private void setPanelClickListener(Runnable listener) {
+        PanelButtonSlotMachine.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                listener.run();
+                PanelButtonSlotMachine.deactivateListeners();
+                PanelDisplayerPlayer1.setState(PlayerState.IDLE);
+                PanelDisplayPlayer2.setState(PlayerState.IDLE);
+                casePopupManager.closePopup();
+            }
+        });
     }
     
     @SuppressWarnings("unchecked")
@@ -207,18 +248,19 @@ public class UI extends javax.swing.JFrame implements IPirates {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         LayeredPaneMain.setBackground(new java.awt.Color(51, 204, 0));
+        LayeredPaneMain.setBorder(javax.swing.BorderFactory.createMatteBorder(10, 0, 10, 0, new java.awt.Color(0, 0, 0)));
 
-        PanelPion1.setPreferredSize(new java.awt.Dimension(30, 30));
+        PanelPion1.setPreferredSize(new java.awt.Dimension(25, 25));
 
         javax.swing.GroupLayout PanelPion1Layout = new javax.swing.GroupLayout(PanelPion1);
         PanelPion1.setLayout(PanelPion1Layout);
         PanelPion1Layout.setHorizontalGroup(
             PanelPion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
+            .addGap(0, 25, Short.MAX_VALUE)
         );
         PanelPion1Layout.setVerticalGroup(
             PanelPion1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
+            .addGap(0, 25, Short.MAX_VALUE)
         );
 
         PanelPion2.setPreferredSize(new java.awt.Dimension(25, 25));
@@ -255,31 +297,35 @@ public class UI extends javax.swing.JFrame implements IPirates {
         LayeredPaneMainLayout.setHorizontalGroup(
             LayeredPaneMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LayeredPaneMainLayout.createSequentialGroup()
-                .addComponent(PanelPion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(221, 221, 221)
-                .addComponent(PanelButtonSlotMachine, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(PanelPion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
-            .addGroup(LayeredPaneMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(PanelGameboard, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addGroup(LayeredPaneMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(LayeredPaneMainLayout.createSequentialGroup()
+                        .addComponent(PanelPion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(PanelButtonSlotMachine, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(211, 211, 211)
+                        .addComponent(PanelPion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LayeredPaneMainLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(PanelGameboard, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         LayeredPaneMainLayout.setVerticalGroup(
             LayeredPaneMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LayeredPaneMainLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(LayeredPaneMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LayeredPaneMainLayout.createSequentialGroup()
-                        .addComponent(PanelGameboard, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(PanelButtonSlotMachine, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(PanelPion1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PanelPion2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(PanelGameboard, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(LayeredPaneMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(LayeredPaneMainLayout.createSequentialGroup()
+                        .addComponent(PanelPion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addComponent(PanelPion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PanelButtonSlotMachine, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         LayeredPanePlayer1.setBackground(new java.awt.Color(204, 255, 204));
+        LayeredPanePlayer1.setBorder(javax.swing.BorderFactory.createMatteBorder(10, 0, 0, 0, new java.awt.Color(0, 0, 0)));
         LayeredPanePlayer1.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout PanelLifePlayer1Layout = new javax.swing.GroupLayout(PanelLifePlayer1);
@@ -311,6 +357,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
         LayeredPanePlayer1.add(PanelDisplayerPlayer1, java.awt.BorderLayout.PAGE_END);
 
         LayeredPanePlayer2.setBackground(new java.awt.Color(0, 105, 91));
+        LayeredPanePlayer2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 10, 0, new java.awt.Color(0, 0, 0)));
         LayeredPanePlayer2.setForeground(new java.awt.Color(0, 105, 91));
         LayeredPanePlayer2.setLayout(new java.awt.BorderLayout());
 
@@ -337,7 +384,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
             PanelDisplayPlayer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelDisplayPlayer2Layout.createSequentialGroup()
                 .addComponent(PanelLifePlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 456, Short.MAX_VALUE))
+                .addGap(0, 463, Short.MAX_VALUE))
         );
 
         LayeredPanePlayer2.add(PanelDisplayPlayer2, java.awt.BorderLayout.CENTER);
@@ -348,18 +395,16 @@ public class UI extends javax.swing.JFrame implements IPirates {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(LayeredPanePlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(LayeredPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(LayeredPanePlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(LayeredPanePlayer1)
+            .addComponent(LayeredPanePlayer1, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
             .addComponent(LayeredPaneMain, javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                .addComponent(LayeredPanePlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 17, Short.MAX_VALUE))
+            .addComponent(LayeredPanePlayer2, javax.swing.GroupLayout.Alignment.LEADING)
         );
 
         pack();
@@ -379,4 +424,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
     private com.mycompany.pirate.Boundary.UserInterface.PionPanel PanelPion2;
     private javax.swing.JInternalFrame jInternalFrame1;
     // End of variables declaration//GEN-END:variables
+
+
+
 }

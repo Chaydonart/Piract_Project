@@ -11,26 +11,25 @@ package com.mycompany.pirate.Interfaces;
  * Adaptateur qui permet le dialogue entre le jeu et la boundary
  */
 public interface IDialogue {
-    void notify(String message);
-    
     void notifySpin(int[] values);
     
     void notifyEtatJeu();
     
     void notifyCaseDegat(String name, int vie);
     
-    void notifyCaseRejouer();
+    void notifyCaseRejouer(String name);
     
     void notifyCaseReculer();
    
-    void notifyCaseGambling(String name, int randomValue);  
+    void notifyCaseGambling(int randomValue);  
+    
     void notifyDuelResult(String name, boolean win);
     
     void notifyDeplacerPion(int deplacement, String name);
     
     void notifyNouveauTour(String name);
     
-    void notifyFinDeJeu();
+    void notifyFinDeJeu(String name);
     
   
 }

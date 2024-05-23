@@ -36,7 +36,7 @@ public class ControlReculer implements IControlReculer, IControlDeplacerPion, IC
         int[] values = spin();;//Valeur aléatoire de retour en arrière
         int resultat = -Arrays.stream(values).sum();
         this.distanceRecule = resultat;
-      
+        
         deplacerPion(pion,resultat); 
     }
     

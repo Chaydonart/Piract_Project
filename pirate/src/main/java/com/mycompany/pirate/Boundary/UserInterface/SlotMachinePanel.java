@@ -29,7 +29,7 @@ public class SlotMachinePanel extends javax.swing.JPanel {
     private int[] finalValues;
     private final int[] currentValues = new int[3];
     private final int maxValue = 4; 
-    private static final int ANIMATION_DURATION = 2000; // Animation duration in milliseconds
+    private static final int ANIMATION_DURATION = 2000; 
     private long animationStartTime;
     private Timer timer;
 
@@ -43,7 +43,7 @@ public class SlotMachinePanel extends javax.swing.JPanel {
             add(slotLabels[i]);
         }
 
-        setOpaque(false); // Make the JPanel transparent
+        setOpaque(false); 
     }
 
     public void startAnimation(int[] values) {

@@ -119,29 +119,29 @@ private Map<Integer, ImageIcon> loadIcons() {
 
     
     public void deplacerPion(PionPanel pion, int destinationCellNumber, Runnable onAnimationEnd) {
+        // Limitation de la destination entre 0 et 36
+        destinationCellNumber = Math.max(0, Math.min(destinationCellNumber, 36));
+
         for (Component component : getComponents()) {
-            if (component instanceof CellPanel) {
-                CellPanel cellPanel = (CellPanel) component;
-                if(destinationCellNumber >= 36){
-                    destinationCellNumber = 36;
-                }
-                if (cellPanel.getCellNumber() == destinationCellNumber) {
-                    int destinationX = cellPanel.getX() + (cellPanel.getWidth() ) / 2;
-                    int destinationY = cellPanel.getY() + cellPanel.getHeight() + (pion.getWidth() / 2);
-                    
-                    //Pour eviter que les pions s'overlape
-                    switch(pion.player_number){
-                        case 1 -> destinationX -= 15;
-                        case 2 -> destinationX += 15;
-                    }
-                    
-                    animatePionMovement(pion, destinationX, destinationY, destinationCellNumber, onAnimationEnd);
-                    break;
-                }
+            if (!(component instanceof CellPanel))
+                continue;
+
+            CellPanel cellPanel = (CellPanel) component;
+            if (cellPanel.getCellNumber() == destinationCellNumber) {
+                int destinationX = cellPanel.getX() + cellPanel.getWidth() / 2;
+                int destinationY = cellPanel.getY() + cellPanel.getHeight() + pion.getWidth() / 2;
+
+                // Ajustement pour éviter le chevauchement des pions
+                if (pion.player_number == 1)
+                    destinationX -= 15;
+                else if (pion.player_number == 2)
+                    destinationX += 15;
+
+                animatePionMovement(pion, destinationX, destinationY, destinationCellNumber, onAnimationEnd);
+                break;
             }
         }
     }
-
     private void animatePionMovement(PionPanel pion, int destinationX, int destinationY, int destinationCellNumber, Runnable onAnimationEnd) {
         int startX = pion.getX();
         int startY = pion.getY();
@@ -165,8 +165,6 @@ private Map<Integer, ImageIcon> loadIcons() {
                     ((Timer) e.getSource()).stop();
                     pion.setLocation(destinationX, destinationY);
                     pion.setCellPosition(destinationCellNumber);
-
-                    // Ajoute un délai d'une seconde ici
                     Timer delayTimer = new Timer(500, (ActionEvent ev) -> {
                         if (onAnimationEnd != null) {
                             onAnimationEnd.run();
@@ -200,8 +198,9 @@ private Map<Integer, ImageIcon> loadIcons() {
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D) g;
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            this.setBorder(BorderFactory.createLineBorder(Color.WHITE, 4)); // Bordure noire de 2 pixels
-            
+            this.setBorder(BorderFactory.createLineBorder(Color.WHITE, 4)); 
+
+            // Déterminer la couleur de la cellule
             if (cellNumber == 0) {
                 g2d.setColor(Color.GRAY);
             } else if (isRed(cellNumber)) {
@@ -210,13 +209,12 @@ private Map<Integer, ImageIcon> loadIcons() {
                 g2d.setColor(Color.BLACK);
             }
 
-            // Dessiner le cercle
-            int diameter = Math.min(getWidth(), getHeight()) - 10; // Ajuster pour les marges
+            int diameter = Math.min(getWidth(), getHeight()) - 10; 
+           
             int x = (getWidth() - diameter) / 2;
             int y = (getHeight() - diameter) / 2;
             g2d.fillOval(x, y, diameter, diameter);
 
-            // Dessiner le numéro de la cellule
             g2d.setColor(Color.WHITE);
             g2d.setFont(new Font("Arial", Font.BOLD, 25));
             FontMetrics fm = g2d.getFontMetrics();
