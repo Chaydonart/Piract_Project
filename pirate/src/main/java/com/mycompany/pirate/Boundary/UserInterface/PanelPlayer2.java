@@ -18,8 +18,7 @@ import javax.swing.Timer;
  * @author BEN JAAFAR
  */
 public class PanelPlayer2 extends PanelPlayerDisplay {
-
-  private double imageY = 0;
+    private double imageY = 0;
     private double imageSpeed = 0.2;
     private boolean movingDown = true;
 
@@ -33,7 +32,7 @@ public class PanelPlayer2 extends PanelPlayerDisplay {
     private void loadImages() {
         idleImage = loadImageFromFile(IMAGE_PLAYER_2);
         victoryImage = loadImageFromFile(IMAGE_PLAYER_2_DAMAGE);
-        damageImage = loadImageFromFile(IMAGE_PLAYER_2);
+        damageImage = loadImageFromFile(IMAGE_PLAYER_2_DAMAGE);
     }
 
     
