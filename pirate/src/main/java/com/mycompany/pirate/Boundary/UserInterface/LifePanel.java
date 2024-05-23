@@ -62,7 +62,9 @@ public class LifePanel extends javax.swing.JPanel {
 
             int bottomY = getHeight() - 20;
             int imageSpacing = 5;
-            int startX = getWidth() / 2 - (lifeImageWidth + imageSpacing) * (viesRestantes / 2);
+            // Ajustez le calcul de startX pour centrer les images
+            int totalWidth = (lifeImageWidth + imageSpacing) * viesRestantes - imageSpacing;
+            int startX = (getWidth() - totalWidth) / 2;
 
             for (int i = 0; i < viesRestantes; i++) {
                 int imageX = startX + (lifeImageWidth + imageSpacing) * i;

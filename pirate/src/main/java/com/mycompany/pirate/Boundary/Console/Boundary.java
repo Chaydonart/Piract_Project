@@ -38,7 +38,7 @@ public class Boundary implements IBoundary {
     
     @Override 
     public void tourSuivant(){
-        this.GUI.nouveauTour();
+        this.GUI.newTurn();
     }
     
     @Override
@@ -55,17 +55,7 @@ public class Boundary implements IBoundary {
 
     @Override    
     public void deplacerPion(int deplacement, String name) {
-       GUI.deplacerPion(deplacement,name);
-    }
-    
-    public void notifyFinPartie() {
-    	GUI.finPartie();
-    }
-    @Override
-    public void notifyDuelReussi(Pion pion) {
-    	// TODO Auto-generated method stub
-    	GUI.duelReussi(pion);
-    	
+       GUI.movePiece(deplacement,name);
     }
 
     // Partie pacerelle dialogue
@@ -85,34 +75,24 @@ public class Boundary implements IBoundary {
     }
 
     @Override
-    public void notifyCaseDegat(String name) {
-//        afficherMessage("Le joueur tombe sur une case DÉGÂTS");
-//        afficherMessage("Le pion " + name + " a pris des dégâts");
-        GUI.degat(name);
+    public void notifyCaseDegat(String name, int vie) {
+       this.GUI.takeDamage(name);
+       this.GUI.caseBombe();
     }
 
     @Override
-    public void notifyCaseRejouer(String name, int resultat) {
-//        afficherMessage("Le joueur tombe sur une case REJOUER");
-//        notifyEtatJeu();
-//        afficherMessage("Le joueur va rejouer");
-    	//TODO les animations pour l'interface
-        deplacerPion(resultat, name);
+    public void notifyCaseRejouer(String name) {
+        this.GUI.caseRejouer(name);
     }
 
     @Override
-    public void notifyCaseReculer(String name, int resultat) {             
-//        afficherMessage("Le joueur tombe sur une case RECULER");
-//        notifyEtatJeu();
-    	//TODO les animations pour l'interface
-        deplacerPion(resultat, name);
+    public void notifyCaseReculer() {             
+        this.GUI.caseReculer();
     }
 
     @Override
-    public void notifyCaseGambling(String name, int randomValue) {
-        afficherMessage("Le " + name + " tombe sur une case GAMBLING");
-        afficherMessage("Le " + name + " va donc procéder à un duel contre Gambi le robot !");
-        afficherMessage("Duel gambling ! Le joueur doit faire une valeur supérieure à " + randomValue);
+    public void notifyCaseGambling(int randomValue) {
+        this.GUI.caseGambling(randomValue);
     }
 
     @Override
@@ -123,6 +103,16 @@ public class Boundary implements IBoundary {
     @Override
     public void notifyNouveauTour(String name){
         tourSuivant();
+    }
+
+    @Override
+    public void notifyFinDeJeu() {
+       this.GUI.endGame();
+    }
+    
+    @Override
+    public void notifyDuelResult(String name, boolean win){
+        this.GUI.gamblingDuelResult(name,win);
     }
 
 }

@@ -15,81 +15,110 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import javax.swing.ImageIcon;
 
 /**
  *
  * @author BEN JAAFAR
  * Panel faisant office de bouton pour lancer la machine a sous
+ * Il comprends des animations et fx sonore 
  */
 public class PanelSlotButton extends javax.swing.JPanel {
     private Image slotMachineImage;
-    SlotMachineWindow window;
-    private SoundPlayer fxOnSlotmachine = new SoundPlayer(FX_ON_SLOTMACHINE);
-    private SoundPlayer fxOffSlotmachine = new SoundPlayer(FX_OFF_SLOTMACHINE);
-    private SoundPlayer fxClick = new SoundPlayer(FX_CLICK);
+    private SlotMachineWindow window;
+    private final SoundPlayer fxOnSlotmachine;
+    private final SoundPlayer fxOffSlotmachine;
+    private final SoundPlayer fxClick;
     private boolean isMouseOver = false;
+    private final MouseAdapter mouseAdapter;
 
     public PanelSlotButton() {
+        fxOnSlotmachine = new SoundPlayer(FX_ON_SLOTMACHINE);
+        fxOffSlotmachine = new SoundPlayer(FX_OFF_SLOTMACHINE);
+        fxClick = new SoundPlayer(FX_CLICK);
+
         loadSlotMachineImage();
-        setPreferredSize(new Dimension(200, 200)); 
-        addMouseListener(new MouseAdapter() {
+        setPreferredSize(new Dimension(200, 200));
+
+        mouseAdapter = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                fxClick.play();
-                openSlotMachineWindow();
+                handleMouseClick();
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                isMouseOver = true;
-                fxOffSlotmachine.stop();
-                fxOnSlotmachine.play();
-                repaint();
+                handleMouseEnter();
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                isMouseOver = false;
-                fxOnSlotmachine.stop();
-                fxOffSlotmachine.play();
-                repaint();
+                handleMouseExit();
             }
-        });
+        };
+        addMouseListener(mouseAdapter);
     }
 
     private void loadSlotMachineImage() {
         slotMachineImage = new ImageIcon(IMAGE_SLOT_MACHINE).getImage();
     }
 
+    private void handleMouseClick() {
+        fxClick.play();
+        openSlotMachineWindow();
+    }
+
+    private void handleMouseEnter() {
+        isMouseOver = true;
+        fxOffSlotmachine.stop();
+        fxOnSlotmachine.play();
+        repaint();
+    }
+
+    private void handleMouseExit() {
+        isMouseOver = false;
+        fxOnSlotmachine.stop();
+        fxOffSlotmachine.play();
+        repaint();
+    }
+
     private void openSlotMachineWindow() {
         window = new SlotMachineWindow();
-        window.setLocationRelativeTo(null); 
+        window.setLocationRelativeTo(null);
         window.setVisible(true);
     }
 
-public void startAnimation(int[] values, Runnable onAnimationEnd) {
-    // Code pour démarrer l'animation
-    window.startAnimation(values, onAnimationEnd);
-}
+    public void startAnimation(int[] values, Runnable onAnimationEnd) {
+        if (window != null) {
+            window.startAnimation(values, onAnimationEnd);
+        }
+        isMouseOver = false;
+        repaint();
+    }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         int width = getWidth();
         int height = getHeight();
-        
+
         if (isMouseOver) {
-            width = (int) (width * 1.1);
-            height = (int) (height * 1.1);
+            width *= 1.1;
+            height *= 1.1;
         }
 
         int x = (getWidth() - width) / 2;
         int y = (getHeight() - height) / 2;
-        
+
         g.drawImage(slotMachineImage, x, y, width, height, this);
+    }
+
+    public void activateListeners() {
+        addMouseListener(mouseAdapter);
+    }
+
+    public void deactivateListeners() {
+        removeMouseListener(mouseAdapter);
     }
     
     @SuppressWarnings("unchecked")

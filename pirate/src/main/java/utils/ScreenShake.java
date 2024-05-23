@@ -19,7 +19,7 @@ import javax.swing.Timer;
 public class ScreenShake {
       public static void shakePanel(JPanel panel, int shakeDuration, int shakeDistance) {
         Point originalLocation = panel.getLocation();    
-        int shakePeriod = 20; 
+        int shakePeriod = 10; 
         int shakeCount = shakeDuration / shakePeriod;
 
         Timer timer = new Timer(shakePeriod, new ActionListener() {
