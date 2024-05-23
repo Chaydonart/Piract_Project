@@ -7,6 +7,7 @@ package com.mycompany.pirate.Boundary.UserInterface;
 import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_1;
 import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_1_DAMAGE;
 import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_1_VICTORY;
+import static com.mycompany.pirate.data.FileRef.OST_MAINTHEME;
 import static com.mycompany.pirate.data.values.RED_CUSTOM;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -15,6 +16,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import javax.swing.Timer;
+import utils.SoundPlayer;
 
 /**
  *

@@ -25,7 +25,7 @@ public interface IPirates {
     
     public void spinMachineUI(int[] values);
     public void newTurn();
-    public void endGame();
+    public void endGame(String name);
     public void takeDamage(String name);
     public void gamblingDuelResult(String name, boolean win);
     public void caseBombe();

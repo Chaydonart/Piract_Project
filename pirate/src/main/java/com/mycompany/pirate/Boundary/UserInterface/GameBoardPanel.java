@@ -78,7 +78,7 @@ public class GameBoardPanel extends javax.swing.JPanel {
     
     public void deplacerPion(PionPanel pion, int destinationCellNumber, Runnable onAnimationEnd) {
         // Limitation de la destination entre 0 et 36
-        destinationCellNumber = Math.max(0, Math.min(destinationCellNumber, 37));
+        destinationCellNumber = Math.max(0, Math.min(destinationCellNumber, 36));
 
         for (Component component : getComponents()) {
             if (!(component instanceof CellPanel))

@@ -69,8 +69,8 @@ public class Boundary implements IPirates, IDialogue {
     }
     
     @Override
-    public void notifyFinDeJeu() {
-       endGame();
+    public void notifyFinDeJeu(String name) {
+       endGame(name);
     }
     
     @Override
@@ -90,8 +90,8 @@ public class Boundary implements IPirates, IDialogue {
     }
     
     @Override
-    public void endGame() {
-    	GUI.endGame();
+    public void endGame(String name) {
+    	GUI.endGame(name);
     }
     
     @Override

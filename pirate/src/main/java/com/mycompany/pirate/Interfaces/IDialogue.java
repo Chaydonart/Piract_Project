@@ -29,7 +29,7 @@ public interface IDialogue {
     
     void notifyNouveauTour(String name);
     
-    void notifyFinDeJeu();
+    void notifyFinDeJeu(String name);
     
   
 }

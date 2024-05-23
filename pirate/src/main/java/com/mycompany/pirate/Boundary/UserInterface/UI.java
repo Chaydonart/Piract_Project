@@ -9,6 +9,7 @@ import com.mycompany.pirate.Interfaces.IPirates;
 import static com.mycompany.pirate.data.FileRef.FX_CHANGE_TURN;
 import static com.mycompany.pirate.data.FileRef.FX_DAMAGE;
 import static com.mycompany.pirate.data.FileRef.FX_GAMBLING_DUEL_VICTORY;
+import static com.mycompany.pirate.data.FileRef.FX_WIN;
 import static com.mycompany.pirate.data.FileRef.OST_MAINTHEME;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
@@ -36,6 +37,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
     private SoundPlayer mainTheme = new SoundPlayer(OST_MAINTHEME);
     private SoundPlayer changeTurn = new SoundPlayer(FX_CHANGE_TURN);
     private SoundPlayer takeDamage = new SoundPlayer(FX_DAMAGE);
+    private SoundPlayer winFx = new SoundPlayer(FX_WIN);
     private SoundPlayer gamblingDuelVictory = new SoundPlayer(FX_GAMBLING_DUEL_VICTORY);
     
 
@@ -92,6 +94,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
             try {
                 latchAnimationEnd.await();
                 currentPlayer.setCellPosition(currentIndex + destinationCellNumber);
+                PanelButtonSlotMachine.activateListeners();
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
@@ -124,7 +127,6 @@ public class UI extends javax.swing.JFrame implements IPirates {
 
         try {
             latchAnimationEnd.await();
-            PanelButtonSlotMachine.activateListeners();
             // Wait for the animation to finish
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -140,11 +142,16 @@ public class UI extends javax.swing.JFrame implements IPirates {
     }
     
     @Override
-    public void endGame() {
+    public void endGame(String name) {
         this.PanelButtonSlotMachine.setEnabled(false);
         this.PanelButtonSlotMachine.deactivateListeners();
         mainTheme.stop();
-        // Add a victory window
+        winFx.play();
+        
+        this.setVisible(false);
+        this.dispose();
+        
+        new FrameWinPlayer(name);
         
     }
     
@@ -168,6 +175,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
            takeDamage(name);
         }
         casePopupManager.closePopup();
+        PanelButtonSlotMachine.activateListeners();
     }
     
     @Override
