@@ -109,7 +109,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
         SwingUtilities.invokeLater(() -> {
             try {
                 // Code to start the slot machine animation
-                setPanelClickListener(() -> latchClick.countDown());
+                setPanelClickListener(latchClick::countDown);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -122,7 +122,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
             return;
         }
 
-        PanelButtonSlotMachine.startAnimation(values, () -> latchAnimationEnd.countDown());
+        PanelButtonSlotMachine.startAnimation(values, latchAnimationEnd::countDown);
 
         try {
             latchAnimationEnd.await();
