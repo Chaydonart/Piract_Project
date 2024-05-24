@@ -10,6 +10,7 @@ import static com.mycompany.pirate.data.FileRef.POPUP_BOMBE;
 import static com.mycompany.pirate.data.FileRef.POPUP_GAMBI;
 import static com.mycompany.pirate.data.FileRef.POPUP_RECULER;
 import static com.mycompany.pirate.data.FileRef.POPUP_REJOUER;
+import static com.mycompany.pirate.data.values.BOARD_SIZE;
 import static com.mycompany.pirate.data.values.GREEN_CUSTOM;
 import java.awt.Color;
 import java.awt.Component;
