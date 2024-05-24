@@ -248,6 +248,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Pirate game");
 
         LayeredPaneMain.setBackground(new java.awt.Color(51, 204, 0));
         LayeredPaneMain.setBorder(javax.swing.BorderFactory.createMatteBorder(10, 0, 10, 0, new java.awt.Color(0, 0, 0)));
