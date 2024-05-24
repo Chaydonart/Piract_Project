@@ -6,3 +6,5 @@ Pour jouer au jeu, lancer le Main.java
   - Optimiser le CasePopupManager
 # Future ajout :
   - Rajouter la mécanoque de "Parie" qui permet de sacrifier une vie pour donner un malus au joueur adverses
+#Organisation :
+- Utilisation d'un groupe discord pour communiquer et séparer les taches
