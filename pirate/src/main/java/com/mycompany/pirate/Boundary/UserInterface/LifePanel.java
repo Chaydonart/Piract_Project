@@ -19,7 +19,8 @@ import java.awt.RenderingHints;
 
 /**
  *
- * @author BEN JAAFAR
+ * @author BEN JAAFAR & MUNOS
+ * 
  */
 public class LifePanel extends javax.swing.JPanel {
  private boolean isPlayer1 = true;

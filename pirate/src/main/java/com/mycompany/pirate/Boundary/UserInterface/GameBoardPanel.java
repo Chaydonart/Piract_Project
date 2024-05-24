@@ -38,8 +38,11 @@ import utils.SoundPlayer;
 /**
  * @author BEN JAAFAR & RIBEIRO
  * 
- * Panel qui trace un plateau avec un gridlayout 
- * Permet aussi de deplacer les pions grace aux coordonnes des cellules
+ * Chedli -> conception du composants + creation du board (avec les cellules) 
+ *           + conception de la methode deplacerPion 
+ * RIBEIRO -> Animationpath 
+ * MUNOS -> Afficages des icones pour les cases spéciales
+ * 
  */
 public class GameBoardPanel extends javax.swing.JPanel {
     private static final int PIECE_Y_OFFSET = -50; // Ajustement de la position verticale des pions
