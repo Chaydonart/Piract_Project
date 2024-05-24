@@ -49,7 +49,12 @@ public class FileRef {
     //VOICELINE
     public static final String VOICELINE_PLAYER2_WIN = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\fx\\VOICELINE_player2_win.wav";
     public static final String VOICELINE_PLAYER1_WIN = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\fx\\VOICELINE_player1_win.wav";
-
+    public static final String VOICELINE_PLAYER2_VICTORY = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\fx\\VOICELINE_player2_victory.wav";
+    public static final String VOICELINE_PLAYER1_VICTORY = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\fx\\VOICELINE_player1_victory.wav";
+    public static final String VOICELINE_PLAYER2_DAMAGE = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\fx\\VOICELINE_player2_damage.wav";
+    public static final String VOICELINE_PLAYER1_DAMAGE = "src\\main\\java\\com\\mycompany\\pirate\\res\\sounds\\fx\\VOICELINE_player1_damage.wav";
+    
+    
     //FONTS (not used)
     public static final String FONT_CASINO = "src\\main\\java\\com\\mycompany\\pirate\\res\\fonts\\RetroSigned-DYYY0.ttf";
 }

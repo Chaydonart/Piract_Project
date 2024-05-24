@@ -8,6 +8,8 @@ import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_1;
 import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_1_DAMAGE;
 import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_1_VICTORY;
 import static com.mycompany.pirate.data.FileRef.OST_MAINTHEME;
+import static com.mycompany.pirate.data.FileRef.VOICELINE_PLAYER1_DAMAGE;
+import static com.mycompany.pirate.data.FileRef.VOICELINE_PLAYER1_VICTORY;
 import static com.mycompany.pirate.data.values.RED_CUSTOM;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -26,7 +28,9 @@ public class PanelPlayer1 extends PanelPlayerDisplay {
     private double imageY = 0;
     private double imageSpeed = 0.2;
     private boolean movingDown = true;
-
+    private SoundPlayer voicelineDamage = new SoundPlayer(VOICELINE_PLAYER1_DAMAGE);
+    private SoundPlayer voicelineVictory = new SoundPlayer(VOICELINE_PLAYER1_VICTORY);
+    
     public PanelPlayer1() {
         loadImages();
         setPreferredSize(new Dimension(triangleBase, triangleHeight));
@@ -107,8 +111,14 @@ public class PanelPlayer1 extends PanelPlayerDisplay {
 
         g2d.dispose();
     }
-
     
+    @Override
+    public void playVoiceline(PlayerState state){
+         switch (currentState) {
+            case VICTORY -> voicelineVictory.play();
+            case DAMAGE ->voicelineDamage.play();
+        }
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

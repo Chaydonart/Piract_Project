@@ -24,6 +24,7 @@ public abstract class PanelPlayerDisplay extends javax.swing.JPanel {
     protected int triangleBase = 200;
     protected int triangleHeight = 500;
     protected Color colorBackground = Color.white;
+    
 
     // Etat de tour
     protected Color turnColor = Color.white;
@@ -77,5 +78,7 @@ public abstract class PanelPlayerDisplay extends javax.swing.JPanel {
         }
         repaint(); 
     }
+    
+    public abstract void playVoiceline(PlayerState state);
 }
 

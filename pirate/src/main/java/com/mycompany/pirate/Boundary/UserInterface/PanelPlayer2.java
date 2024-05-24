@@ -4,10 +4,14 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
+import static com.mycompany.pirate.Boundary.UserInterface.PanelPlayerDisplay.PlayerState.DAMAGE;
+import static com.mycompany.pirate.Boundary.UserInterface.PanelPlayerDisplay.PlayerState.VICTORY;
 import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_1_VICTORY;
 import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_2;
 import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_2_DAMAGE;
 import static com.mycompany.pirate.data.FileRef.IMAGE_PLAYER_2_VICTORY;
+import static com.mycompany.pirate.data.FileRef.VOICELINE_PLAYER2_DAMAGE;
+import static com.mycompany.pirate.data.FileRef.VOICELINE_PLAYER2_VICTORY;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,6 +20,7 @@ import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.RenderingHints;
 import javax.swing.Timer;
+import utils.SoundPlayer;
 
 /**
  *
@@ -25,6 +30,9 @@ public class PanelPlayer2 extends PanelPlayerDisplay {
     private double imageY = 0;
     private double imageSpeed = 0.2;
     private boolean movingDown = true;
+    private SoundPlayer voicelineDamage = new SoundPlayer(VOICELINE_PLAYER2_DAMAGE);
+    private SoundPlayer voicelineVictory = new SoundPlayer(VOICELINE_PLAYER2_VICTORY);
+    
 
     public PanelPlayer2() {
         loadImages();
@@ -104,6 +112,14 @@ public class PanelPlayer2 extends PanelPlayerDisplay {
             g2d.setClip(null); 
         }
     
+    }
+    
+    @Override
+    public void playVoiceline(PlayerState state){
+         switch (currentState) {
+            case VICTORY -> voicelineVictory.play();
+            case DAMAGE ->voicelineDamage.play();
+        }
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
