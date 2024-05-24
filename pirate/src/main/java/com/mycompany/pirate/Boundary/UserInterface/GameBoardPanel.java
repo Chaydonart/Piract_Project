@@ -3,8 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package com.mycompany.pirate.Boundary.UserInterface;
+
+import static com.mycompany.pirate.data.FileRef.BLANK;
 import static com.mycompany.pirate.data.FileRef.FX_SAUT_PION;
-import static com.mycompany.pirate.data.values.BOARD_SIZE;
+import static com.mycompany.pirate.data.FileRef.POPUP_BOMBE;
+import static com.mycompany.pirate.data.FileRef.POPUP_GAMBI;
+import static com.mycompany.pirate.data.FileRef.POPUP_RECULER;
+import static com.mycompany.pirate.data.FileRef.POPUP_REJOUER;
 import static com.mycompany.pirate.data.values.GREEN_CUSTOM;
 import java.awt.Color;
 import java.awt.Component;
@@ -23,10 +28,14 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import java.util.Arrays;
+import java.awt.Image;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import javax.swing.ImageIcon;
 import utils.SoundPlayer;
+
 /**
- *
  * @author BEN JAAFAR & RIBEIRO
  * 
  * Panel qui trace un plateau avec un gridlayout 
@@ -35,8 +44,11 @@ import utils.SoundPlayer;
 public class GameBoardPanel extends javax.swing.JPanel {
     private static final int PIECE_Y_OFFSET = -50; // Ajustement de la position verticale des pions
     private SoundPlayer fxSaut = new SoundPlayer(FX_SAUT_PION);
+    private Map<Integer, ImageIcon> iconMap;
 
     public GameBoardPanel() {
+         // Charger les icônes
+        iconMap = loadIcons();
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         // Configuration des contraintes pour chaque cellule
@@ -59,8 +71,9 @@ public class GameBoardPanel extends javax.swing.JPanel {
                 gbc.gridy = row;
                 // Créer une cellule de plateau
                 int cellNumber = numbers[row][col];
-                CellPanel cell = new CellPanel(cellNumber);
-                
+                ImageIcon icon = iconMap.get(cellNumber);
+                CellPanel cell = new CellPanel(cellNumber,icon);
+
                 add(cell, gbc);
             }
         }
@@ -68,9 +81,35 @@ public class GameBoardPanel extends javax.swing.JPanel {
         gbc.gridx = 0;
         gbc.gridy = rows;
         gbc.gridwidth = cols;
-        CellPanel zeroCell = new CellPanel(0);
+        ImageIcon zeroIcon = iconMap.get(0);
+        CellPanel zeroCell = new CellPanel(0, zeroIcon);
         add(zeroCell, gbc);
         setOpaque(false);
+    }
+    
+    
+    private Map<Integer, ImageIcon> loadIcons() {
+        Map<Integer, ImageIcon> iconMap = new HashMap<>();             
+        String imagePath;
+        int iconSize = 15; // Taille souhaitée pour les icônes redimensionnées
+        for (int i = 0; i < 37; i++) { // assuming you have 37 icons, one for each cell number
+             switch (i) {
+                case 3, 13, 21, 29, 34 -> imagePath = POPUP_BOMBE;
+                case 7, 19, 31 -> imagePath = POPUP_GAMBI;
+                case 8, 15, 23 -> imagePath = POPUP_REJOUER;
+                case 9, 16, 24 -> imagePath = POPUP_RECULER;
+                
+                default -> imagePath = BLANK;
+          }
+         
+                ImageIcon originalIcon = new ImageIcon(imagePath);
+                Image originalImage = originalIcon.getImage();
+                Image resizedImage = originalImage.getScaledInstance(iconSize, iconSize, Image.SCALE_SMOOTH);
+                ImageIcon resizedIcon = new ImageIcon(resizedImage);
+                iconMap.put(i, resizedIcon);
+           
+        }
+        return iconMap;
     }
     
     public void deplacerPion(PionPanel pion, int destinationCellNumber, Runnable onAnimationEnd) {
@@ -159,10 +198,14 @@ public class GameBoardPanel extends javax.swing.JPanel {
 
     private class CellPanel extends JPanel {
         private int cellNumber;
-
+        private ImageIcon icon;
         private static final List<Integer> RED_NUMBERS = Arrays.asList(1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36);
-        public CellPanel(int cellNumber) {
+        public CellPanel(int cellNumber, ImageIcon icon) {
+
+
             setOpaque(false);
+            this.icon = icon;
+
             this.cellNumber = cellNumber;
             this.setPreferredSize(new Dimension(80, 80)); // Taille préférée pour la cellule
         }
@@ -193,6 +236,15 @@ public class GameBoardPanel extends javax.swing.JPanel {
             int textX = x + (diameter - fm.stringWidth(text)) / 2;
             int textY = y + ((diameter - fm.getHeight()) / 2) + fm.getAscent();
             g2d.drawString(text, textX, textY);
+            // Dessiner l'icône dans le coin inférieur droit
+            if (icon != null) {
+                int iconWidth = icon.getIconWidth();
+                int iconHeight = icon.getIconHeight();
+                int iconX = getWidth() - iconWidth - 5; // 5px padding from the edge
+                int iconY = getHeight() - iconHeight - 5; // 5px padding from the edge
+                icon.paintIcon(this, g2d, iconX, iconY);
+            }
+
         }
         private boolean isRed(int number) {
             return RED_NUMBERS.contains(number);

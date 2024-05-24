@@ -26,6 +26,8 @@ public class FileRef {
     public static final String POPUP_REJOUER = "src\\main\\java\\com\\mycompany\\pirate\\res\\POPUP_rejouer.png";
     public static final String POPUP_RECULER= "src\\main\\java\\com\\mycompany\\pirate\\res\\POPUP_reculer.png";
     public static final String POPUP_GAMBI = "src\\main\\java\\com\\mycompany\\pirate\\res\\POPUP_gambi.png";
+    public static final String BLANK = "src\\main\\java\\com\\mycompany\\pirate\\res\\blank.png";
+
 
     
     //MUSICS
