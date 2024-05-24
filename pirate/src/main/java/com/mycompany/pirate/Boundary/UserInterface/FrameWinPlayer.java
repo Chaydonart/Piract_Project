@@ -49,6 +49,7 @@ public class FrameWinPlayer extends javax.swing.JFrame {
         TestWIn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Win screen");
 
         jLayeredPane1.setBackground(new java.awt.Color(0, 0, 0));
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createMatteBorder(10, 10, 10, 10, new java.awt.Color(0, 0, 0)));

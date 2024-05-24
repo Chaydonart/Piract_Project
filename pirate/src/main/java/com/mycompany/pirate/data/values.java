@@ -27,8 +27,10 @@ public class values {
     public static final Color BLUE_CUSTOM = new Color(108,154,175);
     public static final Color INFO_PANEL_COLOR_BACKGROUND = new Color(24, 101, 45);
     public static final Color TRANSPARENT_COLOR_BACKGROUND = new Color(255, 0, 0, 0);
-    
+  
     public static final int MAX_LIFE = 3;
+    public static final int BOARD_SIZE = 37;
+
     
     //need fix not working
     public static void usingCustomFonts() {

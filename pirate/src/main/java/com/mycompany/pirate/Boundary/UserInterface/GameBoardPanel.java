@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package com.mycompany.pirate.Boundary.UserInterface;
+
 import static com.mycompany.pirate.data.FileRef.BLANK;
 import static com.mycompany.pirate.data.FileRef.FX_SAUT_PION;
 import static com.mycompany.pirate.data.FileRef.POPUP_BOMBE;
@@ -33,9 +34,9 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.ImageIcon;
 import utils.SoundPlayer;
+
 /**
- *
- * @author BEN JAAFAR & RIBEIRO & MUNOS
+ * @author BEN JAAFAR & RIBEIRO
  * 
  * Panel qui trace un plateau avec un gridlayout 
  * Permet aussi de deplacer les pions grace aux coordonnes des cellules
@@ -44,7 +45,6 @@ public class GameBoardPanel extends javax.swing.JPanel {
     private static final int PIECE_Y_OFFSET = -50; // Ajustement de la position verticale des pions
     private SoundPlayer fxSaut = new SoundPlayer(FX_SAUT_PION);
     private Map<Integer, ImageIcon> iconMap;
-
 
     public GameBoardPanel() {
          // Charger les icônes
@@ -113,7 +113,7 @@ public class GameBoardPanel extends javax.swing.JPanel {
     }
     
     public void deplacerPion(PionPanel pion, int destinationCellNumber, Runnable onAnimationEnd) {
-        destinationCellNumber = Math.max(0, Math.min(destinationCellNumber, 36));
+        destinationCellNumber = Math.max(0, Math.min(destinationCellNumber, BOARD_SIZE - 1));
         int startCellNumber = pion.getCellPosition();
         List<Integer> path = createPath(startCellNumber, destinationCellNumber);
         animatePath(pion, path, 0, onAnimationEnd);
@@ -199,10 +199,10 @@ public class GameBoardPanel extends javax.swing.JPanel {
     private class CellPanel extends JPanel {
         private int cellNumber;
         private ImageIcon icon;
-
-
         private static final List<Integer> RED_NUMBERS = Arrays.asList(1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36);
         public CellPanel(int cellNumber, ImageIcon icon) {
+
+
             setOpaque(false);
             this.icon = icon;
 
@@ -245,8 +245,6 @@ public class GameBoardPanel extends javax.swing.JPanel {
                 icon.paintIcon(this, g2d, iconX, iconY);
             }
 
-            
-            
         }
         private boolean isRed(int number) {
             return RED_NUMBERS.contains(number);

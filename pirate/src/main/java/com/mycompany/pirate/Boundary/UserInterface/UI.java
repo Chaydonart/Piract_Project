@@ -157,12 +157,13 @@ public class UI extends javax.swing.JFrame implements IPirates {
     
     @Override
     public void takeDamage(String name) {
-        displayPanels.get(name).setState(PlayerState.DAMAGE);
         ScreenShake shakeEffect = new ScreenShake();
         if (lifePanels.containsKey(name) && displayPanels.containsKey(name)) {
             lifePanels.get(name).perdreVie();
             shakeEffect.shakePanel(displayPanels.get(name), 200, 50);
             takeDamage.play();
+            displayPanels.get(name).setState(PlayerState.DAMAGE);
+            displayPanels.get(name).playVoiceline(PlayerState.DAMAGE);
         }
     }
     
@@ -170,7 +171,9 @@ public class UI extends javax.swing.JFrame implements IPirates {
     public void gamblingDuelResult(String name, boolean win) {
         if(win) {
            gamblingDuelVictory.play();
-           displayPanels.get(name).setState(PlayerState.VICTORY);
+           displayPanels.get(name).setState(PlayerState.VICTORY);            
+           displayPanels.get(name).playVoiceline(PlayerState.VICTORY);
+           
         } else {
            takeDamage(name);
         }
@@ -188,7 +191,8 @@ public class UI extends javax.swing.JFrame implements IPirates {
     public void caseRejouer(String name){
        casePopupManager.popupCaseRejouer();
        casePopupManager.showPopup(this,"CASE REJOUER ! LANCE LA MACHINE ET REJOUE !");
-       displayPanels.get(name).setState(PlayerState.VICTORY);
+       displayPanels.get(name).setState(PlayerState.VICTORY); 
+       displayPanels.get(name).playVoiceline(PlayerState.VICTORY);
     }
     
     @Override
@@ -248,6 +252,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Pirate game");
 
         LayeredPaneMain.setBackground(new java.awt.Color(51, 204, 0));
         LayeredPaneMain.setBorder(javax.swing.BorderFactory.createMatteBorder(10, 0, 10, 0, new java.awt.Color(0, 0, 0)));
