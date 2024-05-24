@@ -91,7 +91,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
         if (currentPlayer != null) {
             int currentIndex = currentPlayer.getCellPosition();
             CountDownLatch latchAnimationEnd = new CountDownLatch(1);
-            PanelGameboard.deplacerPion(currentPlayer, currentIndex + destinationCellNumber, () -> latchAnimationEnd.countDown());
+            PanelGameboard.deplacerPion(currentPlayer, currentIndex + destinationCellNumber, latchAnimationEnd::countDown);
             try {
                 latchAnimationEnd.await();
                 currentPlayer.setCellPosition(currentIndex + destinationCellNumber);
