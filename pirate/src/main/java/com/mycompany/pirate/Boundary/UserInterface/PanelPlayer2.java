@@ -30,6 +30,7 @@ public class PanelPlayer2 extends PanelPlayerDisplay {
         loadImages();
         colorBackground = Color.BLACK;
         setPreferredSize(new Dimension(triangleBase, triangleHeight));
+        updateImage();
         startAnimation();
     }
 

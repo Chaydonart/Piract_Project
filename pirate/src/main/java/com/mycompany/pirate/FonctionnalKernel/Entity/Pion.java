@@ -1,5 +1,6 @@
 package com.mycompany.pirate.FonctionnalKernel.Entity;
 
+import static com.mycompany.pirate.data.values.MAX_LIFE;
 import java.awt.Color;
 
 /**
@@ -16,7 +17,7 @@ public class Pion {
 
     public Pion(String name) {
         this.name = name;
-        vie = 3;
+        vie = MAX_LIFE;
         position = 1;
     }
 

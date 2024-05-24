@@ -4,6 +4,7 @@
  */
 package com.mycompany.pirate.Boundary.UserInterface;
 
+import com.mycompany.pirate.Boundary.UserInterface.PanelPlayerDisplay.PlayerState;
 import com.mycompany.pirate.Interfaces.IPirates;
 import static com.mycompany.pirate.data.FileRef.FX_CHANGE_TURN;
 import static com.mycompany.pirate.data.FileRef.FX_DAMAGE;
@@ -156,6 +157,7 @@ public class UI extends javax.swing.JFrame implements IPirates {
     
     @Override
     public void takeDamage(String name) {
+        displayPanels.get(name).setState(PlayerState.DAMAGE);
         ScreenShake shakeEffect = new ScreenShake();
         if (lifePanels.containsKey(name) && displayPanels.containsKey(name)) {
             lifePanels.get(name).perdreVie();

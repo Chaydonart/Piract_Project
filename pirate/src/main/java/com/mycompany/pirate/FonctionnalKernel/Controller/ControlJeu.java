@@ -36,10 +36,12 @@ public class ControlJeu implements IControlDeplacerPion, IControlSlotMachine{
                 int deplacement = Arrays.stream(spinResult).sum();
                 deplacerPion(pion,deplacement);
                 
-                notificationService.notifyEtatJeu();
-           
+                //notificationService.notifyEtatJeu();
+                
                 if(pion.getVie() <= 0){
                     jeu.setGameOver(true);
+                    pionRepository.nextPion();
+                    notificationService.notifyFinDeJeu(pionRepository.getPionActuel().getName());
                 }
 
                 // Check if the game is won by checking pion's position or other criteria
