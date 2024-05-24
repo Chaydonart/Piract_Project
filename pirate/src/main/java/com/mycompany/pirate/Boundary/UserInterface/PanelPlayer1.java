@@ -23,8 +23,9 @@ public class PanelPlayer1 extends PanelPlayerDisplay {
     public PanelPlayer1() {
         loadImage(IMAGE_PLAYER_1);
         setPreferredSize(new Dimension(triangleBase, triangleHeight));
-        if(playerImage != null){
-            imageY = triangleHeight - (triangleBase - 20) * ((double) playerImage.getHeight() / playerImage.getWidth()) - 10;
+        if (playerImage != null) {
+            imageY = triangleHeight - (triangleBase - 20) * ((double) playerImage.getHeight() / playerImage.getWidth())
+                    - 10;
         }
         startAnimation();
     }
@@ -33,41 +34,44 @@ public class PanelPlayer1 extends PanelPlayerDisplay {
     public void startAnimation() {
         Timer timer = new Timer(20, e -> {
             if (playerImage != null && playerImage.getWidth() != 0) {
-                int imageWidth = triangleBase - 20;
-                int imageHeight = playerImage.getHeight() != 0 ? (int) ((double) playerImage.getHeight() / playerImage.getWidth() * imageWidth) : 0;
+                int[] dimensions = getImageDimensions();
+                int imageHeight = dimensions[1];
 
-                if (imageHeight > triangleHeight - 20) {
-                    imageHeight = triangleHeight - 20;
-                    imageWidth = (int) ((double) playerImage.getWidth() / playerImage.getHeight() * imageHeight);
-                }
-
-                // Déplacer l'image en fonction de la vitesse
-                if (movingDown) {
-                    imageY += imageSpeed;
-                    if (imageY >= triangleHeight - imageHeight) {
-                        movingDown = false;
-                    }
-                } else {
-                    imageY -= imageSpeed;
-                    if (imageY <= 150) { // Changement ici
-                        movingDown = true;
-                    }
-                }
+                moveImage(imageHeight);
 
                 repaint();
             }
         });
         timer.start();
     }
-    
+
+    private int[] getImageDimensions() {
+        int imageWidth = triangleBase - 20;
+        int imageHeight = playerImage.getHeight() != 0
+                ? (int) ((double) playerImage.getHeight() / imageWidth * imageWidth)
+                : 0;
+
+        if (imageHeight > triangleHeight - 20) {
+            imageHeight = triangleHeight - 20;
+            imageWidth = (int) ((double) playerImage.getWidth() / playerImage.getHeight() * imageHeight);
+        }
+
+        return new int[] { imageWidth, imageHeight };
+    }
+
+    private void moveImage(int imageHeight) {
+        imageY += movingDown ? imageSpeed : -imageSpeed;
+        movingDown = (imageY >= triangleHeight - imageHeight) ? false : (imageY <= 150) ? true : movingDown;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g.create();
 
         // Dessiner le triangle rectangle
-        int[] xPoints = {0, triangleBase, 0};
-        int[] yPoints = {0, triangleHeight, triangleHeight};
+        int[] xPoints = { 0, triangleBase, 0 };
+        int[] yPoints = { 0, triangleHeight, triangleHeight };
         Polygon triangle = new Polygon(xPoints, yPoints, 3);
         g2d.setColor(turnColor);
         g2d.fillPolygon(triangle);
@@ -94,24 +98,21 @@ public class PanelPlayer1 extends PanelPlayerDisplay {
 
         g2d.dispose();
     }
-    
-    
+
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 286, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 286, Short.MAX_VALUE));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 454, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 454, Short.MAX_VALUE));
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
