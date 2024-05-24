@@ -53,11 +53,10 @@ public class Plateau {
 
             //ATTENTION LES i SONT DECALES DE 1 !!! il faut faire -1 (case 10 = case 9 en vrai)
             switch (i) {
-                case 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22, 29, 34 -> caseSupplier = caseSpeciale1;
-                case  31 -> caseSupplier = caseSpeciale2;
-                case  23 -> caseSupplier = caseSpeciale3;
-                case  24 -> caseSupplier = caseSpeciale4;
-                
+                case 3, 13, 21, 29, 34 -> caseSupplier = caseSpeciale1;
+                case 7, 19, 31 -> caseSupplier = caseSpeciale2;
+                case 8, 15, 23 -> caseSupplier = caseSpeciale3;
+                case 9, 16, 24 -> caseSupplier = caseSpeciale4;
                 default -> caseSupplier = caseNormale;
             }
 
