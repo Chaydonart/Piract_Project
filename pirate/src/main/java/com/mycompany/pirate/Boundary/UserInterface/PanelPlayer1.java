@@ -61,7 +61,12 @@ public class PanelPlayer1 extends PanelPlayerDisplay {
 
     private void moveImage(int imageHeight) {
         imageY += movingDown ? imageSpeed : -imageSpeed;
-        movingDown = (imageY >= triangleHeight - imageHeight) ? false : (imageY <= 150) ? true : movingDown;
+    
+        if (imageY >= triangleHeight - imageHeight) {
+            movingDown = false;
+        } else if (imageY <= 150) {
+            movingDown = true;
+        }
     }
 
     @Override

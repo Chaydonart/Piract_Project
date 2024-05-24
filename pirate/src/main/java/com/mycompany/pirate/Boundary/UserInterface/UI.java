@@ -157,10 +157,9 @@ public class UI extends javax.swing.JFrame implements IPirates {
     }
 
     public void takeDamage(String name) {
-        ScreenShake shakeEffect = new ScreenShake();
         if (lifePanels.containsKey(name) && displayPanels.containsKey(name)) {
             lifePanels.get(name).perdreVie();
-            shakeEffect.shakePanel(displayPanels.get(name), 200, 50);
+            ScreenShake.shakePanel(displayPanels.get(name), 200, 50);
             takeDamage.play();
         }
     }

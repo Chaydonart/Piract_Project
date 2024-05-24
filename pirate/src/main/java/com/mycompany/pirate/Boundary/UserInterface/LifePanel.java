@@ -24,8 +24,8 @@ public class LifePanel extends javax.swing.JPanel {
  private boolean isPlayer1 = true;
     private int viesRestantes = 5;
     private BufferedImage lifeImage;
-    private final int lifeImageWidth = 30;
-    private final int lifeImageHeight = 30;
+    private static final int lifeImageWidth = 30;
+    private static final int lifeImageHeight = 30;
     private LifeAnimation[] animations;
 
     public LifePanel() {
@@ -99,6 +99,7 @@ public class LifePanel extends javax.swing.JPanel {
             }
         }
 
+        @Override
         public void run() {
             double time = 0.0;
             double amplitude = 5.0; // Hauteur du mouvement
