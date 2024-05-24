@@ -224,7 +224,6 @@ public class UI extends javax.swing.JFrame implements IPirates {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jInternalFrame1 = new javax.swing.JInternalFrame();
         LayeredPaneMain = new javax.swing.JLayeredPane();
         PanelPion1 = new com.mycompany.pirate.Boundary.UserInterface.PionPanel();
         PanelPion2 = new com.mycompany.pirate.Boundary.UserInterface.PionPanel();
@@ -237,19 +236,6 @@ public class UI extends javax.swing.JFrame implements IPirates {
         LayeredPanePlayer2 = new javax.swing.JLayeredPane();
         PanelDisplayPlayer2 = new com.mycompany.pirate.Boundary.UserInterface.PanelPlayer2();
         PanelLifePlayer2 = new com.mycompany.pirate.Boundary.UserInterface.LifePanel();
-
-        jInternalFrame1.setVisible(true);
-
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pirate game");
@@ -429,7 +415,6 @@ public class UI extends javax.swing.JFrame implements IPirates {
     private com.mycompany.pirate.Boundary.UserInterface.LifePanel PanelLifePlayer2;
     private com.mycompany.pirate.Boundary.UserInterface.PionPanel PanelPion1;
     private com.mycompany.pirate.Boundary.UserInterface.PionPanel PanelPion2;
-    private javax.swing.JInternalFrame jInternalFrame1;
     // End of variables declaration//GEN-END:variables
 
 

@@ -23,7 +23,7 @@ import java.awt.RenderingHints;
  * 
  */
 public class LifePanel extends javax.swing.JPanel {
- private boolean isPlayer1 = true;
+    private boolean isPlayer1 = true;
     private int viesRestantes = MAX_LIFE;
     private BufferedImage lifeImage;
     private final int lifeImageWidth = 30;

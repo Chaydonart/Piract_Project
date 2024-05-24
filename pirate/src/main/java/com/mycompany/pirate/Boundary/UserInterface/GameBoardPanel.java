@@ -91,7 +91,6 @@ public class GameBoardPanel extends javax.swing.JPanel {
         setOpaque(false);
     }
     
-    
     private Map<Integer, ImageIcon> loadIcons() {
         Map<Integer, ImageIcon> iconMap = new HashMap<>();             
         String imagePath;
@@ -122,6 +121,7 @@ public class GameBoardPanel extends javax.swing.JPanel {
         List<Integer> path = createPath(startCellNumber, destinationCellNumber);
         animatePath(pion, path, 0, onAnimationEnd);
     }
+    
     private List<Integer> createPath(int start, int end) {
         List<Integer> path = new java.util.ArrayList<>();
         if (start < end) {
@@ -160,6 +160,7 @@ public class GameBoardPanel extends javax.swing.JPanel {
             }
         }
     }
+    
     private void animatePionMovement(PionPanel pion, int destinationX, int destinationY, int destinationCellNumber, Runnable onAnimationEnd) {
         int startX = pion.getX();
         int startY = pion.getY();
@@ -199,14 +200,11 @@ public class GameBoardPanel extends javax.swing.JPanel {
         timer.start();
     }
 
-
     private class CellPanel extends JPanel {
         private int cellNumber;
         private ImageIcon icon;
         private static final List<Integer> RED_NUMBERS = Arrays.asList(1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36);
         public CellPanel(int cellNumber, ImageIcon icon) {
-
-
             setOpaque(false);
             this.icon = icon;
 
