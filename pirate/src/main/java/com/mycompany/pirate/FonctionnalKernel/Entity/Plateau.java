@@ -40,30 +40,27 @@ public class Plateau {
         return cases[position];
     }
     
-    public void initialiser(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine){
+    public void initialiser(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine) {
         // Définition des fournisseurs de cases spéciales
         Supplier<Case> caseNormale = Case::new;
-        Supplier<Case> caseSpeciale1 = () -> new CaseDegat(this.notificationService); 
-        Supplier<Case> caseSpeciale2 = () -> new CaseGambling(controlSlotMachine, this.notificationService); 
-        Supplier<Case> caseSpeciale3 = () -> new CaseRejouer(controlDeplacerPion, controlSlotMachine, this.notificationService); 
-        Supplier<Case> caseSpeciale4 = () -> new CaseReculer(controlDeplacerPion, controlSlotMachine, this.notificationService);
+        Supplier<Case> caseDegat = () -> new CaseDegat(this.notificationService); 
+        Supplier<Case> caseGambling = () -> new CaseGambling(controlSlotMachine, this.notificationService); 
+        Supplier<Case> caseRejouer = () -> new CaseRejouer(controlDeplacerPion, controlSlotMachine, this.notificationService); 
+        Supplier<Case> caseReculer = () -> new CaseReculer(controlDeplacerPion, controlSlotMachine, this.notificationService);
         
         for (int i = 0; i < nbCases; i++) {
             Supplier<Case> caseSupplier;
 
             //ATTENTION LES i SONT DECALES DE 1 !!! il faut faire -1 (case 10 = case 9 en vrai)
             switch (i) {
-                case 3, 13, 21, 29, 34 -> caseSupplier = caseSpeciale1;
-                case 7, 19, 31 -> caseSupplier = caseSpeciale2;
-                case 8, 15, 23 -> caseSupplier = caseSpeciale3;
-                case 9, 16, 24 -> caseSupplier = caseSpeciale4;
+                case 3, 13, 21, 29, 34 -> caseSupplier = caseDegat;
+                case 7, 19, 31 -> caseSupplier = caseGambling;
+                case 8, 15, 23 -> caseSupplier = caseRejouer;
+                case 9, 16, 24 -> caseSupplier = caseReculer;
                 default -> caseSupplier = caseNormale;
             }
 
             this.cases[i] = caseSupplier.get();
         }
-        
     }
-    
-
 }
