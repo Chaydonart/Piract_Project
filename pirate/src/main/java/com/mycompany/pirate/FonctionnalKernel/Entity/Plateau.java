@@ -23,23 +23,35 @@ public class Plateau {
 
     public void poserPion(Pion pion) {
         int position = pion.getPosition() - 1;
-        cases[position].ajouterPion(pion);
+        if (position >= 0 && position < nbCases) {
+            cases[position].ajouterPion(pion);
+        } else {
+            throw new IllegalArgumentException("Position du pion invalide : " + pion.getPosition());
+        }
     }
 
     public void retirerPion(Pion pion) {
         int position = pion.getPosition() - 1;
-        cases[position].retirerPion(pion);
+        if (position >= 0 && position < nbCases) {
+            cases[position].retirerPion(pion);
+        } else {
+            throw new IllegalArgumentException("Position du pion invalide : " + pion.getPosition());
+        }
     }
 
     public int getNbCases() {
         return nbCases;
     }
     
-    public Case getCase(Pion pion){
+    public Case getCase(Pion pion) {
         int position = pion.getPosition() - 1;
-        return cases[position];
+        if (position >= 0 && position < nbCases) {
+            return cases[position];
+        } else {
+            throw new IllegalArgumentException("Position du pion invalide : " + pion.getPosition());
+        }
     }
-    
+
     public void initialiser(ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controlSlotMachine) {
         // Définition des fournisseurs de cases spéciales
         Supplier<Case> caseNormale = Case::new;
