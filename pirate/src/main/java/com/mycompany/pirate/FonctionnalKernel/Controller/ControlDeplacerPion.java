@@ -13,7 +13,6 @@ import static com.mycompany.pirate.data.values.BOARD_SIZE;
  * @author ESSENGUE MATIS
  */
 public class ControlDeplacerPion implements IControlDeplacerPion {
-    
     private PionRepository pionRepository;
     private Plateau plateau;
     private IDialogue notificationService;
@@ -46,5 +45,4 @@ public class ControlDeplacerPion implements IControlDeplacerPion {
     public PionRepository getPionRepository() {
         return pionRepository;
     }
-
 }
