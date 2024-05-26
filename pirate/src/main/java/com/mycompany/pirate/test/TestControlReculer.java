@@ -27,7 +27,7 @@ import java.util.Random;
  */
 public class TestControlReculer {
     private static final int BOARD_SIZE = 36; // Définir la taille du plateau
-    
+
     public static void main(String[] args) {
         String cheminFichierTests = System.getProperty("user.dir") + File.separator + "tests" + File.separator + "testsControlReculer.txt";
         try {
@@ -44,13 +44,17 @@ public class TestControlReculer {
                     }
                     int positionAttendue = Integer.parseInt(parties[2]);
 
-                    int positionObtenue = executerTestReculer(positionInitiale, spinValues);
-                    boolean testResult = positionObtenue == positionAttendue;
+                    try {
+                        int positionObtenue = executerTestReculer(positionInitiale, spinValues);
+                        boolean testResult = positionObtenue == positionAttendue;
 
-                    if (testResult) {
-                        System.out.println("Test PASS pour positionInitiale: " + positionInitiale + ", spinValues: " + Arrays.toString(spinValues) + "=" + Arrays.stream(spinValues).sum() + ", positionAttendue: " + positionAttendue + ", positionObtenue: " + positionObtenue);
-                    } else {
-                        System.out.println("Test FAIL pour positionInitiale: " + positionInitiale + ", spinValues: " + Arrays.toString(spinValues) + "=" + Arrays.stream(spinValues).sum() + ", positionAttendue: " + positionAttendue + ", positionObtenue: " + positionObtenue);
+                        if (testResult) {
+                            System.out.println("Test PASS pour positionInitiale: " + positionInitiale + ", spinValues: " + Arrays.toString(spinValues) + "=" + Arrays.stream(spinValues).sum() + ", positionAttendue: " + positionAttendue + ", positionObtenue: " + positionObtenue);
+                        } else {
+                            System.out.println("Test FAIL pour positionInitiale: " + positionInitiale + ", spinValues: " + Arrays.toString(spinValues) + "=" + Arrays.stream(spinValues).sum() + ", positionAttendue: " + positionAttendue + ", positionObtenue: " + positionObtenue);
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Erreur lors de l'exécution du test pour positionInitiale: " + positionInitiale + ", spinValues: " + Arrays.toString(spinValues) + " - " + e.getMessage());
                     }
                 } else {
                     System.out.println("Ligne ignorée car elle ne contient pas le format attendu 'positionInitiale:spinValues:positionAttendue': " + ligne);
@@ -58,13 +62,13 @@ public class TestControlReculer {
             }
             reader.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Le fichier de tests n'a pas été trouvé : " + cheminFichierTests);
+            System.err.println("Le fichier de tests n'a pas été trouvé : " + cheminFichierTests);
         } catch (IOException e) {
-            System.out.println("Une erreur est survenue lors de la lecture du fichier de tests : " + e.getMessage());
+            System.err.println("Une erreur est survenue lors de la lecture du fichier de tests : " + e.getMessage());
         }
     }
 
-    private static int executerTestReculer(int positionInitiale, int[] spinValues) {
+    private static int executerTestReculer(int positionInitiale, int[] spinValues) throws Exception {
         // Créer une liste de pions avec un seul pion pour le test
         List<Pion> pions = new ArrayList<>();
         Pion pion = new Pion("TestPion");
@@ -108,6 +112,7 @@ public class TestControlReculer {
                     case 2: result = spinValues[2] - 1; break;
                     default: throw new IllegalStateException("Unexpected call count: " + callCount);
                 }
+                callCount++;
                 return result;
             }
         };

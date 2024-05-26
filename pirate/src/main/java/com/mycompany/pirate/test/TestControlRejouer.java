@@ -26,7 +26,7 @@ import java.util.Random;
  * @author RIBEIRO
  */
 public class TestControlRejouer {
-    private static final int BOARD_SIZE = 36; // Définir la taille du plateau
+    private static final int BOARD_SIZE = 36; // Define the board size
 
     public static void main(String[] args) {
         String cheminFichierTests = System.getProperty("user.dir") + File.separator + "tests" + File.separator + "testsControlRejouer.txt";
@@ -34,26 +34,32 @@ public class TestControlRejouer {
             BufferedReader reader = new BufferedReader(new FileReader(cheminFichierTests));
             String ligne;
             while ((ligne = reader.readLine()) != null) {
-                if (ligne.contains(":")) {
-                    String[] parties = ligne.split(":", -1);
-                    int positionInitiale = Integer.parseInt(parties[0]);
-                    String[] spinValuesString = parties[1].split(",");
-                    int[] spinValues = new int[3];
-                    for (int i = 0; i < 3; i++) {
-                        spinValues[i] = Integer.parseInt(spinValuesString[i]);
-                    }
-                    int positionAttendue = Integer.parseInt(parties[2]);
-                    int positionObtenue = executerTestRejouer(positionInitiale, spinValues);
-                    boolean testResult = positionObtenue == positionAttendue;
-                    
-                    if (testResult) {
-                        System.out.println("Test PASS pour positionInitiale: " + positionInitiale + ", spinValues: " + Arrays.toString(spinValues) + "=" + Arrays.stream(spinValues).sum() + ", positionAttendue: " + positionAttendue + ", positionObtenue: " + positionObtenue);
-                    } else {
-                        System.out.println("Test FAIL pour positionInitiale: " + positionInitiale + ", spinValues: " + Arrays.toString(spinValues) + "=" + Arrays.stream(spinValues).sum() + ", positionAttendue: " + positionAttendue + ", positionObtenue: " + positionObtenue);
-                    }
+                try {
+                    if (ligne.contains(":")) {
+                        String[] parties = ligne.split(":", -1);
+                        int positionInitiale = Integer.parseInt(parties[0]);
+                        String[] spinValuesString = parties[1].split(",");
+                        int[] spinValues = new int[3];
+                        for (int i = 0; i < 3; i++) {
+                            spinValues[i] = Integer.parseInt(spinValuesString[i]);
+                        }
+                        int positionAttendue = Integer.parseInt(parties[2]);
+                        int positionObtenue = executerTestRejouer(positionInitiale, spinValues);
+                        boolean testResult = positionObtenue == positionAttendue;
 
-                } else {
-                    System.out.println("Ligne ignorée car elle ne contient pas le format attendu 'positionInitiale:spinValues:positionAttendue': " + ligne);
+                        if (testResult) {
+                            System.out.println("Test PASS pour positionInitiale: " + positionInitiale + ", spinValues: " + Arrays.toString(spinValues) + "=" + Arrays.stream(spinValues).sum() + ", positionAttendue: " + positionAttendue + ", positionObtenue: " + positionObtenue);
+                        } else {
+                            System.out.println("Test FAIL pour positionInitiale: " + positionInitiale + ", spinValues: " + Arrays.toString(spinValues) + "=" + Arrays.stream(spinValues).sum() + ", positionAttendue: " + positionAttendue + ", positionObtenue: " + positionObtenue);
+                        }
+
+                    } else {
+                        System.out.println("Ligne ignorée car elle ne contient pas le format attendu 'positionInitiale:spinValues:positionAttendue': " + ligne);
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Erreur de format de nombre dans la ligne: " + ligne + " Erreur: " + e.getMessage());
+                } catch (Exception e) {
+                    System.out.println("Erreur lors de l'exécution du test pour la ligne: " + ligne + " Erreur: " + e.getMessage());
                 }
             }
             reader.close();
@@ -64,7 +70,7 @@ public class TestControlRejouer {
         }
     }
 
-    private static int executerTestRejouer(int positionInitiale, int[] spinValues) {
+    private static int executerTestRejouer(int positionInitiale, int[] spinValues) throws Exception {
         // Créer une liste de pions avec un seul pion pour le test
         List<Pion> pions = new ArrayList<>();
         Pion pion = new Pion("TestPion");
@@ -128,4 +134,3 @@ public class TestControlRejouer {
         return pion.getPosition();
     }
 }
-

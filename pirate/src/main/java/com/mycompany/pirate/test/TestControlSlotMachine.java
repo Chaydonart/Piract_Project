@@ -19,7 +19,6 @@ import java.util.Random;
  * @author RIBEIRO
  */
 public class TestControlSlotMachine {
-
     public static void main(String[] args) {
         String cheminFichierTests = System.getProperty("user.dir") + File.separator + "tests" + File.separator + "testsControlSlotMachine.txt";
         try {
