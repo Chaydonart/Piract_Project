@@ -6,7 +6,6 @@ package com.mycompany.pirate.FonctionnalKernel.Controller;
 
 import com.mycompany.pirate.Interfaces.IControlSlotMachine;
 import com.mycompany.pirate.Interfaces.IDialogue;
-
 import java.util.Optional;
 import java.util.Random;
 
