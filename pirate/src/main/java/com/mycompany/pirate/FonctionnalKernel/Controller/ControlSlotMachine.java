@@ -33,9 +33,4 @@ public class ControlSlotMachine implements IControlSlotMachine {
         Optional.ofNullable(dialogue).ifPresent(service -> service.notifySpin(values));
         return values;
     }
-    
-    public int getCompteurSpin() {
-        return compteurSpin;
-    }
-
 }
