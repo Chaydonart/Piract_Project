@@ -4,6 +4,7 @@
  */
 package com.mycompany.pirate.test;
 
+import com.mycompany.pirate.FonctionnalKernel.Controller.ControlGamblingDuel;
 import com.mycompany.pirate.test.mutants.ControlGamblingDuelModifie;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
@@ -13,7 +14,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -22,33 +26,34 @@ import java.util.Arrays;
 public class TestControlGamblingDuel {
     public static void main(String[] args) {
         String cheminFichierTests = System.getProperty("user.dir") + File.separator + "tests" + File.separator + "testsControlGamblingDuel.txt";
-        try (BufferedReader reader = new BufferedReader(new FileReader(cheminFichierTests))) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(cheminFichierTests));
             String ligne;
             while ((ligne = reader.readLine()) != null) {
                 if (ligne.contains(":")) {
                     String[] parties = ligne.split(":", -1);
-                    int vieInitiale = Integer.parseInt(parties[0]);
-                    int forcedRandomValue = Integer.parseInt(parties[1]);
-                    int[] forcedSpinValues = Arrays.stream(parties[2].split(",")).mapToInt(Integer::parseInt).toArray();
+                    int randomValue = Integer.parseInt(parties[0]);
+                    String[] spinValuesString = parties[1].split(",");
+                    int[] spinValues = new int[3];
+                    for (int i = 0; i < 3; i++) {
+                        spinValues[i] = Integer.parseInt(spinValuesString[i]);
+                    }
+                    int vieInitiale = Integer.parseInt(parties[2]);
                     int vieAttendue = Integer.parseInt(parties[3]);
 
-                    // Instanciation du pion ici
-                    Pion pion = new Pion("TestPion");
-                    pion.setVie(vieInitiale);
-
-                    boolean testResult = executerTestGamblingDuel(pion, forcedRandomValue, forcedSpinValues, vieAttendue);
+                    int vieObtenue = executerTestDuelDeDes(randomValue, spinValues, vieInitiale);
+                    boolean testResult = vieObtenue == vieAttendue;
 
                     if (testResult) {
-                        System.out.printf("Test PASS - Vie initiale : %d, Random Value : %d, Spin : %s, Res : %d - Vie attendue : %d - Resultat Vie : %d, Duel Gagne : %s\n",
-                                vieInitiale, forcedRandomValue, Arrays.toString(forcedSpinValues), Arrays.stream(forcedSpinValues).sum(), vieAttendue, vieAttendue, vieAttendue > vieInitiale - 1 ? "Oui" : "Non");
+                        System.out.println("Test PASS pour randomValue: " + randomValue + ", spinValues: " + Arrays.toString(spinValues) + "=" + Arrays.stream(spinValues).sum() + ", vieInitiale: " + vieInitiale + " - Vie attendue: " + vieAttendue + ", Vie obtenue: " + vieObtenue);
                     } else {
-                        System.out.printf("Test FAIL - Vie initiale : %d, Random Value : %d, Spin : %s, Res : %d - Vie attendue : %d - Resultat Vie : %d, Duel Gagne : %s\n",
-                                vieInitiale, forcedRandomValue, Arrays.toString(forcedSpinValues), Arrays.stream(forcedSpinValues).sum(), vieAttendue, pion.getVie(), vieAttendue > vieInitiale - 1 ? "Oui" : "Non");
+                        System.out.println("Test FAIL pour randomValue: " + randomValue + ", spinValues: " + Arrays.toString(spinValues) + "=" + Arrays.stream(spinValues).sum() + ", vieInitiale: " + vieInitiale + " - Vie attendue: " + vieAttendue + ", Vie obtenue: " + vieObtenue);
                     }
                 } else {
-                    System.out.println("Ligne ignorée car elle ne contient pas le format attendu 'vieInitiale:forcedRandomValue:forcedSpinValues:vieAttendue': " + ligne);
+                    System.out.println("Ligne ignorée car elle ne contient pas le format attendu 'randomValue:spinValues:vieInitiale:vieAttendue': " + ligne);
                 }
             }
+            reader.close();
         } catch (FileNotFoundException e) {
             System.out.println("Le fichier de tests n'a pas été trouvé : " + cheminFichierTests);
         } catch (IOException e) {
@@ -56,7 +61,13 @@ public class TestControlGamblingDuel {
         }
     }
 
-    private static boolean executerTestGamblingDuel(Pion pion, int forcedRandomValue, int[] forcedSpinValues, int vieAttendue) {
+    private static int executerTestDuelDeDes(int randomValue, int[] spinValues, int vieInitiale) {
+        // Créer une liste de pions avec un seul pion pour le test
+        List<Pion> pions = new ArrayList<>();
+        Pion pion = new Pion("TestPion");
+        pion.setVie(vieInitiale);
+        pions.add(pion);
+
         // Initialiser les dépendances
         IDialogue notificationService = new IDialogue() {
             // Implémentation fictive pour les tests
@@ -81,18 +92,39 @@ public class TestControlGamblingDuel {
             @Override
             public void notifyFinDeJeu(String name) {}
         };
-        ControlSlotMachine controlSlotMachine = new ControlSlotMachine(notificationService);
-        ControlGamblingDuelModifie controlGamblingDuelModifie = new ControlGamblingDuelModifie(controlSlotMachine);
-        
-        // Initialisation
-        controlGamblingDuelModifie.setForcedRandomValue(forcedRandomValue);
-        controlGamblingDuelModifie.setForcedSpinValues(forcedSpinValues);
+
+        // Création d'un faux random pour ControlGamblingDuel
+        Random fauxRandom = new Random() {
+            @Override
+            public int nextInt(int bound) {
+                return randomValue - 2; // Ajuster pour que le randomValue soit retourné correctement
+            }
+        };
+
+        // Création d'un faux random pour ControlSlotMachine
+        Random fauxRandomSlotMachine = new Random() {
+            private int callCount = 0;
+
+            @Override
+            public int nextInt(int bound) {
+                int result;
+                switch (callCount++) {
+                    case 0: result = spinValues[0]; break;
+                    case 1: result = spinValues[1]; break;
+                    case 2: result = spinValues[2]; break;
+                    default: throw new IllegalStateException("Unexpected call count: " + callCount);
+                }
+                return result;
+            }
+        };
+
+        ControlSlotMachine controlSlotMachine = new ControlSlotMachine(notificationService, fauxRandomSlotMachine);
+        ControlGamblingDuel controlGamblingDuel = new ControlGamblingDuel(controlSlotMachine, fauxRandom);
 
         // Exécuter la méthode à tester
-        int result = controlGamblingDuelModifie.duelDeDes(pion, notificationService);
+        controlGamblingDuel.duelDeDes(pion, notificationService);
 
-        // Vérifier les résultats
-        boolean success = (pion.getVie() == vieAttendue);
-        return success;
+        // Retourner la vie obtenue pour comparaison
+        return pion.getVie();
     }
 }

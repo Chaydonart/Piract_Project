@@ -102,10 +102,3 @@ public class TestControlDeplacerPion {
         return pion.getPosition();
     }
 }
-
-
-
-
-
-
-

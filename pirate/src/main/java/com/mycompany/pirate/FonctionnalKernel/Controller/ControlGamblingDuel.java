@@ -19,10 +19,17 @@ import java.util.Random;
 public class ControlGamblingDuel implements IControlGamblingDuel, IControlSlotMachine   {
     
     private final IControlSlotMachine controlSlotMachine;
-    private Random random = new Random();
+    private Random random;
 
     public ControlGamblingDuel(ControlSlotMachine controlSlotMachine) {
         this.controlSlotMachine = controlSlotMachine;
+        this.random = new Random();
+    }
+    
+    //Overload pour les tests
+    public ControlGamblingDuel(ControlSlotMachine controlSlotMachine, Random random) {
+        this.controlSlotMachine = controlSlotMachine;
+        this.random = random;
     }
     
     @Override
@@ -52,5 +59,4 @@ public class ControlGamblingDuel implements IControlGamblingDuel, IControlSlotMa
     public int[] spin() {
        return this.controlSlotMachine.spin();
     }
-    
 }

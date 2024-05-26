@@ -15,12 +15,19 @@ import java.util.Random;
  * @author BEN JAAFAR
  */
 public class ControlSlotMachine implements IControlSlotMachine {
-    private final Random random = new Random();
+    private final Random random;
     private int compteurSpin = 0;
     private IDialogue dialogue;
     
     public ControlSlotMachine(IDialogue dialogue){
         this.dialogue = dialogue;
+        this.random = new Random();
+    }
+    
+    //Overload pour les tests
+    public ControlSlotMachine(IDialogue dialogue, Random random) {
+        this.dialogue = dialogue;
+        this.random = random;
     }
     
     @Override
