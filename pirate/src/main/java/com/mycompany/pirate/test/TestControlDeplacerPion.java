@@ -36,13 +36,17 @@ public class TestControlDeplacerPion {
                     int deplacement = Integer.parseInt(parties[1]);
                     int positionAttendue = Integer.parseInt(parties[2]);
 
-                    int positionObtenue = executerTestDeplacerPion(positionInitiale, deplacement);
-                    boolean testResult = positionObtenue == positionAttendue;
+                    try {
+                        int positionObtenue = executerTestDeplacerPion(positionInitiale, deplacement);
+                        boolean testResult = positionObtenue == positionAttendue;
 
-                    if (testResult) {
-                        System.out.println("Test PASS pour la position initiale: " + positionInitiale + ", deplacement: " + deplacement + " - Position attendue: " + positionAttendue + ", Position obtenue: " + positionObtenue);
-                    } else {
-                        System.out.println("Test FAIL pour la position initiale: " + positionInitiale + ", deplacement: " + deplacement + " - Position attendue: " + positionAttendue + ", Position obtenue: " + positionObtenue);
+                        if (testResult) {
+                            System.out.println("Test PASS pour la position initiale: " + positionInitiale + ", deplacement: " + deplacement + " - Position attendue: " + positionAttendue + ", Position obtenue: " + positionObtenue);
+                        } else {
+                            System.out.println("Test FAIL pour la position initiale: " + positionInitiale + ", deplacement: " + deplacement + " - Position attendue: " + positionAttendue + ", Position obtenue: " + positionObtenue);
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Erreur lors de l'execution du test pour la position initiale: " + positionInitiale + ", deplacement: " + deplacement + " - " + e.getMessage());
                     }
                 } else {
                     System.out.println("Ligne ignorée car elle ne contient pas le format attendu 'positionInitiale:deplacement:positionAttendue': " + ligne);
@@ -50,13 +54,13 @@ public class TestControlDeplacerPion {
             }
             reader.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Le fichier de tests n'a pas été trouvé : " + cheminFichierTests);
+            System.err.println("Le fichier de tests n'a pas été trouvé : " + cheminFichierTests);
         } catch (IOException e) {
-            System.out.println("Une erreur est survenue lors de la lecture du fichier de tests : " + e.getMessage());
+            System.err.println("Une erreur est survenue lors de la lecture du fichier de tests : " + e.getMessage());
         }
     }
 
-    private static int executerTestDeplacerPion(int positionInitiale, int deplacement) {
+    private static int executerTestDeplacerPion(int positionInitiale, int deplacement) throws Exception {
         // Créer une liste de pions avec un seul pion pour le test
         List<Pion> pions = new ArrayList<>();
         Pion pion = new Pion("TestPion");
