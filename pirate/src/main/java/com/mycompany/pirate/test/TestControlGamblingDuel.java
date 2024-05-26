@@ -34,7 +34,7 @@ public class TestControlGamblingDuel {
 
                     // Instanciation du pion ici
                     Pion pion = new Pion("TestPion");
-                    pion.setVie(vieInitiale); // Assurez-vous que la classe Pion a une méthode setVie
+                    pion.setVie(vieInitiale);
 
                     boolean testResult = executerTestGamblingDuel(pion, forcedRandomValue, forcedSpinValues, vieAttendue);
 
@@ -59,50 +59,32 @@ public class TestControlGamblingDuel {
     private static boolean executerTestGamblingDuel(Pion pion, int forcedRandomValue, int[] forcedSpinValues, int vieAttendue) {
         // Initialiser les dépendances
         IDialogue notificationService = new IDialogue() {
+            // Implémentation fictive pour les tests
             @Override
-            public void notifySpin(int[] values) {
-            }
-
+            public void notifySpin(int[] values) {}
             @Override
-            public void notifyEtatJeu() {
-            }
-
+            public void notifyEtatJeu() {}
             @Override
-            public void notifyCaseDegat(String name, int vie) {
-            }
-
+            public void notifyCaseDegat(String name, int vie) {}
             @Override
-            public void notifyCaseRejouer(String name) {
-            }
-
+            public void notifyCaseRejouer(String name) {}
             @Override
-            public void notifyCaseReculer() {
-            }
-
+            public void notifyCaseReculer() {}
             @Override
-            public void notifyCaseGambling(int randomValue) {
-            }
-
+            public void notifyCaseGambling(int randomValue) {}
             @Override
-            public void notifyDuelResult(String name, boolean win) {
-            }
-
+            public void notifyDuelResult(String name, boolean win) {}
             @Override
-            public void notifyDeplacerPion(int deplacement, String name) {
-            }
-
+            public void notifyDeplacerPion(int deplacement, String name) {}
             @Override
-            public void notifyNouveauTour(String name) {
-            }
-
+            public void notifyNouveauTour(String name) {}
             @Override
-            public void notifyFinDeJeu(String name) {
-            }
-            // Implémentations des méthodes
+            public void notifyFinDeJeu(String name) {}
         };
-
         ControlSlotMachine controlSlotMachine = new ControlSlotMachine(notificationService);
         ControlGamblingDuelModifie controlGamblingDuelModifie = new ControlGamblingDuelModifie(controlSlotMachine);
+        
+        // Initialisation
         controlGamblingDuelModifie.setForcedRandomValue(forcedRandomValue);
         controlGamblingDuelModifie.setForcedSpinValues(forcedSpinValues);
 
@@ -114,4 +96,3 @@ public class TestControlGamblingDuel {
         return success;
     }
 }
-

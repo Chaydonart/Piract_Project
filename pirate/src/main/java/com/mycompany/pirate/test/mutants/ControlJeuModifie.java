@@ -1,21 +1,27 @@
-package com.mycompany.pirate.FonctionnalKernel.Controller;
+package com.mycompany.pirate.test.mutants;
 
+import com.mycompany.pirate.FonctionnalKernel.Controller.*;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Jeu;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
 import com.mycompany.pirate.Interfaces.IControlDeplacerPion;
 import com.mycompany.pirate.Interfaces.IControlSlotMachine;
-import java.util.Arrays;
 import com.mycompany.pirate.Interfaces.IDialogue;
+import java.util.Arrays;
 
-public class ControlJeu implements IControlDeplacerPion, IControlSlotMachine{
+/**
+ *
+ * @author RIBEIRO
+ */
+public class ControlJeuModifie implements IControlDeplacerPion, IControlSlotMachine{
+    private int[] forcedSpinValues;
     protected Jeu jeu;
     protected PionRepository pionRepository;
     protected IDialogue notificationService;
     protected IControlDeplacerPion controlDeplacerPion;
     protected IControlSlotMachine controleSlotMachine;
 
-    public ControlJeu(Jeu jeu, PionRepository pionRepository, IDialogue notificationService,
+    public ControlJeuModifie(Jeu jeu, PionRepository pionRepository, IDialogue notificationService,
                       ControlDeplacerPion controlDeplacerPion, ControlSlotMachine controleSlotMachine) {
         this.jeu = jeu;
         this.pionRepository = pionRepository;
@@ -53,13 +59,18 @@ public class ControlJeu implements IControlDeplacerPion, IControlSlotMachine{
 
                 pionRepository.nextPion();
             }
+            //break pour tester qu'un tour
+            break;
         }
+    }
+    
+    public void setForcedSpinValues(int[] values) {
+        this.forcedSpinValues = values;
     }
     
     public void setNotificationService(IDialogue notificationService){
         this.notificationService = notificationService;   
     }
-    
     
     //Override des controlleurs pour permettre les updates dans le futur
     @Override
@@ -69,7 +80,6 @@ public class ControlJeu implements IControlDeplacerPion, IControlSlotMachine{
 
     @Override
     public int[] spin() {
-        return this.controleSlotMachine.spin();
+        return this.forcedSpinValues;
     }
-
 }

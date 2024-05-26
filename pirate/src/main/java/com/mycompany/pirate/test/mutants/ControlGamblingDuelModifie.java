@@ -6,12 +6,9 @@ package com.mycompany.pirate.test.mutants;
 
 import com.mycompany.pirate.FonctionnalKernel.Controller.*;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
-import com.mycompany.pirate.Interfaces.IControlGamblingDuel;
-import com.mycompany.pirate.Interfaces.IControlSlotMachine;
 import com.mycompany.pirate.Interfaces.IDialogue;
 import java.util.Arrays;
 import java.util.Optional;
-import java.util.Random;
 
 /**
  *

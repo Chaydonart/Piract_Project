@@ -5,20 +5,20 @@
 package com.mycompany.pirate.test;
 
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlDeplacerPion;
-import com.mycompany.pirate.FonctionnalKernel.Controller.ControlJeu;
 import com.mycompany.pirate.FonctionnalKernel.Controller.ControlSlotMachine;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Jeu;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Pion;
 import com.mycompany.pirate.FonctionnalKernel.Entity.PionRepository;
 import com.mycompany.pirate.FonctionnalKernel.Entity.Plateau;
 import com.mycompany.pirate.Interfaces.IDialogue;
-import java.util.Arrays;
-import java.util.List;
+import com.mycompany.pirate.test.mutants.ControlJeuModifie;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -26,6 +26,7 @@ import java.io.IOException;
  */
 public class TestControlJeu {
     private static final int BOARD_SIZE = 36; // Taille du plateau
+    private static Pion pion;
 
     public static void main(String[] args) {
         String cheminFichierTests = System.getProperty("user.dir") + File.separator + "tests" + File.separator + "testsControlJeu.txt";
@@ -34,21 +35,30 @@ public class TestControlJeu {
             while ((ligne = reader.readLine()) != null) {
                 if (ligne.contains(":")) {
                     String[] parties = ligne.split(":", -1);
-                    int positionInitialePion1 = Integer.parseInt(parties[0]);
-                    int positionInitialePion2 = Integer.parseInt(parties[1]);
-                    int expectedPositionPion1 = Integer.parseInt(parties[2]);
-                    int expectedPositionPion2 = Integer.parseInt(parties[3]);
-                    boolean expectedGameOver = Boolean.parseBoolean(parties[4]);
 
-                    boolean testResult = executerTestControlJeu(positionInitialePion1, positionInitialePion2, expectedPositionPion1, expectedPositionPion2, expectedGameOver);
+                    int vieInitiale = Integer.parseInt(parties[0]);
+                    int positionInitiale = Integer.parseInt(parties[1]);
+                    int[] forcedSpinValues = Arrays.stream(parties[2].split(","))
+                                                   .mapToInt(Integer::parseInt)
+                                                   .toArray();
+                    int expectedVie = Integer.parseInt(parties[3]);
+                    int expectedPosition = Integer.parseInt(parties[4]);
+                    boolean expectedGameOver = Boolean.parseBoolean(parties[5]);
 
-                    if (testResult) {
-                        System.out.println("Test PASS - Positions initiales: Pion1=" + positionInitialePion1 + ", Pion2=" + positionInitialePion2 + " - Positions attendues: Pion1=" + expectedPositionPion1 + ", Pion2=" + expectedPositionPion2 + " - Game Over attendu: " + expectedGameOver);
-                    } else {
-                        System.out.println("Test FAIL - Positions initiales: Pion1=" + positionInitialePion1 + ", Pion2=" + positionInitialePion2 + " - Positions attendues: Pion1=" + expectedPositionPion1 + ", Pion2=" + expectedPositionPion2 + " - Game Over attendu: " + expectedGameOver);
-                    }
+                    boolean testResult = executerTestControlJeu(vieInitiale, positionInitiale, expectedVie, expectedPosition, expectedGameOver, forcedSpinValues);
+
+                    int deplacement = Arrays.stream(forcedSpinValues).sum();
+                    boolean gameOver = pion.getVie() <= 0 || pion.getPosition() >= BOARD_SIZE;
+
+                    String result = testResult ? "PASS" : "FAIL";
+
+                    System.out.printf(
+                        "%s - Vie initiale: %d, Position initiale: %d, Deplacement: %d, Vie attendue: %d, Position attendue: %d, Fin de partie attendue: %s, Vie obtenue: %d, Position obtenue: %d, Fin de partie obtenue: %s\n",
+                        result, vieInitiale, positionInitiale, deplacement, expectedVie, expectedPosition, expectedGameOver,
+                        pion.getVie(), pion.getPosition(), gameOver
+                    );
                 } else {
-                    System.out.println("Ligne ignorée car elle ne contient pas le format attendu 'positionInitialePion1:positionInitialePion2:expectedPositionPion1:expectedPositionPion2:expectedGameOver': " + ligne);
+                    System.out.println("Ligne ignorée car elle ne contient pas le format attendu 'vieInitiale:positionInitiale:3 valeurs du tableau:expectedVie:expectedPosition:expectedGameOver': " + ligne);
                 }
             }
         } catch (FileNotFoundException e) {
@@ -58,17 +68,14 @@ public class TestControlJeu {
         }
     }
 
-    private static boolean executerTestControlJeu(int positionInitialePion1, int positionInitialePion2, int expectedPositionPion1, int expectedPositionPion2, boolean expectedGameOver) {
-        // Initialiser les pions
-        Pion pion1 = new Pion("Pion1");
-        pion1.setPosition(positionInitialePion1);
-        Pion pion2 = new Pion("Pion2");
-        pion2.setPosition(positionInitialePion2);
+    private static boolean executerTestControlJeu(int vieInitiale, int positionInitiale, int expectedVie, int expectedPosition, boolean expectedGameOver, int[] forcedSpinValues) {
+        pion = new Pion("Pion1");
+        pion.setPosition(positionInitiale);
+        pion.setVie(vieInitiale);
 
-        List<Pion> pions = Arrays.asList(pion1, pion2);
+        List<Pion> pions = Arrays.asList(pion);
         PionRepository pionRepository = new PionRepository(pions);
 
-        // Initialiser les dépendances
         IDialogue notificationService = new IDialogue() {
             @Override
             public void notifySpin(int[] values) {}
@@ -96,16 +103,17 @@ public class TestControlJeu {
         ControlDeplacerPion controlDeplacerPion = new ControlDeplacerPion(plateau, notificationService, pionRepository);
         ControlSlotMachine controlSlotMachine = new ControlSlotMachine(notificationService);
         Jeu jeu = new Jeu(pions);
+        ControlJeuModifie controlJeu = new ControlJeuModifie(jeu, pionRepository, notificationService, controlDeplacerPion, controlSlotMachine);
 
-        ControlJeu controlJeu = new ControlJeu(jeu, pionRepository, notificationService, controlDeplacerPion, controlSlotMachine);
+        controlJeu.setForcedSpinValues(forcedSpinValues);
+        plateau.initialiser(controlDeplacerPion, controlSlotMachine);
 
-        // Exécuter la méthode à tester
         controlJeu.startGame();
 
-        // Vérifier les résultats
-        boolean positionsMatch = (pion1.getPosition() == expectedPositionPion1) && (pion2.getPosition() == expectedPositionPion2);
-        boolean gameOverMatch = jeu.isGameOver() == expectedGameOver;
+        boolean positionsMatch = (pion.getPosition() == expectedPosition);
+        boolean vieMatch = (pion.getVie() == expectedVie);
+        boolean gameOverMatch = (jeu.isGameOver() == expectedGameOver);
 
-        return positionsMatch && gameOverMatch;
+        return positionsMatch && vieMatch && gameOverMatch;
     }
 }

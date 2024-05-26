@@ -63,9 +63,7 @@ public class TestControlDeplacerPion {
         pion.setPosition(positionInitiale);
         pions.add(pion);
 
-        // Initialiser les dépendances réelles
-        PionRepository pionRepository = new PionRepository(pions);
-
+        // Initialiser les dépendances
         IDialogue notificationService = new IDialogue() {
             // Implémentation fictive pour les tests
             @Override
@@ -89,15 +87,12 @@ public class TestControlDeplacerPion {
             @Override
             public void notifyFinDeJeu(String name) {}
         };
-
-        // Initialiser le plateau
+        PionRepository pionRepository = new PionRepository(pions);
         Plateau plateau = new Plateau(BOARD_SIZE, notificationService);
-
-        // Créer une instance de ControlDeplacerPion
         ControlDeplacerPion controlDeplacerPion = new ControlDeplacerPion(plateau, notificationService, pionRepository);
         ControlSlotMachine controlSlotMachine = new ControlSlotMachine(notificationService);
 
-        // Initialiser le plateau avec des cases
+        // Initialisation
         plateau.initialiser(controlDeplacerPion, controlSlotMachine);
 
         // Exécuter la méthode à tester
