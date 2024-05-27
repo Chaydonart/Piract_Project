@@ -41,12 +41,23 @@ public class TestControlDeplacerPion {
                         boolean testResult = positionObtenue == positionAttendue;
 
                         if (testResult) {
-                            System.out.println("Test PASS pour la position initiale: " + positionInitiale + ", deplacement: " + deplacement + " - Position attendue: " + positionAttendue + ", Position obtenue: " + positionObtenue);
+                            System.out.println("Test PASS pour la position "
+                                    + "initiale: " + positionInitiale + 
+                                    ", deplacement: " + deplacement + 
+                                    " - Position attendue: " + positionAttendue + 
+                                    ", Position obtenue: " + positionObtenue);
                         } else {
-                            System.out.println("Test FAIL pour la position initiale: " + positionInitiale + ", deplacement: " + deplacement + " - Position attendue: " + positionAttendue + ", Position obtenue: " + positionObtenue);
+                            System.out.println("Test FAIL pour la position initiale: " 
+                                    + positionInitiale + ", deplacement: " 
+                                    + deplacement + " - Position attendue: " 
+                                    + positionAttendue + ", Position obtenue: " 
+                                    + positionObtenue);
                         }
                     } catch (Exception e) {
-                        System.err.println("Erreur lors de l'execution du test pour la position initiale: " + positionInitiale + ", deplacement: " + deplacement + " - " + e.getMessage());
+                        System.err.println("Erreur lors de l'execution du test "
+                                + "pour la position initiale: " + positionInitiale 
+                                + ", deplacement: " + deplacement + " - " 
+                                + e.getMessage());
                     }
                 } else {
                     System.out.println("Ligne ignorée car elle ne contient pas le format attendu 'positionInitiale:deplacement:positionAttendue': " + ligne);

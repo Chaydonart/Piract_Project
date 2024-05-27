@@ -32,7 +32,7 @@ public class ControlDeplacerPion implements IControlDeplacerPion {
         if (pion.getPosition() + deplacement < 1) {
             nouvellePosition = 1;
         // S'assurer de ne pas dépasser le plateau
-        } else if (pion.getPosition() + deplacement > BOARD_SIZE) {
+        } else if (pion.getPosition() + deplacement >= BOARD_SIZE) {
             nouvellePosition = plateau.getNbCases(); 
         } else {
             nouvellePosition = pion.getPosition() + deplacement;

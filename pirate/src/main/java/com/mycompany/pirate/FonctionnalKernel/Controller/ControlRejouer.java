@@ -49,8 +49,9 @@ public class ControlRejouer implements IControlRejouer, IControlSlotMachine, ICo
     public void deplacerPion(Pion pion, int deplacement) {
         this.controlDeplacerPion.deplacerPion(pion, deplacement);
     }
+    
     public int getDistanceRejoue() {
-		return distanceRejoue;
-	}
+        return distanceRejoue;
+    }
     
 }

@@ -14,7 +14,7 @@ import java.util.Optional;
 
 /**
  *
- * @author RIBEIRO
+ * @author RIBEIRO & BEN JAAFAR
  */
 public class ControlReculer implements IControlReculer, IControlDeplacerPion, IControlSlotMachine {
     private ControlDeplacerPion controlDeplacerPion;

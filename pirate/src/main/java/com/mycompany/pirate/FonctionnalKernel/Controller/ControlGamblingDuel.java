@@ -14,7 +14,7 @@ import java.util.Random;
 
 /**
  *
- * @author RIBEIRO
+ * @author RIBEIRO & BEN JAAFAR
  */
 public class ControlGamblingDuel implements IControlGamblingDuel, IControlSlotMachine   {
     
